@@ -3,15 +3,22 @@
   "id": "legacy_tweaks",
   "version": "${version}",
   "name": "Legacy Tweaks",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "Brings back many Legacy Console Edition features as configurable tweaks!",
   "authors": [
-    "Me!"
+    "@omo50 (jelly)",
+    "@LimeGradient"
+  ],
+  "contributors" : [
+    "@Capeling",
+    "@Permdog99",
+    "@Adrenix",
+    "@WilyIcaro"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
-  "license": "CC0-1.0",
+  "license": "Polyform-Shield-1.0.0"",
   "icon": "assets/legacy_tweaks/icon.png",
   "environment": "*",
   "entrypoints": {
