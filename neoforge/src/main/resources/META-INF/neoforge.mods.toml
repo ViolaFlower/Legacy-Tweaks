@@ -8,7 +8,7 @@ modId = "legacy_tweaks"
 version = "${version}"
 displayName = "Legacy Tweaks"
 authors = "@omo50 (jelly), @LimeGradient"
-credits = "@Capeling", "@Permdog99", "@Adrenix", "@WilyIcaro"
+credits = "@Capeling, @Permdog99, @Adrenix, @WilyIcaro"
 description = '''
 Brings back many Legacy Console Edition features as configurable tweaks!
 '''
