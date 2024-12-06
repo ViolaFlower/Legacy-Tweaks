@@ -18,7 +18,7 @@
     "homepage": "https://fabricmc.net/",
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
-  "license": "Polyform-Shield-1.0.0"",
+  "license": "Polyform-Shield-1.0.0",
   "icon": "assets/legacy_tweaks/icon.png",
   "environment": "*",
   "entrypoints": {
