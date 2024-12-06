@@ -1,15 +1,16 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
 #issueTrackerURL = ""
-license = "Insert License Here"
+license = "Polyform-Shield-1.0.0"
 
 [[mods]]
 modId = "legacy_tweaks"
 version = "${version}"
 displayName = "Legacy Tweaks"
-authors = "Me!"
+authors = "@omo50 (jelly), @LimeGradient"
+credits = "@Capeling", "@Permdog99", "@Adrenix", "@WilyIcaro"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Brings back many Legacy Console Edition features as configurable tweaks!
 '''
 #logoFile = ""
 
