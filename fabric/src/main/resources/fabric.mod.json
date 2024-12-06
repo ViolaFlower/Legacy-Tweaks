@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "legacy_tweaks",
+  "version": "${version}",
+  "name": "Legacy Tweaks",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "Me!"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/legacy_tweaks/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "xyz.violaflower.legacy_tweaks.fabric.ExampleModFabric"
+    ],
+    "client": [
+      "xyz.violaflower.legacy_tweaks.fabric.client.ExampleModFabricClient"
+    ]
+  },
+  "mixins": [
+    "legacy_tweaks.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.9",
+    "minecraft": "~1.21",
+    "java": ">=21",
+    "architectury": ">=13.0.2",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
