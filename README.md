@@ -29,9 +29,6 @@ Legacy Tweaks has **multiple goals** on how it should be developed.
 ### 🔧 Customizable
 - Unlike other alternatives, Legacy Tweaks comes with **customizability in mind**. You can **disable anything** you don't like in the **click of a button**!
 
-### ⚙️ Source Available
-- Legacy Tweaks is **fully source available**, licensed under the [Polyform Shield License](https://polyformproject.org/wp-content/uploads/2020/06/PolyForm-Shield-1.0.0.txt), which allows for forking and contributions! **Feel free to contribute on our GitHub**.
-
 ### 🚀 Performant and Lightweight
 - Legacy Tweaks seeks to **solve key performance issues** in all-in-one alternatives, while being **lightweight, customizable and compatible**.
 
@@ -82,6 +79,11 @@ These are a list of different add-ons and modpacks to start your adventure!
 
   ### [Download Here!](https://modrinth.com/modpack/legacy-minecraft)
 
+# 🍉 Sponsor
+Are you looking to enjoy Legacy Tweaks with your friends? Feel free to use my code ``raamviot50`` for 25% off your first month of any server from BisectHosting, supporting me in the process.
+
+[![Bisect Hosting Partnership](https://cdn.modrinth.com/data/cached_images/3b126c5a2e2d73318afa92da7f188663649ff55a_0.webp)](https://bisecthosting.com/raamviot50)
+
 <details>
 <summary>➕ Official Add-ons</summary>
   
@@ -103,7 +105,7 @@ These are a list of different add-ons and modpacks to start your adventure!
 # Controlify
 ![Controlify Banner](https://raw.githubusercontent.com/isXander/Controlify/1.19.x/dev/assets/controlify-banner.png)
 
-- Controlify is the ***best*** mod when it comes to Controller Support! With explicit Steam Deck support, Gyro controls, and more! It is compatible with Legacy Tweaks, with connecting a controller being as simple as plugging it into your PC!
+- Controlify is the **best** mod when it comes to Controller Support! With explicit Steam Deck support, Gyro controls, and more! It is compatible with Legacy Tweaks, with connecting a controller being as simple as plugging it into your PC!
 
   ### [Download Here!](https://modrinth.com/mod/controlify)
 
