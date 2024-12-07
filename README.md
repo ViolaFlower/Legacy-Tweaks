@@ -15,7 +15,9 @@ Legacy Tweaks contains over 25 tweaks as of 0.1.0, including everything from GUI
 Consider joining the [ViolaFlower Discord](https://discord.gg/kprFeAn7Gq) for sneak peeks and updates on development!
 
 ## ❓ Why Over Legacy4J
-Legacy4J was built as an all-in-one LCE re-creation. Unlike Legacy4J, Legacy Tweaks is much more customizable, lightweight and doesn't cause a sizable performance hit. We seek to also prioritize mod compatibility!
+Legacy4J was built as an all-in-one LCE re-creation. While that may seem like a good choice at first glance, it has caused a very bloated and rigid experienc. Customization and compatibility are some of Legacy4J's worse aspects, not to mention a 15% performance drop and rise in stutters between vanilla MC and the mod. Many fans in the community have been wanting a way to customize aspects of the game and the developers have decided not to. And even mod creators have been scared away from compatibility due to the horrendous spaghetti code Legacy4J was built on. 
+
+Overall, Legacy Edition Tweaks has been designed to do away with the issues that had plagued Legacy4J since the beginning.
 
 ## 📥 Installation Guide
 Legacy Tweaks is available for multiple mod loaders, but [Fabric Loader](https://fabricmc.net/use) is recommended. If you are using a third-party launcher (such as Prism Launcher), it should have built-in functionality to automatically install mod loaders. Once you have installed your mod loader of choice, you can simply place Legacy Tweaks into your mods folder like anything else.
@@ -42,9 +44,6 @@ Please use the issue tracker linked at the top of the page if you are experienci
 
 <img alt="blank" width="500" src="https://cdn.modrinth.com/data/cached_images/ec86d1e5cda784c3f3550b865c0f68532671571d_0.webp">
 
-![Replace this with a description](https://cdn.modrinth.com/data/cached_images/d39dd145da7fcd294c0de65f3d8cf4e1a81b70e6_0.webp)
-
-
 <img alt="blank" width="500" src="https://cdn.modrinth.com/data/cached_images/ec86d1e5cda784c3f3550b865c0f68532671571d_0.webp">
 
 ![Replace this with a description](https://cdn.modrinth.com/data/cached_images/a3379570d964c64205f449197df7351b94183557_0.webp)
@@ -61,7 +60,7 @@ These are a list of different add-ons and modpacks to start your adventure!
 # 🍉 Sponsor
 Are you looking to enjoy Legacy Tweaks with your friends? Feel free to use my code `` raamviot50`` for 25% off your first month of any server from BisectHosting, supporting me in the process.
 
-[![Bisect Hosting Partnership](https://cdn.modrinth.com/data/cached_images/3b126c5a2e2d73318afa92da7f188663649ff55a_0.webp)](https://bh.naomieow.xyz/raamviot50)
+[![Bisect Hosting Partnership](https://cdn.modrinth.com/data/cached_images/3b126c5a2e2d73318afa92da7f188663649ff55a_0.webp)](https://bisecthosting.com/raamviot50)
 
 <details>
 <summary>➕ Official Add-ons</summary>
@@ -123,27 +122,22 @@ WIP
 
 ![Credits](https://cdn.modrinth.com/data/cached_images/802088672cb942fe41c48e43b121ec3d85bd54af_0.webp)
 
-## 💾 Development Team
-
-### 📅 Owners
+### Owners
 - omoso/bowen
 - LimeGradient
 
-### 🧑‍💻 Coding
+### Developers
 - LimeGradient
 - Capeling
+- Kyrptonaught
 
-### 🎨 Texture/Model Creation
+### Texture/Model Creation
 - mzov_jen
 
-### 🎮 Playtesters
+### Playtesters
 - ContraryBaton60
 - Kaer1a
+- DexrnZacAttack
 
-## 👏 Credits & Attributions
-
-More **details on credits** can be found in the **mod's class files**, alongside **resource files**. All of which can be **found on the [GitHub](https://github.com/ViolaFlower/Legacy-Tweaks)**.
-
-### 🧑‍💻 Code
-- **[Adrenix](https://github.com/Adrenix)** for the **original tweaks system** used in Nostalgic Tweaks, alongside being an **inspiration** towards the creation of the mod.
-- **[WilyIcaro](https://github.com/Wilyicaro)** for **much of the code** used in Legacy4J that is **licensed under MIT**.
+## Special Thanks
+- Pedro270707/AndroidDr for guidance and assistance in development
