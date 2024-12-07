@@ -15,9 +15,7 @@ Legacy Tweaks contains over 25 tweaks as of 0.1.0, including everything from GUI
 Consider joining the [ViolaFlower Discord](https://discord.gg/kprFeAn7Gq) for sneak peeks and updates on development!
 
 ## ❓ Why Over Legacy4J
-Legacy4J was built as an all-in-one LCE re-creation. While that may seem like a good choice at first glance, it has caused a very bloated and rigid experienc. Customization and compatibility are some of Legacy4J's worse aspects, not to mention a 15% performance drop and rise in stutters between vanilla MC and the mod. Many fans in the community have been wanting a way to customize aspects of the game and the developers have decided not to. And even mod creators have been scared away from compatibility due to the horrendous spaghetti code Legacy4J was built on. 
-
-Overall, Legacy Edition Tweaks has been designed to do away with the issues that had plagued Legacy4J since the beginning.
+Legacy4J was built as an all-in-one LCE re-creation. Unlike Legacy4J, Legacy Tweaks is much more customizable, lightweight and doesn't cause a sizable performance hit. We seek to also prioritize mod compatibility!
 
 ## 📥 Installation Guide
 Legacy Tweaks is available for multiple mod loaders, but [Fabric Loader](https://fabricmc.net/use) is recommended. If you are using a third-party launcher (such as Prism Launcher), it should have built-in functionality to automatically install mod loaders. Once you have installed your mod loader of choice, you can simply place Legacy Tweaks into your mods folder like anything else.
