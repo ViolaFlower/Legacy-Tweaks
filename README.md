@@ -9,7 +9,7 @@ Legacy Tweaks is a mod which brings back many Legacy Console Edition features as
 
 Inspired by Adrenix's [Nostalgic Tweaks](https://modrinth.com/mod/nostalgic-tweaks) and Wilyicaro's [Legacy4J](https://modrinth.com/mod/legacy4j), Legacy Tweaks takes many old Legacy Console Edition features and brings them to Java Edition.
 
-Legacy Tweaks contains over 25 tweaks as of 0.1.0, including everything from GUIs, tool-tips, gameplay features, to even recreations of old LCE version menus!
+Legacy Tweaks contains over 30 tweaks as of 0.1.0, including everything from GUIs, tool-tips, gameplay features, to even recreations of old LCE version menus!
 
 ### Want to keep up with development?
 Consider joining the [ViolaFlower Discord](https://discord.gg/kprFeAn7Gq) for sneak peeks and updates on development!
