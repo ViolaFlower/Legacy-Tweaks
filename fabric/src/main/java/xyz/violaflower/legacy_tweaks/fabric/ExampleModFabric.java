@@ -2,7 +2,7 @@ package xyz.violaflower.legacy_tweaks.fabric;
 
 import net.fabricmc.api.ModInitializer;
 
-import xyz.violaflower.legacy_tweaks.ExampleMod;
+import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 
 public final class ExampleModFabric implements ModInitializer {
     @Override
@@ -12,6 +12,6 @@ public final class ExampleModFabric implements ModInitializer {
         // Proceed with mild caution.
 
         // Run our common setup.
-        ExampleMod.init();
+        LegacyTweaks.init();
     }
 }
