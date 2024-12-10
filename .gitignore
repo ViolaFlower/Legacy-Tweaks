@@ -1,0 +1,5 @@
+.idea/
+fabric/run/
+fabric/.gradle/
+neoforge/.gradle/
+.gradle/
