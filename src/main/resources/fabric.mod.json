@@ -15,10 +15,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "xyz.violaflower.legacy_tweaks.fabric.ExampleModFabric"
-    ],
-    "client": [
-      "xyz.violaflower.legacy_tweaks.fabric.client.ExampleModFabricClient"
+      "xyz.violaflower.legacy_tweaks.LegacyTweaks::init"
     ]
   },
   "mixins": [
