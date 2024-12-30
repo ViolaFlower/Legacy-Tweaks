@@ -5,11 +5,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
-import dev.architectury.platform.Platform;
+//? if fabric
+import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,10 +39,15 @@ public class TweakManager {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(jsonElement);
 		try {
-			Files.writeString(Platform.getConfigFolder().resolve("legacy-tweaks.json"), json);
+			Files.writeString(getConfigFolder().resolve("legacy-tweaks.json"), json);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	private static Path getConfigFolder() {
+		//? if fabric
+		return FabricLoader.getInstance().getConfigDir();
 	}
 
     public static void load() {

@@ -9,12 +9,20 @@ version = rootProject.mod_version
 
 
 apply plugin: 'dev.architectury.loom'
+stonecutter.const("fabric", fabric)
+stonecutter.const("neoforge", neoforge)
 
 base {
     // Set up a suffixed format for the mod jar names, e.g. `example-fabric`.
     archivesName = "$rootProject.archives_name-$project.name"
 }
 
+loom {
+    runConfigs.all {
+        ideConfigGenerated(true) // Run configurations are not created for subprojects by default
+        runDir = "../../run" // Use a shared run folder and just create separate worlds
+    }
+}
 
 repositories {
     maven {
