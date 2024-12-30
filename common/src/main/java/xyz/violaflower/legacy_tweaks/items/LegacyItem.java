@@ -1,12 +1,12 @@
 package xyz.violaflower.legacy_tweaks.items;
 
-import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 
 public class LegacyItem {
-    public static Item register(Item item, String id ) {
-        Identifier itemID = Identifier.of(LegacyTweaks.MOD_ID, id);
+    public static Item register(net.minecraft.world.item.Item item, String id ) {
+        ResourceLocation itemID = ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID, id);
         Item registeredItem = ItemManager.getInstance().registerItem(itemID, item);
         return registeredItem;
     }

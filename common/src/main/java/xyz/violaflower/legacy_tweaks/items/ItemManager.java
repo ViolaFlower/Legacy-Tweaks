@@ -4,11 +4,9 @@ import com.google.common.base.Suppliers;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrarManager;
 import dev.architectury.registry.registries.RegistrySupplier;
-import net.minecraft.component.type.FoodComponent;
-import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
-import net.minecraft.resource.Resource;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 
 import java.util.function.Supplier;
@@ -27,7 +25,7 @@ public class ItemManager {
      * @param itemID The resource location
      * @param _item The item to register
      */
-    public Item registerItem(Identifier itemID, Item _item) {
+    public Item registerItem(ResourceLocation itemID, Item _item) {
         RegistrySupplier<Item> item = items.register(itemID, () -> _item);
         return item.get();
     }
