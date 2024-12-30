@@ -2,7 +2,6 @@ package xyz.violaflower.legacy_tweaks.tweaks;
 
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +42,11 @@ public abstract class Tweak {
         } else {
             onDisable();
         }
+    }
+
+    public void setDefaultEnabled(boolean enabled) {
+        // TODO for when we do file saving
+        setEnabled(enabled);
     }
 
     public String getTweakID() {
