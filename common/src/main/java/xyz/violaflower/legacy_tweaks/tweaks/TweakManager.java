@@ -1,6 +1,8 @@
 package xyz.violaflower.legacy_tweaks.tweaks;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TweakManager {
     public static final TweakManager INSTANCE = new TweakManager();
@@ -8,20 +10,14 @@ public class TweakManager {
         return INSTANCE;
     }
 
-    ArrayList<Tweak> tweaks = new ArrayList<Tweak>();
+    Map<String, Tweak> tweaks = new HashMap<>();
 
     public void register(Tweak tweak) {
-        tweaks.add(tweak);
+        tweaks.put(tweak.getTweakID(), tweak);
         tweak.onRegister();
     }
 
     public Tweak getTweak(String id) {
-        for (Tweak tweak : tweaks) {
-            if (tweak.getTweakID().equals(id)) {
-                return tweak;
-            }
-        }
-
-        return null;
+        return tweaks.get(id);
     }
 }
