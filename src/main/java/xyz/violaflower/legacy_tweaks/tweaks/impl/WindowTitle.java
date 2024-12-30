@@ -20,7 +20,7 @@ public class WindowTitle extends Tweak {
     }
 
     public String getTitle() {
-        ShowTUVersion showTUVersion = (ShowTUVersion) this.getSubTweak("showtuversion");
+        ShowTUVersion showTUVersion = this.getSubTweak("showtuversion");
         if (showTUVersion != null && showTUVersion.isEnabled()) {
             return String.format("Minecraft Legacy Console Edition - %s", showTUVersion.getTUVersion());
         } else {

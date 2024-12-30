@@ -65,8 +65,9 @@ public abstract class Tweak {
         LegacyTweaks.LOGGER.info("Registered tweak: {}", getTweakID());
     }
 
-    public Tweak getSubTweak(String tweakID) {
-        return subTweaks.get(tweakID);
+    @SuppressWarnings("unchecked") // shut up IDE i know what i'm doing
+	public <T extends Tweak> T getSubTweak(String tweakID) {
+        return (T) subTweaks.get(tweakID);
     }
 
     public void addSubTweak(Tweak tweak) {
