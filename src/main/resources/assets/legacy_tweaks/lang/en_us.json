@@ -1,6 +1,7 @@
 {
   "lt.title.ltbutton": "LT Settings",
   "lt.screens.ltscreen.title": "LT Settings",
-  "lt.main.enabled": "Enabled",
-  "lt.main.disabled": "Disabled"
+  "lt.main.enabled": "E",
+  "lt.main.disabled": "D",
+  "lt.main.settings": "S"
 }

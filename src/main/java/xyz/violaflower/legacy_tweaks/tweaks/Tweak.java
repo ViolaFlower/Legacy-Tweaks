@@ -61,6 +61,10 @@ public abstract class Tweak {
         this.description = description;
     }
 
+    public String getTweakDescription() {
+        return this.description;
+    }
+
     public void onRegister() {
         LegacyTweaks.LOGGER.info("Registered tweak: {}", getTweakID());
     }
