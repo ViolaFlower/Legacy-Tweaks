@@ -7,14 +7,20 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.violaflower.legacy_tweaks.gui.LTScreen;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
+import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Mixin(targets = "net/minecraft/client/gui/components/DebugScreenOverlay")
 public class F3Mixin {
-        @Inject(method = "getGameInformation", at = @At("RETURN"))
+        @Inject(method = "getGameInformation", at = @At("RETURN"), cancellable = true)
         private void getGameInformation(CallbackInfoReturnable<List<String>> cir) {
-            // Dexrn: for Jab125...
-            // "Enabled tweaks: %s"
+                List<String> returnValue = cir.getReturnValue();
+                ArrayList<String> strings = new ArrayList<>(returnValue);
+                strings.add("Tweaks: " + TweakManager.getInstance().tweaks.values().stream().filter(Tweak::isEnabled).map(Tweak::getTweakID).collect(Collectors.joining(", ")));
+                cir.setReturnValue(strings);
         }
 }
