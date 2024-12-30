@@ -39,13 +39,13 @@ jobs:
     - name: Upload Fabric JAR
       uses: actions/upload-artifact@v3
       with:
-        name: LT-actions-fabric
+        name: LT-fabric-1.21
         path: versions/1.21-fabric/build/libs/*.jar
 
     - name: Upload NeoForge JAR
       uses: actions/upload-artifact@v3
       with:
-        name: LT-actions-fabric
+        name: LT-neoforge-1.21
         path: versions/1.21-neoforge/build/libs/*.jar
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
