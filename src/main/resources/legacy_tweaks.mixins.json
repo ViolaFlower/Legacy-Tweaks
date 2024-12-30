@@ -4,9 +4,10 @@
   "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
   "client": [
+    "ChatComponentMixin",
+    "F3Mixin",
     "MapRendererMixin",
-    "TitleScreenMixin",
-    "F3Mixin"
+    "TitleScreenMixin"
   ],
   "mixins": [
     "MinecraftMixin"

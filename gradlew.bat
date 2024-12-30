@@ -1,3 +1,4 @@
+echo "Console: 1.21.1 Edition - Java"
 @rem
 @rem Copyright 2015 the original author or authors.
 @rem

@@ -3,13 +3,17 @@ package xyz.violaflower.legacy_tweaks.tweaks;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class Tweak {
     private String id; // this probably shouldn't have a default
     private String author = "John LegacyTweaks";
     private String description = "Changes... something.";
+    private String exDescription = "Changes something, I think... Maybe?";
+    private String version = "1.0.0";
     private boolean isEnabled = true;
     private final Map<String, Tweak> subTweaks = new HashMap<>();
 
@@ -49,8 +53,8 @@ public abstract class Tweak {
         this.id = id;
     }
 
-    public void setTweakAuthor(String author) {
-        this.author = author;
+    public void setTweakAuthor(String... author) {
+        this.author = Arrays.stream(author).collect(Collectors.joining(", "));
     }
 
     public String getTweakAuthor() {
@@ -63,6 +67,22 @@ public abstract class Tweak {
 
     public String getTweakDescription() {
         return this.description;
+    }
+
+    public void setTweakExtendedDescription(String exDescription) {
+        this.exDescription = exDescription;
+    }
+
+    public String getTweakExtendedDescription() {
+        return this.exDescription;
+    }
+
+    public void setTweakVersion(String version) {
+        this.version = version;
+    }
+
+    public String getTweakVersion() {
+        return this.version;
     }
 
     public void onRegister() {

@@ -30,8 +30,9 @@ public class TweakManager {
         tweak.onRegister();
     }
 
-    public Tweak getTweak(String id) {
-        return tweaks.get(id);
+    @SuppressWarnings("unchecked")
+    public <T extends Tweak> T getTweak(String id) {
+        return (T) tweaks.get(id);
     }
 
     public static final Codec<List<String>> TWEAKS = Codec.STRING.listOf();

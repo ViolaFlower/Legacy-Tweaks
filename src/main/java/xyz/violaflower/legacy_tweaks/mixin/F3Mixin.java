@@ -23,7 +23,7 @@ public class F3Mixin {
                 List<String> returnValue = cir.getReturnValue();
                 ArrayList<String> strings = new ArrayList<>(returnValue);
                 Map<String, Tweak> tweaks = TweakManager.getInstance().tweaks;
-                strings.add("Tweaks (%s): ".formatted(tweaks.size()) + tweaks.values().stream().filter(Tweak::isEnabled).map(Tweak::getTweakID).collect(Collectors.joining(", ")));
+                strings.add("Active Tweaks (%s): ".formatted(tweaks.size()) + tweaks.values().stream().filter(Tweak::isEnabled).map(Tweak::getTweakID).collect(Collectors.joining(", ")));
                 cir.setReturnValue(strings);
         }
 }

@@ -11,22 +11,24 @@ public class WindowTitle extends Tweak {
         }
 
         public String getTUVersion() {
-            return "TU12";
+            return "TU199";
         }
     }
 
     public WindowTitle() {
         setTweakID("windowtitle");
-        setTweakAuthor("LimeGradient");
-        this.addSubTweak(new ShowTUVersion());
+        setTweakAuthor("LimeGradient", "Jab125");
+        ShowTUVersion showTUVersion = new ShowTUVersion();
+        showTUVersion.setEnabled(false);
+        this.addSubTweak(showTUVersion);
     }
 
     public String getTitle() {
         ShowTUVersion showTUVersion = this.getSubTweak("showtuversion");
         if (showTUVersion != null && showTUVersion.isEnabled()) {
-            return String.format("Minecraft Legacy Console Edition - %s", showTUVersion.getTUVersion());
+            return String.format("Minecraft: Console Edition - %s", showTUVersion.getTUVersion());
         } else {
-            return String.format("Minecraft Legacy Console Edition - %s", SharedConstants.getCurrentVersion().getName());
+            return String.format("Console: %s Edition - Java", SharedConstants.getCurrentVersion().getName());
         }
     }
 

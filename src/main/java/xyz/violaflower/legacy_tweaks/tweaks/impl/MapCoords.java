@@ -7,5 +7,6 @@ public class MapCoords extends Tweak {
         setTweakID("mapcoords");
         setTweakAuthor("Jab125");
         setTweakDescription("Adds coordinates to maps!");
+        setTweakVersion("1.0.0");
     }
 }
