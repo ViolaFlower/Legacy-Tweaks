@@ -24,6 +24,7 @@ public abstract class TitleScreenMixin extends Screen {
         this.addRenderableWidget(Button.builder(
                 Component.translatable("lt.title.ltbutton"),
                 button -> {
+                    assert minecraft != null;
                     minecraft.setScreen(new LTScreen());
                 }
         ).bounds(this.width / 2 - 100, this.height / 4 + 120, 200, 20).build());
