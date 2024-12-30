@@ -17,6 +17,7 @@ public class WindowTitle extends Tweak {
 
     public WindowTitle() {
         setTweakID("windowtitle");
+        setTweakAuthor("LimeGradient");
         this.addSubTweak(new ShowTUVersion());
     }
 
