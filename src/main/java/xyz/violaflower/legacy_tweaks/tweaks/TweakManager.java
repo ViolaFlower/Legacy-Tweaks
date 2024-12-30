@@ -6,9 +6,9 @@ import com.google.gson.JsonElement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 //? if neoforge
-import net.neoforged.fml.loading.FMLPaths;
+/*import net.neoforged.fml.loading.FMLPaths;*/
 //? if fabric
-/*import net.fabricmc.loader.api.FabricLoader;*/
+import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -49,9 +49,9 @@ public class TweakManager {
 
 	private static Path getConfigFolder() {
 		//? if fabric
-		/*return FabricLoader.getInstance().getConfigDir();*/
+		return FabricLoader.getInstance().getConfigDir();
 		//? if neoforge
-		return FMLPaths.CONFIGDIR.get();
+		/*return FMLPaths.CONFIGDIR.get();*/
 	}
 
     public static void load() {
