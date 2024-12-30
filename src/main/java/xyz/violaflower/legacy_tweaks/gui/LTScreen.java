@@ -1,8 +1,5 @@
 package xyz.violaflower.legacy_tweaks.gui;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -10,7 +7,6 @@ import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 
-@Environment(EnvType.CLIENT)
 public class LTScreen extends Screen {
 
     public LTScreen() {

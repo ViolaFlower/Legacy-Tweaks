@@ -27,12 +27,5 @@ versionRange = "[1.21,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.legacy_tweaks]]
-modId = "architectury"
-type = "required"
-versionRange = "[13.0.2,)"
-ordering = "AFTER"
-side = "BOTH"
-
 [[mixins]]
 config = "legacy_tweaks.mixins.json"
