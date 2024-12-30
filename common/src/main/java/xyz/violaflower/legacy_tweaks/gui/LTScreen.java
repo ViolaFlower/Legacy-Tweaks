@@ -27,9 +27,9 @@ public class LTScreen extends Screen {
         for (Tweak tweak : managerInstance.tweaks.values()) {
             int finalI = i;
             this.addDrawable((context, mouseX, mouseY, delta) -> context.drawCenteredTextWithShadow(textRenderer, Text.literal(tweak.getTweakID() + " - " + tweak.getTweakAuthor()), width / 2, height / 2 - finalI, 0xffffff));
-            this.addDrawableChild(ButtonWidget.builder(Text.literal(tweak.isEnabled() ? "Enabled" : "Disabled"), button -> {
+            this.addDrawableChild(ButtonWidget.builder(Text.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"), button -> {
                 tweak.setEnabled(!tweak.isEnabled());
-                button.setMessage(Text.literal(tweak.isEnabled() ? "Enabled" : "Disabled"));
+                button.setMessage(Text.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"));
                 TweakManager.save();
             }).dimensions(width / 2, height / 2 - i, 200, 20).build());
             i -= 40;
