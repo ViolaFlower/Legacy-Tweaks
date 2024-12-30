@@ -86,10 +86,20 @@ public abstract class Tweak {
         return new BooleanOption();
     }
 
+    public SliderOption addSliderOption(String name, double min, double max) {
+        return new SliderOption();
+    }
+
     // TODO get this saved to a file and vice versa
-    public class BooleanOption {
+    public static class BooleanOption {
         public boolean isOn() {
             return true;
+        }
+    }
+
+    public static class SliderOption {
+        public double get() {
+            return 0.0;
         }
     }
 }
