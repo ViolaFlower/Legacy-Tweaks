@@ -6,10 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.violaflower.legacy_tweaks.items.ItemManager;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
-import xyz.violaflower.legacy_tweaks.tweaks.impl.Gamma;
-import xyz.violaflower.legacy_tweaks.tweaks.impl.MapCoords;
-import xyz.violaflower.legacy_tweaks.tweaks.impl.Stub;
-import xyz.violaflower.legacy_tweaks.tweaks.impl.WindowTitle;
+import xyz.violaflower.legacy_tweaks.tweaks.impl.*;
 
 //? if neoforge
 /*@Mod(LegacyTweaks.MOD_ID)*/
@@ -32,5 +29,6 @@ public final class LegacyTweaks {
         tweakManager.register(new Stub());
         tweakManager.register(new MapCoords());
         tweakManager.register(new Gamma());
+        tweakManager.register(new F3Info());
     }
 }

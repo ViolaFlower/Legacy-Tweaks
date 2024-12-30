@@ -5,7 +5,8 @@
   "minVersion": "0.8",
   "client": [
     "MapRendererMixin",
-    "TitleScreenMixin"
+    "TitleScreenMixin",
+    "F3Mixin"
   ],
   "mixins": [
     "MinecraftMixin"
