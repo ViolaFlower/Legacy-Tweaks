@@ -6,5 +6,6 @@ public class MapCoords extends Tweak {
     public MapCoords() {
         setTweakID("mapcoords");
         setTweakAuthor("Jab125");
+        setTweakDescription("Adds coordinates to maps!");
     }
 }
