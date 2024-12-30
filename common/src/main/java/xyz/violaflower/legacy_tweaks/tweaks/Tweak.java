@@ -54,8 +54,6 @@ public abstract class Tweak {
         this.description = description;
     }
 
-    // TODO: readd setter for tweak id, I don't have any idea on how to override a field.
-
     public void onRegister() {
         LegacyTweaks.LOGGER.info("Registered tweak: {}", getTweakID());
     }
