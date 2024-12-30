@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Tweak {
-    private String id;
-    private String author;
-    private String description;
+    private String id; // this probably shouldn't have a default
+    private String author = "Legacy McTweaky";
+    private String description = "";
     private boolean isEnabled = true;
     private final Map<String, Tweak> subTweaks = new HashMap<>();
 
