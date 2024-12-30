@@ -31,7 +31,14 @@ public abstract class Tweak {
     }
 
     public void setEnabled(boolean enabled) {
+        boolean changed = isEnabled != enabled;
+        if (!changed) return;
         isEnabled = enabled;
+        if (isEnabled) {
+            onEnable();
+        } else {
+            onDisable();
+        }
     }
 
     public String getTweakID() {
@@ -64,5 +71,13 @@ public abstract class Tweak {
 
     public void addSubTweak(Tweak tweak) {
         subTweaks.put(tweak.getTweakID(), tweak);
+    }
+
+    public void onEnable() {
+
+    }
+
+    public void onDisable() {
+
     }
 }
