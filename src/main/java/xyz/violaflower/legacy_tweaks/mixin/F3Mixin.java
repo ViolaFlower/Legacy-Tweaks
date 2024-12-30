@@ -12,6 +12,7 @@ import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Mixin(targets = "net/minecraft/client/gui/components/DebugScreenOverlay")
@@ -21,7 +22,8 @@ public class F3Mixin {
                 if (!TweakManager.getInstance().getTweak("F3 Info").isEnabled()) return;
                 List<String> returnValue = cir.getReturnValue();
                 ArrayList<String> strings = new ArrayList<>(returnValue);
-                strings.add("Tweaks: " + TweakManager.getInstance().tweaks.values().stream().filter(Tweak::isEnabled).map(Tweak::getTweakID).collect(Collectors.joining(", ")));
+                Map<String, Tweak> tweaks = TweakManager.getInstance().tweaks;
+                strings.add("Tweaks (%s): ".formatted(tweaks.size()) + tweaks.values().stream().filter(Tweak::isEnabled).map(Tweak::getTweakID).collect(Collectors.joining(", ")));
                 cir.setReturnValue(strings);
         }
 }

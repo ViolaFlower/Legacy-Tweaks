@@ -30,5 +30,6 @@ public final class LegacyTweaks {
         tweakManager.register(new MapCoords());
         tweakManager.register(new Gamma());
         tweakManager.register(new F3Info());
+        tweakManager.register(new FatChat());
     }
 }
