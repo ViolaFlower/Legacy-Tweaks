@@ -81,4 +81,15 @@ public abstract class Tweak {
     public void onDisable() {
 
     }
+
+    public BooleanOption addBooleanOption(String name) {
+        return new BooleanOption();
+    }
+
+    // TODO get this saved to a file and vice versa
+    public class BooleanOption {
+        public boolean isOn() {
+            return true;
+        }
+    }
 }
