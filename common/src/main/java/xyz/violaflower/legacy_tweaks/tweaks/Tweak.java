@@ -46,6 +46,10 @@ public abstract class Tweak {
         this.author = author;
     }
 
+    public String getTweakAuthor() {
+        return this.author;
+    }
+
     public void setTweakDescription(String description) {
         this.description = description;
     }

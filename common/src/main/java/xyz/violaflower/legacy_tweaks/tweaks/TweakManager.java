@@ -10,7 +10,7 @@ public class TweakManager {
         return INSTANCE;
     }
 
-    Map<String, Tweak> tweaks = new HashMap<>();
+    public Map<String, Tweak> tweaks = new HashMap<>();
 
     public void register(Tweak tweak) {
         tweaks.put(tweak.getTweakID(), tweak);

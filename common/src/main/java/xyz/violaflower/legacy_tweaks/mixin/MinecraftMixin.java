@@ -14,7 +14,7 @@ public class MinecraftMixin {
     private String setWindowTitleMixin(String title) {
         TweakManager tweakManager = TweakManager.getInstance();
         WindowTitle windowTitle = (WindowTitle) tweakManager.getTweak("windowtitle");
-        if (!windowTitle.isEnabled()) {
+        if (windowTitle == null || !windowTitle.isEnabled()) {
             return title;
         } else {
             return windowTitle.getTitle();
