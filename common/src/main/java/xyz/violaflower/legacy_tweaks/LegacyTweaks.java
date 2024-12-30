@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.violaflower.legacy_tweaks.items.ItemManager;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
+import xyz.violaflower.legacy_tweaks.tweaks.impl.Stub;
 import xyz.violaflower.legacy_tweaks.tweaks.impl.WindowTitle;
 
 public final class LegacyTweaks {
@@ -16,5 +17,6 @@ public final class LegacyTweaks {
 
         TweakManager tweakManager = TweakManager.getInstance();
         tweakManager.register(new WindowTitle());
+        tweakManager.register(new Stub());
     }
 }
