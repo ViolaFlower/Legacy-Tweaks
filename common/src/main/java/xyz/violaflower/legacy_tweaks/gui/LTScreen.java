@@ -30,6 +30,7 @@ public class LTScreen extends Screen {
             this.addDrawableChild(ButtonWidget.builder(Text.literal(tweak.isEnabled() ? "Enabled" : "Disabled"), button -> {
                 tweak.setEnabled(!tweak.isEnabled());
                 button.setMessage(Text.literal(tweak.isEnabled() ? "Enabled" : "Disabled"));
+                TweakManager.save();
             }).dimensions(width / 2, height / 2 - i, 200, 20).build());
             i -= 40;
         }
