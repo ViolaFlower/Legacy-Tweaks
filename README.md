@@ -135,7 +135,7 @@ WIP
 - mzov_jen
 
 ### Playtesters
-- ContraryBaton60
+- PeacefulWilliam
 - Kaer1a
 - DexrnZacAttack
 
