@@ -1,0 +1,12 @@
+plugins {
+    id "dev.kikugie.stonecutter"
+    id 'dev.architectury.loom' version '1.9-SNAPSHOT' apply false
+}
+
+plugins.apply "dev.kikugie.stonecutter"
+stonecutter.active "1.21-fabric" /* [SC] DO NOT EDIT */
+
+stonecutter.registerChiseled tasks.register("chiseledBuild", stonecutter.chiseled) { 
+    setGroup "project"
+    ofTask "build"
+}

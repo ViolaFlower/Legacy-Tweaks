@@ -5,7 +5,7 @@ import net.minecraft.world.item.Item;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 
 public class LegacyItem {
-    public static Item register(net.minecraft.world.item.Item item, String id ) {
+    public static Item register(Item item, String id ) {
         ResourceLocation itemID = ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID, id);
         Item registeredItem = ItemManager.getInstance().registerItem(itemID, item);
         return registeredItem;

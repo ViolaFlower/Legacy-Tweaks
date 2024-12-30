@@ -7,8 +7,15 @@ pluginManagement {
     }
 }
 
+plugins {
+    id "dev.kikugie.stonecutter" version "0.5"
+}
+
 rootProject.name = 'legacy_tweaks'
 
-include 'common'
-include 'fabric'
-include 'neoforge'
+stonecutter {
+    create(rootProject) {
+        versions "1.21-fabric", "1.21-neoforge"
+        vcsVersion = "1.21-fabric"
+    }
+}
