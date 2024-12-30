@@ -12,6 +12,7 @@ public class TweakManager {
 
     public void register(Tweak tweak) {
         tweaks.add(tweak);
+        tweak.onRegister();
     }
 
     public Tweak getTweak(String id) {

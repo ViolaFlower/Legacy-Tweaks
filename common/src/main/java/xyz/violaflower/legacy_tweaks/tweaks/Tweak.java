@@ -1,10 +1,11 @@
 package xyz.violaflower.legacy_tweaks.tweaks;
 
+import xyz.violaflower.legacy_tweaks.LegacyTweaks;
+
 import java.util.ArrayList;
 
-public class Tweak {
+public abstract class Tweak {
     private boolean isEnabled = true;
-    private String tweakID;
     private ArrayList<Tweak> subTweaks = new ArrayList<Tweak>();
 
     public boolean isEnabled() {
@@ -16,11 +17,23 @@ public class Tweak {
     }
 
     public String getTweakID() {
-        return tweakID;
+        return "My Tweak";
+    }
+    public String getTweakAuthor() {
+        return "John LegacyTweaks";
+    }
+    public String getTweakDescription() {
+        return "Changes... something.";
+    }
+    // TODO: readd setter for tweak id, I don't have any idea on how to override a field.
+
+    public void onRegister() {
+        LegacyTweaks.LOGGER.info("Registered tweak: {}", getTweakID());
     }
 
-    public void setTweakID(String tID) {
-        tweakID = tID;
+    public void setTweakID(String tweakID) {
+        // oops! does nothing atm.
+        return;
     }
 
     public Tweak getSubTweak(String tweakID) {
