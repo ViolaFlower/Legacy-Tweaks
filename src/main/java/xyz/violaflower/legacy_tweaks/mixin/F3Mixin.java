@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class F3Mixin {
         @Inject(method = "getGameInformation", at = @At("RETURN"), cancellable = true)
         private void getGameInformation(CallbackInfoReturnable<List<String>> cir) {
+                if (!TweakManager.getInstance().getTweak("F3 Info").isEnabled()) return;
                 List<String> returnValue = cir.getReturnValue();
                 ArrayList<String> strings = new ArrayList<>(returnValue);
                 strings.add("Tweaks: " + TweakManager.getInstance().tweaks.values().stream().filter(Tweak::isEnabled).map(Tweak::getTweakID).collect(Collectors.joining(", ")));
