@@ -1,6 +1,7 @@
 package xyz.violaflower.legacy_tweaks.tweaks.impl;
 
 import net.minecraft.SharedConstants;
+import net.minecraft.client.Minecraft;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 
 public class WindowTitle extends Tweak {
@@ -26,5 +27,15 @@ public class WindowTitle extends Tweak {
         } else {
             return String.format("Minecraft Legacy Console Edition - %s", SharedConstants.getCurrentVersion().getName());
         }
+    }
+
+    @Override
+    public void onEnable() {
+        Minecraft.getInstance().updateTitle();
+    }
+
+    @Override
+    public void onDisable() {
+        Minecraft.getInstance().updateTitle();
     }
 }
