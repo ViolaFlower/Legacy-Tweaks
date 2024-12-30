@@ -24,7 +24,7 @@ public class WindowTitle extends Tweak {
         if (showTUVersion != null && showTUVersion.isEnabled()) {
             return String.format("Minecraft Legacy Console Edition - %s", showTUVersion.getTUVersion());
         } else {
-            return String.format("Minecraft Legacy Console Edition - %s", SharedConstants.getGameVersion().getName());
+            return String.format("Minecraft Legacy Console Edition - %s", SharedConstants.getCurrentVersion().getName());
         }
     }
 }

@@ -19,13 +19,13 @@ public abstract class TitleScreenMixin extends Screen {
     }
 
     @Inject(method = "init", at = @At("RETURN"))
-    private void addButton(CallbackInfo ci) {
+    private void initInject(CallbackInfo ci) {
         // Dexrn: this is in a bad location :thumbsup:
-        this.addButton(Button.builder(
+        this.addWidget(Button.builder(
                 Component.translatable("lt.title.ltbutton"),
                 button -> {
                     minecraft.setScreen(new LTScreen());
                 }
-        ).dimensions(this.width / 2 - 100, this.height / 4 + 120, 200, 20).build());
+        ).bounds(this.width / 2 - 100, this.height / 4 + 120, 200, 20).build());
     }
 }
