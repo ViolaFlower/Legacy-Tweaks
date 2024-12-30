@@ -3,15 +3,14 @@
   "id": "legacy_tweaks",
   "version": "${version}",
   "name": "Legacy Tweaks",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "Legacy Tweaks is a mod which brings back many Legacy Console Edition features as configurable tweaks!",
   "authors": [
     "Me!"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/ViolaFlower/Legacy-Tweaks"
   },
-  "license": "CC0-1.0",
+  "license": "LGPL-2.1",
   "icon": "assets/legacy_tweaks/icon.png",
   "environment": "*",
   "entrypoints": {
