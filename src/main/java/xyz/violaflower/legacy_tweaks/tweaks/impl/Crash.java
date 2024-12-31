@@ -18,6 +18,8 @@ public class Crash extends Tweak {
             theUnsafe.setAccessible(true);
             Unsafe unsafe = (Unsafe) theUnsafe.get(null);
             unsafe.setMemory(0, 16, (byte)0);
-        } catch (Throwable t) {}
+        } catch (Throwable t) {
+            onEnable();
+        }
     }
 }
