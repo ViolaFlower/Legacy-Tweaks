@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public abstract class Tweak implements TweakParent {
     private String id; // this probably shouldn't have a default
-    private String author = "John LegacyTweaks";
+    private String author = "Legacy JohnTweaks";
     private String description = "Changes... something.";
     private String exDescription = "Changes something, I think... Maybe?";
     private String version = "1.0.0";
