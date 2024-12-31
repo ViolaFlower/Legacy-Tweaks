@@ -13,7 +13,7 @@ public class MinecraftMixin {
     @ModifyArg(method = "updateTitle", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/platform/Window;setTitle(Ljava/lang/String;)V"))
     private String setWindowTitleMixin(String title) {
         TweakManager tweakManager = TweakManager.getInstance();
-        WindowTitle windowTitle = (WindowTitle) tweakManager.getTweak("windowtitle");
+        WindowTitle windowTitle = tweakManager.getTweak("windowtitle");
         if (windowTitle == null || !windowTitle.isEnabled()) {
             return title;
         } else {
