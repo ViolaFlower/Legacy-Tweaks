@@ -7,5 +7,6 @@ public class F3Info extends Tweak {
         setTweakID("F3 Info");
         setTweakAuthor("DexrnZacAttack", "Jab125");
         setTweakDescription("Adds LegacyTweaks related info to the F3 debug screen.");
+        addBooleanOption("fatty");
     }
 }

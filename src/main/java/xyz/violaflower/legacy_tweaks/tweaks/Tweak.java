@@ -160,6 +160,7 @@ public abstract class Tweak implements TweakParent {
     public static class BooleanOption extends Option<Boolean> {
         public BooleanOption(String name) {
             super(name);
+            this.value = false;
         }
 
         public boolean isOn() {

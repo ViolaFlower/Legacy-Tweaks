@@ -86,6 +86,7 @@ public class SettingsScreen extends Screen {
 			private @Nullable Tweak.Option<?> option;
 			private final ArrayList<GuiEventListener> children = new ArrayList<>();
 			private AbstractSliderButton sliderButton;
+			private Button toggleButton;
 			public SettingEntry(@Nullable Tweak.Option<?> option) {
 				this.option = option;
 				if (option instanceof Tweak.SliderOption<?> sliderOption) {
@@ -101,6 +102,13 @@ public class SettingsScreen extends Screen {
 						}
 					};
 					children.add(sliderButton);
+				} else if (option instanceof Tweak.BooleanOption booleanOption) {
+					Component component = booleanOption.get() ? CommonComponents.OPTION_ON : CommonComponents.OPTION_OFF;
+					toggleButton = Button.builder(component, b -> {
+						booleanOption.set(!booleanOption.get());
+						b.setMessage(booleanOption.get() ? CommonComponents.OPTION_ON : CommonComponents.OPTION_OFF);
+					}).bounds(100, 0, 100, 20).build();
+					children.add(toggleButton);
 				}
 			}
 			@Override
@@ -111,9 +119,16 @@ public class SettingsScreen extends Screen {
 			@Override
 			public void render(GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
 				guiGraphics.drawString(font, option.getName(), left, top + 5, 0xffffffff);
-				sliderButton.setY(top);
-				sliderButton.setX(left + width / 2 + 10);
-				sliderButton.setWidth(width / 2 -10);
+				if (sliderButton != null) {
+					sliderButton.setY(top);
+					sliderButton.setX(left + width / 2 + 10);
+					sliderButton.setWidth(width / 2 - 10);
+				}
+				if (toggleButton != null) {
+					toggleButton.setY(top);
+					toggleButton.setX(left + width / 2 + 10);
+					toggleButton.setWidth(width / 2 - 10);
+				}
 				for (GuiEventListener child : this.children) {
 					if (child instanceof Renderable renderable) {
 						renderable.render(guiGraphics, mouseX, mouseY, partialTick);
