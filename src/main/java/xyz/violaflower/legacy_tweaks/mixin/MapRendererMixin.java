@@ -28,8 +28,8 @@ public class MapRendererMixin {
 			minecraft.font.drawInBatch("X:%s,Y:%s,Z:%s".formatted(x, y, z), /* I have no idea what these 3 numbers are */ 0, 0, 0, false, arg.last().pose(), bufferSource, Font.DisplayMode.NORMAL, 0, packedLight);
 			arg.popPose();
 		}
-		// TODO new config for smaller maps
-		{
+
+		if (smallerMapContents()) {
 			arg.pushPose();
 			// the map is now 115.2
 			arg.translate(10f, 10f, 0);
@@ -40,13 +40,18 @@ public class MapRendererMixin {
 	@Inject(method = "draw", at = @At("RETURN"))
 	private void injectDrawEnd(PoseStack arg, MultiBufferSource bufferSource, boolean active, int packedLight, CallbackInfo ci) {
 		if (active) return;
-		// TODO new config for smaller maps
-		{
+
+		if (smallerMapContents()) {
 			arg.popPose();
 		}
 	}
 	@Unique
 	private static boolean mapCoords() {
-		return TweakManager.getInstance().getTweak("mapcoords").isEnabled();
+		return TweakManager.getInstance().getTweak("Map Changes").getSubTweak("Map Coordinates").isEnabled();
+	}
+
+	@Unique
+	private static boolean smallerMapContents() {
+		return TweakManager.getInstance().getTweak("Map Changes").getSubTweak("Smaller Map Contents").isEnabled();
 	}
 }

@@ -15,6 +15,7 @@ public abstract class Tweak implements TweakParent {
     private String exDescription = "Changes something, I think... Maybe?";
     private String version = "1.0.0";
     private boolean isEnabled = true;
+    private boolean isGroup = false;
     private final Map<String, Tweak> subTweaks = new LinkedHashMap<>();
 
     public Tweak() {
@@ -48,6 +49,14 @@ public abstract class Tweak implements TweakParent {
     public void setDefaultEnabled(boolean enabled) {
         // TODO for when we do file saving
         setEnabled(enabled);
+    }
+
+    public void setGroup() {
+        this.isGroup = true;
+    }
+
+    public boolean isGroup() {
+        return isGroup;
     }
 
     public String getTweakID() {

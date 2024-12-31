@@ -32,7 +32,7 @@ public final class LegacyTweaks {
         TweakManager tweakManager = TweakManager.getInstance();
         tweakManager.register(new WindowTitle());
        // tweakManager.register(new Stub());
-        tweakManager.register(new MapCoords());
+        tweakManager.register(new MapChanges());
         tweakManager.register(new Gamma());
         tweakManager.register(new F3Info());
         tweakManager.register(new FatChat());
