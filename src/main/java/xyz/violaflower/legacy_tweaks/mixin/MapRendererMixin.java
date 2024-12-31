@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
 @Mixin(targets = "net/minecraft/client/gui/MapRenderer$MapInstance")
 public class MapRendererMixin {
@@ -47,11 +48,11 @@ public class MapRendererMixin {
 	}
 	@Unique
 	private static boolean mapCoords() {
-		return TweakManager.getInstance().getTweak("Map Changes").getSubTweak("Map Coordinates").isEnabled();
+		return Tweaks.MAP_CHANGES.getSubTweak("Map Coordinates").isEnabled();
 	}
 
 	@Unique
 	private static boolean smallerMapContents() {
-		return TweakManager.getInstance().getTweak("Map Changes").getSubTweak("Smaller Map Contents").isEnabled();
+		return Tweaks.MAP_CHANGES.getSubTweak("Smaller Map Contents").isEnabled();
 	}
 }
