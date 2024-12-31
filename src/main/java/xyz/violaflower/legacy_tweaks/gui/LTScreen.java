@@ -14,6 +14,7 @@ import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.FormattedCharSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,9 +35,16 @@ public class LTScreen extends Screen {
     private TweakParent tweakParent;
 
     public LTScreen(Screen parent, TweakParent tweakParent) {
-        super(TITLE);
+        super(getTitle(parent, tweakParent));
         this.parent = parent;
         this.tweakParent = tweakParent;
+    }
+
+    private static Component getTitle(Screen parent, TweakParent tweakParent) {
+        if (parent instanceof LTScreen ltScreen) {
+            return ltScreen.title.copy().append(" / " + ((Tweak) tweakParent).getTweakID());
+        }
+        else return TITLE;
     }
 
     public LTScreen(Screen parent) {
@@ -45,7 +53,7 @@ public class LTScreen extends Screen {
 
     @Override
     public void init() {
-        this.layout.addTitleHeader(TITLE, this.font);
+        this.layout.addTitleHeader(getTitle(), this.font);
         this.settingList = this.layout.addToContents(new SettingList(tweakParent));
         LinearLayout linearLayout = this.layout.addToFooter(LinearLayout.horizontal().spacing(8));
         linearLayout.addChild(Button.builder(CommonComponents.GUI_DONE, button -> this.minecraft.setScreen(parent)).build());
