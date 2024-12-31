@@ -33,12 +33,17 @@ public class SettingsScreen extends Screen {
 		this.tweak = tweak;
 	}
 
+	public Screen getParent() {
+		return parent;
+	}
+
 	@Override
 	protected void init() {
 		this.layout.addTitleHeader(getTitle(), font);
 		this.settingList = this.layout.addToContents(new SettingList(tweak));
 		LinearLayout linearLayout = this.layout.addToFooter(LinearLayout.horizontal().spacing(8));
 		linearLayout.addChild(Button.builder(CommonComponents.GUI_DONE, button -> this.minecraft.setScreen(parent)).build());
+		linearLayout.addChild(Button.builder(Component.literal("Sub tyaska"), button -> this.minecraft.setScreen(new LTScreen(parent, tweak))).build());
 		this.layout.visitWidgets(this::addRenderableWidget);
 		this.repositionElements();
 	}

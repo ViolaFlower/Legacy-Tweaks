@@ -3,10 +3,7 @@ package xyz.violaflower.legacy_tweaks.tweaks;
 import net.minecraft.util.Mth;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -132,11 +129,17 @@ public abstract class Tweak implements TweakParent {
     }
 
     public BooleanOption addBooleanOption(String name) {
-        return new BooleanOption(name);
+        return add(new BooleanOption(name));
+    }
+
+    private final ArrayList<Option<?>> options = new ArrayList<>();
+    private <T extends Option<?>> T add(T option) {
+        options.add(option);
+        return option;
     }
 
     public DoubleSliderOption addSliderOption(String name, double min, double max) {
-        return new DoubleSliderOption(name) {
+        return add(new DoubleSliderOption(name) {
             @Override
             public Double getMin() {
                 return min;
@@ -146,11 +149,11 @@ public abstract class Tweak implements TweakParent {
             public Double getMax() {
                 return max;
             }
-        };
+        });
     }
 
     public List<Option<?>> getOptions() {
-        return List.of(addSliderOption("LOL", 0, 1),addSliderOption("LOL", 0, 1));
+        return options;
     }
 
     // TODO get this saved to a file and vice versa

@@ -44,6 +44,9 @@ public class LTScreen extends Screen {
         if (parent instanceof LTScreen ltScreen) {
             return ltScreen.title.copy().append(" / " + ((Tweak) tweakParent).getTweakID());
         }
+        if (parent instanceof SettingsScreen settingsScreen) {
+            return getTitle(settingsScreen.getParent(), tweakParent);
+        }
         else return TITLE;
     }
 
@@ -55,7 +58,7 @@ public class LTScreen extends Screen {
     public void init() {
         this.layout.addTitleHeader(getTitle(), this.font);
         this.settingList = this.layout.addToContents(new SettingList(tweakParent));
-        LinearLayout linearLayout = this.layout.addToFooter(LinearLayout.horizontal().spacing(8));
+        LinearLayout linearLayout = this.layout.addToFooter(LinearLayout.horizontal().spacing(2));
         linearLayout.addChild(Button.builder(CommonComponents.GUI_DONE, button -> this.minecraft.setScreen(parent)).build());
         this.layout.visitWidgets(this::addRenderableWidget);
         this.repositionElements();
