@@ -1,11 +1,13 @@
 package xyz.violaflower.legacy_tweaks.tweaks;
 
+import net.minecraft.util.Mth;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public abstract class Tweak implements TweakParent {
@@ -158,32 +160,38 @@ public abstract class Tweak implements TweakParent {
         }
 
         public boolean isOn() {
-            return true;
-        }
-
-        @Override
-        public Boolean get() {
-            return isOn();
+            return get();
         }
     }
 
     public abstract class SliderOption<T extends Number> extends Option<T> {
-        public SliderOption(String name) {
+        private final Function<Double, T> newT;
+        public SliderOption(String name, Function<Double, T> newT) {
             super(name);
+            this.newT = newT;
         }
 
         public abstract T getMin();
         public abstract T getMax();
+        public double normalize() {
+            double value = get().doubleValue();
+            double min = getMin().doubleValue();
+            double max = getMax().doubleValue();
+            return Mth.map(value, min, max, 0, 1);
+        }
+
+        public T unNormalize(double normalise) {
+           // double value = get().doubleValue();
+            double min = getMin().doubleValue();
+            double max = getMax().doubleValue();
+            return newT.apply(Mth.map(normalise, 0, 1, min, max));
+        }
     }
 
     public class DoubleSliderOption extends SliderOption<Double> {
         public DoubleSliderOption(String name) {
-            super(name);
-        }
-
-        @Override
-        public Double get() {
-            return 0.0;
+            super(name, f -> f);
+            this.value = 0D;
         }
 
         @Override
@@ -199,12 +207,19 @@ public abstract class Tweak implements TweakParent {
 
     public abstract static class Option<T> {
         private final String name;
+        T value;
         public Option(String name) {
             this.name = name;
         }
         public String getName() {
             return this.name;
         }
-        public abstract T get();
+        public T get() {
+            return value;
+        }
+
+        public void set(T t) {
+            this.value = t;
+        }
     }
 }

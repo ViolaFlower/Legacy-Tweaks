@@ -1,10 +1,10 @@
 package xyz.violaflower.legacy_tweaks.gui;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ContainerObjectSelectionList;
+import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.layouts.LinearLayout;
@@ -15,8 +15,10 @@ import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class SettingsScreen extends Screen {
 
@@ -61,7 +63,7 @@ public class SettingsScreen extends Screen {
 	}
 
 	class SettingList extends ContainerObjectSelectionList<SettingList.SettingEntry> {
-		private static final int ITEM_HEIGHT = 40;
+		private static final int ITEM_HEIGHT = 25;
 		private Tweak tweak;
 		public SettingList(Tweak option) {
 			super(
@@ -77,21 +79,41 @@ public class SettingsScreen extends Screen {
 
 		class SettingEntry extends ContainerObjectSelectionList.Entry<SettingList.SettingEntry> {
 			private @Nullable Tweak.Option<?> option;
-			private final ArrayList<? extends GuiEventListener> children = new ArrayList<>();
+			private final ArrayList<GuiEventListener> children = new ArrayList<>();
+			private AbstractSliderButton sliderButton;
 			public SettingEntry(@Nullable Tweak.Option<?> option) {
 				this.option = option;
 				if (option instanceof Tweak.SliderOption<?> sliderOption) {
+					sliderButton = new AbstractSliderButton(100, 0, 100, 20, Component.literal("Value " + new DecimalFormat("#0.00").format(sliderOption.get())), sliderOption.normalize()) {
+						@Override
+						protected void updateMessage() {
+							setMessage(Component.literal("Value " + new DecimalFormat("#0.00").format(sliderOption.get())));
+						}
 
+						@Override
+						protected void applyValue() {
+							((Tweak.SliderOption) sliderOption).set(sliderOption.unNormalize(value));
+						}
+					};
+					children.add(sliderButton);
 				}
 			}
 			@Override
 			public List<? extends NarratableEntry> narratables() {
-				return children;
+				return (List<? extends NarratableEntry>) (Object) children;
 			}
 
 			@Override
 			public void render(GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
 				guiGraphics.drawString(font, option.getName(), left, top + 5, 0xffffffff);
+				sliderButton.setY(top);
+				sliderButton.setX(left + width / 2 + 10);
+				sliderButton.setWidth(width / 2 -10);
+				for (GuiEventListener child : this.children) {
+					if (child instanceof Renderable renderable) {
+						renderable.render(guiGraphics, mouseX, mouseY, partialTick);
+					}
+				}
 				//guiGraphics.fill(left, top, left+width, top+height, 0xffffffff);
 			}
 
