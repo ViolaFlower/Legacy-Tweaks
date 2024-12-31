@@ -92,17 +92,19 @@ public class LTScreen extends Screen {
                 this.title = Component.literal(tweak.getTweakID() + " - " + tweak.getTweakAuthor());
                 this.label = LTScreen.this.minecraft.font.split(Component.literal(tweak.getTweakDescription()).withStyle(ChatFormatting.GRAY), 175);
 
-                toggleButton = Button.builder(Component.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"), button -> {
-                    tweak.setEnabled(!tweak.isEnabled());
-                    button.setMessage(Component.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"));
-                    TweakManager.save();
-                }).size(20, 20).build();
+                if (!tweak.isGroup()) {
+                    toggleButton = Button.builder(Component.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"), button -> {
+                        tweak.setEnabled(!tweak.isEnabled());
+                        button.setMessage(Component.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"));
+                        TweakManager.save();
+                    }).size(20, 20).build();
+                } else toggleButton = null;
                 settingsButton = Button.builder(Component.translatable("lt.main.settings"), button -> {
 //                    // https://www.minecraftforum.net/forums/archive/alpha/alpha-survival-single-player/798878-dohasdoshih-analysis-of-glitched-chunks
 //                    LegacyTweaks.LOGGER.info("DOHASDOSHIH!");
                     Minecraft.getInstance().setScreen(new LTScreen(LTScreen.this, tweak));
                 }).size(20, 20).build();
-                this.children.add(toggleButton);
+                if (toggleButton != null) this.children.add(toggleButton);
                 this.children.add(settingsButton);
             }
 
@@ -129,11 +131,13 @@ public class LTScreen extends Screen {
 
                 int off = 5;
 
-                this.toggleButton.setX(x + entryWidth - 21);
-                this.toggleButton.setY(y + off);
+                if (toggleButton != null) {
+                    this.toggleButton.setX(x + entryWidth - 21);
+                    this.toggleButton.setY(y + off);
+                }
                 this.settingsButton.setX(x + entryWidth - 42);
                 this.settingsButton.setY(y + off);
-                this.toggleButton.render(guiGraphics, mouseX, mouseY, tickDelta);
+                if (toggleButton != null) this.toggleButton.render(guiGraphics, mouseX, mouseY, tickDelta);
                 this.settingsButton.render(guiGraphics, mouseX, mouseY, tickDelta);
             }
         }
