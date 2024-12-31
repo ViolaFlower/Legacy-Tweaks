@@ -97,6 +97,8 @@ public class LTScreen extends Screen {
                     // https://www.minecraftforum.net/forums/archive/alpha/alpha-survival-single-player/798878-dohasdoshih-analysis-of-glitched-chunks
                     LegacyTweaks.LOGGER.info("DOHASDOSHIH!");
                 }).size(20, 20).build();
+                this.children.add(toggleButton);
+                this.children.add(settingsButton);
             }
 
             @Override
