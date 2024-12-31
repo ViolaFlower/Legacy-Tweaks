@@ -12,4 +12,5 @@ public class Tweaks {
 	public static final Stub STUB = new Stub();
 	public static final WindowTitle WINDOW_TITLE = new WindowTitle();
 	public static final YellowChat YELLOW_CHAT = new YellowChat();
+	public static final LegacyUI LEGACY_UI = new LegacyUI();
 }

@@ -38,6 +38,7 @@ public final class LegacyTweaks {
         tweakManager.register(Tweaks.FAT_CHAT);
         tweakManager.register(Tweaks.CRASH);
         tweakManager.register(Tweaks.LEGACY_ATTACK);
+        tweakManager.register(Tweaks.LEGACY_UI);
 
         // this only works on Fabric!
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
