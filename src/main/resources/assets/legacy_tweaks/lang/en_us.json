@@ -3,5 +3,7 @@
   "lt.screens.ltscreen.title": "LT Settings",
   "lt.main.enabled": "E",
   "lt.main.disabled": "D",
-  "lt.main.settings": "S"
+  "lt.main.settings": "S",
+  "lt.tweaks.f3info.setting.showEnabledTweaks": "Show enabled tweaks in F3 menu",
+  "lt.tweaks.f3info.enabledTweaks": "Active Tweaks (%s): "
 }
