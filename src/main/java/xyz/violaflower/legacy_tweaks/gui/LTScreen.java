@@ -32,7 +32,7 @@ public class LTScreen extends Screen {
     private final Screen parent;
     @Nullable
     private SettingList settingList;
-    private TweakParent tweakParent;
+    private final TweakParent tweakParent;
 
     public LTScreen(Screen parent, TweakParent tweakParent) {
         super(getTitle(parent, tweakParent));
