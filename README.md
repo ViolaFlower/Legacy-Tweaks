@@ -15,7 +15,8 @@ Legacy Tweaks contains over 30 tweaks as of 0.1.0, including everything from GUI
 Consider joining the [ViolaFlower Discord](https://discord.gg/kprFeAn7Gq) for sneak peeks and updates on development!
 
 ## ❓ Why Over Legacy4J
-Legacy4J was built as an all-in-one LCE re-creation. While that may seem like a good choice at first glance, it has caused a very bloated and rigid experienc. Customization and compatibility are some of Legacy4J's worse aspects, not to mention a 15% performance drop and rise in stutters between vanilla MC and the mod. Many fans in the community have been wanting a way to customize aspects of the game and the developers have decided not to. And even mod creators have been scared away from compatibility due to the horrendous spaghetti code Legacy4J was built on. 
+Legacy4J was built as an all-in-one LCE re-creation. While on paper, that seems like a good idea, in reality, it has caused problems. Legacy4J is very bloated, uncustomizable and causes issues with mod compatibility.
+Legacy Tweaks fixes those problems, being built with customizability and mod compatibility in mind. 
 
 Overall, Legacy Edition Tweaks has been designed to do away with the issues that had plagued Legacy4J since the beginning.
 
@@ -46,7 +47,7 @@ Please use the issue tracker linked at the top of the page if you are experienci
 
 <img alt="blank" width="500" src="https://cdn.modrinth.com/data/cached_images/ec86d1e5cda784c3f3550b865c0f68532671571d_0.webp">
 
-![Replace this with a description](https://cdn.modrinth.com/data/cached_images/a3379570d964c64205f449197df7351b94183557_0.webp)
+![Additional Content](https://cdn.modrinth.com/data/cached_images/a3379570d964c64205f449197df7351b94183557_0.webp)
 These are a list of different add-ons and modpacks to start your adventure!
 
 # 📦 Official Modpack
@@ -58,7 +59,7 @@ These are a list of different add-ons and modpacks to start your adventure!
   ### [Download Here!](https://modrinth.com/modpack/legacy-minecraft)
 
 # 🍉 Sponsor
-Are you looking to enjoy Legacy Tweaks with your friends? Feel free to use my code `` raamviot50`` for 25% off your first month of any server from BisectHosting, supporting me in the process.
+Are you looking to enjoy Legacy Tweaks with your friends? Feel free to use my code ``raamviot50`` for 25% off your first month of any server from BisectHosting, supporting me in the process.
 
 [![Bisect Hosting Partnership](https://cdn.modrinth.com/data/cached_images/3b126c5a2e2d73318afa92da7f188663649ff55a_0.webp)](https://bisecthosting.com/raamviot50)
 
@@ -72,13 +73,6 @@ Are you looking to enjoy Legacy Tweaks with your friends? Feel free to use my co
 - Created by Mzov_Jen, PACP is a continuation of the old Programmer Art textures. This resource pack has full support for Legacy Tweaks.
 
   ### [Download Here!](https://modrinth.com/resourcepack/pacp)
-
-# Legacy Skins
-![LS Banner](https://cdn.modrinth.com/data/4UNJZ4cX/images/55427e50f4c204978ce32f55f007e1b64e2d5126.png)
-- Legacy Skins is a **compatibility mod for Customizable Player Models**. It is entirely **resource driven**, meaning adding a new skin pack is as simple as applying a resource pack!
-
-  ### [Download Here!](https://modrinth.com/mod/legacy-skins)
-
 
 # Controlify
 ![Controlify Banner](https://raw.githubusercontent.com/isXander/Controlify/1.19.x/dev/assets/controlify-banner.png)
@@ -96,7 +90,7 @@ Are you looking to enjoy Legacy Tweaks with your friends? Feel free to use my co
 
 ![Legacy Edition Battle](https://cdn.modrinth.com/data/cached_images/adba3b99ce3e221667a86a7a2160300f0816deca.png)
 
-- Legacy Edition Minigames (https://www.legacyminigames.net) is a group of servers that re-create the old minigames. Unlike Legacy4J, Legacy Edition Tweaks supports LEM Closed alpha out of the box!
+- Legacy Edition Minigames (https://www.legacyminigames.net) is a group of servers that re-create the old minigames. Unlike Legacy4J, Legacy Tweaks supports LEM Closed alpha out of the box!
 
 - For the best gameplay with LEM, we recommend using [Console-idated](https://modrinth.com/modpack/console-idated) by S_N00B for the best experience. It is premade and configured for the servers!
 
@@ -127,9 +121,12 @@ WIP
 - LimeGradient
 
 ### Developers
-- LimeGradient
 - Capeling
+- DexrnZacAttack
+- icanttellyou
+- Jab125
 - Kyrptonaught
+- LimeGradient
 
 ### Texture/Model Creation
 - mzov_jen
@@ -137,7 +134,6 @@ WIP
 ### Playtesters
 - PeacefulWilliam
 - Kaer1a
-- DexrnZacAttack
 
 ## Special Thanks
 - Pedro270707/AndroidDr for guidance and assistance in development
