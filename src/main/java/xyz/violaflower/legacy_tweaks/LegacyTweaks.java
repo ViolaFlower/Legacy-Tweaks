@@ -30,14 +30,14 @@ public final class LegacyTweaks {
         ItemManager.init();
 
         TweakManager tweakManager = TweakManager.getInstance();
-        tweakManager.register(new WindowTitle());
-       // tweakManager.register(new Stub());
-        tweakManager.register(new MapChanges());
-        tweakManager.register(new Gamma());
+        tweakManager.register(Tweaks.WINDOW_TITLE);
+        tweakManager.register(Tweaks.STUB);
+        tweakManager.register(Tweaks.MAP_CHANGES);
+        tweakManager.register(Tweaks.GAMMA);
         tweakManager.register(Tweaks.F3INFO);
-        tweakManager.register(new FatChat());
+        tweakManager.register(Tweaks.FAT_CHAT);
         tweakManager.register(Tweaks.CRASH);
-        tweakManager.register(new LegacyAttack());
+        tweakManager.register(Tweaks.LEGACY_ATTACK);
 
         // this only works on Fabric!
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
