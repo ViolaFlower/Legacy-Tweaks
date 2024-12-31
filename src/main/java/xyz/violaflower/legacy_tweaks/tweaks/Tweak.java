@@ -4,6 +4,7 @@ import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -14,7 +15,7 @@ public abstract class Tweak {
     private String exDescription = "Changes something, I think... Maybe?";
     private String version = "1.0.0";
     private boolean isEnabled = true;
-    private final Map<String, Tweak> subTweaks = new HashMap<>();
+    private final Map<String, Tweak> subTweaks = new LinkedHashMap<>();
 
     public Tweak() {
 

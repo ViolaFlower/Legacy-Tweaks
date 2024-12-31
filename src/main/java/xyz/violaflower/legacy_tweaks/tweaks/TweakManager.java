@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class TweakManager {
         return INSTANCE;
     }
 
-    public Map<String, Tweak> tweaks = new HashMap<>();
+    public Map<String, Tweak> tweaks = new LinkedHashMap<>();
 
     public void register(Tweak tweak) {
         tweaks.put(tweak.getTweakID(), tweak);
