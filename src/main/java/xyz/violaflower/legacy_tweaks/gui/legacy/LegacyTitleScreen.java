@@ -15,6 +15,8 @@ import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.gui.LTScreen;
+import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
 import java.util.Objects;
 import java.util.function.BiConsumer;
@@ -31,18 +33,24 @@ public class LegacyTitleScreen extends Screen {
 		this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, () -> new LogoRenderer(false));
 	}
 
+	/* Dexrn says:
+	* There should probably be an easy way for other mods to add their own buttons
+	 */
 	@Override
 	protected void init() {
 		super.init();
 		LinearLayout linearLayout = LinearLayout.vertical().spacing(4);
-		linearLayout.addChild(Button.builder(Component.literal("Play Game"), button -> setScreen(SelectWorldScreen::new)).width(200).build());
-		linearLayout.addChild(Button.builder(Component.literal("Mini Games"), button -> setScreen(JoinMultiplayerScreen::new)).width(200).build());
-		linearLayout.addChild(Button.builder(Component.literal("Leaderboards"), button -> setScreen(LTScreen::new)).width(200).build());
-		linearLayout.addChild(Button.builder(Component.literal("Help & Options"), button -> {
+		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.playButton"), button -> setScreen(SelectWorldScreen::new)).width(200).build());
+		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.minigamesButton"), button -> setScreen(JoinMultiplayerScreen::new)).width(200).build());
+		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.leaderboardsButton"), button -> setScreen(LTScreen::new)).width(200).build());
+		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.optionsButton"), button -> {
 			Minecraft.getInstance().setScreen(new OptionsScreen(this, Minecraft.getInstance().options));
 		}).width(200).build());
-		linearLayout.addChild(Button.builder(Component.literal("Minecraft Store"), button -> {}).width(200).build());
-		linearLayout.addChild(Button.builder(Component.literal("Launch New Minecraft"), button -> {button.setMessage(Component.literal("no.").withStyle(ChatFormatting.RED));}).width(200).build());
+		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.storeButton"), button -> {}).width(200).build());
+		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.launchNewMinecraftButton"), button -> {
+			Tweaks.LEGACY_UI.legacyTitleScreen.set(false);
+			Minecraft.getInstance().setScreen(new TitleScreen());
+		}).width(200).build());
 		//this.linearLayout.visitWidgets(this::addRenderableWidget);
 		frameLayout.addChild(linearLayout);
 		frameLayout.visitWidgets(this::addRenderableWidget);
