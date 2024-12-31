@@ -11,6 +11,6 @@ public class F3Info extends Tweak {
         setTweakAuthor("DexrnZacAttack", "Jab125");
         setTweakDescription("Adds LegacyTweaks related info to the F3 debug screen.");
         // localize hopefully
-        showEnabledTweaks = addBooleanOption("lt.tweaks.f3info.setting.showEnabledTweaks");
+        showEnabledTweaks = addBooleanOption("showEnabledTweaks");
     }
 }
