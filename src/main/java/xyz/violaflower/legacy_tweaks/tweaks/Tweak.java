@@ -3,8 +3,8 @@ package xyz.violaflower.legacy_tweaks.tweaks;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -130,23 +130,81 @@ public abstract class Tweak implements TweakParent {
     }
 
     public BooleanOption addBooleanOption(String name) {
-        return new BooleanOption();
+        return new BooleanOption(name);
     }
 
-    public SliderOption addSliderOption(String name, double min, double max) {
-        return new SliderOption();
+    public DoubleSliderOption addSliderOption(String name, double min, double max) {
+        return new DoubleSliderOption(name) {
+            @Override
+            public Double getMin() {
+                return min;
+            }
+
+            @Override
+            public Double getMax() {
+                return max;
+            }
+        };
+    }
+
+    public List<Option<?>> getOptions() {
+        return List.of(addSliderOption("LOL", 0, 1),addSliderOption("LOL", 0, 1));
     }
 
     // TODO get this saved to a file and vice versa
-    public static class BooleanOption {
+    public static class BooleanOption extends Option<Boolean> {
+        public BooleanOption(String name) {
+            super(name);
+        }
+
         public boolean isOn() {
             return true;
         }
+
+        @Override
+        public Boolean get() {
+            return isOn();
+        }
     }
 
-    public static class SliderOption {
-        public double get() {
+    public abstract class SliderOption<T extends Number> extends Option<T> {
+        public SliderOption(String name) {
+            super(name);
+        }
+
+        public abstract T getMin();
+        public abstract T getMax();
+    }
+
+    public class DoubleSliderOption extends SliderOption<Double> {
+        public DoubleSliderOption(String name) {
+            super(name);
+        }
+
+        @Override
+        public Double get() {
             return 0.0;
         }
+
+        @Override
+        public Double getMax() {
+            return 1.0;
+        }
+
+        @Override
+        public Double getMin() {
+            return 0.0;
+        }
+    }
+
+    public abstract static class Option<T> {
+        private final String name;
+        public Option(String name) {
+            this.name = name;
+        }
+        public String getName() {
+            return this.name;
+        }
+        public abstract T get();
     }
 }

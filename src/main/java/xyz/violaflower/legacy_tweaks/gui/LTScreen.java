@@ -112,7 +112,7 @@ public class LTScreen extends Screen {
                 settingsButton = Button.builder(Component.translatable("lt.main.settings"), button -> {
 //                    // https://www.minecraftforum.net/forums/archive/alpha/alpha-survival-single-player/798878-dohasdoshih-analysis-of-glitched-chunks
 //                    LegacyTweaks.LOGGER.info("DOHASDOSHIH!");
-                    Minecraft.getInstance().setScreen(new LTScreen(LTScreen.this, tweak));
+                    Minecraft.getInstance().setScreen(new SettingsScreen(LTScreen.this, tweak));
                 }).size(20, 20).build();
                 if (toggleButton != null) this.children.add(toggleButton);
                 this.children.add(settingsButton);
