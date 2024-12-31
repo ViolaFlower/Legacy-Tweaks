@@ -18,7 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TweakManager {
+public class TweakManager implements TweakParent {
     public static final TweakManager INSTANCE = new TweakManager();
     public static TweakManager getInstance() {
         return INSTANCE;
@@ -47,6 +47,16 @@ public class TweakManager {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public <T extends Tweak> T getSubTweak(String tweakID) {
+		return (T) tweaks.get(tweakID);
+	}
+
+	@Override
+	public Map<String, Tweak> getSubTweaks() {
+		return tweaks;
 	}
 
 	private static Path getConfigFolder() {

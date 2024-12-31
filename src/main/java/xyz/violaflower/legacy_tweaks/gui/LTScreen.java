@@ -20,6 +20,7 @@ import org.jetbrains.annotations.Nullable;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
+import xyz.violaflower.legacy_tweaks.tweaks.TweakParent;
 
 import java.util.List;
 import java.util.Map;
@@ -30,17 +31,22 @@ public class LTScreen extends Screen {
     private final Screen parent;
     @Nullable
     private SettingList settingList;
+    private TweakParent tweakParent;
 
-    public LTScreen(Screen parent) {
+    public LTScreen(Screen parent, TweakParent tweakParent) {
         super(TITLE);
         this.parent = parent;
+        this.tweakParent = tweakParent;
+    }
+
+    public LTScreen(Screen parent) {
+        this(parent, TweakManager.getInstance());
     }
 
     @Override
     public void init() {
-        TweakManager manager = TweakManager.getInstance();
         this.layout.addTitleHeader(TITLE, this.font);
-        this.settingList = this.layout.addToContents(new SettingList(manager));
+        this.settingList = this.layout.addToContents(new SettingList(tweakParent));
         LinearLayout linearLayout = this.layout.addToFooter(LinearLayout.horizontal().spacing(8));
         linearLayout.addChild(Button.builder(CommonComponents.GUI_DONE, button -> this.minecraft.setScreen(parent)).build());
         this.layout.visitWidgets(this::addRenderableWidget);
@@ -59,7 +65,7 @@ public class LTScreen extends Screen {
     class SettingList extends ContainerObjectSelectionList<SettingList.SettingEntry> {
         private static final int ITEM_HEIGHT = 40;
 
-        public SettingList(final TweakManager tweakManager) {
+        public SettingList(final TweakParent tweakManager) {
             super(
                     Minecraft.getInstance(),
                     LTScreen.this.width,
@@ -68,7 +74,7 @@ public class LTScreen extends Screen {
                     ITEM_HEIGHT
             );
 
-            tweakManager.tweaks
+            tweakManager.getSubTweaks()
                     .entrySet()
                     .forEach(tweak -> {
                         this.addEntry(new SettingEntry(tweak.getValue()));
@@ -92,8 +98,9 @@ public class LTScreen extends Screen {
                     TweakManager.save();
                 }).size(20, 20).build();
                 settingsButton = Button.builder(Component.translatable("lt.main.settings"), button -> {
-                    // https://www.minecraftforum.net/forums/archive/alpha/alpha-survival-single-player/798878-dohasdoshih-analysis-of-glitched-chunks
-                    LegacyTweaks.LOGGER.info("DOHASDOSHIH!");
+//                    // https://www.minecraftforum.net/forums/archive/alpha/alpha-survival-single-player/798878-dohasdoshih-analysis-of-glitched-chunks
+//                    LegacyTweaks.LOGGER.info("DOHASDOSHIH!");
+                    Minecraft.getInstance().setScreen(new LTScreen(LTScreen.this, tweak));
                 }).size(20, 20).build();
                 this.children.add(toggleButton);
                 this.children.add(settingsButton);

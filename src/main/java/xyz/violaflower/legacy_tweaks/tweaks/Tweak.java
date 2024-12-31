@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public abstract class Tweak {
+public abstract class Tweak implements TweakParent {
     private String id; // this probably shouldn't have a default
     private String author = "John LegacyTweaks";
     private String description = "Changes... something.";
@@ -103,12 +103,21 @@ public abstract class Tweak {
         subTweaks.put(tweak.getTweakID(), tweak);
     }
 
-    public void onEnable() {
+    public void onToggled() {
 
     }
 
-    public void onDisable() {
+    public void onEnable() {
+        onToggled();
+    }
 
+    public void onDisable() {
+        onToggled();
+    }
+
+    @Override
+    public Map<String, Tweak> getSubTweaks() {
+        return subTweaks;
     }
 
     public BooleanOption addBooleanOption(String name) {
