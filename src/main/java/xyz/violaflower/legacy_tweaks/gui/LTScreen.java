@@ -70,8 +70,6 @@ public class LTScreen extends Screen {
 
             tweakManager.tweaks
                     .entrySet()
-                    .stream()
-                    .sorted(Map.Entry.comparingByKey())
                     .forEach(tweak -> {
                         this.addEntry(new SettingEntry(tweak.getValue()));
                     });
