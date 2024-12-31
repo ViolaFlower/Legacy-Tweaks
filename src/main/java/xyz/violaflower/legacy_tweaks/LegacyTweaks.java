@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import xyz.violaflower.legacy_tweaks.gui.LTScreen;
 import xyz.violaflower.legacy_tweaks.items.ItemManager;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
-import xyz.violaflower.legacy_tweaks.tweaks.impl.*;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;import xyz.violaflower.legacy_tweaks.tweaks.impl.*;
 
 //? if neoforge
 /*@Mod(LegacyTweaks.MOD_ID)*/
@@ -34,9 +34,9 @@ public final class LegacyTweaks {
        // tweakManager.register(new Stub());
         tweakManager.register(new MapChanges());
         tweakManager.register(new Gamma());
-        tweakManager.register(new F3Info());
+        tweakManager.register(Tweaks.F3INFO);
         tweakManager.register(new FatChat());
-        tweakManager.register(new Crash());
+        tweakManager.register(Tweaks.CRASH);
         tweakManager.register(new LegacyAttack());
 
         // this only works on Fabric!
