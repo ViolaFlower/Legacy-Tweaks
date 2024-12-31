@@ -13,6 +13,12 @@ public class WindowTitle extends Tweak {
         public String getTUVersion() {
             return "TU199";
         }
+
+        @Override
+        public void onToggled() {
+            if (Minecraft.getInstance().getWindow() == null) return;
+            Minecraft.getInstance().updateTitle();
+        }
     }
 
     public WindowTitle() {
@@ -33,12 +39,8 @@ public class WindowTitle extends Tweak {
     }
 
     @Override
-    public void onEnable() {
-        Minecraft.getInstance().updateTitle();
-    }
-
-    @Override
-    public void onDisable() {
+    public void onToggled() {
+        if (Minecraft.getInstance().getWindow() == null) return;
         Minecraft.getInstance().updateTitle();
     }
 }
