@@ -34,7 +34,7 @@ public class LegacyTitleScreen extends Screen {
 	@Override
 	protected void init() {
 		super.init();
-		LinearLayout linearLayout = LinearLayout.vertical().spacing(2);
+		LinearLayout linearLayout = LinearLayout.vertical().spacing(4);
 		linearLayout.addChild(Button.builder(Component.literal("Play Game"), button -> setScreen(SelectWorldScreen::new)).width(200).build());
 		linearLayout.addChild(Button.builder(Component.literal("Mini Games"), button -> setScreen(JoinMultiplayerScreen::new)).width(200).build());
 		linearLayout.addChild(Button.builder(Component.literal("Leaderboards"), button -> setScreen(LTScreen::new)).width(200).build());
@@ -56,12 +56,13 @@ public class LegacyTitleScreen extends Screen {
 	@Override
 	protected void repositionElements() {
 		frameLayout.setMinWidth(this.width);
-		frameLayout.setY(height/2-132/2);
+		frameLayout.setY(height/2-144/2);
 		frameLayout.arrangeElements();
 	}
 
 	@Override
 	public void render(GuiGraphics guiGraphics, int i, int j, float f) {
+		this.renderPanorama(guiGraphics, f);
 		super.render(guiGraphics, i, j, f);
 		logoRenderer.renderLogo(guiGraphics, this.width, 1);
 	}
@@ -69,5 +70,9 @@ public class LegacyTitleScreen extends Screen {
 	@Override
 	protected void renderPanorama(GuiGraphics guiGraphics, float f) {
 		PANORAMA.render(guiGraphics, this.width, this.height, 1, f);
+	}
+
+	@Override
+	public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f) {
 	}
 }
