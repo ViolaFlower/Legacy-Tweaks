@@ -42,8 +42,8 @@ public final class LegacyTweaks {
 
         // this only works on Fabric!
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
-            Screen old = Minecraft.getInstance().screen;
-            dispatcher.register(ClientCommandManager.literal("ltscreen").executes(c -> {Minecraft.getInstance().tell(() -> Minecraft.getInstance().setScreen(new LTScreen(old)));return 0;}));
+
+            dispatcher.register(ClientCommandManager.literal("ltscreen").executes(c -> {Minecraft.getInstance().tell(() -> Minecraft.getInstance().setScreen(new LTScreen(Minecraft.getInstance().screen)));return 0;}));
         });
     }
 }
