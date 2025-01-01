@@ -3,10 +3,13 @@ package xyz.violaflower.legacy_tweaks.tweaks.impl;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
+import xyz.violaflower.legacy_tweaks.tweaks.TweakBuilder;
 
 public class EyeCandy extends Tweak {
 	public final LegacyTextShadows legacyTextShadows;
 	public final FineTunedUIScale fineTunedUIScale;
+	public final Tweak oldButton;
+
 	public EyeCandy() {
 		setTweakID("Eye Candy");
 		setGroup();
@@ -14,6 +17,7 @@ public class EyeCandy extends Tweak {
 		setTweakDescription("Various cosmetic changes");
 		addSubTweak(legacyTextShadows = new LegacyTextShadows());
 		addSubTweak(fineTunedUIScale = new FineTunedUIScale());
+		addSubTweak(oldButton = new TweakBuilder("Pre 1.13 button").description("Reverts buttons to their pre 1.14 state").setDefaultEnabled(true).build());
 	}
 	public static class LegacyTextShadows extends Tweak {
 		public final IntSliderOption shadowOffset;

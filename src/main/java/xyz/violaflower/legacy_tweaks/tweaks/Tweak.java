@@ -52,7 +52,7 @@ public abstract class Tweak implements TweakParent {
 
     public void setDefaultEnabled(boolean enabled) {
         // TODO for when we do file saving
-        setEnabled(enabled);
+        setEnabled(enabled, false);
     }
 
     public void setGroup() {
