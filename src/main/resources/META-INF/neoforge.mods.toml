@@ -11,7 +11,7 @@ authors = "Me!"
 description = '''
 This is an example description! Tell everyone what your mod is about!
 '''
-#logoFile = ""
+logoFile = "assets/legacy_tweaks/icon.png"
 
 [[dependencies.legacy_tweaks]]
 modId = "neoforge"
