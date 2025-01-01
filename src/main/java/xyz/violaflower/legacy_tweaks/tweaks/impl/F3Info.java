@@ -1,6 +1,5 @@
 package xyz.violaflower.legacy_tweaks.tweaks.impl;
 
-import net.fabricmc.loader.impl.util.Localization;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 
 public class F3Info extends Tweak {
