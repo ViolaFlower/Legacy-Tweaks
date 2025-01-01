@@ -9,7 +9,8 @@
     "MapRendererMixin",
     "PanoramaRendererMixin",
     "TitleScreenMixin",
-    "client.GlyphInfoMixin"
+    "client.GlyphInfoMixin",
+    "client.WindowMixin"
   ],
   "mixins": [
     "ItemStackMixin",

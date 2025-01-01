@@ -4,6 +4,7 @@ import net.minecraft.util.Mth;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -35,9 +36,13 @@ public abstract class Tweak implements TweakParent {
     }
 
     public void setEnabled(boolean enabled) {
+        setEnabled(enabled, true);
+    }
+    public void setEnabled(boolean enabled, boolean triggerHooks) {
         boolean changed = isEnabled != enabled;
         if (!changed) return;
         isEnabled = enabled;
+        if (!triggerHooks) return;
         if (isEnabled) {
             onEnable();
         } else {
@@ -129,7 +134,7 @@ public abstract class Tweak implements TweakParent {
     }
 
     public BooleanOption addBooleanOption(String name) {
-        return add(new BooleanOption(name));
+        return add(new BooleanOption(name, ignored -> {}));
     }
 
     private final ArrayList<Option<?>> options = new ArrayList<>();
@@ -139,7 +144,7 @@ public abstract class Tweak implements TweakParent {
     }
 
     public DoubleSliderOption addSliderOption(String name, double min, double max) {
-        return add(new DoubleSliderOption(name) {
+        return add(new DoubleSliderOption(name, ignored -> {}) {
             @Override
             public Double getMin() {
                 return min;
@@ -153,7 +158,7 @@ public abstract class Tweak implements TweakParent {
     }
 
     public IntSliderOption addSliderOption(String name, int min, int max) {
-        return add(new IntSliderOption(name) {
+        return add(new IntSliderOption(name, ignored -> {}) {
             @Override
             public Integer getMin() {
                 return min;
@@ -172,8 +177,8 @@ public abstract class Tweak implements TweakParent {
 
     // TODO get this saved to a file and vice versa
     public static class BooleanOption extends Option<Boolean> {
-        public BooleanOption(String name) {
-            super(name);
+        public BooleanOption(String name, Consumer<Boolean> onChanged) {
+            super(name, onChanged);
             this.value = false;
         }
 
@@ -184,8 +189,8 @@ public abstract class Tweak implements TweakParent {
 
     public abstract class SliderOption<T extends Number> extends Option<T> {
         private final Function<Double, T> newT;
-        public SliderOption(String name, Function<Double, T> newT) {
-            super(name);
+        public SliderOption(String name, Function<Double, T> newT, Consumer<T> onChanged) {
+            super(name, onChanged);
             this.newT = newT;
         }
 
@@ -195,7 +200,7 @@ public abstract class Tweak implements TweakParent {
             double value = get().doubleValue();
             double min = getMin().doubleValue();
             double max = getMax().doubleValue();
-            return Mth.map(value, min, max, 0, 1);
+            return Mth.clampedMap(value, min, max, 0, 1);
         }
 
         public T unNormalize(double normalise) {
@@ -207,8 +212,8 @@ public abstract class Tweak implements TweakParent {
     }
 
     public class DoubleSliderOption extends SliderOption<Double> {
-        public DoubleSliderOption(String name) {
-            super(name, f -> f);
+        public DoubleSliderOption(String name, Consumer<Double> onChanged) {
+            super(name, f -> f, onChanged);
             this.value = 0D;
         }
 
@@ -224,8 +229,8 @@ public abstract class Tweak implements TweakParent {
     }
 
     public class IntSliderOption extends SliderOption<Integer> {
-        public IntSliderOption(String name) {
-            super(name, Double::intValue);
+        public IntSliderOption(String name, Consumer<Integer> onChanged) {
+            super(name, Double::intValue, onChanged);
             this.value = 0;
         }
 
@@ -243,8 +248,10 @@ public abstract class Tweak implements TweakParent {
     public abstract static class Option<T> {
         private final String name;
         T value;
-        public Option(String name) {
+        Consumer<T> onChanged;
+        public Option(String name, Consumer<T> onChanged) {
             this.name = name;
+            this.onChanged = onChanged;
         }
         public String getName() {
             return this.name;
@@ -255,6 +262,11 @@ public abstract class Tweak implements TweakParent {
 
         public void set(T t) {
             this.value = t;
+            onChanged.accept(t);
+        }
+
+        public void setConsumer(Consumer<T> onChanged) {
+            this.onChanged = onChanged;
         }
     }
 }
