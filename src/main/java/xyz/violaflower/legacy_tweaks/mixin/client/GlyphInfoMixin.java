@@ -13,7 +13,7 @@ import xyz.violaflower.legacy_tweaks.tweaks.impl.EyeCandy;
 public interface GlyphInfoMixin {
 	@Inject(method = "getShadowOffset", at = @At("HEAD"), cancellable = true)
 	private void getShadowOffset(CallbackInfoReturnable<Float> cir) {
-		EyeCandy.LegacyTextShadows legacyTextShadows = Tweaks.EYE_CANDY.getSubTweak("Legacy Text Shadows");
+		EyeCandy.LegacyTextShadows legacyTextShadows = Tweaks.EYE_CANDY.legacyTextShadows;
 		if (!legacyTextShadows.isEnabled()) return;
 		cir.setReturnValue((float)(legacyTextShadows.shadowOffset.get() / Minecraft.getInstance().getWindow().getGuiScale()));
 	}

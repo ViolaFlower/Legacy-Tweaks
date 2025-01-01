@@ -5,13 +5,15 @@ import net.minecraft.client.Minecraft;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 
 public class EyeCandy extends Tweak {
+	public final LegacyTextShadows legacyTextShadows;
+	public final FineTunedUIScale fineTunedUIScale;
 	public EyeCandy() {
 		setTweakID("Eye Candy");
 		setGroup();
 		setTweakAuthor("Jab125");
 		setTweakDescription("Various cosmetic changes");
-		addSubTweak(new LegacyTextShadows());
-		addSubTweak(new FineTunedUIScale());
+		addSubTweak(legacyTextShadows = new LegacyTextShadows());
+		addSubTweak(fineTunedUIScale = new FineTunedUIScale());
 	}
 	public static class LegacyTextShadows extends Tweak {
 		public final IntSliderOption shadowOffset;

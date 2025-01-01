@@ -15,7 +15,7 @@ import xyz.violaflower.legacy_tweaks.tweaks.impl.EyeCandy;
 public class WindowMixin {
 	@Inject(method = "setGuiScale", at = @At("HEAD"))
 	private void guiScaleInject(double d, CallbackInfo ci, @Local(argsOnly = true) LocalDoubleRef ref) {
-		EyeCandy.FineTunedUIScale fineTunedUiScale = Tweaks.EYE_CANDY.getSubTweak("Fine Tuned UI Scale");
+		EyeCandy.FineTunedUIScale fineTunedUiScale = Tweaks.EYE_CANDY.fineTunedUIScale;
 		if (fineTunedUiScale.isEnabled()) {
 			 ref.set(fineTunedUiScale.uiScale.get());
 		}
