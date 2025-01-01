@@ -1,0 +1,7 @@
+{
+  "intros": [
+    "minecraft:textures/png.png",
+    "legacy_tweaks:icon.png",
+    "minecraft:intentional_missing_texture"
+  ]
+}
