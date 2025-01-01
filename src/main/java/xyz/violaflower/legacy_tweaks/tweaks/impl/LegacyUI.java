@@ -15,5 +15,6 @@ public class LegacyUI extends Tweak {
 		legacyTitleScreen = addBooleanOption("Legacy Title Screen");
 		legacyTitleScreen.set(true); // true by default
 		legacyPanorama = addBooleanOption("Legacy Panorama");
+		legacyPanorama.set(true);
 	}
 }
