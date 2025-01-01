@@ -51,7 +51,7 @@ public class LegacyTitleScreen extends Screen {
 			Tweaks.LEGACY_UI.legacyTitleScreen.set(false);
 			Minecraft.getInstance().reloadResourcePacks();
 			new Thread(() -> {
-				long l = System.currentTimeMillis() + 2500;
+				long l = System.currentTimeMillis() + 2000;
 				while (System.currentTimeMillis() < l);
 				Minecraft.getInstance().tell(() -> Minecraft.getInstance().setScreen(new TitleScreen()));
 			}).start();
