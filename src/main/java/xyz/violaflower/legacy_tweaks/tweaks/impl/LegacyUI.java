@@ -5,7 +5,7 @@ import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 public class LegacyUI extends Tweak {
 
 	public final BooleanOption legacyTitleScreen;
-	private final BooleanOption legacyPanorama;
+	public final BooleanOption legacyPanorama;
 
 	public LegacyUI() {
 		setTweakID("Legacy UI");
