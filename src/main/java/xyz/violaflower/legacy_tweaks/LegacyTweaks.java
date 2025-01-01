@@ -2,16 +2,17 @@ package xyz.violaflower.legacy_tweaks;
 
 //? if neoforge
 /*import net.neoforged.fml.common.Mod;*/
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+//? if fabric {
+    import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+    import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+//?}
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.violaflower.legacy_tweaks.gui.LTScreen;
 import xyz.violaflower.legacy_tweaks.items.ItemManager;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
-import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;import xyz.violaflower.legacy_tweaks.tweaks.impl.*;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
 //? if neoforge
 /*@Mod(LegacyTweaks.MOD_ID)*/
@@ -35,15 +36,16 @@ public final class LegacyTweaks {
         tweakManager.register(Tweaks.MAP_CHANGES);
         tweakManager.register(Tweaks.GAMMA);
         tweakManager.register(Tweaks.F3INFO);
-        tweakManager.register(Tweaks.FAT_CHAT);
+        tweakManager.register(Tweaks.LEGACY_CHAT);
         tweakManager.register(Tweaks.CRASH);
         tweakManager.register(Tweaks.LEGACY_ATTACK);
         tweakManager.register(Tweaks.LEGACY_UI);
 
         // this only works on Fabric!
-        ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
-
-            dispatcher.register(ClientCommandManager.literal("ltscreen").executes(c -> {Minecraft.getInstance().tell(() -> Minecraft.getInstance().setScreen(new LTScreen(Minecraft.getInstance().screen)));return 0;}));
-        });
+        //? if fabric {
+            ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+                dispatcher.register(ClientCommandManager.literal("ltscreen").executes(c -> {Minecraft.getInstance().tell(() -> Minecraft.getInstance().setScreen(new LTScreen(Minecraft.getInstance().screen)));return 0;}));
+            });
+        //?}
     }
 }

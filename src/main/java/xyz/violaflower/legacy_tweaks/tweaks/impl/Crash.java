@@ -1,8 +1,8 @@
 package xyz.violaflower.legacy_tweaks.tweaks.impl;
 
-import sun.misc.Unsafe;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 
+import sun.misc.Unsafe;
 import java.lang.reflect.Field;
 
 public class Crash extends Tweak {

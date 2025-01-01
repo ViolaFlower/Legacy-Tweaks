@@ -22,7 +22,7 @@ public class WindowTitle extends Tweak {
     }
 
     public WindowTitle() {
-        setTweakID("windowtitle");
+        setTweakID("Window Title");
         setTweakAuthor("LimeGradient", "Jab125");
         ShowTUVersion showTUVersion = new ShowTUVersion();
         showTUVersion.setEnabled(false);
@@ -30,7 +30,7 @@ public class WindowTitle extends Tweak {
     }
 
     public String getTitle() {
-        ShowTUVersion showTUVersion = this.getSubTweak("showtuversion");
+        ShowTUVersion showTUVersion = this.getSubTweak("Show TU Version");
         if (showTUVersion != null && showTUVersion.isEnabled()) {
             return String.format("Minecraft: Console Edition - %s", showTUVersion.getTUVersion());
         } else {
