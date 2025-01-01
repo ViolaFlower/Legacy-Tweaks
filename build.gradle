@@ -80,3 +80,13 @@ processResources {
     if (!neoforge) exclude "META-INF/neoforge.mods.toml"
     if (!fabric) exclude "fabric.mod.json"
 }
+
+def packageJar = tasks.create("packageJar", Copy.class) {
+    into("${rootProject.layout.buildDirectory.get()}/libs/$mod_version")
+}
+
+afterEvaluate {
+    packageJar.dependsOn(remapJar)
+    packageJar.from(remapJar.archiveFile)
+    build.finalizedBy(packageJar)
+}
