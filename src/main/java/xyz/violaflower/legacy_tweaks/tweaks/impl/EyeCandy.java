@@ -17,7 +17,7 @@ public class EyeCandy extends Tweak {
 		setTweakDescription("Various cosmetic changes");
 		addSubTweak(legacyTextShadows = new LegacyTextShadows());
 		addSubTweak(fineTunedUIScale = new FineTunedUIScale());
-		addSubTweak(oldButton = new TweakBuilder("Pre 1.13 button").description("Reverts buttons to their pre 1.14 state").setDefaultEnabled(true).build());
+		addSubTweak(oldButton = new TweakBuilder("Pre 1.13 button").description("Reverts buttons to their pre 1.14 state").authors("Jab125").setDefaultEnabled(true).build());
 	}
 	public static class LegacyTextShadows extends Tweak {
 		public final IntSliderOption shadowOffset;

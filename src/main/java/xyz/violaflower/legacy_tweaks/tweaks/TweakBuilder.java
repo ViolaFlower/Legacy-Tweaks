@@ -5,6 +5,7 @@ public class TweakBuilder {
 	private String id;
 	private String description;
 	private boolean defaultEnabled = true;
+	private String[] authors;
 
 	public TweakBuilder(String tweakID) {
 		this.id = tweakID;
@@ -21,6 +22,11 @@ public class TweakBuilder {
 		return this;
 	}
 
+	public TweakBuilder authors(String... authors) {
+		this.authors = authors;
+		return this;
+	}
+
 	public TweakBuilder setDefaultEnabled(boolean defaultEnabled) {
 		this.defaultEnabled = defaultEnabled;
 		return this;
@@ -31,6 +37,7 @@ public class TweakBuilder {
 		};
 		tweak.setTweakDescription(description);
 		tweak.setDefaultEnabled(defaultEnabled);
+		tweak.setTweakAuthor(authors);
 		return tweak;
 	}
 }
