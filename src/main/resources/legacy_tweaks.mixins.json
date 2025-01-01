@@ -9,7 +9,9 @@
     "MapRendererMixin",
     "PanoramaRendererMixin",
     "TitleScreenMixin",
+    "client.GameRendererMixin",
     "client.GlyphInfoMixin",
+    "client.PostChainAccessor",
     "client.WindowMixin"
   ],
   "mixins": [

@@ -9,11 +9,13 @@ package xyz.violaflower.legacy_tweaks;
 import net.minecraft.client.Minecraft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import xyz.violaflower.legacy_tweaks.gui.LTScreen;
+    import xyz.violaflower.legacy_tweaks.client.LegacyTweaksClient;
+    import xyz.violaflower.legacy_tweaks.gui.LTScreen;
 import xyz.violaflower.legacy_tweaks.items.ItemManager;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
+// TODO properly credit Legacy4J for gamma
 //? if neoforge
 /*@Mod(LegacyTweaks.MOD_ID)*/
 public final class LegacyTweaks {
@@ -48,5 +50,8 @@ public final class LegacyTweaks {
                 dispatcher.register(ClientCommandManager.literal("ltscreen").executes(c -> {Minecraft.getInstance().tell(() -> Minecraft.getInstance().setScreen(new LTScreen(Minecraft.getInstance().screen)));return 0;}));
             });
         //?}
+
+        // TODO check for client side
+        LegacyTweaksClient.init();
     }
 }

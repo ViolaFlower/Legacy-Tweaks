@@ -1,0 +1,3 @@
+Modified versions from Legacy4J 1.7.5, licensed under the MIT license:
+
+gamma.json
