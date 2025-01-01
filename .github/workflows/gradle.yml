@@ -36,19 +36,16 @@ jobs:
     - name: chmod cuz github moment
       run: chmod +x gradlew
 
-    - name: Build Fabric 1.21 JAR
-      run: ./gradlew :1.21-fabric:chiseledBuild 
+    - name: Build with Gradle Wrapper
+      run: ./gradlew chiseledBuild
 
-    - name: Upload Fabric 1.21 JAR
+    - name: Upload Fabric JAR
       uses: actions/upload-artifact@v3
       with:
         name: LT-fabric-1.21
         path: versions/1.21-fabric/build/libs/*.jar
 
-    - name: Build NeoForge 1.21 JAR
-      run: ./gradlew :1.21-neoforge:chiseledBuild 
-
-    - name: Upload NeoForge 1.21 JAR
+    - name: Upload NeoForge JAR
       uses: actions/upload-artifact@v3
       with:
         name: LT-neoforge-1.21
