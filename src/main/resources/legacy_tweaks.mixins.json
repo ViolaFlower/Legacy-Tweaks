@@ -7,12 +7,13 @@
     "ChatComponentMixin",
     "F3Mixin",
     "MapRendererMixin",
+    "PanoramaRendererMixin",
     "TitleScreenMixin"
   ],
   "mixins": [
     "ItemStackMixin",
-    "PlayerMixin",
-    "MinecraftMixin"
+    "MinecraftMixin",
+    "PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

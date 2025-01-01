@@ -5,6 +5,7 @@ import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 public class LegacyUI extends Tweak {
 
 	public final BooleanOption legacyTitleScreen;
+	private final BooleanOption legacyPanorama;
 
 	public LegacyUI() {
 		setTweakID("Legacy UI");
@@ -13,5 +14,6 @@ public class LegacyUI extends Tweak {
 		setGroup();
 		legacyTitleScreen = addBooleanOption("Legacy Title Screen");
 		legacyTitleScreen.set(true); // true by default
+		legacyPanorama = addBooleanOption("Legacy Panorama");
 	}
 }
