@@ -43,6 +43,8 @@ public class LegacyTweaksResourceManager implements ResourceManagerReloadListene
 		} catch (JsonSyntaxException jsonSyntaxException) {
 			System.err.printf("Failed to parse shader: %s, %s%n", GAMMA_LOCATION, jsonSyntaxException);
 		}
+
+		// TODO: we need the resources loaded _before_ the loading overlay starts, not after, probably move this into LoadingOverlayMixin?
 		Optional<Resource> resource = resourceManager.getResource(ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID, "intros.json"));
 		if (resource.isPresent()) {
 			List<ResourceLocation> resourceLocations = null;
