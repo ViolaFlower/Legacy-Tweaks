@@ -1,6 +1,5 @@
-package xyz.violaflower.legacy_tweaks.gui.legacy;
+package xyz.violaflower.legacy_tweaks.gui.screen.legacy;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -12,15 +11,11 @@ import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
 import net.minecraft.client.gui.screens.options.OptionsScreen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import xyz.violaflower.legacy_tweaks.gui.LTScreen;
-import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
+import xyz.violaflower.legacy_tweaks.gui.screen.LTScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
 import java.util.Objects;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class LegacyTitleScreen extends Screen {

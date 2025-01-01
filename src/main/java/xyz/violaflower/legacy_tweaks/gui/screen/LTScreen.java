@@ -1,4 +1,4 @@
-package xyz.violaflower.legacy_tweaks.gui;
+package xyz.violaflower.legacy_tweaks.gui.screen;
 
 import com.google.common.collect.Lists;
 import net.minecraft.ChatFormatting;
@@ -14,17 +14,14 @@ import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.FormattedCharSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakParent;
 
 import java.util.List;
-import java.util.Map;
 
 public class LTScreen extends Screen {
     private static final Component TITLE = Component.translatable("lt.screens.ltscreen.title");

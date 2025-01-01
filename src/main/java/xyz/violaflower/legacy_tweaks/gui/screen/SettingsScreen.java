@@ -1,4 +1,4 @@
-package xyz.violaflower.legacy_tweaks.gui;
+package xyz.violaflower.legacy_tweaks.gui.screen;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
@@ -18,7 +18,6 @@ import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class SettingsScreen extends Screen {
 
