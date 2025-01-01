@@ -8,7 +8,8 @@
     "F3Mixin",
     "MapRendererMixin",
     "PanoramaRendererMixin",
-    "TitleScreenMixin"
+    "TitleScreenMixin",
+    "client.GlyphInfoMixin"
   ],
   "mixins": [
     "ItemStackMixin",

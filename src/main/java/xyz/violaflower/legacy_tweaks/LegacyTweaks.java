@@ -40,6 +40,7 @@ public final class LegacyTweaks {
         tweakManager.register(Tweaks.CRASH);
         tweakManager.register(Tweaks.LEGACY_ATTACK);
         tweakManager.register(Tweaks.LEGACY_UI);
+        tweakManager.register(Tweaks.EYE_CANDY);
 
         // this only works on Fabric!
         //? if fabric {

@@ -152,6 +152,20 @@ public abstract class Tweak implements TweakParent {
         });
     }
 
+    public IntSliderOption addSliderOption(String name, int min, int max) {
+        return add(new IntSliderOption(name) {
+            @Override
+            public Integer getMin() {
+                return min;
+            }
+
+            @Override
+            public Integer getMax() {
+                return max;
+            }
+        });
+    }
+
     public List<Option<?>> getOptions() {
         return options;
     }
@@ -206,6 +220,23 @@ public abstract class Tweak implements TweakParent {
         @Override
         public Double getMin() {
             return 0.0;
+        }
+    }
+
+    public class IntSliderOption extends SliderOption<Integer> {
+        public IntSliderOption(String name) {
+            super(name, Double::intValue);
+            this.value = 0;
+        }
+
+        @Override
+        public Integer getMax() {
+            return 1;
+        }
+
+        @Override
+        public Integer getMin() {
+            return 0;
         }
     }
 

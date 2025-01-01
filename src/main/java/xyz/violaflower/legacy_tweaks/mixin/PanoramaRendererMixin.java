@@ -14,7 +14,7 @@ public class PanoramaRendererMixin {
 	@Inject(method = "render", at = @At("HEAD"), cancellable = true)
 	private void rneder(GuiGraphics guiGraphics, int i, int j, float f, float g, CallbackInfo ci) {
 		if (Tweaks.LEGACY_UI.legacyPanorama.isOn()) {
-			LegacyUIClient.render(guiGraphics, i, j, f, g);
+			LegacyUIClient.renderPanorama(guiGraphics, i, j, f, g);
 			ci.cancel();
 		}
 	}
