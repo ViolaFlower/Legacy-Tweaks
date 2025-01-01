@@ -45,7 +45,12 @@ public class LegacyTweaksResourceManager implements ResourceManagerReloadListene
 		}
 		Optional<Resource> resource = resourceManager.getResource(ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID, "intros.json"));
 		if (resource.isPresent()) {
-			List<ResourceLocation> resourceLocations = INTROS_CODEC.parse(JsonOps.INSTANCE, new Gson().fromJson(new String(resource.get().open().readAllBytes()), JsonElement.class)).resultOrPartial(System.err::println).orElseThrow();
+			List<ResourceLocation> resourceLocations = null;
+			try {
+				resourceLocations = INTROS_CODEC.parse(JsonOps.INSTANCE, new Gson().fromJson(new String(resource.get().open().readAllBytes()), JsonElement.class)).resultOrPartial(System.err::println).orElseThrow();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
 			System.out.println("Intros: " + resourceLocations);
 			//TODO please actually implement this
 		}
