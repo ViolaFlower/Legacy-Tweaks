@@ -1,4 +1,4 @@
-package xyz.violaflower.legacy_tweaks.client.screen;
+package xyz.violaflower.legacy_tweaks.client.gui.screen;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;

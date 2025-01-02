@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import xyz.violaflower.legacy_tweaks.gui.screen.legacy.LegacyTitleScreen;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.LegacyTitleScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
 @Mixin(Screen.class)

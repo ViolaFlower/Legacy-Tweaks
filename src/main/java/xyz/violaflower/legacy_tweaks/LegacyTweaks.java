@@ -10,7 +10,7 @@ import net.minecraft.client.Minecraft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
     import xyz.violaflower.legacy_tweaks.client.LegacyTweaksClient;
-    import xyz.violaflower.legacy_tweaks.gui.screen.LTScreen;
+    import xyz.violaflower.legacy_tweaks.client.gui.screen.LTScreen;
 import xyz.violaflower.legacy_tweaks.items.ItemManager;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;

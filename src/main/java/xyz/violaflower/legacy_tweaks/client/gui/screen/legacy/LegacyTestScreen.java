@@ -1,4 +1,4 @@
-package xyz.violaflower.legacy_tweaks.client.screen.legacy;
+package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;

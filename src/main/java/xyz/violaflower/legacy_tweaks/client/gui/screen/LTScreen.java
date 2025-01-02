@@ -1,4 +1,4 @@
-package xyz.violaflower.legacy_tweaks.client.screen;
+package xyz.violaflower.legacy_tweaks.client.gui.screen;
 
 import com.google.common.collect.Lists;
 import net.minecraft.ChatFormatting;
