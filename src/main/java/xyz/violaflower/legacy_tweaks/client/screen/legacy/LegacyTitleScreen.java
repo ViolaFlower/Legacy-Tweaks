@@ -1,4 +1,4 @@
-package xyz.violaflower.legacy_tweaks.gui.screen.legacy;
+package xyz.violaflower.legacy_tweaks.client.screen.legacy;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -12,7 +12,7 @@ import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
 import net.minecraft.client.gui.screens.options.OptionsScreen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.network.chat.Component;
-import xyz.violaflower.legacy_tweaks.gui.screen.LTScreen;
+import xyz.violaflower.legacy_tweaks.client.screen.LTScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
 import java.util.Objects;

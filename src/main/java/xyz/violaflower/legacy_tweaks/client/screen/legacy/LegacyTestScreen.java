@@ -1,4 +1,4 @@
-package xyz.violaflower.legacy_tweaks.gui.screen.legacy;
+package xyz.violaflower.legacy_tweaks.client.screen.legacy;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -6,7 +6,6 @@ import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
