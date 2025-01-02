@@ -19,5 +19,10 @@
   "lt.legacyScreens.optionsScreen.buttons.graphics": "Graphics",
   "lt.legacyScreens.optionsScreen.buttons.userInterface": "User Interface",
   "lt.legacyScreens.optionsScreen.buttons.reset": "Reset to Defaults",
-  "lt.legacyScreens.optionsScreen.buttons.newSettings": "Java Edition Settings"
+  "lt.legacyScreens.optionsScreen.buttons.newSettings": "Java Edition Settings",
+  "lt.legacyScreens.graphicsScreen.buttons.renderClouds": "Render Clouds",
+  "lt.legacyScreens.graphicsScreen.buttons.customSkinAnim": "Custom Skin Animation",
+  "lt.legacyScreens.graphicsScreen.buttons.gamma": "Gamma",
+  "lt.legacyScreens.graphicsScreen.buttons.showGlideGhost": "Show Glide Ghost",
+  "lt.legacyScreens.graphicsScreen.buttons.showGlideGhostPath": "Show Glide Ghost Path"
 }
