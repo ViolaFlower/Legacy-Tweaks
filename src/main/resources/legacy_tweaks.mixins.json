@@ -11,6 +11,7 @@
     "TitleScreenMixin",
     "client.AbstractButtonMixin",
     "client.AbstractWidgetMixin",
+    "client.FogRendererMixin",
     "client.GameRendererMixin",
     "client.GlyphInfoMixin",
     "client.PostChainAccessor",
