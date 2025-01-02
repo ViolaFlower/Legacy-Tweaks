@@ -8,10 +8,16 @@
   "lt.tweaks.f3info.enabledTweaks": "Active Tweaks (%s): ",
   "lt.legacyScreens.titleScreen.buttons.playButton": "Play Game",
   "lt.legacyScreens.titleScreen.buttons.minigamesButton": "Mini Games",
-  "lt.legacyScreens.titleScreen.buttons.leaderboardsButton": "Leaderboards",
+  "lt.legacyScreens.titleScreen.buttons.leaderboardsButton": "LT Options",
   "lt.legacyScreens.titleScreen.buttons.achievementsButton": "Achievements",
   "lt.legacyScreens.titleScreen.buttons.optionsButton": "Help & Options",
   "lt.legacyScreens.titleScreen.buttons.storeButton": "Minecraft Store",
   "lt.legacyScreens.titleScreen.buttons.launchNewMinecraftButton": "Launch New Minecraft",
-  "lt.legacyScreens.titleScreen.buttons.exitButton": "Exit Game"
+  "lt.legacyScreens.titleScreen.buttons.exitButton": "Exit Game",
+  "lt.legacyScreens.optionsScreen.buttons.gameOptions": "Game Options",
+  "lt.legacyScreens.optionsScreen.buttons.audio": "Audio",
+  "lt.legacyScreens.optionsScreen.buttons.graphics": "Graphics",
+  "lt.legacyScreens.optionsScreen.buttons.userInterface": "User Interface",
+  "lt.legacyScreens.optionsScreen.buttons.reset": "Reset to Defaults",
+  "lt.legacyScreens.optionsScreen.buttons.newSettings": "Java Edition Settings"
 }
