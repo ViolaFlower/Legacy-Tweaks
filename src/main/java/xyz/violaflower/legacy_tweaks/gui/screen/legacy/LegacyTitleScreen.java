@@ -44,7 +44,7 @@ public class LegacyTitleScreen extends Screen {
 		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.optionsButton"), button -> {
 			Minecraft.getInstance().setScreen(new OptionsScreen(this, Minecraft.getInstance().options));
 		}).width(200).build());
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.storeButton"), button -> {}).width(200).build());
+		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.storeButton"), button -> setScreen(LegacyTestScreen::new)).width(200).build());
 		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.launchNewMinecraftButton"), button -> {
 			Tweaks.LEGACY_UI.legacyTitleScreen.set(false);
 			Minecraft.getInstance().reloadResourcePacks();
