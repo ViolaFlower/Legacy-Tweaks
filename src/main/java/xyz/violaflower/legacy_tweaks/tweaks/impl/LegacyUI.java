@@ -16,7 +16,7 @@ public class LegacyUI extends Tweak {
 		legacyTitleScreen = addBooleanOption("Legacy Title Screen");
 		legacyTitleScreen.set(true); // true by default
 		showQuitButton = addBooleanOption("Show Quit Button");
-		showQuitButton.set(false);
+		showQuitButton.set(true);
 		legacyPanorama = addBooleanOption("Legacy Panorama");
 		legacyPanorama.set(true);
 	}
