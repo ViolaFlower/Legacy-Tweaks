@@ -18,6 +18,7 @@
     "client.WindowMixin"
   ],
   "mixins": [
+    "EntityMixin",
     "ItemStackMixin",
     "MinecraftMixin",
     "PlayerMixin"

@@ -24,5 +24,7 @@
   "lt.legacyScreens.graphicsScreen.buttons.customSkinAnim": "Custom Skin Animation",
   "lt.legacyScreens.graphicsScreen.buttons.gamma": "Gamma",
   "lt.legacyScreens.graphicsScreen.buttons.showGlideGhost": "Show Glide Ghost",
-  "lt.legacyScreens.graphicsScreen.buttons.showGlideGhostPath": "Show Glide Ghost Path"
+  "lt.legacyScreens.graphicsScreen.buttons.showGlideGhostPath": "Show Glide Ghost Path",
+  "lt.tweaks.dimensionNotification.endEntranceMessage": "%s has entered The End",
+  "lt.tweaks.dimensionNotification.endLeaveMessage": "%s has left The End"
 }
