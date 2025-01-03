@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.level.Level;
 
+// These only work for the physical client!
 public class PlayerUtil {
 
     public static boolean isInOverworld() {
