@@ -2,24 +2,28 @@ package xyz.violaflower.legacy_tweaks.util;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 
 // These only work for the physical client!
 public class PlayerUtil {
 
-    public static boolean isInOverworld() {
+    public static ResourceKey<Level> getDimension() {
         ClientLevel level = Minecraft.getInstance().level;
-        return level != null && level.dimension().equals(Level.OVERWORLD);
+        assert level != null;
+        return level.dimension();
+    }
+
+    public static boolean isInOverworld() {
+        return getDimension().equals(Level.OVERWORLD);
     }
 
     public static boolean isInNether() {
-        ClientLevel level = Minecraft.getInstance().level;
-        return level != null && level.dimension().equals(Level.NETHER);
+        return getDimension().equals(Level.NETHER);
     }
 
     public static boolean isInEnd() {
-        ClientLevel level = Minecraft.getInstance().level;
-        return level != null && level.dimension().equals(Level.END);
+        return getDimension().equals(Level.END);
     }
 
     public static int getMinecraftRenderDistance() {
