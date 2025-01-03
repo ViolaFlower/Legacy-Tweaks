@@ -9,6 +9,7 @@ public class Crash extends Tweak {
     public Crash() {
         setTweakID("Crash");
         setTweakDescription("You should enable this ;)");
+        setTweakAuthor("Jeremiah");
         setEnabled(false);
     }
     @Override
