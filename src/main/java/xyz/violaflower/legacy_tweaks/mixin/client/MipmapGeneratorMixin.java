@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import xyz.violaflower.legacy_tweaks.helper.tweak.MipmapTypeHelper;
+import xyz.violaflower.legacy_tweaks.helper.tweak.texture.MipmapTypeHelper;
 
 // TODO for 1.21.2+, needs fixing
 @Mixin(MipmapGenerator.class)

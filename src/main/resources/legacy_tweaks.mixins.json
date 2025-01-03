@@ -12,6 +12,7 @@
     "client.AbstractButtonMixin",
     "client.AbstractWidgetMixin",
     "client.DimensionSpecialEffectsMixin",
+    "client.FireworkEntityRendererMixin",
     "client.FogRendererMixin",
     "client.GameRendererMixin",
     "client.GlyphInfoMixin",
@@ -19,7 +20,8 @@
     "client.MipmapGeneratorMixin",
     "client.PostChainAccessor",
     "client.ScreenMixin",
-    "client.WindowMixin"
+    "client.WindowMixin",
+    "client.WitchModelMixin"
   ],
   "mixins": [
     "EntityMixin",

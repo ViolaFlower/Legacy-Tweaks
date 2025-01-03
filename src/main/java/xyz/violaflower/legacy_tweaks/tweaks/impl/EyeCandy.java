@@ -9,6 +9,7 @@ public class EyeCandy extends Tweak {
 	public final LegacyTextShadows legacyTextShadows;
 	public final FineTunedUIScale fineTunedUIScale;
 	public final SunsetColors sunsetColors;
+	public final Models models;
 	public final Tweak smallerStars;
 	public final Tweak oldButton;
 	public final Tweak legacyWaterColors;
@@ -21,6 +22,7 @@ public class EyeCandy extends Tweak {
 		addSubTweak(legacyTextShadows = new LegacyTextShadows());
 		addSubTweak(fineTunedUIScale = new FineTunedUIScale());
 		addSubTweak(sunsetColors = new SunsetColors());
+		addSubTweak(models = new Models());
 		addSubTweak(smallerStars = new TweakBuilder("Smaller Stars").description("Makes the stars smaller, like LCE").authors("Permdog99").setDefaultEnabled(true).build());
 		addSubTweak(oldButton = new TweakBuilder("Pre 1.13 button").description("Reverts buttons to their pre 1.14 state").authors("Jab125").setDefaultEnabled(true).build());
 		addSubTweak(legacyWaterColors = new TweakBuilder("Legacy Water Colors").description("앚졸딩도알lk노wn라w소f아v이앋이온텔에잇노왜압에엣호울d베압렏오f뤼잊윙살엗오옷말l독엗잊f앋릳t렙옫요ff텍로운d텝에어f조울세f리엣안위왭엦아웃엡에엣돈t잘에w핱움안s틴깃임봈입레").authors("Jab125", "dexrn").setDefaultEnabled(true).build());
@@ -59,10 +61,24 @@ public class EyeCandy extends Tweak {
 		public SunsetColors() {
 			setTweakID("Sunset Colors");
 			setTweakAuthor("Permdog99");
-			setTweakDescription("[Currently TU5 does nothing] Sunset & sunrise colors, based on Xbox 360 LCE update version. ");
+			setTweakDescription("[Currently TU5 does nothing] Sunset & sunrise colors, based on Xbox 360 LCE update version.");
 
 			sunsetColors = addSliderOption("sunsetColors", 1, 3);
 			sunsetColors.set(3);
+		}
+	}
+
+	public static class Models extends Tweak {
+		public final Tweak legacyWitchHat;
+		public final Tweak legacyFireworkModel;
+
+		public Models() {
+			setTweakID("Models");
+			setTweakAuthor("Permdog99");
+			setTweakDescription("Legacy-styled models for entities and other objects.");
+
+			addSubTweak(legacyWitchHat = new TweakBuilder("Legacy Witch Hat").description("Legacy-styled witch hat.").authors("Permdog99, Legacy4J 1.7.5-beta").setDefaultEnabled(false).build());
+			addSubTweak(legacyFireworkModel = new TweakBuilder("Legacy Firework").description("Legacy-styled firework model").authors("Permdog99, Legacy4J 1.7.5-beta").setDefaultEnabled(true).build());
 		}
 	}
 }

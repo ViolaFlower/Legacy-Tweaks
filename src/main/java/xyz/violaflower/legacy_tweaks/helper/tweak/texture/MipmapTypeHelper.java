@@ -2,7 +2,7 @@
 // To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/4.0/
 // Modified by Permdog99 for use under Legacy Tweaks
 
-package xyz.violaflower.legacy_tweaks.helper.tweak;
+package xyz.violaflower.legacy_tweaks.helper.tweak.texture;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.Util;
