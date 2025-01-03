@@ -1,7 +1,7 @@
 # Legacy Tweaks
 Legacy Tweaks is a mod which brings back many Legacy Console Edition features as configurable tweaks!
 
-[<img alt="modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/modrinth_vector.svg">](https://modrinth.com/mod/legacy-tweaks) [<img alt="github" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/github_vector.svg">](https://github.com/Stonecutter-Modding/Legacy-Tweaks) [<img alt="gitbook" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/documentation/gitbook_vector.svg">](https://github.com/Stonecutter-Modding/Legacy-Tweaks/wiki) [<img alt="fabric" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/supported/fabric_vector.svg">](https://fabricmc.net) [<img alt="discord-plural" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/discord-plural_vector.svg">](https://discord.gg/BXkUxFDz8c) [<img alt="forge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/supported/forge_vector.svg">](https://neoforged.net)
+[<img alt="modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/modrinth_vector.svg">](https://modrinth.com/mod/legacy-tweaks) [<img alt="github" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/github_vector.svg">](https://github.com/Stonecutter-Modding/Legacy-Tweaks) [<img alt="gitbook" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/documentation/gitbook_vector.svg">](https://github.com/Stonecutter-Modding/Legacy-Tweaks/wiki) [<img alt="fabric" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/supported/fabric_vector.svg">](https://fabricmc.net) [<img alt="discord-plural" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/discord-plural_vector.svg">](https://discord.com/invite/dsBrDdJysn) [<img alt="forge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/supported/forge_vector.svg">](https://neoforged.net)
 
 ![Banner](https://cdn.modrinth.com/data/cached_images/2b6dfcf375fc0ea3403d7a4e81a79958335136cf_0.webp)
 
@@ -12,7 +12,7 @@ Inspired by Adrenix's [Nostalgic Tweaks](https://modrinth.com/mod/nostalgic-twea
 Legacy Tweaks contains over 30 tweaks as of 0.1.0, including everything from GUIs, tool-tips, gameplay features, to even recreations of old LCE version menus!
 
 ### Want to keep up with development?
-Consider joining the [ViolaFlower Discord](https://discord.gg/kprFeAn7Gq) for sneak peeks and updates on development!
+Consider joining the [ViolaFlower Discord](https://discord.com/invite/dsBrDdJysn) for sneak peeks and updates on development!
 
 ## ❓ Why Over Legacy4J
 Legacy4J was built as an all-in-one LCE re-creation. While on paper, that seems like a good idea, in reality, it has caused problems. Legacy4J is very bloated, uncustomizable and causes issues with mod compatibility.
