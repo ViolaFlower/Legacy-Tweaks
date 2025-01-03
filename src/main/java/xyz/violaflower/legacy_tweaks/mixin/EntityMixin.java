@@ -3,6 +3,7 @@ package xyz.violaflower.legacy_tweaks.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -14,6 +15,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.impl.FatChat;
+
+import static xyz.violaflower.legacy_tweaks.util.PlayerUtil.isInEnd;
 
 
 @Mixin(Entity.class)
@@ -33,13 +36,13 @@ public abstract class EntityMixin {
 
         FatChat.DimensionNotification dn = Tweaks.LEGACY_CHAT.getSubTweak("Dimension Notifications"); // deez nuts
 
-        ResourceLocation dimension = (transition.newLevel()).dimension().location();
-        ResourceLocation playerDimension = instance.level().dimension().location();
+        ResourceKey<Level> currentDimension = instance.level().dimension();
+        ResourceKey<Level> newDimension = (transition.newLevel()).dimension();
         Component displayName = player.getDisplayName();
 
-        if (dimension.toString().equals("minecraft:the_end") && dn.entranceMessage.get()) {
+        if (newDimension.equals(Level.END) && dn.entranceMessage.get()) {
 			serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("lt.tweaks.dimensionNotification.endEntranceMessage", displayName), false);
-		} else if (playerDimension.toString().equals("minecraft:the_end") && dn.leaveMessage.get()) {
+		} else if (currentDimension.equals(Level.END) && dn.leaveMessage.get()) {
 			serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("lt.tweaks.dimensionNotification.endLeaveMessage", displayName), false);
 		}
 

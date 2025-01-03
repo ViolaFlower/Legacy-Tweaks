@@ -16,6 +16,7 @@ public class FatChat extends Tweak {
         legacyMessageHeight = addBooleanOption("Legacy Chat Message Height");
         legacyMessageHeight.set(true);
         addSubTweak(new DimensionNotification());
+        addSubTweak(new NoAdvancementMessage());
     }
 
     public static class DimensionNotification extends Tweak {
@@ -31,6 +32,16 @@ public class FatChat extends Tweak {
             entranceMessage.set(true);
             leaveMessage = addBooleanOption("The End Leave Message");
             leaveMessage.set(true);
+        }
+    }
+
+    public static class NoAdvancementMessage extends Tweak {
+        public NoAdvancementMessage() {
+            setTweakID("No achievement announcement");
+            setTweakAuthor("DexrnZacAttack");
+            setTweakDescription("Doesn't send a message when a player gets an achievement.");
+            setTweakVersion("1.0.0");
+            setDefaultEnabled(false);
         }
     }
 

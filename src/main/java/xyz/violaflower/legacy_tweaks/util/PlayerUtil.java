@@ -10,20 +10,23 @@ public class PlayerUtil {
 
     public static ResourceKey<Level> getDimension() {
         ClientLevel level = Minecraft.getInstance().level;
-        assert level != null;
+        if (level == null) return null;
         return level.dimension();
     }
 
     public static boolean isInOverworld() {
-        return getDimension().equals(Level.OVERWORLD);
+        ResourceKey<Level> dimension = getDimension();
+        return dimension != null && dimension.equals(Level.OVERWORLD);
     }
 
     public static boolean isInNether() {
-        return getDimension().equals(Level.NETHER);
+        ResourceKey<Level> dimension = getDimension();
+        return dimension != null && dimension.equals(Level.OVERWORLD);
     }
 
     public static boolean isInEnd() {
-        return getDimension().equals(Level.END);
+        ResourceKey<Level> dimension = getDimension();
+        return dimension != null && dimension.equals(Level.OVERWORLD);
     }
 
     public static int getMinecraftRenderDistance() {
