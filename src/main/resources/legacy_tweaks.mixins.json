@@ -11,9 +11,12 @@
     "TitleScreenMixin",
     "client.AbstractButtonMixin",
     "client.AbstractWidgetMixin",
+    "client.DimensionSpecialEffectsMixin",
     "client.FogRendererMixin",
     "client.GameRendererMixin",
     "client.GlyphInfoMixin",
+    "client.LevelRendererMixin",
+    "client.MipmapGeneratorMixin",
     "client.PostChainAccessor",
     "client.ScreenMixin",
     "client.WindowMixin"
