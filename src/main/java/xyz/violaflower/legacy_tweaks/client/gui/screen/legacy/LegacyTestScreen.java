@@ -15,6 +15,7 @@ import java.util.Objects;
 // playground for testing gui things
 public class LegacyTestScreen extends Screen {
 	public static final ResourceLocation BACKGROUND_LOC = ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID, "gui_background");
+	public static final ResourceLocation TOP_NAV_LEFT = ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID, "top_nav_left");
 	public static final ResourceLocation INSET_BACKGROUND = ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID,  "inset_background");
 	private final Screen parent;
 	private final FrameLayout frameLayout;
@@ -69,8 +70,11 @@ public class LegacyTestScreen extends Screen {
 	public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 		super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
 		System.out.println(frameLayout.getWidth());
+		guiGraphics.blitSprite(TOP_NAV_LEFT, frameLayout.getX() + frameLayout.getWidth() / 3, frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
+		guiGraphics.blitSprite(TOP_NAV_LEFT, frameLayout.getX() + frameLayout.getWidth() / 3 * 2, frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
 		guiGraphics.blitSprite(BACKGROUND_LOC, frameLayout.getX(), frameLayout.getY(), frameLayout.getWidth(), frameLayout.getHeight());
 		guiGraphics.blitSprite(INSET_BACKGROUND, innerFrameLayout.getX(), innerFrameLayout.getY(), innerFrameLayout.getWidth(), innerFrameLayout.getHeight());
+		guiGraphics.blitSprite(TOP_NAV_LEFT, frameLayout.getX(), frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
 	}
 
 	@Override
