@@ -37,10 +37,11 @@ public abstract class EntityMixin {
         ResourceLocation playerDimension = instance.level().dimension().location();
         Component displayName = player.getDisplayName();
 
-        if (dimension.toString().equals("minecraft:the_end") && dn.entranceMessage.get())
-            serverLevel.getServer().sendSystemMessage(Component.translatable("lt.tweaks.dimensionNotification.endEntranceMessage", displayName));
-        else if (playerDimension.toString().equals("minecraft:the_end") && dn.leaveMessage.get())
-            serverLevel.getServer().sendSystemMessage(Component.translatable("lt.tweaks.dimensionNotification.endLeaveMessage", displayName));
+        if (dimension.toString().equals("minecraft:the_end") && dn.entranceMessage.get()) {
+			serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("lt.tweaks.dimensionNotification.endEntranceMessage", displayName), false);
+		} else if (playerDimension.toString().equals("minecraft:the_end") && dn.leaveMessage.get()) {
+			serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("lt.tweaks.dimensionNotification.endLeaveMessage", displayName), false);
+		}
 
         return original.call(instance, transition);
     }

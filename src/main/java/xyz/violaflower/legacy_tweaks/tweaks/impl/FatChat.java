@@ -23,7 +23,7 @@ public class FatChat extends Tweak {
         public final BooleanOption entranceMessage;
         public DimensionNotification() {
             setTweakID("Dimension Notifications");
-            setTweakAuthor("DexrnZacAttack");
+            setTweakAuthor("DexrnZacAttack", "Jab125");
             setTweakDescription("Sends a message when a player enters/leaves a dimension.");
             setTweakVersion("1.0.0");
             setDefaultEnabled(true);
