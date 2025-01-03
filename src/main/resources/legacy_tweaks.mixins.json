@@ -22,7 +22,8 @@
     "EntityMixin",
     "ItemStackMixin",
     "MinecraftMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "client.BiomeMixin"
   ],
   "injectors": {
     "defaultRequire": 1
