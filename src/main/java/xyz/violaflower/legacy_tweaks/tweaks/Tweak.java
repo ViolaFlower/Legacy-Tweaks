@@ -3,9 +3,14 @@ package xyz.violaflower.legacy_tweaks.tweaks;
 import net.minecraft.util.Mth;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public abstract class Tweak implements TweakParent {
@@ -157,6 +162,23 @@ public abstract class Tweak implements TweakParent {
         });
     }
 
+    public static class EnumProvider<T extends Enum<T>> {
+        private final T defaultValue;
+        private final Supplier<T[]> values;
+        private EnumProvider(T defaultValue, Supplier<T[]> values) {
+            this.defaultValue = defaultValue;
+            this.values = values;
+        }
+    }
+
+    public <T extends Enum<T>> EnumProvider<T> enumProvider(T defaultValue, Supplier<T[]> values) {
+        return new EnumProvider<>(defaultValue, values);
+    }
+
+    public <T extends Enum<T>> EnumSliderOption<T> addSliderOption(String name, EnumProvider<T> enumProvider) {
+        return new EnumSliderOption<>(name, enumProvider, ignored -> {}) {};
+    }
+
     public IntSliderOption addSliderOption(String name, int min, int max) {
         return add(new IntSliderOption(name, ignored -> {}) {
             @Override
@@ -182,15 +204,20 @@ public abstract class Tweak implements TweakParent {
             this.value = false;
         }
 
+        @Override
+        public String format(Boolean aBoolean) {
+            return aBoolean == null ? null : aBoolean.toString();
+        }
+
         public boolean isOn() {
             return get();
         }
     }
 
-    public abstract class SliderOption<T extends Number> extends Option<T> {
+    public abstract static class NumberSliderOption<T extends Number> extends SliderOption<T> {
         private final Function<Double, T> newT;
-        public SliderOption(String name, Function<Double, T> newT, Consumer<T> onChanged) {
-            super(name, onChanged);
+        public NumberSliderOption(String name, Function<Double, T> newT, Consumer<T> onChanged) {
+            super(name, newT, onChanged);
             this.newT = newT;
         }
 
@@ -203,15 +230,80 @@ public abstract class Tweak implements TweakParent {
             return Mth.clampedMap(value, min, max, 0, 1);
         }
 
+        @Override
+        public double doubleValue(T value) {
+            return value.doubleValue();
+        }
+
         public T unNormalize(double normalise) {
-           // double value = get().doubleValue();
+            // double value = get().doubleValue();
             double min = getMin().doubleValue();
             double max = getMax().doubleValue();
             return newT.apply(Mth.map(normalise, 0, 1, min, max));
         }
     }
 
-    public class DoubleSliderOption extends SliderOption<Double> {
+    public abstract static class SliderOption<T> extends Option<T> {
+        private final Function<Double, T> newT;
+        public SliderOption(String name, Function<Double, T> newT, Consumer<T> onChanged) {
+            super(name, onChanged);
+            this.newT = newT;
+        }
+
+        public abstract T getMin();
+        public abstract T getMax();
+        public double normalize() {
+            double value = doubleValue(get());
+            double min = doubleValue(getMin());
+            double max = doubleValue(getMax());
+            return Mth.clampedMap(value, min, max, 0, 1);
+        }
+
+        public abstract double doubleValue(T value);
+
+        public T unNormalize(double normalise) {
+            // double value = get().doubleValue();
+            double min = doubleValue(getMin());
+            double max = doubleValue(getMax());
+            return newT.apply(Mth.map(normalise, 0, 1, min, max));
+        }
+
+        @Override
+        public String format(T num) {
+            return num == null ? "null" : num.toString();
+        }
+    }
+
+    public static class EnumSliderOption<T extends Enum<T>> extends SliderOption<T> {
+        private final EnumProvider<T> provider;
+        public EnumSliderOption(String name, EnumProvider<T> provider, Consumer<T> onChanged) {
+            super(name, f -> provider.values.get()[f.intValue()], onChanged);
+            this.provider = provider;
+            this.value = this.provider.defaultValue;
+        }
+
+        @Override
+        public T getMax() {
+            return provider.values.get()[provider.values.get().length-1];
+        }
+
+        @Override
+        public double doubleValue(T value) {
+            return value.ordinal();
+        }
+
+        @Override
+        public T getMin() {
+            return provider.values.get()[0];
+        }
+
+        @Override
+        public String format(T t) {
+            return t == null ? "null" : t.toString();
+        }
+    }
+
+    public static class DoubleSliderOption extends NumberSliderOption<Double> {
         public DoubleSliderOption(String name, Consumer<Double> onChanged) {
             super(name, f -> f, onChanged);
             this.value = 0D;
@@ -226,9 +318,14 @@ public abstract class Tweak implements TweakParent {
         public Double getMin() {
             return 0.0;
         }
+
+        @Override
+        public String format(Double double_) {
+            return double_ == null ? "null" : double_.toString();
+        }
     }
 
-    public class IntSliderOption extends SliderOption<Integer> {
+    public static class IntSliderOption extends NumberSliderOption<Integer> {
         public IntSliderOption(String name, Consumer<Integer> onChanged) {
             super(name, Double::intValue, onChanged);
             this.value = 0;
@@ -242,6 +339,11 @@ public abstract class Tweak implements TweakParent {
         @Override
         public Integer getMin() {
             return 0;
+        }
+
+        @Override
+        public String format(Integer integer) {
+            return integer == null ? "null" : integer.toString();
         }
     }
 
@@ -268,5 +370,7 @@ public abstract class Tweak implements TweakParent {
         public void setConsumer(Consumer<T> onChanged) {
             this.onChanged = onChanged;
         }
+
+        public abstract String format(T t);
     }
 }
