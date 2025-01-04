@@ -6,6 +6,9 @@ public class TweakBuilder {
 	private String description;
 	private boolean defaultEnabled = true;
 	private String[] authors;
+	private Runnable onToggled = () -> {};
+	private Runnable onEnable = () -> {};
+	private Runnable onDisable = () -> {};
 
 	public TweakBuilder(String tweakID) {
 		this.id = tweakID;
@@ -32,8 +35,29 @@ public class TweakBuilder {
 		return this;
 	}
 
+	public TweakBuilder onToggled(Runnable onToggled) {
+		this.onToggled = onToggled;
+		return this;
+	}
+
 	public Tweak build() {
 		Tweak tweak = new Tweak(id) {
+			@Override
+			public void onEnable() {
+				this.onToggled();
+				onEnable.run();
+			}
+
+			@Override
+			public void onDisable() {
+				this.onToggled();
+				onDisable.run();
+			}
+
+			@Override
+			public void onToggled() {
+				onToggled.run();
+			}
 		};
 		tweak.setTweakDescription(description);
 		tweak.setDefaultEnabled(defaultEnabled);
