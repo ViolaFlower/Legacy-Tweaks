@@ -1,9 +1,7 @@
 package xyz.violaflower.legacy_tweaks.tweaks.impl;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.FogRenderer;
+import xyz.violaflower.legacy_tweaks.mixin.client.FogDataAccessor;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
-import xyz.violaflower.legacy_tweaks.tweaks.TweakBuilder;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.PlayerUtil;
 
@@ -95,7 +93,7 @@ public class LegacyFog extends Tweak {
         }
     }
 
-    public static void setFogStartConditional(FogRenderer.FogData fogData) {
+    public static void setFogStartConditional(FogDataAccessor fogData) {
         if (PlayerUtil.isInOverworld() && Tweaks.LEGACY_FOG.overworldFog.isEnabled()) {
             changeFogStart(Tweaks.LEGACY_FOG.overworldFog.terrainFogStartOverworld, fogData);
         } else if (PlayerUtil.isInNether() && Tweaks.LEGACY_FOG.netherFog.isEnabled()) {
@@ -107,7 +105,7 @@ public class LegacyFog extends Tweak {
         }
     }
 
-    public static void setFogStopConditional(FogRenderer.FogData fogData, float f) {
+    public static void setFogStopConditional(FogDataAccessor fogData, float f) {
         if (PlayerUtil.isInOverworld() && Tweaks.LEGACY_FOG.overworldFog.isEnabled()) {
             changeFogStop(Tweaks.LEGACY_FOG.overworldFog.terrainFogStopOverworld, fogData, f);
         } else if (PlayerUtil.isInNether() && Tweaks.LEGACY_FOG.netherFog.isEnabled()) {
@@ -119,11 +117,11 @@ public class LegacyFog extends Tweak {
         }
     }
 
-    public static void changeFogStart(DoubleSliderOption tweak, FogRenderer.FogData fogData) {
-        fogData.start = (PlayerUtil.getMinecraftRenderDistance()*16)/tweak.get().floatValue() - (PlayerUtil.getMinecraftRenderDistance()*16);
+    public static void changeFogStart(DoubleSliderOption tweak, FogDataAccessor fogData) {
+        fogData.setStart((PlayerUtil.getMinecraftRenderDistance()*16)/tweak.get().floatValue() - (PlayerUtil.getMinecraftRenderDistance()*16));
     }
 
-    public static void changeFogStop(DoubleSliderOption tweak, FogRenderer.FogData fogData, float f) {
-        fogData.end = f * tweak.get().floatValue() * 2;
+    public static void changeFogStop(DoubleSliderOption tweak, FogDataAccessor fogData, float f) {
+        fogData.setEnd(f * tweak.get().floatValue() * 2);
     }
 }

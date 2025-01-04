@@ -13,6 +13,7 @@
     "client.AbstractWidgetMixin",
     "client.DimensionSpecialEffectsMixin",
     "client.FireworkEntityRendererMixin",
+    "client.FogDataAccessor",
     "client.FogRendererMixin",
     "client.GameRendererMixin",
     "client.GlyphInfoMixin",
