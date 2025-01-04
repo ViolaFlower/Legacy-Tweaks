@@ -86,18 +86,19 @@ public class SettingsScreen extends Screen {
 			private final ArrayList<GuiEventListener> children = new ArrayList<>();
 			private AbstractSliderButton sliderButton;
 			private Button toggleButton;
-			public SettingEntry(@Nullable Tweak.Option<?> option) {
+			public <T> SettingEntry(@Nullable Tweak.Option<?> option) {
 				this.option = option;
-				if (option instanceof Tweak.SliderOption<?> sliderOption) {
-					sliderButton = new AbstractSliderButton(100, 0, 100, 20, Component.literal("Value " + new DecimalFormat("#0.00").format(sliderOption.get())), sliderOption.normalize()) {
+				if (option instanceof Tweak.SliderOption<?> sliderOption0) {
+					Tweak.SliderOption<T> sliderOption = (Tweak.SliderOption<T>) sliderOption0;
+					sliderButton = new AbstractSliderButton(100, 0, 100, 20, Component.literal("Value ").append(sliderOption.fancyFormat(sliderOption.get())), sliderOption.normalize()) {
 						@Override
 						protected void updateMessage() {
-							setMessage(Component.literal("Value " + new DecimalFormat("#0.00").format(sliderOption.get())));
+							setMessage(Component.literal("Value ").append(sliderOption.fancyFormat(sliderOption.get())));
 						}
 
 						@Override
 						protected void applyValue() {
-							((Tweak.SliderOption) sliderOption).set(sliderOption.unNormalize(value));
+							sliderOption.set(sliderOption.unNormalize(value));
 						}
 					};
 					children.add(sliderButton);

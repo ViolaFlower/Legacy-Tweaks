@@ -1,8 +1,10 @@
 package xyz.violaflower.legacy_tweaks.tweaks;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -165,18 +167,34 @@ public abstract class Tweak implements TweakParent {
     public static class EnumProvider<T extends Enum<T>> {
         private final T defaultValue;
         private final Supplier<T[]> values;
-        private EnumProvider(T defaultValue, Supplier<T[]> values) {
+        private final Function<T, String> toString;
+        private final Function<T, Component> toComponent;
+        private EnumProvider(T defaultValue, Supplier<T[]> values, Function<T, String> toString, Function<T, Component> toComponent) {
             this.defaultValue = defaultValue;
             this.values = values;
+            this.toString = toString;
+            this.toComponent = toComponent;
+        }
+
+        public String toString(T t) {
+            return toString.apply(t);
         }
     }
 
     public <T extends Enum<T>> EnumProvider<T> enumProvider(T defaultValue, Supplier<T[]> values) {
-        return new EnumProvider<>(defaultValue, values);
+        return enumProvider(defaultValue, values, T::toString);
+    }
+
+    public <T extends Enum<T>> EnumProvider<T> enumProvider(T defaultValue, Supplier<T[]> values, Function<T, String> toString) {
+        return enumProvider(defaultValue, values, toString, t -> Component.literal(toString.apply(t)));
+    }
+
+    public <T extends Enum<T>> EnumProvider<T> enumProvider(T defaultValue, Supplier<T[]> values, Function<T, String> toString, Function<T, Component> toComponent) {
+        return new EnumProvider<>(defaultValue, values, toString, toComponent);
     }
 
     public <T extends Enum<T>> EnumSliderOption<T> addSliderOption(String name, EnumProvider<T> enumProvider) {
-        return new EnumSliderOption<>(name, enumProvider, ignored -> {}) {};
+        return add(new EnumSliderOption<>(name, enumProvider, ignored -> {}) {});
     }
 
     public IntSliderOption addSliderOption(String name, int min, int max) {
@@ -299,7 +317,12 @@ public abstract class Tweak implements TweakParent {
 
         @Override
         public String format(T t) {
-            return t == null ? "null" : t.toString();
+            return t == null ? "null" : provider.toString(t);
+        }
+
+        @Override
+        public Component fancyFormat(T t) {
+            return provider.toComponent.apply(t);
         }
     }
 
@@ -321,7 +344,7 @@ public abstract class Tweak implements TweakParent {
 
         @Override
         public String format(Double double_) {
-            return double_ == null ? "null" : double_.toString();
+            return double_ == null ? "null" : new DecimalFormat("#0.00").format(double_);
         }
     }
 
@@ -372,5 +395,8 @@ public abstract class Tweak implements TweakParent {
         }
 
         public abstract String format(T t);
+        public Component fancyFormat(T t) {
+            return Component.literal(format(t));
+        }
     }
 }
