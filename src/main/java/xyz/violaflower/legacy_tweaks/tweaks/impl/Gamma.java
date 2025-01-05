@@ -1,6 +1,7 @@
 package xyz.violaflower.legacy_tweaks.tweaks.impl;
 
 import net.minecraft.client.renderer.PostChain;
+import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 
 public class Gamma extends Tweak {

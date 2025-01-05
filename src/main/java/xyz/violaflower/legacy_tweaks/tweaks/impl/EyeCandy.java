@@ -2,6 +2,7 @@ package xyz.violaflower.legacy_tweaks.tweaks.impl;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakBuilder;
 
@@ -15,17 +16,16 @@ public class EyeCandy extends Tweak {
 	public final Tweak legacyWaterColors;
 
 	public EyeCandy() {
-		setTweakID("Eye Candy");
+		setTweakID("eyeCandy");
 		setGroup();
 		setTweakAuthor("Jab125");
-		setTweakDescription("Various cosmetic changes");
 		addSubTweak(legacyTextShadows = new LegacyTextShadows());
 		addSubTweak(fineTunedUIScale = new FineTunedUIScale());
 		addSubTweak(sunsetColors = new SunsetColors());
 		addSubTweak(models = new Models());
-		addSubTweak(smallerStars = new TweakBuilder("Smaller Stars").description("Makes the stars smaller, like LCE").authors("Permdog99").setDefaultEnabled(true).build());
-		addSubTweak(oldButton = new TweakBuilder("Pre 1.15 button").description("Reverts buttons to their pre 1.15 state").authors("Jab125").setDefaultEnabled(true).build());
-		addSubTweak(legacyWaterColors = new TweakBuilder("Legacy Water Colors").description("앚졸딩도알lk노wn라w소f아v이앋이온텔에잇노왜압에엣호울d베압렏오f뤼잊윙살엗오옷말l독엗잊f앋릳t렙옫요ff텍로운d텝에어f조울세f리엣안위왭엦아웃엡에엣돈t잘에w핱움안s틴깃임봈입레").authors("Jab125", "dexrn").setDefaultEnabled(true).onToggled(() -> {
+		addSubTweak(smallerStars = new TweakBuilder("smallerStars").authors("Permdog99").setDefaultEnabled(true).build());
+		addSubTweak(oldButton = new TweakBuilder("oldButton").authors("Jab125").setDefaultEnabled(true).build());
+		addSubTweak(legacyWaterColors = new TweakBuilder("legacyWaterColors").authors("Jab125", "dexrn").setDefaultEnabled(true).onToggled(() -> {
 			//noinspection ConstantValue
 			if (Minecraft.getInstance().levelRenderer != null) {
 				Minecraft.getInstance().levelRenderer.allChanged();
@@ -35,9 +35,8 @@ public class EyeCandy extends Tweak {
 	public static class LegacyTextShadows extends Tweak {
 		public final IntSliderOption shadowOffset;
 		public LegacyTextShadows() {
-			setTweakID("Legacy Text Shadows");
+			setTweakID("legacyTextShadows");
 			setTweakAuthor("Jab125");
-			setTweakDescription("Makes shadows consistent with the screen's actual size, not the scaled size.");
 			shadowOffset = addSliderOption("shadowOffset", 0, 10);
 			shadowOffset.set(1);
 		}
@@ -45,9 +44,8 @@ public class EyeCandy extends Tweak {
 	public static class FineTunedUIScale extends Tweak {
 		public final DoubleSliderOption uiScale;
 		public FineTunedUIScale() {
-			setTweakID("Fine Tuned UI Scale");
+			setTweakID("fineTunedUIScale");
 			setTweakAuthor("Jab125");
-			setTweakDescription(ChatFormatting.RED + "Don't use this unless you know what you're doing!");
 			setEnabled(false, false);
 			uiScale = addSliderOption("uiScale", 0.8D, 5D);
 			uiScale.set(1d);
@@ -64,9 +62,8 @@ public class EyeCandy extends Tweak {
 		public final IntSliderOption sunsetColors; // TODO change to Enum
 
 		public SunsetColors() {
-			setTweakID("Sunset Colors");
+			setTweakID("sunsetColors");
 			setTweakAuthor("Permdog99");
-			setTweakDescription("[Currently TU5 does nothing] Sunset & sunrise colors, based on Xbox 360 LCE update version.");
 
 			sunsetColors = addSliderOption("sunsetColors", 1, 3);
 			sunsetColors.set(3);
@@ -78,12 +75,11 @@ public class EyeCandy extends Tweak {
 		public final Tweak legacyFireworkModel;
 
 		public Models() {
-			setTweakID("Models");
+			setTweakID("models");
 			setTweakAuthor("Permdog99");
-			setTweakDescription("Legacy-styled models for entities and other objects.");
 
-			addSubTweak(legacyWitchHat = new TweakBuilder("Legacy Witch Hat").description("Legacy-styled witch hat.").authors("Permdog99, Legacy4J 1.7.5-beta").setDefaultEnabled(false).build());
-			addSubTweak(legacyFireworkModel = new TweakBuilder("Legacy Firework").description("Legacy-styled firework model").authors("Permdog99, Legacy4J 1.7.5-beta").setDefaultEnabled(true).build());
+			addSubTweak(legacyWitchHat = new TweakBuilder("legacyWitchHat").authors("Permdog99, Legacy4J 1.7.5-beta").setDefaultEnabled(false).build());
+			addSubTweak(legacyFireworkModel = new TweakBuilder("legacyFirework").authors("Permdog99, Legacy4J 1.7.5-beta").setDefaultEnabled(true).build());
 		}
 	}
 }

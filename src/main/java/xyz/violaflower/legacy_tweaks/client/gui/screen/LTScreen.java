@@ -39,7 +39,7 @@ public class LTScreen extends Screen {
 
     private static Component getTitle(Screen parent, TweakParent tweakParent) {
         if (parent instanceof LTScreen ltScreen) {
-            return ltScreen.title.copy().append(" / " + ((Tweak) tweakParent).getTweakID());
+            return ltScreen.title.copy().append(" / ").append(((Tweak) tweakParent).getTweakName());
         }
         if (parent instanceof SettingsScreen settingsScreen) {
             return getTitle(settingsScreen.getParent(), tweakParent);
@@ -99,8 +99,8 @@ public class LTScreen extends Screen {
             protected final List<AbstractWidget> children = Lists.newArrayList();
 
             public SettingEntry(final Tweak tweak) {
-                this.title = Component.literal(tweak.getTweakID() + " - " + tweak.getTweakAuthor());
-                this.label = LTScreen.this.minecraft.font.split(Component.literal(tweak.getTweakDescription()).withStyle(ChatFormatting.GRAY), 175);
+                this.title = Component.empty().append(tweak.getTweakName()).append(" - " + tweak.getTweakAuthor());
+                this.label = LTScreen.this.minecraft.font.split(Component.empty().append(tweak.getTweakDescription()).withStyle(ChatFormatting.GRAY), 175);
 
                 if (!tweak.isGroup()) {
                     toggleButton = Button.builder(Component.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"), button -> {

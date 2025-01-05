@@ -18,12 +18,11 @@ import java.util.stream.Collectors;
 public abstract class Tweak implements TweakParent {
     private String id; // this probably shouldn't have a default
     private String author = "Legacy JohnTweaks";
-    private String description = "Changes... something.";
-    private String exDescription = "Changes something, I think... Maybe?";
     private String version = "1.0.0";
     private boolean isEnabled = true;
     private boolean isGroup = false;
     private final Map<String, Tweak> subTweaks = new LinkedHashMap<>();
+    private Tweak parentTweak;
 
     public Tweak() {
 
@@ -33,10 +32,9 @@ public abstract class Tweak implements TweakParent {
         this.id = id;
     }
 
-    public Tweak(String id, String author, String description) {
+    public Tweak(String id, String author) {
         this.id = id;
         this.author = author;
-        this.description = description;
     }
     public boolean isEnabled() {
         return isEnabled;
@@ -74,8 +72,21 @@ public abstract class Tweak implements TweakParent {
         return id;
     }
 
+    private Tweak getParentTweak() {
+        return parentTweak;
+    }
+
+    public String getTweakTranslationId() {
+        Tweak parentTweak = getParentTweak();
+        return parentTweak != null ? parentTweak.getTweakTranslationId() + "." + id : id;
+    }
+
     public void setTweakID(String id) {
         this.id = id;
+    }
+
+    public Component getTweakName() {
+        return Component.translatable("lt.tweak." + getTweakTranslationId());
     }
 
     public void setTweakAuthor(String... author) {
@@ -86,20 +97,12 @@ public abstract class Tweak implements TweakParent {
         return this.author;
     }
 
-    public void setTweakDescription(String description) {
-        this.description = description;
+    public Component getTweakDescription() {
+        return Component.translatable("lt.tweak." + getTweakTranslationId() + ".description");
     }
 
-    public String getTweakDescription() {
-        return this.description;
-    }
-
-    public void setTweakExtendedDescription(String exDescription) {
-        this.exDescription = exDescription;
-    }
-
-    public String getTweakExtendedDescription() {
-        return this.exDescription;
+    public Component getTweakExtendedDescription() {
+        return Component.translatable("lt.tweak." + getTweakTranslationId() + ".extendedDescription");
     }
 
     public void setTweakVersion(String version) {
@@ -121,6 +124,7 @@ public abstract class Tweak implements TweakParent {
 
     public void addSubTweak(Tweak tweak) {
         subTweaks.put(tweak.getTweakID(), tweak);
+        tweak.parentTweak = this;
     }
 
     public void onToggled() {
