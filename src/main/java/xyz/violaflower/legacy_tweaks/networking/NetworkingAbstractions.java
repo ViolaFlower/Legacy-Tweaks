@@ -3,10 +3,13 @@ package xyz.violaflower.legacy_tweaks.networking;
 //? if fabric {
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 //?} elif neoforge {
 /*import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import java.util.HashMap;
 *///?}
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
@@ -15,8 +18,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.entity.player.Player;
-
-import java.util.HashMap;
 
 public class NetworkingAbstractions {
 	//? if neoforge
@@ -49,6 +50,7 @@ public class NetworkingAbstractions {
 		/*CODEC_MAP.put(type, codec);
 		*///?}
 	}
+
 	public static class Client {
 		public static <T extends CustomPacketPayload> void playToClient(CustomPacketPayload.Type<T> type, PlayPayloadHandler<T> handler) {
 			//? if fabric {
@@ -98,6 +100,73 @@ public class NetworkingAbstractions {
 				@Override
 				public Packet<?> createPacket(CustomPacketPayload payload) {
 					return new ServerboundCustomPayloadPacket(payload);
+				}
+
+				@Override
+				public void disconnect(Component message) {
+					context.disconnect(message);
+				}
+			}));
+			*///?}
+		}
+
+		public interface PlayPayloadHandler<T> {
+			void handle(T handler, Context context);
+		}
+	}
+
+	public static class Server {
+		public static <T extends CustomPacketPayload> void playToServer(CustomPacketPayload.Type<T> type, PlayPayloadHandler<T> handler) {
+			//? if fabric {
+			ServerPlayNetworking.registerGlobalReceiver(type, (t, context) -> {
+				handler.handle(t, new Context() {
+					@Override
+					public Player player() {
+						return context.player();
+					}
+
+					@Override
+					public void sendPacket(Packet<?> packet) {
+						context.responseSender().sendPacket(packet);
+					}
+
+					@Override
+					public void sendPacket(CustomPacketPayload payload) {
+						context.responseSender().sendPacket(payload);
+					}
+
+					@Override
+					public Packet<?> createPacket(CustomPacketPayload payload) {
+						return context.responseSender().createPacket(payload);
+					}
+
+					@Override
+					public void disconnect(Component message) {
+						context.responseSender().disconnect(message);
+					}
+				});
+			});
+			//?} elif neoforge {
+			/*event.registrar(version).playToClient(type, (StreamCodec<? super RegistryFriendlyByteBuf, T>) (Object) CODEC_MAP.get(type), (t, context) -> handler.handle(t, new Context() {
+
+				@Override
+				public Player player() {
+					return context.player();
+				}
+
+				@Override
+				public void sendPacket(Packet<?> packet) {
+					context.listener().send(packet);
+				}
+
+				@Override
+				public void sendPacket(CustomPacketPayload payload) {
+					context.listener().send(payload);
+				}
+
+				@Override
+				public Packet<?> createPacket(CustomPacketPayload payload) {
+					return new ClientboundCustomPayloadPacket(payload);
 				}
 
 				@Override
