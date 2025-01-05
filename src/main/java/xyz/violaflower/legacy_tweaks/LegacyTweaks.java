@@ -60,13 +60,13 @@ public final class LegacyTweaks {
 
         // this only works on Fabric!
         //? if fabric {
-            ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
-                dispatcher.register(ClientCommandManager.literal("ltscreen").executes(c -> {Minecraft.getInstance().tell(() -> Minecraft.getInstance().setScreen(new LTScreen(Minecraft.getInstance().screen)));return 0;}));
-                dispatcher.register(ClientCommandManager.literal("testc2s").executes(c -> {
-                    ClientPlayNetworking.send(new CoolPacket2(90, 25.50));
-                    return 0;
-                }));
-            });
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+            dispatcher.register(ClientCommandManager.literal("ltscreen").executes(c -> {Minecraft.getInstance().tell(() -> Minecraft.getInstance().setScreen(new LTScreen(Minecraft.getInstance().screen)));return 0;}));
+            dispatcher.register(ClientCommandManager.literal("testc2s").executes(c -> {
+                ClientPlayNetworking.send(new CoolPacket2(90, 25.50));
+                return 0;
+            }));
+        });
         CommandRegistrationCallback.EVENT.register((dispatcher, context, selection) -> {
             dispatcher.register(Commands.literal("tests2c").executes(c -> {
                 ServerPlayNetworking.getSender(c.getSource().getPlayerOrException()).sendPacket(new CoolPacket(1));
