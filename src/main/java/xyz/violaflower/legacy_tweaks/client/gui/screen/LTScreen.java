@@ -39,7 +39,7 @@ public class LTScreen extends Screen {
 
     private static Component getTitle(Screen parent, TweakParent tweakParent) {
         if (parent instanceof LTScreen ltScreen) {
-            return ltScreen.title.copy().append(" / " + ((Tweak) tweakParent).getTweakName());
+            return ltScreen.title.copy().append(" / ").append(((Tweak) tweakParent).getTweakName());
         }
         if (parent instanceof SettingsScreen settingsScreen) {
             return getTitle(settingsScreen.getParent(), tweakParent);
