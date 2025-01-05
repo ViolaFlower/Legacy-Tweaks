@@ -13,10 +13,9 @@ public class LegacyFog extends Tweak {
     public final ModdedFog moddedFog;
 
     public LegacyFog() {
-        setTweakID("Legacy Fog");
+        setTweakID("legacyfog");
         setGroup();
         setTweakAuthor("Permdog99");
-        setTweakDescription("Customize the fog of certain or all dimensions");
 
         addSubTweak(overworldFog = new OverworldFog());
         addSubTweak(netherFog = new NetherFog());
@@ -29,13 +28,12 @@ public class LegacyFog extends Tweak {
         public final DoubleSliderOption terrainFogStartOverworld;
         public final DoubleSliderOption terrainFogStopOverworld;
         public OverworldFog() {
-            setTweakID("Overworld Fog");
+            setTweakID("overworldfog");
             setTweakAuthor("Permdog99");
-            setTweakDescription("Customize the fog of the Overworld");
             setEnabled(true, false);
 
-            terrainFogStartOverworld = addSliderOption("fogStart", 0d, 1d);
-            terrainFogStopOverworld = addSliderOption("fogStop", 0d, 1d);
+            terrainFogStartOverworld = addSliderOption("overworldstartfog", 0d, 1d);
+            terrainFogStopOverworld = addSliderOption("overworldendfog", 0d, 1d);
 
             terrainFogStartOverworld.set(0.75d);
             terrainFogStopOverworld.set(0.5d);
@@ -46,13 +44,12 @@ public class LegacyFog extends Tweak {
         public final DoubleSliderOption terrainFogStartNether;
         public final DoubleSliderOption terrainFogStopNether;
         public NetherFog() {
-            setTweakID("Nether Fog");
+            setTweakID("netherfog");
             setTweakAuthor("Permdog99");
-            setTweakDescription("Customize the fog of the Nether");
             setEnabled(true, false);
 
-            terrainFogStartNether = addSliderOption("fogStart", 0d, 1d);
-            terrainFogStopNether = addSliderOption("fogStop", 0d, 1d);
+            terrainFogStartNether = addSliderOption("netherstartfog", 0d, 1d);
+            terrainFogStopNether = addSliderOption("netherendfog", 0d, 1d);
 
             terrainFogStartNether.set(0.75d);
             terrainFogStopNether.set(0.5d);
@@ -63,13 +60,12 @@ public class LegacyFog extends Tweak {
         public final DoubleSliderOption terrainFogStartEnd;
         public final DoubleSliderOption terrainFogStopEnd;
         public EndFog() {
-            setTweakID("End Fog");
+            setTweakID("endfog");
             setTweakAuthor("Permdog99");
-            setTweakDescription("Customize the fog of the End");
             setEnabled(true, false);
 
-            terrainFogStartEnd = addSliderOption("fogStart", 0d, 1d);
-            terrainFogStopEnd = addSliderOption("fogStop", 0d, 1d);
+            terrainFogStartEnd = addSliderOption("endstartfog", 0d, 1d);
+            terrainFogStopEnd = addSliderOption("endendfog", 0d, 1d);
 
             terrainFogStartEnd.set(0.75d);
             terrainFogStopEnd.set(0.5d);
@@ -80,13 +76,12 @@ public class LegacyFog extends Tweak {
         public final DoubleSliderOption terrainFogStartModded;
         public final DoubleSliderOption terrainFogStopModded;
         public ModdedFog() {
-            setTweakID("Modded Dimensions Fog");
+            setTweakID("moddedfog");
             setTweakAuthor("Permdog99");
-            setTweakDescription("Customize the fog of all modded dimensions");
             setEnabled(true, false);
 
-            terrainFogStartModded = addSliderOption("fogStart", 0d, 1d);
-            terrainFogStopModded = addSliderOption("fogStop", 0d, 1d);
+            terrainFogStartModded = addSliderOption("moddedstartfog", 0d, 1d);
+            terrainFogStopModded = addSliderOption("moddedendfog", 0d, 1d);
 
             terrainFogStartModded.set(0.75d);
             terrainFogStopModded.set(0.5d);

@@ -9,15 +9,15 @@ public class LegacyUI extends Tweak {
 	public final BooleanOption showQuitButton;
 
 	public LegacyUI() {
-		setTweakID("Legacy UI");
+		setTweakID("legacyui");
 		setTweakAuthor("Jab125");
 		setEnabled(true);
 		setGroup();
-		legacyTitleScreen = addBooleanOption("Legacy Title Screen");
+		legacyTitleScreen = addBooleanOption("legacytitlescreen");
 		legacyTitleScreen.set(true); // true by default
-		showQuitButton = addBooleanOption("Show Quit Button");
+		showQuitButton = addBooleanOption("showquitbutton");
 		showQuitButton.set(true);
-		legacyPanorama = addBooleanOption("Legacy Panorama");
+		legacyPanorama = addBooleanOption("legacypanorama");
 		legacyPanorama.set(true);
 	}
 }

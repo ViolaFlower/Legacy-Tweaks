@@ -18,8 +18,6 @@ import java.util.stream.Collectors;
 public abstract class Tweak implements TweakParent {
     private String id; // this probably shouldn't have a default
     private String author = "Legacy JohnTweaks";
-    private String description = "Changes... something.";
-    private String exDescription = "Changes something, I think... Maybe?";
     private String version = "1.0.0";
     private boolean isEnabled = true;
     private boolean isGroup = false;
@@ -36,7 +34,6 @@ public abstract class Tweak implements TweakParent {
     public Tweak(String id, String author, String description) {
         this.id = id;
         this.author = author;
-        this.description = description;
     }
     public boolean isEnabled() {
         return isEnabled;
@@ -86,20 +83,12 @@ public abstract class Tweak implements TweakParent {
         return this.author;
     }
 
-    public void setTweakDescription(String description) {
-        this.description = description;
+    public Component getTweakDescription() {
+        return Component.translatable("lt.tweaks."+this.id+".description");
     }
 
-    public String getTweakDescription() {
-        return this.description;
-    }
-
-    public void setTweakExtendedDescription(String exDescription) {
-        this.exDescription = exDescription;
-    }
-
-    public String getTweakExtendedDescription() {
-        return this.exDescription;
+    public Component getTweakName() {
+        return Component.translatable("lt.tweaks."+this.id);
     }
 
     public void setTweakVersion(String version) {
@@ -371,16 +360,17 @@ public abstract class Tweak implements TweakParent {
     }
 
     public abstract static class Option<T> {
-        private final String name;
+        private final String id;
         T value;
         Consumer<T> onChanged;
-        public Option(String name, Consumer<T> onChanged) {
-            this.name = name;
+        public Option(String id, Consumer<T> onChanged) {
+            this.id = id;
             this.onChanged = onChanged;
         }
-        public String getName() {
-            return this.name;
+        public String getID() {
+            return this.id;
         }
+        public Component getName() {return Component.translatable("lt.tweaks.option."+this.id);}
         public T get() {
             return value;
         }

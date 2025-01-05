@@ -7,7 +7,7 @@ import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 public class WindowTitle extends Tweak {
     public static class ShowTUVersion extends Tweak {
         public ShowTUVersion() {
-            setTweakID("Show TU Version");
+            setTweakID("showtuversion");
         }
 
         public String getTUVersion() {
@@ -22,7 +22,7 @@ public class WindowTitle extends Tweak {
     }
 
     public WindowTitle() {
-        setTweakID("Window Title");
+        setTweakID("windowtitle");
         setTweakAuthor("LimeGradient", "Jab125");
         ShowTUVersion showTUVersion = new ShowTUVersion();
         showTUVersion.setEnabled(false);

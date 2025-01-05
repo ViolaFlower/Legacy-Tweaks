@@ -8,9 +8,8 @@ import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 public class Stub extends Tweak {
     public Stub() {
         setTweakAuthor("DexrnZacAttack", "Jab125");
-        setTweakDescription("This does absolutely nothing.");
-        setTweakID("StubTweak");
-        addSliderOption("Chat Formatting", enumProvider(ChatFormatting.RED, ChatFormatting::values, ChatFormatting::getName, f -> Component.literal(f.getName()).withStyle(f)));
-        addSliderOption("Rarity", enumProvider(Rarity.COMMON, Rarity::values, Rarity::getSerializedName, f -> Component.literal(f.getSerializedName()).withStyle(f.color())));
+        setTweakID("stub");
+        addSliderOption("stubchatformatting", enumProvider(ChatFormatting.RED, ChatFormatting::values, ChatFormatting::getName, f -> Component.literal(f.getName()).withStyle(f)));
+        addSliderOption("stubrarity", enumProvider(Rarity.COMMON, Rarity::values, Rarity::getSerializedName, f -> Component.literal(f.getSerializedName()).withStyle(f.color())));
     }
 }

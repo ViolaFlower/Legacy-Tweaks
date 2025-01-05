@@ -12,7 +12,7 @@ public class Gamma extends Tweak {
 	public Gamma() {
 		setTweakID("gamma");
 		// TODO better name
-		potency = addSliderOption("potency", 0D, 1D);
+		potency = addSliderOption("gammapotency", 0D, 1D);
 		potency.set(0.5d);
 	}
 

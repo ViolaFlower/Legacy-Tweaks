@@ -7,8 +7,7 @@ import java.lang.reflect.Field;
 
 public class Crash extends Tweak {
     public Crash() {
-        setTweakID("Crash");
-        setTweakDescription("You should enable this ;)");
+        setTweakID("crash");
         setTweakAuthor("Jeremiah");
         setEnabled(false);
     }
