@@ -99,7 +99,7 @@ public class LTScreen extends Screen {
             protected final List<AbstractWidget> children = Lists.newArrayList();
 
             public SettingEntry(final Tweak tweak) {
-                this.title = Component.literal(tweak.getTweakName() + " - " + tweak.getTweakAuthor());
+                this.title = Component.empty().append(tweak.getTweakName()).append(" - " + tweak.getTweakAuthor());
                 this.label = LTScreen.this.minecraft.font.split(Component.empty().append(tweak.getTweakDescription()).withStyle(ChatFormatting.GRAY), 175);
 
                 if (!tweak.isGroup()) {
