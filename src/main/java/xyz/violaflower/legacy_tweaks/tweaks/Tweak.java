@@ -17,9 +17,10 @@ import java.util.stream.Collectors;
 
 public abstract class Tweak implements TweakParent {
     private String id; // this probably shouldn't have a default
+    private Component name = Component.literal("Tweaky McTweakFace");
     private String author = "Legacy JohnTweaks";
-    private String description = "Changes... something.";
-    private String exDescription = "Changes something, I think... Maybe?";
+    private Component description = Component.literal("Changes... something.");
+    private Component exDescription = Component.literal("Changes something, I think... Maybe?");
     private String version = "1.0.0";
     private boolean isEnabled = true;
     private boolean isGroup = false;
@@ -33,9 +34,10 @@ public abstract class Tweak implements TweakParent {
         this.id = id;
     }
 
-    public Tweak(String id, String author, String description) {
+    public Tweak(String id, String author, Component name, Component description) {
         this.id = id;
         this.author = author;
+        this.name = name;
         this.description = description;
     }
     public boolean isEnabled() {
@@ -78,6 +80,14 @@ public abstract class Tweak implements TweakParent {
         this.id = id;
     }
 
+    public Component getTweakName() {
+        return name;
+    }
+
+    public void setTweakName(Component name) {
+        this.name = name;
+    }
+
     public void setTweakAuthor(String... author) {
         this.author = Arrays.stream(author).collect(Collectors.joining(", "));
     }
@@ -86,19 +96,19 @@ public abstract class Tweak implements TweakParent {
         return this.author;
     }
 
-    public void setTweakDescription(String description) {
+    public void setTweakDescription(Component description) {
         this.description = description;
     }
 
-    public String getTweakDescription() {
+    public Component getTweakDescription() {
         return this.description;
     }
 
-    public void setTweakExtendedDescription(String exDescription) {
+    public void setTweakExtendedDescription(Component exDescription) {
         this.exDescription = exDescription;
     }
 
-    public String getTweakExtendedDescription() {
+    public Component getTweakExtendedDescription() {
         return this.exDescription;
     }
 

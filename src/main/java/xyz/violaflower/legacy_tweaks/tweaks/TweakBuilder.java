@@ -1,9 +1,12 @@
 package xyz.violaflower.legacy_tweaks.tweaks;
 
+import net.minecraft.network.chat.Component;
+
 public class TweakBuilder {
 
 	private String id;
-	private String description;
+	private Component name;
+	private Component description;
 	private boolean defaultEnabled = true;
 	private String[] authors;
 	private Runnable onToggled = () -> {};
@@ -20,7 +23,12 @@ public class TweakBuilder {
 		return this;
 	}
 
-	public TweakBuilder description(String description) {
+	public TweakBuilder name(Component name) {
+		this.name = name;
+		return this;
+	}
+
+	public TweakBuilder description(Component description) {
 		this.description = description;
 		return this;
 	}
@@ -60,6 +68,7 @@ public class TweakBuilder {
 			}
 		};
 		tweak.setTweakDescription(description);
+		tweak.setTweakName(name);
 		tweak.setDefaultEnabled(defaultEnabled);
 		tweak.setTweakAuthor(authors);
 		return tweak;

@@ -1,5 +1,6 @@
 package xyz.violaflower.legacy_tweaks.tweaks.impl;
 
+import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 
 import sun.misc.Unsafe;
@@ -7,8 +8,9 @@ import java.lang.reflect.Field;
 
 public class Crash extends Tweak {
     public Crash() {
-        setTweakID("Crash");
-        setTweakDescription("You should enable this ;)");
+        setTweakID("crash");
+        setTweakName(Component.translatable("lt.tweaks.crash"));
+        setTweakDescription(Component.translatable("lt.tweaks.crash.description"));
         setTweakAuthor("Jeremiah");
         setEnabled(false);
     }

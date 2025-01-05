@@ -26,5 +26,31 @@
   "lt.legacyScreens.graphicsScreen.buttons.showGlideGhost": "Show Glide Ghost",
   "lt.legacyScreens.graphicsScreen.buttons.showGlideGhostPath": "Show Glide Ghost Path",
   "lt.tweaks.dimensionNotification.endEntranceMessage": "%s has entered The End",
-  "lt.tweaks.dimensionNotification.endLeaveMessage": "%s has left The End"
+  "lt.tweaks.dimensionNotification.endLeaveMessage": "%s has left The End",
+
+  "lt.tweaks.crash": "Crash",
+  "lt.tweaks.crash.description": "You should enable this ;)",
+  "lt.tweaks.eyecandy": "Eye Candy",
+  "lt.tweaks.eyecandy.description": "Various cosmetic changes",
+  "lt.tweaks.eyecandy.legacytextshadows": "Legacy Text Shadows",
+  "lt.tweaks.eyecandy.legacytextshadows.description": "Makes shadows consistent with the screen's actual size, not the scaled size.",
+  "lt.tweaks.eyecandy.finetuneduiscale": "Fine Tuned UI Scale",
+  "lt.tweaks.eyecandy.finetuneduiscale.description": "Don't use this unless you know what you're doing!",
+  "lt.tweaks.eyecandy.sunsetcolors": "Sunset Colors",
+  "lt.tweaks.eyecandy.sunsetcolors.description": "[Currently TU5 does nothing] Sunset & sunrise colors, based on Xbox 360 LCE update version.",
+  "lt.tweaks.eyecandy.models": "Models",
+  "lt.tweaks.eyecandy.models.description": "Legacy-styled models for entities and other objects.",
+  "lt.tweaks.eyecandy.models.legacywitchhat": "Legacy Witch Hat",
+  "lt.tweaks.eyecandy.models.legacywitchhat.description": "Legacy-styled witch hat.",
+  "lt.tweaks.eyecandy.models.legacyfireworkmodel": "Legacy Firework Model",
+  "lt.tweaks.eyecandy.models.legacyfireworkmodel.description": "Legacy-styled firework model.",
+  "lt.tweaks.eyecandy.smallerstars": "Smaller Stars",
+  "lt.tweaks.eyecandy.smallerstars.description": "Makes the stars smaller, like LCE",
+  "lt.tweaks.eyecandy.oldbutton": "Pre 1.15 button",
+  "lt.tweaks.eyecandy.oldbutton.description": "Reverts buttons to their pre 1.15 state",
+  "lt.tweaks.eyecandy.legacywatercolors": "Legacy Water Colors",
+  "lt.tweaks.eyecandy.legacywatercolors.description": "Makes water colors match LCE",
+
+  "lt.tweaks.f3info": "F3 Info",
+  "lt.tweaks.f3info.description": "Adds LegacyTweaks related info to the F3 debug screen."
 }
