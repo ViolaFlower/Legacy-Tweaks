@@ -178,7 +178,7 @@ public class NetworkingAbstractions {
 		}
 
 		public interface PlayPayloadHandler<T> {
-			void handle(T handler, Context context);
+			void handle(T payload, Context context);
 		}
 	}
 

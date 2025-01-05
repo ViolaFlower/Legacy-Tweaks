@@ -5,6 +5,7 @@ package xyz.violaflower.legacy_tweaks;
 //? if fabric {
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.impl.networking.CustomPayloadTypeProvider;
@@ -61,6 +62,10 @@ public final class LegacyTweaks {
         //? if fabric {
             ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
                 dispatcher.register(ClientCommandManager.literal("ltscreen").executes(c -> {Minecraft.getInstance().tell(() -> Minecraft.getInstance().setScreen(new LTScreen(Minecraft.getInstance().screen)));return 0;}));
+                dispatcher.register(ClientCommandManager.literal("testc2s").executes(c -> {
+                    ClientPlayNetworking.send(new CoolPacket2(90, 25.50));
+                    return 0;
+                }));
             });
         CommandRegistrationCallback.EVENT.register((dispatcher, context, selection) -> {
             dispatcher.register(Commands.literal("tests2c").executes(c -> {
@@ -77,8 +82,15 @@ public final class LegacyTweaks {
         LegacyTweaksNetworking.init();
     }
 
-    public static void initNetworking() {
+    private static void registerNetworkingCodecs() {
         NetworkingAbstractions.registerCodec(CoolPacket.TYPE, CoolPacket.STREAM_CODEC, NetworkingAbstractions.PayloadType.PLAY_S2C);
+        NetworkingAbstractions.registerCodec(CoolPacket2.TYPE, CoolPacket2.STREAM_CODEC, NetworkingAbstractions.PayloadType.PLAY_C2S);
+    }
+    public static void initNetworking() {
+        registerNetworkingCodecs();
+        NetworkingAbstractions.Server.playToServer(CoolPacket2.TYPE, (payload, context) -> {
+            System.out.println("[SERVER] received packet " + payload);
+        });
     }
 
     public record CoolPacket(int number) implements CustomPacketPayload {
@@ -87,6 +99,16 @@ public final class LegacyTweaks {
 
         @Override
         public Type<CoolPacket> type() {
+            return TYPE;
+        }
+    }
+
+    public record CoolPacket2(int number, double number2) implements CustomPacketPayload {
+        public static final Type<CoolPacket2> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID, "cool_packet2"));
+        public static final StreamCodec<FriendlyByteBuf, CoolPacket2> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.INT, CoolPacket2::number, ByteBufCodecs.DOUBLE, CoolPacket2::number2, CoolPacket2::new);
+
+        @Override
+        public Type<CoolPacket2> type() {
             return TYPE;
         }
     }
