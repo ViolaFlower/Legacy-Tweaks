@@ -1,2 +1,2 @@
-// TODO: Login and play packets. We could try to use both Fabric and NeoForge's APIs to achieve this.
+/// package for networking abstractions, other stuff goes in network
 package xyz.violaflower.legacy_tweaks.networking;

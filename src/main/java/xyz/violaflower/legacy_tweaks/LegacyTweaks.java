@@ -3,15 +3,26 @@ package xyz.violaflower.legacy_tweaks;
 //? if neoforge
 /*import net.neoforged.fml.common.Mod;*/
 //? if fabric {
-    import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
-    import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.fabric.impl.networking.CustomPayloadTypeProvider;
 //?}
 import net.minecraft.client.Minecraft;
+import net.minecraft.commands.Commands;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-    import xyz.violaflower.legacy_tweaks.client.LegacyTweaksClient;
-    import xyz.violaflower.legacy_tweaks.client.gui.screen.LTScreen;
+import xyz.violaflower.legacy_tweaks.client.LegacyTweaksClient;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.LTScreen;
 import xyz.violaflower.legacy_tweaks.items.ItemManager;
+import xyz.violaflower.legacy_tweaks.networking.LegacyTweaksNetworking;
+import xyz.violaflower.legacy_tweaks.networking.NetworkingAbstractions;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
@@ -51,9 +62,32 @@ public final class LegacyTweaks {
             ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
                 dispatcher.register(ClientCommandManager.literal("ltscreen").executes(c -> {Minecraft.getInstance().tell(() -> Minecraft.getInstance().setScreen(new LTScreen(Minecraft.getInstance().screen)));return 0;}));
             });
+        CommandRegistrationCallback.EVENT.register((dispatcher, context, selection) -> {
+            dispatcher.register(Commands.literal("tests2c").executes(c -> {
+                ServerPlayNetworking.getSender(c.getSource().getPlayerOrException()).sendPacket(new CoolPacket(1));
+                return 0;
+            }));
+        });
         //?}
 
         // TODO check for client side
         LegacyTweaksClient.init();
+
+        //? if fabric
+        LegacyTweaksNetworking.init();
+    }
+
+    public static void initNetworking() {
+        NetworkingAbstractions.registerCodec(CoolPacket.TYPE, CoolPacket.STREAM_CODEC, NetworkingAbstractions.PayloadType.PLAY_S2C);
+    }
+
+    public record CoolPacket(int number) implements CustomPacketPayload {
+        public static final Type<CoolPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID, "cool_packet"));
+        public static final StreamCodec<FriendlyByteBuf, CoolPacket> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.INT, CoolPacket::number, CoolPacket::new);
+
+        @Override
+        public Type<CoolPacket> type() {
+            return TYPE;
+        }
     }
 }

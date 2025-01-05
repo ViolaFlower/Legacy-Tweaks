@@ -48,11 +48,11 @@ public class MapRendererMixin {
 	}
 	@Unique
 	private static boolean mapCoords() {
-		return Tweaks.MAP_CHANGES.getSubTweak("Map Coordinates").isEnabled();
+		return Tweaks.MAP_CHANGES.getSubTweak("mapCoordinates").isEnabled();
 	}
 
 	@Unique
 	private static boolean smallerMapContents() {
-		return Tweaks.MAP_CHANGES.getSubTweak("Smaller Map Contents").isEnabled();
+		return Tweaks.MAP_CHANGES.getSubTweak("smallerMapContents").isEnabled();
 	}
 }
