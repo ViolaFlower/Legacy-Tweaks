@@ -30,14 +30,18 @@
 
   "lt.tweaks.crash": "Crash",
   "lt.tweaks.crash.description": "You should enable this ;)",
+
   "lt.tweaks.eyecandy": "Eye Candy",
   "lt.tweaks.eyecandy.description": "Various cosmetic changes",
   "lt.tweaks.eyecandy.legacytextshadows": "Legacy Text Shadows",
   "lt.tweaks.eyecandy.legacytextshadows.description": "Makes shadows consistent with the screen's actual size, not the scaled size.",
+  "lt.tweaks.eyecandy.legacytextshadows.option.shadowoffset": "Shadow Offset",
   "lt.tweaks.eyecandy.finetuneduiscale": "Fine Tuned UI Scale",
   "lt.tweaks.eyecandy.finetuneduiscale.description": "Don't use this unless you know what you're doing!",
+  "lt.tweaks.eyecandy.finetuneduiscale.option.uiscale": "UI Scale",
   "lt.tweaks.eyecandy.sunsetcolors": "Sunset Colors",
   "lt.tweaks.eyecandy.sunsetcolors.description": "[Currently TU5 does nothing] Sunset & sunrise colors, based on Xbox 360 LCE update version.",
+  "lt.tweaks.eyecandy.sunsetcolors.option.sunsetcolor": "Sunset Colors",
   "lt.tweaks.eyecandy.models": "Models",
   "lt.tweaks.eyecandy.models.description": "Legacy-styled models for entities and other objects.",
   "lt.tweaks.eyecandy.models.legacywitchhat": "Legacy Witch Hat",
@@ -52,5 +56,70 @@
   "lt.tweaks.eyecandy.legacywatercolors.description": "Makes water colors match LCE",
 
   "lt.tweaks.f3info": "F3 Info",
-  "lt.tweaks.f3info.description": "Adds LegacyTweaks related info to the F3 debug screen."
+  "lt.tweaks.f3info.description": "Adds LegacyTweaks related info to the F3 debug screen.",
+  "lt.tweaks.f3info.option.showenabledtweaks": "Show enabled tweaks",
+
+  "lt.tweaks.legacychat": "Legacy Chat",
+  "lt.tweaks.legacychat.description": "Various tweaks to make the chat look and function like it does in LCE.",
+  "lt.tweaks.legacychat.option.messagewidthspansscreen": "Show enabled tweaks",
+  "lt.tweaks.legacychat.option.legacymessageheight": "Legacy Chat Message Height",
+  "lt.tweaks.legacychat.dimensionnotif": "Dimension Notification",
+  "lt.tweaks.legacychat.dimensionnotif.description": "Sends a message when a player enters/leaves a dimension.",
+  "lt.tweaks.legacychat.dimensionnotif.option.enter": "The End Entrance Message",
+  "lt.tweaks.legacychat.dimensionnotif.option.leave": "The End Leave Message",
+  "lt.tweaks.legacychat.noachievementannouncement": "No Achievement Announcement",
+  "lt.tweaks.legacychat.noachievementannouncement.description": "Doesn't send a message when a player gets an achievement.",
+
+  "lt.tweaks.gamma": "Gamma",
+  "lt.tweaks.gamme.option.potency": "Gamma Strength",
+
+  "lt.tweaks.legacyattack": "Legacy Attack",
+  "lt.tweaks.legacyattack.description": "Various tweaks to fighting.",
+  "lt.tweaks.legacyattack.cooldown": "No Attack Cooldown",
+  "lt.tweaks.legacyattack.cooldown.description": "Removes attack cooldown from every item, excluding the Mace.",
+  "lt.tweaks.legacyattack.lessaxedamage": "Less Axe Damage",
+  "lt.tweaks.legacyattack.lessaxedamage.description": "Restores the Axe's damage to its pre-Combat Update (1.9) values.",
+
+  "lt.tweaks.legacyfog": "Legacy Fog",
+  "lt.tweaks.legacyfog.description": "Customize the fog of certain or all dimensions",
+  "lt.tweaks.legacyfog.option.start": "Fog Start",
+  "lt.tweaks.legacyfog.option.end": "Fog End",
+  "lt.tweaks.legacyfog.overworld": "Overworld Fod",
+  "lt.tweaks.legacyfog.overworld.description": "ustomize the fog of the Overworld",
+  "lt.tweaks.legacyfog.nether": "Nether Fog",
+  "lt.tweaks.legacyfog.nether.description": "Customize the fog of the Nether",
+  "lt.tweaks.legacyfog.end": "End Fog",
+  "lt.tweaks.legacyfog.end.description": "Customize the fog of the End.",
+  "lt.tweaks.legacyfog.modded": "Modded Dimensions Fog",
+  "lt.tweaks.legacyfog.modded.description": "Customize the fog of all modded dimensions.",
+
+  "lt.tweaks.legacyui": "Legacy UI",
+  "lt.tweaks.legacyui.option.legacytitlescreen": "Legacy Title Screen",
+  "lt.tweaks.legacyui.option.showquitbutton": "Show Quit Button",
+  "lt.tweaks.legacyui.option.legacypanorama": "Legacy Panorama",
+
+  "lt.tweaks.mapchanges": "Map Changes",
+  "lt.tweaks.mapchanges.description": "Various tweaks to maps.",
+  "lt.tweaks.mapchanges.coords": "Map Coordinates",
+  "lt.tweaks.mapchanges.coords.description": "Adds coordinates to maps!",
+  "lt.tweaks.mapchanges.smallercontent": "Smaller Map Contents",
+  "lt.tweaks.mapchanges.smallercontent.description": "Makes the contents of maps smaller.",
+
+  "lt.tweaks.mipmapping": "Mipmappings",
+  "lt.tweaks.mipmapping.description": "Various mipmap settings",
+  "lt.tweaks.mipmapping.type": "Mipmapping Type",
+  "lt.tweaks.mipmapping.type.description": "Set the mipmapping/LOD style based on a specific LCE update.",
+  "lt.tweaks.mipmapping.type.option.type": "Type",
+  "lt.tweaks.mipmapping.manual": "Manual Mipmapping",
+  "lt.tweaks.mipmapping.manual.description": "[CURRENTLY DOES NOTHING] Allow resource packs to add in manual mipmaps for fine tuning.",
+
+  "lt.tweaks.stub": "Stub Tweak",
+  "lt.tweaks.stub.description": "This does absolutely nothing.",
+  "lt.tweaks.stub.option.chatformatting": "Chat Formatting",
+  "lt.tweaks.stub.option.rarity": "Rarity",
+
+  "lt.tweaks.windowtitle": "Window Title",
+  "lt.tweaks.windowtitle.showtuversion": "Show TU Version",
+
+  "lt.tweaks.yellowchat": "Yellow Chat"
 }

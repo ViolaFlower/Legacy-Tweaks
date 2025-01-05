@@ -41,7 +41,7 @@ public class EyeCandy extends Tweak {
 			setTweakName(Component.translatable("lt.tweaks.eyecandy.legacytextshadows"));
 			setTweakAuthor("Jab125");
 			setTweakDescription(Component.translatable("lt.tweaks.eyecandy.legacytextshadows.description"));
-			shadowOffset = addSliderOption("shadowOffset", 0, 10);
+			shadowOffset = addSliderOption(Component.translatable("lt.tweaks.eyecandy.legacytextshadows.option.shadowoffset"), 0, 10);
 			shadowOffset.set(1);
 		}
 	}
@@ -53,7 +53,7 @@ public class EyeCandy extends Tweak {
 			setTweakAuthor("Jab125");
 			setTweakDescription(Component.translatable("lt.tweaks.eyecandy.finetuneduiscale.description").withStyle(ChatFormatting.RED));
 			setEnabled(false, false);
-			uiScale = addSliderOption("uiScale", 0.8D, 5D);
+			uiScale = addSliderOption(Component.translatable("lt.tweaks.eyecandy.finetuneduiscale.option.uiscale"), 0.8D, 5D);
 			uiScale.set(1d);
 			uiScale.setConsumer(d -> {if (isEnabled()) Minecraft.getInstance().resizeDisplay();});
 		}
@@ -73,7 +73,7 @@ public class EyeCandy extends Tweak {
 			setTweakAuthor("Permdog99");
 			setTweakDescription(Component.translatable("lt.tweaks.eyecandy.sunsetcolors.description"));
 
-			sunsetColors = addSliderOption("sunsetColors", 1, 3);
+			sunsetColors = addSliderOption(Component.translatable("lt.tweaks.eyecandy.sunsetcolors.option.sunsetcolor"), 1, 3);
 			sunsetColors.set(3);
 		}
 	}

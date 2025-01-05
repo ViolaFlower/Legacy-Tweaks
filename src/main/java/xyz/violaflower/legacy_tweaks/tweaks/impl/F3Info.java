@@ -12,6 +12,7 @@ public class F3Info extends Tweak {
         setTweakAuthor("DexrnZacAttack", "Jab125");
         setTweakDescription(Component.translatable("lt.tweaks.f3info.enabledTweaks"));
         // localize hopefully
-        showEnabledTweaks = addBooleanOption("showEnabledTweaks");
+        // LOCALISED! - S_N00B
+        showEnabledTweaks = addBooleanOption(Component.translatable("lt.tweaks.f3info.option.showenabledtweaks"));
     }
 }

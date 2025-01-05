@@ -1,5 +1,6 @@
 package xyz.violaflower.legacy_tweaks.tweaks.impl;
 
+import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 
 public class LegacyUI extends Tweak {
@@ -9,15 +10,16 @@ public class LegacyUI extends Tweak {
 	public final BooleanOption showQuitButton;
 
 	public LegacyUI() {
-		setTweakID("Legacy UI");
+		setTweakID("legacyUI");
+		setTweakName(Component.translatable("lt.tweaks.legacyui"));
 		setTweakAuthor("Jab125");
 		setEnabled(true);
 		setGroup();
-		legacyTitleScreen = addBooleanOption("Legacy Title Screen");
+		legacyTitleScreen = addBooleanOption(Component.translatable("lt.tweaks.legacyui.option.legacytitlescreen"));
 		legacyTitleScreen.set(true); // true by default
-		showQuitButton = addBooleanOption("Show Quit Button");
+		showQuitButton = addBooleanOption(Component.translatable("lt.tweaks.legacyui.option.showquitbutton"));
 		showQuitButton.set(true);
-		legacyPanorama = addBooleanOption("Legacy Panorama");
+		legacyPanorama = addBooleanOption(Component.translatable("lt.tweaks.legacyui.option.legacypanorama"));
 		legacyPanorama.set(true);
 	}
 }

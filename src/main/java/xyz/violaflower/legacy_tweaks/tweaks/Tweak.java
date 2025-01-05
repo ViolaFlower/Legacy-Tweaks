@@ -150,7 +150,7 @@ public abstract class Tweak implements TweakParent {
         return subTweaks;
     }
 
-    public BooleanOption addBooleanOption(String name) {
+    public BooleanOption addBooleanOption(Component name) {
         return add(new BooleanOption(name, ignored -> {}));
     }
 
@@ -160,7 +160,7 @@ public abstract class Tweak implements TweakParent {
         return option;
     }
 
-    public DoubleSliderOption addSliderOption(String name, double min, double max) {
+    public DoubleSliderOption addSliderOption(Component name, double min, double max) {
         return add(new DoubleSliderOption(name, ignored -> {}) {
             @Override
             public Double getMin() {
@@ -203,11 +203,11 @@ public abstract class Tweak implements TweakParent {
         return new EnumProvider<>(defaultValue, values, toString, toComponent);
     }
 
-    public <T extends Enum<T>> EnumSliderOption<T> addSliderOption(String name, EnumProvider<T> enumProvider) {
+    public <T extends Enum<T>> EnumSliderOption<T> addSliderOption(Component name, EnumProvider<T> enumProvider) {
         return add(new EnumSliderOption<>(name, enumProvider, ignored -> {}) {});
     }
 
-    public IntSliderOption addSliderOption(String name, int min, int max) {
+    public IntSliderOption addSliderOption(Component name, int min, int max) {
         return add(new IntSliderOption(name, ignored -> {}) {
             @Override
             public Integer getMin() {
@@ -227,7 +227,7 @@ public abstract class Tweak implements TweakParent {
 
     // TODO get this saved to a file and vice versa
     public static class BooleanOption extends Option<Boolean> {
-        public BooleanOption(String name, Consumer<Boolean> onChanged) {
+        public BooleanOption(Component name, Consumer<Boolean> onChanged) {
             super(name, onChanged);
             this.value = false;
         }
@@ -244,7 +244,7 @@ public abstract class Tweak implements TweakParent {
 
     public abstract static class NumberSliderOption<T extends Number> extends SliderOption<T> {
         private final Function<Double, T> newT;
-        public NumberSliderOption(String name, Function<Double, T> newT, Consumer<T> onChanged) {
+        public NumberSliderOption(Component name, Function<Double, T> newT, Consumer<T> onChanged) {
             super(name, newT, onChanged);
             this.newT = newT;
         }
@@ -273,7 +273,7 @@ public abstract class Tweak implements TweakParent {
 
     public abstract static class SliderOption<T> extends Option<T> {
         private final Function<Double, T> newT;
-        public SliderOption(String name, Function<Double, T> newT, Consumer<T> onChanged) {
+        public SliderOption(Component name, Function<Double, T> newT, Consumer<T> onChanged) {
             super(name, onChanged);
             this.newT = newT;
         }
@@ -304,7 +304,7 @@ public abstract class Tweak implements TweakParent {
 
     public static class EnumSliderOption<T extends Enum<T>> extends SliderOption<T> {
         private final EnumProvider<T> provider;
-        public EnumSliderOption(String name, EnumProvider<T> provider, Consumer<T> onChanged) {
+        public EnumSliderOption(Component name, EnumProvider<T> provider, Consumer<T> onChanged) {
             super(name, f -> provider.values.get()[f.intValue()], onChanged);
             this.provider = provider;
             this.value = this.provider.defaultValue;
@@ -337,7 +337,7 @@ public abstract class Tweak implements TweakParent {
     }
 
     public static class DoubleSliderOption extends NumberSliderOption<Double> {
-        public DoubleSliderOption(String name, Consumer<Double> onChanged) {
+        public DoubleSliderOption(Component name, Consumer<Double> onChanged) {
             super(name, f -> f, onChanged);
             this.value = 0D;
         }
@@ -359,7 +359,7 @@ public abstract class Tweak implements TweakParent {
     }
 
     public static class IntSliderOption extends NumberSliderOption<Integer> {
-        public IntSliderOption(String name, Consumer<Integer> onChanged) {
+        public IntSliderOption(Component name, Consumer<Integer> onChanged) {
             super(name, Double::intValue, onChanged);
             this.value = 0;
         }
@@ -381,14 +381,14 @@ public abstract class Tweak implements TweakParent {
     }
 
     public abstract static class Option<T> {
-        private final String name;
+        private final Component name;
         T value;
         Consumer<T> onChanged;
-        public Option(String name, Consumer<T> onChanged) {
+        public Option(Component name, Consumer<T> onChanged) {
             this.name = name;
             this.onChanged = onChanged;
         }
-        public String getName() {
+        public Component getName() {
             return this.name;
         }
         public T get() {
