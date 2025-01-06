@@ -1,5 +1,6 @@
 package xyz.violaflower.legacy_tweaks.network;
 
+import xyz.violaflower.legacy_tweaks.network.client.ClientNetworking;
 import xyz.violaflower.legacy_tweaks.network.payload.CoolPacket;
 import xyz.violaflower.legacy_tweaks.network.payload.CoolPacket2;
 import xyz.violaflower.legacy_tweaks.networking.NetworkingAbstractions;
@@ -17,6 +18,7 @@ public class Networking {
 		});
 	}
 
+	/// @see ClientNetworking#registerConfigurationTasks()
 	public static void registerConfigurationTasks() {
 
 	}
