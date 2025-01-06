@@ -50,10 +50,6 @@ public class NetworkingAbstractions {
 		*///?}
 	}
 
-	public static class Server {
-
-	}
-
 	public interface Context {
 		/// {@link net.minecraft.client.player.LocalPlayer} if the client is on the receiving end,<br>
 		/// {@link net.minecraft.server.level.ServerPlayer} if the server is on the receiving end.
