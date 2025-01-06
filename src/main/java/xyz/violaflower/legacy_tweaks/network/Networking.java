@@ -1,6 +1,9 @@
 package xyz.violaflower.legacy_tweaks.network;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ConfigurationTask;
 import xyz.violaflower.legacy_tweaks.network.client.ClientNetworking;
 import xyz.violaflower.legacy_tweaks.network.payload.CoolConfigurationPacket;
@@ -26,7 +29,8 @@ public class Networking {
 			System.out.println("[SERVER] received packet " + payload);
 		});
 		ServerboundConfiguration.registerHandler(CoolConfigurationResponsePacket.TYPE, (payload, context) -> {
-			System.out.println("Client responded with " + payload + "!");
+			//MinecraftServer server = context.;
+			context.getServer().getPlayerList().broadcastSystemMessage(Component.literal("[SERVER] Received " + payload + " from connecting client."), true);
 			context.finishCurrentTask(SendCoolConfigurationPacketTask.TYPE);
 		});
 	}
