@@ -14,6 +14,7 @@ import org.jetbrains.annotations.ApiStatus;
 import java.util.function.Consumer;
 
 public class ServerConfigurationEvents {
+	/// Register things to do on the server during the configuration phase.
 	public static void registerOnConfigure(Consumer<Handler> handler) {
 		//? if fabric {
 		ServerConfigurationConnectionEvents.CONFIGURE.register((handler_, server) -> handler.accept(new Handler() {

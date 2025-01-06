@@ -15,6 +15,12 @@ import xyz.violaflower.legacy_tweaks.networking.NetworkingAbstractions;
 
 
 public class ClientboundConfiguration {
+	/**
+	 * Registers a handler for a payload type.
+	 * A global receiver is registered to all connections, in the present and future.
+	 * @param type the payload type
+	 * @param handler the handler
+	 */
 	public static <T extends CustomPacketPayload> void registerHandler(CustomPacketPayload.Type<T> type, ConfigurationPayloadHandler<T> handler) {
 		//? if fabric {
 		ClientConfigurationNetworking.registerGlobalReceiver(type, (payload, context) -> {

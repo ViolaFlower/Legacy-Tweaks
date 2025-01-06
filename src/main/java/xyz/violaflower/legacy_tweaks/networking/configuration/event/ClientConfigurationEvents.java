@@ -9,6 +9,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientConfigurationPacketListenerImpl;
 
 public class ClientConfigurationEvents {
+	/// An event called after the connection has been initialized and is ready to start sending and receiving configuration packets.
+	///
+	/// Packets may be sent during this event.
 	public static void registerOnStart(Start start) {
 		//? if fabric {
 		ClientConfigurationConnectionEvents.START.register(start::onConfigurationStart);

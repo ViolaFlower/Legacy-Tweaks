@@ -13,13 +13,18 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.ApiStatus;
 
 // TODO documentation
 public class NetworkingAbstractions {
 	//? if neoforge {
-	/*public static RegisterConfigurationTasksEvent configurationTasksEvent;
+	/*@ApiStatus.Internal
+	public static RegisterConfigurationTasksEvent configurationTasksEvent;
+	@ApiStatus.Internal
 	public static RegisterPayloadHandlersEvent event;
+	@ApiStatus.Internal
 	public static final String version = "1.0.0";
+	@ApiStatus.Internal
 	public static final HashMap<CustomPacketPayload.Type<?>, StreamCodec<FriendlyByteBuf, ?>> CODEC_MAP = new HashMap<>();
 	*///?}
 	public enum PayloadType {
@@ -29,6 +34,7 @@ public class NetworkingAbstractions {
 		CONFIGURATION_S2C;
 
 		//? if fabric {
+		@ApiStatus.Internal
 		public PayloadTypeRegistry<? extends FriendlyByteBuf> registry() {
 			return switch (this) {
 				case PLAY_C2S -> PayloadTypeRegistry.playC2S();
