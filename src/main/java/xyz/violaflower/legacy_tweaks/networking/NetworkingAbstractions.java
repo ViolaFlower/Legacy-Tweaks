@@ -2,13 +2,8 @@ package xyz.violaflower.legacy_tweaks.networking;
 
 //? if fabric {
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 //?} elif neoforge {
-/*import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
-import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+/*import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import java.util.HashMap;
 *///?}
 import net.minecraft.network.FriendlyByteBuf;
