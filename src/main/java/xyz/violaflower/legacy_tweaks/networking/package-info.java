@@ -1,2 +1,2 @@
-/// package for networking abstractions, other stuff goes in network
+/// This package is for the abstractions we need to do networking, put anything that actually uses this in {@link xyz.violaflower.legacy_tweaks.network}
 package xyz.violaflower.legacy_tweaks.networking;
