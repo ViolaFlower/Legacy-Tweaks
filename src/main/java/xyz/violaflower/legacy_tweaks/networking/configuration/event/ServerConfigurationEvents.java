@@ -14,12 +14,26 @@ import org.jetbrains.annotations.ApiStatus;
 import java.util.function.Consumer;
 
 public class ServerConfigurationEvents {
-	public static void registerOnConfigure(ConfigurationTask configurationTask) {
+	public static void registerOnConfigure(Consumer<Handler> handler) {
 		//? if fabric {
-		ServerConfigurationConnectionEvents.CONFIGURE.register((handler, server) -> handler.addTask(configurationTask));
+		ServerConfigurationConnectionEvents.CONFIGURE.register((handler_, server) -> handler.accept(new Handler() {
+			@Override
+			public void addTask(ConfigurationTask task) {
+				handler_.addTask(task);
+			}
+		}));
 		//?} elif neoforge {
-		/*NetworkingAbstractions.configurationTasksEvent.register(configurationTask);
+		/*handler.accept(new Handler() {
+			@Override
+			public void addTask(ConfigurationTask task) {
+				NetworkingAbstractions.configurationTasksEvent.register(task);
+			}
+		});
 		*///?}
+	}
+
+	public interface Handler {
+		void addTask(ConfigurationTask task);
 	}
 
 	public interface CustomPayloadConfigurationTask extends ConfigurationTask {

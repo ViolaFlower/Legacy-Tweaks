@@ -10,6 +10,7 @@ import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.network.ConfigurationTask;
 import net.minecraft.world.entity.player.Player;
 import xyz.violaflower.legacy_tweaks.networking.NetworkingAbstractions;
 
@@ -18,7 +19,12 @@ public class ServerboundConfiguration {
 	public static <T extends CustomPacketPayload> void registerHandler(CustomPacketPayload.Type<T> type, ConfigurationPayloadHandler<T> handler) {
 		//? if fabric {
 		ServerConfigurationNetworking.registerGlobalReceiver(type, (payload, context) -> {
-			handler.handle(payload, new NetworkingAbstractions.Context() {
+			handler.handle(payload, new ServerContext() {
+				@Override
+				public void finishCurrentTask(ConfigurationTask.Type type) {
+					context.networkHandler().completeTask(type);
+				}
+				
 				@Override
 				public Player player() {
 					throw new UnsupportedOperationException();
@@ -47,7 +53,12 @@ public class ServerboundConfiguration {
 		});
 		//?} elif neoforge {
 		/*NetworkingAbstractions.event.registrar(NetworkingAbstractions.version).configurationToServer(type, (StreamCodec<? super FriendlyByteBuf, T>) (Object) NetworkingAbstractions.CODEC_MAP.get(type), (payload, context) -> {
-			handler.handle(payload, new NetworkingAbstractions.Context() {
+			handler.handle(payload, new ServerContext() {
+				@Override
+				public void finishCurrentTask(ConfigurationTask.Type type) {
+					context.finishCurrentTask(type);
+				}
+
 				@Override
 				public Player player() {
 					throw new UnsupportedOperationException();
@@ -78,6 +89,10 @@ public class ServerboundConfiguration {
 	}
 
 	public interface ConfigurationPayloadHandler<T extends CustomPacketPayload> {
-		void handle(T payload, NetworkingAbstractions.Context context);
+		void handle(T payload, ServerContext context);
+	}
+
+	public interface ServerContext extends NetworkingAbstractions.Context {
+		void finishCurrentTask(ConfigurationTask.Type type);
 	}
 }
