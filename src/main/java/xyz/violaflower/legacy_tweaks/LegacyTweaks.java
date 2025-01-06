@@ -80,7 +80,10 @@ public final class LegacyTweaks {
         // TODO check for client side
         LegacyTweaksClient.init();
 
-        //? if fabric
-        LegacyTweaksNetworking.init();
+        //? if fabric {
+        LegacyTweaksNetworking.registerCodecs();
+        LegacyTweaksNetworking.registerPayloadHandlers();
+        LegacyTweaksNetworking.registerConfigurationTasks();
+        //?}
     }
 }

@@ -3,7 +3,8 @@ package xyz.violaflower.legacy_tweaks.networking;
 //? if fabric {
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 //?} elif neoforge {
-/*import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+/*import net.neoforged.neoforge.network.event.RegisterConfigurationTasksEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import java.util.HashMap;
 *///?}
 import net.minecraft.network.FriendlyByteBuf;
@@ -16,7 +17,8 @@ import net.minecraft.world.entity.player.Player;
 // TODO documentation
 public class NetworkingAbstractions {
 	//? if neoforge {
-	/*public static RegisterPayloadHandlersEvent event;
+	/*public static RegisterConfigurationTasksEvent configurationTasksEvent;
+	public static RegisterPayloadHandlersEvent event;
 	public static final String version = "1.0.0";
 	public static final HashMap<CustomPacketPayload.Type<?>, StreamCodec<FriendlyByteBuf, ?>> CODEC_MAP = new HashMap<>();
 	*///?}

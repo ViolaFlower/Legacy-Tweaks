@@ -7,6 +7,7 @@ import net.fabricmc.loader.api.FabricLoader;
 /*import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.network.event.RegisterConfigurationTasksEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 *///?}
 import org.jetbrains.annotations.ApiStatus;
@@ -17,26 +18,59 @@ import xyz.violaflower.legacy_tweaks.network.Networking;
 //? if neoforge
 /*@EventBusSubscriber(modid = LegacyTweaks.MOD_ID, bus = EventBusSubscriber.Bus.MOD)*/
 public class LegacyTweaksNetworking {
-	private static boolean initted = false;
+	private static boolean payloadHandlersInitted = false;
+	private static boolean configurationTasksInitted = false;
+	private static boolean registeredCodecs = false;
 	//? if neoforge {
 	/*@SubscribeEvent
 	public static void event(RegisterPayloadHandlersEvent event) {
+		if (!registeredCodecs) {
+			registerCodecs();
+		}
 		NetworkingAbstractions.event = event;
-		init();
+		registerPayloadHandlers();
 		NetworkingAbstractions.event = null;
+	}
+
+	@SubscribeEvent
+	public static void event(RegisterConfigurationTasksEvent event) {
+		if (!registeredCodecs) {
+			registerCodecs();
+		}
+		NetworkingAbstractions.configurationTasksEvent = event;
+		registerConfigurationTasks();
+		NetworkingAbstractions.configurationTasksEvent = null;
 	}
 	*///?}
 
-	public static void init() {
+	public static void registerPayloadHandlers() {
 		//? if neoforge {
-		/*if (NetworkingAbstractions.event == null) throw new IllegalStateException("init called outside of RegisterPayloadHandlersEvent.");
+		/*if (NetworkingAbstractions.event == null) throw new IllegalStateException("registerPayloadHandlers called outside of RegisterPayloadHandlersEvent.");
 		*///?}
-		if (initted) throw new IllegalStateException("init called more than once!");
-		initted = true;
-		Networking.initNetworking();
+		if (payloadHandlersInitted) throw new IllegalStateException("registerPayloadHandlers called more than once!");
+		payloadHandlersInitted = true;
+		Networking.registerPayloadHandlers();
 		if (isClient()) {
-			new ClientNetworking();
+			new ClientPayloadHandlerNetworking();
 		}
+	}
+
+	public static void registerConfigurationTasks() {
+		//? if neoforge {
+		/*if (NetworkingAbstractions.configurationTasksEvent == null) throw new IllegalStateException("registerConfigurationTasks called outside of RegisterConfigurationTasksEvent.");
+		*///?}
+		if (configurationTasksInitted) throw new IllegalStateException("registerConfigurationTasks called more than once!");
+		configurationTasksInitted = true;
+		Networking.registerConfigurationTasks();
+		if (isClient()) {
+			new ClientPayloadHandlerNetworking();
+		}
+	}
+
+	public static void registerCodecs() {
+		if (registeredCodecs) throw new IllegalStateException("registerCodecs called more than once!");
+		registeredCodecs = true;
+		Networking.registerNetworkingCodecs();
 	}
 
 	private static boolean isClient() {
