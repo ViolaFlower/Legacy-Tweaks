@@ -10,6 +10,7 @@ import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ConfigurationTask;
 import net.minecraft.world.entity.player.Player;
 import xyz.violaflower.legacy_tweaks.networking.NetworkingAbstractions;
@@ -30,7 +31,12 @@ public class ServerboundConfiguration {
 				public void finishCurrentTask(ConfigurationTask.Type type) {
 					context.networkHandler().completeTask(type);
 				}
-				
+
+				@Override
+				public MinecraftServer getServer() {
+					return context.server();
+				}
+
 				@Override
 				public Player player() {
 					throw new UnsupportedOperationException();
@@ -63,6 +69,11 @@ public class ServerboundConfiguration {
 				@Override
 				public void finishCurrentTask(ConfigurationTask.Type type) {
 					context.finishCurrentTask(type);
+				}
+
+				@Override
+				public MinecraftServer getServer() {
+					return (MinecraftServer) context.listener().getMainThreadEventLoop();
 				}
 
 				@Override
@@ -100,5 +111,7 @@ public class ServerboundConfiguration {
 
 	public interface ServerContext extends NetworkingAbstractions.Context {
 		void finishCurrentTask(ConfigurationTask.Type type);
+
+		MinecraftServer getServer();
 	}
 }
