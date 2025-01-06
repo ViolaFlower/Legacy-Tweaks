@@ -5,13 +5,15 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientConfigurationConnectio
 //?}
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientConfigurationPacketListenerImpl;
+import xyz.violaflower.legacy_tweaks.networking.event.InternalClientConfigurationEvents;
 
 public class ClientConfigurationEvents {
 	public static void registerOnStart(Start start) {
 		//? if fabric {
 		ClientConfigurationConnectionEvents.START.register(start::onConfigurationStart);
-		//?}
-		// TODO we need a simple event system for NeoForge.
+		//?} elif neoforge {
+		/*InternalClientConfigurationEvents.START.register(start);
+		*///?}
 	}
 
 	public interface Start {
