@@ -63,7 +63,7 @@ public class LegacyTweaksNetworking {
 		configurationTasksInitted = true;
 		Networking.registerConfigurationTasks();
 		if (isClient()) {
-			new ClientPayloadHandlerNetworking();
+			new ClientConfigurationNetworking();
 		}
 	}
 
