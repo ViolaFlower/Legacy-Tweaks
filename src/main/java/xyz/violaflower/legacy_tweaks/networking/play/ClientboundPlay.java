@@ -14,6 +14,12 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import xyz.violaflower.legacy_tweaks.networking.NetworkingAbstractions;
 
 public class ClientboundPlay {
+	/**
+	 * Registers a handler for a payload type.
+	 * A global receiver is registered to all connections, in the present and future.
+	 * @param type the payload type
+	 * @param handler the handler
+	 */
 	public static <T extends CustomPacketPayload> void registerHandler(CustomPacketPayload.Type<T> type, PlayPayloadHandler<T> handler) {
 		//? if fabric {
 		ClientPlayNetworking.registerGlobalReceiver(type, (t, context) -> handler.handle(t, new NetworkingAbstractions.Context() {
