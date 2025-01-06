@@ -21,7 +21,7 @@ public class ClientboundConfiguration {
 			handler.handle(payload, new NetworkingAbstractions.Context() {
 				@Override
 				public Player player() {
-					return context.client().player;
+					throw new UnsupportedOperationException();
 				}
 
 				@Override
@@ -50,7 +50,7 @@ public class ClientboundConfiguration {
 			handler.handle(payload, new NetworkingAbstractions.Context() {
 				@Override
 				public Player player() {
-					return context.player();
+					throw new UnsupportedOperationException();
 				}
 
 				@Override

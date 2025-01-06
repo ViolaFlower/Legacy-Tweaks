@@ -21,7 +21,7 @@ public class ServerboundConfiguration {
 			handler.handle(payload, new NetworkingAbstractions.Context() {
 				@Override
 				public Player player() {
-					return null; // FIXME maybe there isn't a player to begin with?
+					throw new UnsupportedOperationException();
 				}
 
 				@Override
@@ -50,7 +50,7 @@ public class ServerboundConfiguration {
 			handler.handle(payload, new NetworkingAbstractions.Context() {
 				@Override
 				public Player player() {
-					return null; // FIXME maybe there isn't a player to begin with?
+					throw new UnsupportedOperationException();
 				}
 
 				@Override
