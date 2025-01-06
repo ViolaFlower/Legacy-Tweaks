@@ -21,11 +21,10 @@ import net.minecraft.world.entity.player.Player;
 
 // TODO documentation
 public class NetworkingAbstractions {
-	//? if neoforge
-	/*public static RegisterPayloadHandlersEvent event;*/
-	private static final String version = "1.0.0";
 	//? if neoforge {
-	/*private static final HashMap<CustomPacketPayload.Type<?>, StreamCodec<FriendlyByteBuf, ?>> CODEC_MAP = new HashMap<>();
+	/*public static RegisterPayloadHandlersEvent event;
+	public static final String version = "1.0.0";
+	public static final HashMap<CustomPacketPayload.Type<?>, StreamCodec<FriendlyByteBuf, ?>> CODEC_MAP = new HashMap<>();
 	*///?}
 	public enum PayloadType {
 		PLAY_C2S,
@@ -52,135 +51,8 @@ public class NetworkingAbstractions {
 		*///?}
 	}
 
-	public static class Client {
-		public static <T extends CustomPacketPayload> void playToClient(CustomPacketPayload.Type<T> type, PlayPayloadHandler<T> handler) {
-			//? if fabric {
-			ClientPlayNetworking.registerGlobalReceiver(type, (t, context) -> handler.handle(t, new Context() {
-				@Override
-				public LocalPlayer player() {
-					return context.player();
-				}
-
-				@Override
-				public void sendPacket(Packet<?> packet) {
-					context.responseSender().sendPacket(packet);
-				}
-
-				@Override
-				public void sendPacket(CustomPacketPayload payload) {
-					context.responseSender().sendPacket(payload);
-				}
-
-				@Override
-				public Packet<?> createPacket(CustomPacketPayload payload) {
-					return context.responseSender().createPacket(payload);
-				}
-
-				@Override
-				public void disconnect(Component message) {
-					context.responseSender().disconnect(message);
-				}
-			}));
-			//?} elif neoforge {
-			/*event.registrar(version).playToClient(type, (StreamCodec<? super RegistryFriendlyByteBuf, T>) (Object) CODEC_MAP.get(type), (t, context) -> handler.handle(t, new Context() {
-				@Override
-				public LocalPlayer player() {
-					return (LocalPlayer) context.player();
-				}
-
-				@Override
-				public void sendPacket(Packet<?> packet) {
-					context.listener().send(packet);
-				}
-
-				@Override
-				public void sendPacket(CustomPacketPayload payload) {
-					context.listener().send(payload);
-				}
-
-				@Override
-				public Packet<?> createPacket(CustomPacketPayload payload) {
-					return new ServerboundCustomPayloadPacket(payload);
-				}
-
-				@Override
-				public void disconnect(Component message) {
-					context.disconnect(message);
-				}
-			}));
-			*///?}
-		}
-
-		public interface PlayPayloadHandler<T> {
-			void handle(T handler, Context context);
-		}
-	}
-
 	public static class Server {
-		public static <T extends CustomPacketPayload> void playToServer(CustomPacketPayload.Type<T> type, PlayPayloadHandler<T> handler) {
-			//? if fabric {
-			ServerPlayNetworking.registerGlobalReceiver(type, (t, context) -> {
-				handler.handle(t, new Context() {
-					@Override
-					public Player player() {
-						return context.player();
-					}
 
-					@Override
-					public void sendPacket(Packet<?> packet) {
-						context.responseSender().sendPacket(packet);
-					}
-
-					@Override
-					public void sendPacket(CustomPacketPayload payload) {
-						context.responseSender().sendPacket(payload);
-					}
-
-					@Override
-					public Packet<?> createPacket(CustomPacketPayload payload) {
-						return context.responseSender().createPacket(payload);
-					}
-
-					@Override
-					public void disconnect(Component message) {
-						context.responseSender().disconnect(message);
-					}
-				});
-			});
-			//?} elif neoforge {
-			/*event.registrar(version).playToClient(type, (StreamCodec<? super RegistryFriendlyByteBuf, T>) (Object) CODEC_MAP.get(type), (t, context) -> handler.handle(t, new Context() {
-
-				@Override
-				public Player player() {
-					return context.player();
-				}
-
-				@Override
-				public void sendPacket(Packet<?> packet) {
-					context.listener().send(packet);
-				}
-
-				@Override
-				public void sendPacket(CustomPacketPayload payload) {
-					context.listener().send(payload);
-				}
-
-				@Override
-				public Packet<?> createPacket(CustomPacketPayload payload) {
-					return new ClientboundCustomPayloadPacket(payload);
-				}
-
-				@Override
-				public void disconnect(Component message) {
-					context.disconnect(message);
-				}
-			}));
-			*///?}
-		}
-
-		public interface PlayPayloadHandler<T> {
-			void handle(T payload, Context context);
-		}
 	}
 
 	public interface Context {

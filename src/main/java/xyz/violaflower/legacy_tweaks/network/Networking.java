@@ -1,14 +1,9 @@
 package xyz.violaflower.legacy_tweaks.network;
 
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
-import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 import xyz.violaflower.legacy_tweaks.network.payload.CoolPacket;
 import xyz.violaflower.legacy_tweaks.network.payload.CoolPacket2;
 import xyz.violaflower.legacy_tweaks.networking.NetworkingAbstractions;
+import xyz.violaflower.legacy_tweaks.networking.play.ServerboundPlay;
 
 public class Networking {
 	private static void registerNetworkingCodecs() {
@@ -17,7 +12,7 @@ public class Networking {
 	}
 	public static void initNetworking() {
 		registerNetworkingCodecs();
-		NetworkingAbstractions.Server.playToServer(CoolPacket2.TYPE, (payload, context) -> {
+		ServerboundPlay.registerHandler(CoolPacket2.TYPE, (payload, context) -> {
 			System.out.println("[SERVER] received packet " + payload);
 		});
 	}
