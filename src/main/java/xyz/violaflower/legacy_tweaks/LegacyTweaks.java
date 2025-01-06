@@ -22,6 +22,8 @@ import org.slf4j.LoggerFactory;
 import xyz.violaflower.legacy_tweaks.client.LegacyTweaksClient;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.LTScreen;
 import xyz.violaflower.legacy_tweaks.items.ItemManager;
+import xyz.violaflower.legacy_tweaks.network.payload.CoolPacket;
+import xyz.violaflower.legacy_tweaks.network.payload.CoolPacket2;
 import xyz.violaflower.legacy_tweaks.networking.LegacyTweaksNetworking;
 import xyz.violaflower.legacy_tweaks.networking.NetworkingAbstractions;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
@@ -80,36 +82,5 @@ public final class LegacyTweaks {
 
         //? if fabric
         LegacyTweaksNetworking.init();
-    }
-
-    private static void registerNetworkingCodecs() {
-        NetworkingAbstractions.registerCodec(CoolPacket.TYPE, CoolPacket.STREAM_CODEC, NetworkingAbstractions.PayloadType.PLAY_S2C);
-        NetworkingAbstractions.registerCodec(CoolPacket2.TYPE, CoolPacket2.STREAM_CODEC, NetworkingAbstractions.PayloadType.PLAY_C2S);
-    }
-    public static void initNetworking() {
-        registerNetworkingCodecs();
-        NetworkingAbstractions.Server.playToServer(CoolPacket2.TYPE, (payload, context) -> {
-            System.out.println("[SERVER] received packet " + payload);
-        });
-    }
-
-    public record CoolPacket(int number) implements CustomPacketPayload {
-        public static final Type<CoolPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID, "cool_packet"));
-        public static final StreamCodec<FriendlyByteBuf, CoolPacket> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.INT, CoolPacket::number, CoolPacket::new);
-
-        @Override
-        public Type<CoolPacket> type() {
-            return TYPE;
-        }
-    }
-
-    public record CoolPacket2(int number, double number2) implements CustomPacketPayload {
-        public static final Type<CoolPacket2> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID, "cool_packet2"));
-        public static final StreamCodec<FriendlyByteBuf, CoolPacket2> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.INT, CoolPacket2::number, ByteBufCodecs.DOUBLE, CoolPacket2::number2, CoolPacket2::new);
-
-        @Override
-        public Type<CoolPacket2> type() {
-            return TYPE;
-        }
     }
 }

@@ -1,3 +1,4 @@
+// this class was for testing and should be removed
 //package xyz.violaflower.legacy_tweaks.networking;
 //
 //import io.netty.buffer.ByteBuf;

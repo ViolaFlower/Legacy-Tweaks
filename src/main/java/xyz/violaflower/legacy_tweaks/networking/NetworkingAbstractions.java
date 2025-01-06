@@ -19,6 +19,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.entity.player.Player;
 
+// TODO documentation
 public class NetworkingAbstractions {
 	//? if neoforge
 	/*public static RegisterPayloadHandlersEvent event;*/

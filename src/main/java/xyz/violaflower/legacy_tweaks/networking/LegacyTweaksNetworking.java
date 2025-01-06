@@ -9,8 +9,11 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 *///?}
+import org.jetbrains.annotations.ApiStatus;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
+import xyz.violaflower.legacy_tweaks.network.Networking;
 
+@ApiStatus.Internal
 //? if neoforge
 /*@EventBusSubscriber(modid = LegacyTweaks.MOD_ID, bus = EventBusSubscriber.Bus.MOD)*/
 public class LegacyTweaksNetworking {
@@ -30,7 +33,7 @@ public class LegacyTweaksNetworking {
 		*///?}
 		if (initted) throw new IllegalStateException("init called more than once!");
 		initted = true;
-		LegacyTweaks.initNetworking();
+		Networking.initNetworking();
 		if (isClient()) {
 			new ClientNetworking();
 		}

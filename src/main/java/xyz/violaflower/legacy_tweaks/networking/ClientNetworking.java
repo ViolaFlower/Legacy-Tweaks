@@ -1,10 +1,11 @@
 package xyz.violaflower.legacy_tweaks.networking;
 
-import xyz.violaflower.legacy_tweaks.client.LegacyTweaksClient;
+import org.jetbrains.annotations.ApiStatus;
 
 // This class is only here for class loader isolation, so we don't load client-side classes on the server.
-public class ClientNetworking {
-	public ClientNetworking() {
-		LegacyTweaksClient.initNetworking();
+@ApiStatus.Internal
+class ClientNetworking {
+	ClientNetworking() {
+		xyz.violaflower.legacy_tweaks.network.client.ClientNetworking.initNetworking();
 	}
 }

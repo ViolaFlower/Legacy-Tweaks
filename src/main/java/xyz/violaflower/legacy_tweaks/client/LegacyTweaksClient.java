@@ -40,10 +40,4 @@ public class LegacyTweaksClient {
 		//?} elif neoforge
 		/*((ReloadableResourceManager) Minecraft.getInstance().getResourceManager()).registerReloadListener(new LegacyTweaksResourceManager());*/
 	}
-
-	public static void initNetworking() {
-		NetworkingAbstractions.Client.playToClient(LegacyTweaks.CoolPacket.TYPE, (handler, context) -> {
-			System.out.println("RECEIVED!: " + handler.number() + " " + context.player());
-		});
-	}
 }
