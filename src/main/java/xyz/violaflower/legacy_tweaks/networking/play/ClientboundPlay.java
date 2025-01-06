@@ -3,7 +3,7 @@ package xyz.violaflower.legacy_tweaks.networking.play;
 //? if fabric {
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 //?} elif neoforge {
-/*import net.minecraft.network.RegistryFriendlyByteBuf;
+/*import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
 *///?}
@@ -49,7 +49,7 @@ public class ClientboundPlay {
 			}
 		}));
 		//?} elif neoforge {
-			/*NetworkingAbstractions.event.registrar(NetworkingAbstractions.version).playToClient(type, (StreamCodec<? super RegistryFriendlyByteBuf, T>) (Object) NetworkingAbstractions.CODEC_MAP.get(type), (t, context) -> handler.handle(t, new NetworkingAbstractions.Context() {
+			/*NetworkingAbstractions.event.registrar(NetworkingAbstractions.version).playToClient(type, (StreamCodec<? super FriendlyByteBuf, T>) (Object) NetworkingAbstractions.CODEC_MAP.get(type), (t, context) -> handler.handle(t, new NetworkingAbstractions.Context() {
 				@Override
 				public LocalPlayer player() {
 					return (LocalPlayer) context.player();
