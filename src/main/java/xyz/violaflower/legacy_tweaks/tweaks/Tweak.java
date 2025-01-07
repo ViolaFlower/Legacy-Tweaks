@@ -74,12 +74,6 @@ public abstract class Tweak implements TweakParent {
 //        }
     }
 
-    @Deprecated(forRemoval = true)
-    public void setDefaultEnabled(boolean enabled) {
-        // TODO for when we do file saving
-        setEnabled(enabled, false);
-    }
-
     public void setGroup() {
         this.isGroup = true;
     }
