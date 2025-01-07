@@ -8,8 +8,8 @@ import com.mojang.serialization.JsonOps;
 //? if neoforge
 /*import net.neoforged.fml.loading.FMLPaths;*/
 //? if fabric
-import io.netty.buffer.Unpooled;
 import net.fabricmc.loader.api.FabricLoader;
+import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
 
 import java.io.IOException;
