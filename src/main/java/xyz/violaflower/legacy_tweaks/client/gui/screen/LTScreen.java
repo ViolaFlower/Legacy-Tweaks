@@ -37,6 +37,11 @@ public class LTScreen extends Screen {
         this.tweakParent = tweakParent;
     }
 
+    @Override
+    public void onClose() {
+        this.minecraft.setScreen(parent);
+    }
+
     private static Component getTitle(Screen parent, TweakParent tweakParent) {
         if (parent instanceof LTScreen ltScreen) {
             return ltScreen.title.copy().append(" / ").append(((Tweak) tweakParent).getTweakName());
