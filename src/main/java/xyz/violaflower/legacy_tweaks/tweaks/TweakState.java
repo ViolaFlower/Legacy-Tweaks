@@ -123,16 +123,11 @@ public class TweakState<T> {
 		return buf;
 	}
 
-	public static <T> void decodeLocalStates(JsonElement element) {
+	public static <T> void decodeStatesFromAnActuallyReadableFormat(JsonElement element) {
 		if (!(element instanceof JsonObject object)) throw new RuntimeException("what");
-		ArrayList<TweakState<T>> list = (ArrayList<TweakState<T>>) (Object) new ArrayList<>(tweakStates.values());
-		for (Map.Entry<String, JsonElement> entry : object.asMap().entrySet()) {
-			TweakState<T> tweakState = (TweakState<T>) (Object) tweakStates.get(entry.getKey());
-			tweakState.setLocalState(tweakState.codec.parse(JsonOps.INSTANCE, entry.getValue()).getOrThrow());
-			list.remove(tweakState);
-		}
-		for (TweakState<?> tweakState : list) {
-			tweakState.setLocalState(null);
+		//ArrayList<TweakState<T>> list = (ArrayList<TweakState<T>>) (Object) new ArrayList<>(tweakStates.values());
+		for (Map.Entry<String, JsonElement> tweakEntry : object.entrySet()) {
+			decodeTweak(TweakManager.getInstance().getTweak(tweakEntry.getKey()), tweakEntry.getValue());
 		}
 	}
 
@@ -155,14 +150,71 @@ public class TweakState<T> {
 
 	public static <T> JsonElement encodeStatesToAnActuallyReadableFormat() {
 		JsonObject element = new JsonObject();
-		FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-		List<TweakState<T>> list = (List<TweakState<T>>) (Object) tweakStates.values().stream().filter(a -> a.getLocalState() != null).toList();
-
-		for (TweakState<T> value : list) {
-			Codec<T> codec = value.codec;
-			JsonElement jsonElement = codec.encodeStart(JsonOps.INSTANCE, value.getLocalState()).resultOrPartial(System.err::println).orElseThrow();
-			element.add(value.getId(), jsonElement);
+		for (Map.Entry<String, Tweak> tweakEntry : TweakManager.INSTANCE.tweaks.entrySet()) {
+			String key = tweakEntry.getKey();
+			Tweak value = tweakEntry.getValue();
+			element.add(key, encodeTweak(value));
 		}
 		return element;
+	}
+
+	public JsonElement valueToJsonElement(T value) {
+		return codec.encodeStart(JsonOps.INSTANCE, value).resultOrPartial(System.err::println).orElseThrow();
+	}
+
+	public T jsonElementToValue(JsonElement element) {
+		return codec.parse(JsonOps.INSTANCE, element).resultOrPartial(System.err::println).orElseThrow();
+	}
+
+	private static <T> JsonElement encodeTweak(Tweak tweak) {
+		JsonObject object = new JsonObject();
+		@SuppressWarnings("deprecation") TweakState<Boolean> tweakState = tweak.getTweakState();
+		if (tweakState.getLocalState() != null) {
+			object.addProperty("enabled", tweakState.getLocalState());
+		}
+		for (Map.Entry<String, Tweak> tweakEntry : tweak.getSubTweaks().entrySet()) {
+			object.add(tweakEntry.getKey(), encodeTweak(tweakEntry.getValue()));
+		}
+		options: {
+			@SuppressWarnings("unchecked") List<Tweak.Option<T>> options = (List<Tweak.Option<T>>) (Object) tweak.getOptions();
+			options = options.stream().filter(a -> a.getTweakState().getLocalState() != null).toList();
+			if (options.isEmpty()) break options;
+			JsonObject optionsObject = new JsonObject();
+			for (Tweak.Option<T> option : options) {
+				@SuppressWarnings("deprecation") TweakState<T> optionTweakState = option.getTweakState();
+				if (optionTweakState.getLocalState() != null) {
+					optionsObject.add(option.getName(), optionTweakState.valueToJsonElement(optionTweakState.getLocalState()));
+				}
+			}
+			object.add("options", optionsObject);
+		}
+		return object;
+	}
+
+	private static <T> void decodeTweak(Tweak tweak, JsonElement element) {
+		if (!(element instanceof JsonObject object)) throw new IllegalStateException("???");
+		options: {
+			boolean hasOptions = object.has("options") && object.get("options").isJsonObject();
+			if (!hasOptions) break options;
+			JsonObject options = object.getAsJsonObject("options");
+			for (Map.Entry<String, JsonElement> optionEntry : options.entrySet()) {
+				Tweak.Option<T> option = (Tweak.Option<T>) (Object) tweak.getOptions().stream().filter(a -> optionEntry.getKey().equals(a.getName())).findFirst().orElseThrow();
+				option.getTweakState().setLocalState(option.getTweakState().jsonElementToValue(optionEntry.getValue()));
+			}
+		}
+		enabled: {
+			boolean hasEnabled = object.has("enabled") && object.get("enabled").isJsonPrimitive() && object.getAsJsonPrimitive("enabled").isBoolean();
+			if (!hasEnabled) break enabled;
+			tweak.getTweakState().setLocalState(tweak.getTweakState().jsonElementToValue(object.get("enabled")));
+		}
+		options:
+		{
+			for (Map.Entry<String, JsonElement> stringJsonElementEntry : object.entrySet()) {
+				if (stringJsonElementEntry.getKey().equals("options") || stringJsonElementEntry.getKey().equals("enabled"))
+					continue;
+				String key = stringJsonElementEntry.getKey();
+				decodeTweak(tweak.getSubTweak(key), stringJsonElementEntry.getValue());
+			}
+		}
 	}
 }

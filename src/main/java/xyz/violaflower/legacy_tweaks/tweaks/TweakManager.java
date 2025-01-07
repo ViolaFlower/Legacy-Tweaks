@@ -46,7 +46,7 @@ public class TweakManager implements TweakParent {
 //        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 //        String json = gson.toJson(jsonElement);
 		try {
-			Files.writeString(getConfigFolder().resolve("legacy-tweaks.json"), new GsonBuilder().setPrettyPrinting().create().toJson(TweakState.encodeStatesToAnActuallyReadableFormat()));
+			Files.writeString(getConfigFolder().resolve("legacy-tweaks2.json"), new GsonBuilder().setPrettyPrinting().create().toJson(TweakState.encodeStatesToAnActuallyReadableFormat()));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -72,7 +72,7 @@ public class TweakManager implements TweakParent {
     public static void load() {
 		if (!getConfigFolder().resolve("legacy-tweaks.json").toFile().isFile()) save();
 		try {
-			TweakState.decodeLocalStates(new Gson().fromJson(Files.readString(getConfigFolder().resolve("legacy-tweaks.json")), JsonElement.class));
+			TweakState.decodeStatesFromAnActuallyReadableFormat(new Gson().fromJson(Files.readString(getConfigFolder().resolve("legacy-tweaks.json")), JsonElement.class));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

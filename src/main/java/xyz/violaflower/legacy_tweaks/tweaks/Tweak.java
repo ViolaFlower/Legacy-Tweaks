@@ -28,6 +28,12 @@ public abstract class Tweak implements TweakParent {
     private Tweak parentTweak;
     private final TweakState<Boolean> tweakState;
 
+    // only used for saving
+    @Deprecated // so you don't call this by accident
+    public TweakState<Boolean> getTweakState() {
+        return tweakState;
+    }
+
     // default value should always be true if it's a group
     public Tweak(String id, boolean defaultValue) {
         this.tweakState = new TweakState<>("tw:" + id + defaultValue, defaultValue, Codec.BOOL, this::onChange);
@@ -396,6 +402,13 @@ public abstract class Tweak implements TweakParent {
         private final Codec<T> codec;
         private final StreamCodec<ByteBuf, T> streamCodec;
         private final TweakState<T> state;
+
+        // only used for saving
+        @Deprecated // so you don't call this by accident
+        public TweakState<T> getTweakState() {
+            return state;
+        }
+
         public Option(String name, T defaultValue, Consumer<T> onChanged, Codec<T> codec) {
             this(name, defaultValue, onChanged, codec, ByteBufCodecs.fromCodec(codec));
         }
@@ -406,6 +419,8 @@ public abstract class Tweak implements TweakParent {
             this.streamCodec = streamCodec;
             this.state = new TweakState<>("opt!" + this.getClass().toString().hashCode() + name + "//"  + Tweak.this.getTweakID() + "?!" + defaultValue, defaultValue, codec, streamCodec, t -> onChanged.accept(t.getEffectiveState()));
         }
+
+        /// _more like `getId()`_
         public String getName() {
             return this.name;
         }
