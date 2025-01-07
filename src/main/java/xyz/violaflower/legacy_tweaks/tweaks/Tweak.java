@@ -234,7 +234,7 @@ public abstract class Tweak implements TweakParent {
     }
 
     // TODO get this saved to a file and vice versa
-    public static class BooleanOption extends Option<Boolean> {
+    public class BooleanOption extends Option<Boolean> {
         public BooleanOption(String name, boolean defaultValue, Consumer<Boolean> onChanged) {
             super(name, defaultValue, onChanged, Codec.BOOL, ByteBufCodecs.BOOL);
         }
@@ -249,7 +249,7 @@ public abstract class Tweak implements TweakParent {
         }
     }
 
-    public abstract static class NumberSliderOption<T extends Number> extends SliderOption<T> {
+    public abstract class NumberSliderOption<T extends Number> extends SliderOption<T> {
         private final Function<Double, T> newT;
         public NumberSliderOption(String name, T defaultValue, Function<Double, T> newT, Consumer<T> onChanged, Codec<T> codec) {
             this(name, defaultValue, newT, onChanged, codec, ByteBufCodecs.fromCodec(codec));
@@ -281,7 +281,7 @@ public abstract class Tweak implements TweakParent {
         }
     }
 
-    public abstract static class SliderOption<T> extends Option<T> {
+    public abstract class SliderOption<T> extends Option<T> {
         private final Function<Double, T> newT;
         public SliderOption(String name, T defaultValue, Function<Double, T> newT, Consumer<T> onChanged, Codec<T> codec) {
             this(name, defaultValue, newT, onChanged, codec, ByteBufCodecs.fromCodec(codec));
@@ -315,7 +315,7 @@ public abstract class Tweak implements TweakParent {
         }
     }
 
-    public static class EnumSliderOption<T extends Enum<T>> extends SliderOption<T> {
+    public class EnumSliderOption<T extends Enum<T>> extends SliderOption<T> {
         private final EnumProvider<T> provider;
         public EnumSliderOption(String name, EnumProvider<T> provider, Consumer<T> onChanged) {
             super(name, provider.defaultValue, f -> provider.values.get()[f.intValue()], onChanged, Codec.INT.xmap(a -> provider.values.get()[a], Enum::ordinal));
@@ -348,7 +348,7 @@ public abstract class Tweak implements TweakParent {
         }
     }
 
-    public static class DoubleSliderOption extends NumberSliderOption<Double> {
+    public class DoubleSliderOption extends NumberSliderOption<Double> {
         public DoubleSliderOption(String name, double defaultValue, Consumer<Double> onChanged) {
             super(name, defaultValue, f -> f, onChanged, Codec.DOUBLE, ByteBufCodecs.DOUBLE);
         }
@@ -369,7 +369,7 @@ public abstract class Tweak implements TweakParent {
         }
     }
 
-    public static class IntSliderOption extends NumberSliderOption<Integer> {
+    public class IntSliderOption extends NumberSliderOption<Integer> {
         public IntSliderOption(String name, int defaultValue, Consumer<Integer> onChanged) {
             super(name, defaultValue, Double::intValue, onChanged, Codec.INT, ByteBufCodecs.INT);
         }
@@ -390,7 +390,7 @@ public abstract class Tweak implements TweakParent {
         }
     }
 
-    public abstract static class Option<T> {
+    public abstract class Option<T> {
         private final String name;
         Consumer<T> onChanged;
         private final Codec<T> codec;
@@ -404,7 +404,7 @@ public abstract class Tweak implements TweakParent {
             this.onChanged = onChanged;
             this.codec = codec;
             this.streamCodec = streamCodec;
-            this.state = new TweakState<>("opt!" + this.getClass().toString().hashCode() + name + "//" + defaultValue, defaultValue, codec, streamCodec, t -> onChanged.accept(t.getEffectiveState()));
+            this.state = new TweakState<>("opt!" + this.getClass().toString().hashCode() + name + "//"  + Tweak.this.getTweakID() + "?!" + defaultValue, defaultValue, codec, streamCodec, t -> onChanged.accept(t.getEffectiveState()));
         }
         public String getName() {
             return this.name;
