@@ -1,6 +1,9 @@
 package xyz.violaflower.legacy_tweaks.tweaks;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.JsonOps;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
@@ -13,6 +16,7 @@ import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class TweakState<T> {
@@ -119,18 +123,12 @@ public class TweakState<T> {
 		return buf;
 	}
 
-	public static <T> void decodeLocalStates(FriendlyByteBuf byteBuf) {
-		// Dexrn: is there some way to have the server kick the client/do something else if they send the wrong version?
-		System.out.println(tweakStates);
-		ArrayList<TweakState<?>> list = new ArrayList<>(tweakStates.values());
-		// Dexrn: Maybe should be a short? doubt we'll ever have more than 32727 tweaks
-		int length = byteBuf.readInt();
-		for (int i = 0; i < length; i++) {
-			String id = byteBuf.readUtf();
-			TweakState<T> tweakState = (TweakState<T>) (Object) tweakStates.get(id);
-			T decoded = tweakState.streamCodec.decode(byteBuf);
-			tweakState.setLocalState(decoded);
-			System.out.println("Set " + tweakState.id + " to " + decoded);
+	public static <T> void decodeLocalStates(JsonElement element) {
+		if (!(element instanceof JsonObject object)) throw new RuntimeException("what");
+		ArrayList<TweakState<T>> list = (ArrayList<TweakState<T>>) (Object) new ArrayList<>(tweakStates.values());
+		for (Map.Entry<String, JsonElement> entry : object.asMap().entrySet()) {
+			TweakState<T> tweakState = (TweakState<T>) (Object) tweakStates.get(entry.getKey());
+			tweakState.setLocalState(tweakState.codec.parse(JsonOps.INSTANCE, entry.getValue()).getOrThrow());
 			list.remove(tweakState);
 		}
 		for (TweakState<?> tweakState : list) {
@@ -153,5 +151,18 @@ public class TweakState<T> {
 		for (TweakState<?> tweakState : list) {
 			tweakState.setServerState(null);
 		}
+	}
+
+	public static <T> JsonElement encodeStatesToAnActuallyReadableFormat() {
+		JsonObject element = new JsonObject();
+		FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+		List<TweakState<T>> list = (List<TweakState<T>>) (Object) tweakStates.values().stream().filter(a -> a.getLocalState() != null).toList();
+
+		for (TweakState<T> value : list) {
+			Codec<T> codec = value.codec;
+			JsonElement jsonElement = codec.encodeStart(JsonOps.INSTANCE, value.getLocalState()).resultOrPartial(System.err::println).orElseThrow();
+			element.add(value.getId(), jsonElement);
+		}
+		return element;
 	}
 }
