@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TweakManager implements TweakParent {
+	public static final int version = 1;
     public static final TweakManager INSTANCE = new TweakManager();
     public static TweakManager getInstance() {
         return INSTANCE;

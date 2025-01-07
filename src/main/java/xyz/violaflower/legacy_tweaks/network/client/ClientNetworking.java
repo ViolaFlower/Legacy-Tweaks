@@ -6,6 +6,7 @@ import xyz.violaflower.legacy_tweaks.network.Networking;
 import xyz.violaflower.legacy_tweaks.network.payload.*;
 import xyz.violaflower.legacy_tweaks.networking.configuration.ClientboundConfiguration;
 import xyz.violaflower.legacy_tweaks.networking.play.ClientboundPlay;
+import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakState;
 
 public class ClientNetworking {
@@ -23,6 +24,10 @@ public class ClientNetworking {
 
 		ClientboundConfiguration.registerHandler(TweakStatesPayload.TYPE, (payload, context) -> {
 			Minecraft.getInstance().gui.getChat().addMessage(Component.literal("Received server configuration"));
+			int configVersion = payload.configVersion();
+			if (TweakManager.version != configVersion) {
+				context.disconnect(Component.literal("The server uses config version " + payload.configVersion() + " , you have config version " + TweakManager.version));
+			}
 			TweakState.decodeServerStates(payload.byteBuf());
 			context.sendPacket(new TweakStatesResponsePayload());
 		});

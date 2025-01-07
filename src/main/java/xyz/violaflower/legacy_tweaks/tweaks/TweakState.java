@@ -22,7 +22,6 @@ public class TweakState<T> {
 	private T localState = null;
 	private T defaultState = null;
 	private T effectiveState;
-	private static final short version = 1;
 	private final StreamCodec<ByteBuf, T> streamCodec;
 	private Consumer<TweakState<T>> onChange;
 	private final String id;
@@ -112,7 +111,6 @@ public class TweakState<T> {
 
 	public static FriendlyByteBuf encodeStates() {
 		FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-		buf.writeShort(getConfigVersion());
 		List<TweakState<?>> list = tweakStates.values().stream().filter(a -> a.getLocalState() != null).toList();
 		buf.writeInt(list.size());
 		for (TweakState<?> value : list) {
@@ -125,13 +123,6 @@ public class TweakState<T> {
 		// Dexrn: is there some way to have the server kick the client/do something else if they send the wrong version?
 		System.out.println(tweakStates);
 		ArrayList<TweakState<?>> list = new ArrayList<>(tweakStates.values());
-		short version = byteBuf.readShort();
-
-		if (version != getConfigVersion()) {
-			LegacyTweaks.LOGGER.warn("Config version {} is not the same as local version {}", version, getConfigVersion());
-			return;
-		}
-
 		// Dexrn: Maybe should be a short? doubt we'll ever have more than 32727 tweaks
 		int length = byteBuf.readInt();
 		for (int i = 0; i < length; i++) {
@@ -150,13 +141,6 @@ public class TweakState<T> {
 	public static <T> void decodeServerStates(FriendlyByteBuf byteBuf) {
 		System.out.println(tweakStates);
 		ArrayList<TweakState<?>> list = new ArrayList<>(tweakStates.values());
-		short version = byteBuf.readShort();
-
-		if (version != getConfigVersion()) {
-			LegacyTweaks.LOGGER.warn("Config version {} is not the same as local version {}", version, getConfigVersion());
-			return;
-		}
-
 		int length = byteBuf.readInt();
 		for (int i = 0; i < length; i++) {
 			String id = byteBuf.readUtf();
@@ -170,8 +154,4 @@ public class TweakState<T> {
 			tweakState.setServerState(null);
 		}
 	}
-
-    public static short getConfigVersion() {
-        return version;
-    }
 }
