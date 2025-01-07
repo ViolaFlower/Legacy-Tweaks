@@ -1,7 +1,10 @@
 package xyz.violaflower.legacy_tweaks.tweaks;
 
 import com.mojang.serialization.Codec;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.Mth;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 
@@ -239,7 +242,7 @@ public abstract class Tweak implements TweakParent {
     // TODO get this saved to a file and vice versa
     public static class BooleanOption extends Option<Boolean> {
         public BooleanOption(String name, Consumer<Boolean> onChanged) {
-            super(name, onChanged);
+            super(name, onChanged, Codec.BOOL, ByteBufCodecs.BOOL);
             this.value = false;
         }
 
@@ -255,8 +258,11 @@ public abstract class Tweak implements TweakParent {
 
     public abstract static class NumberSliderOption<T extends Number> extends SliderOption<T> {
         private final Function<Double, T> newT;
-        public NumberSliderOption(String name, Function<Double, T> newT, Consumer<T> onChanged) {
-            super(name, newT, onChanged);
+        public NumberSliderOption(String name, Function<Double, T> newT, Consumer<T> onChanged, Codec<T> codec) {
+            this(name, newT, onChanged, codec, ByteBufCodecs.fromCodec(codec));
+        }
+        public NumberSliderOption(String name, Function<Double, T> newT, Consumer<T> onChanged, Codec<T> codec, StreamCodec<ByteBuf, T> streamCodec) {
+            super(name, newT, onChanged, codec, streamCodec);
             this.newT = newT;
         }
 
@@ -284,8 +290,11 @@ public abstract class Tweak implements TweakParent {
 
     public abstract static class SliderOption<T> extends Option<T> {
         private final Function<Double, T> newT;
-        public SliderOption(String name, Function<Double, T> newT, Consumer<T> onChanged) {
-            super(name, onChanged);
+        public SliderOption(String name, Function<Double, T> newT, Consumer<T> onChanged, Codec<T> codec) {
+            this(name, newT, onChanged, codec, ByteBufCodecs.fromCodec(codec));
+        }
+        public SliderOption(String name, Function<Double, T> newT, Consumer<T> onChanged, Codec<T> codec, StreamCodec<ByteBuf, T> streamCodec) {
+            super(name, onChanged, codec, streamCodec);
             this.newT = newT;
         }
 
@@ -316,7 +325,7 @@ public abstract class Tweak implements TweakParent {
     public static class EnumSliderOption<T extends Enum<T>> extends SliderOption<T> {
         private final EnumProvider<T> provider;
         public EnumSliderOption(String name, EnumProvider<T> provider, Consumer<T> onChanged) {
-            super(name, f -> provider.values.get()[f.intValue()], onChanged);
+            super(name, f -> provider.values.get()[f.intValue()], onChanged, Codec.INT.xmap(a -> provider.values.get()[a], Enum::ordinal));
             this.provider = provider;
             this.value = this.provider.defaultValue;
         }
@@ -349,7 +358,7 @@ public abstract class Tweak implements TweakParent {
 
     public static class DoubleSliderOption extends NumberSliderOption<Double> {
         public DoubleSliderOption(String name, Consumer<Double> onChanged) {
-            super(name, f -> f, onChanged);
+            super(name, f -> f, onChanged, Codec.DOUBLE, ByteBufCodecs.DOUBLE);
             this.value = 0D;
         }
 
@@ -371,7 +380,7 @@ public abstract class Tweak implements TweakParent {
 
     public static class IntSliderOption extends NumberSliderOption<Integer> {
         public IntSliderOption(String name, Consumer<Integer> onChanged) {
-            super(name, Double::intValue, onChanged);
+            super(name, Double::intValue, onChanged, Codec.INT, ByteBufCodecs.INT);
             this.value = 0;
         }
 
@@ -395,7 +404,10 @@ public abstract class Tweak implements TweakParent {
         private final String name;
         T value;
         Consumer<T> onChanged;
-        public Option(String name, Consumer<T> onChanged) {
+        public Option(String name, Consumer<T> onChanged, Codec<T> codec) {
+            this(name, onChanged, codec, ByteBufCodecs.fromCodec(codec));
+        }
+        public Option(String name, Consumer<T> onChanged, Codec<T> codec, StreamCodec<ByteBuf, T> streamCodec) {
             this.name = name;
             this.onChanged = onChanged;
         }
