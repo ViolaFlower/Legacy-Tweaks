@@ -13,7 +13,7 @@ public class SendTweakStatesTask implements ServerConfigurationEvents.CustomPayl
 	public static final Type TYPE = new Type(ModAsset.getResourceLocation("send_tweak_states_task").toString());
 	@Override
 	public void run(Consumer<CustomPacketPayload> sender) {
-		sender.accept(new TweakStatesPayload(TweakState.encodeServerStates()));
+		sender.accept(new TweakStatesPayload(TweakState.encodeStates()));
 	}
 
 	@Override

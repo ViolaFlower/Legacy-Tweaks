@@ -32,11 +32,8 @@ public class LegacyFog extends Tweak {
             super("overworldFog", true);
             setTweakAuthor("Permdog99");
 
-            terrainFogStartOverworld = addSliderOption("terrainFogStart", 0d, 1d);
-            terrainFogStopOverworld = addSliderOption("terrainFogStop", 0d, 1d);
-
-            terrainFogStartOverworld.set(0.75d);
-            terrainFogStopOverworld.set(0.5d);
+            terrainFogStartOverworld = addSliderOption("terrainFogStart", 0.75d, 0d, 1d);
+            terrainFogStopOverworld = addSliderOption("terrainFogStop", 0.5d, 0d, 1d);
         }
     }
 
@@ -47,11 +44,8 @@ public class LegacyFog extends Tweak {
             super("netherFog", true);
             setTweakAuthor("Permdog99");
 
-            terrainFogStartNether = addSliderOption("terrainFogStart", 0d, 1d);
-            terrainFogStopNether = addSliderOption("terrainFogStop", 0d, 1d);
-
-            terrainFogStartNether.set(0.75d);
-            terrainFogStopNether.set(0.5d);
+            terrainFogStartNether = addSliderOption("terrainFogStart", 0.75d, 0d, 1d);
+            terrainFogStopNether = addSliderOption("terrainFogStop", 0.5d, 0d, 1d);
         }
     }
 
@@ -62,11 +56,8 @@ public class LegacyFog extends Tweak {
             super("endFog", true);
             setTweakAuthor("Permdog99");
 
-            terrainFogStartEnd = addSliderOption("terrainFogStart", 0d, 1d);
-            terrainFogStopEnd = addSliderOption("terrainFogStop", 0d, 1d);
-
-            terrainFogStartEnd.set(0.75d);
-            terrainFogStopEnd.set(0.5d);
+            terrainFogStartEnd = addSliderOption("terrainFogStart", 0.75d, 0d, 1d);
+            terrainFogStopEnd = addSliderOption("terrainFogStop", 0.5d, 0d, 1d);
         }
     }
 
@@ -77,11 +68,8 @@ public class LegacyFog extends Tweak {
             super("moddedDimensionsFog", true);
             setTweakAuthor("Permdog99");
 
-            terrainFogStartModded = addSliderOption("terrainFogStart", 0d, 1d);
-            terrainFogStopModded = addSliderOption("terrainFogEnd", 0d, 1d);
-
-            terrainFogStartModded.set(0.75d);
-            terrainFogStopModded.set(0.5d);
+            terrainFogStartModded = addSliderOption("terrainFogStart", 0.75d, 0d, 1d);
+            terrainFogStopModded = addSliderOption("terrainFogEnd", 0.5d, 0d, 1d);
         }
     }
 

@@ -13,8 +13,7 @@ public class Gamma extends Tweak {
 	public Gamma() {
 		super("gamma", true);
 		// TODO better name
-		potency = addSliderOption("potency", 0D, 1D);
-		potency.set(0.5d);
+		potency = addSliderOption("potency", 0.5D, 0D, 1D);
 	}
 
 	public static PostChain getGammaEffect() {

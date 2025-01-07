@@ -23,7 +23,7 @@ public class ClientNetworking {
 
 		ClientboundConfiguration.registerHandler(TweakStatesPayload.TYPE, (payload, context) -> {
 			Minecraft.getInstance().gui.getChat().addMessage(Component.literal("Received server configuration"));
-			TweakState.decodeServerState(payload.byteBuf());
+			TweakState.decodeServerStates(payload.byteBuf());
 			context.sendPacket(new TweakStatesResponsePayload());
 		});
 	}

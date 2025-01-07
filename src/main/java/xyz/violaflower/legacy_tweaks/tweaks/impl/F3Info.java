@@ -11,6 +11,6 @@ public class F3Info extends Tweak {
         setTweakAuthor("DexrnZacAttack", "Jab125");
         // localize hopefully
         // LOCALISED! - S_N00B
-        showEnabledTweaks = addBooleanOption("showEnabledTweaks");
+        showEnabledTweaks = addBooleanOption("showEnabledTweaks", true);
     }
 }

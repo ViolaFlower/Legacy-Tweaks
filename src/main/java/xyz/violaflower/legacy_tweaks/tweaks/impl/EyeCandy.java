@@ -37,8 +37,7 @@ public class EyeCandy extends Tweak {
 		public LegacyTextShadows() {
 			super("legacyTextShadows", true);
 			setTweakAuthor("Jab125");
-			shadowOffset = addSliderOption("shadowOffset", 0, 10);
-			shadowOffset.set(1);
+			shadowOffset = addSliderOption("shadowOffset", 1, 0, 10);
 		}
 	}
 	public static class FineTunedUIScale extends Tweak {
@@ -46,8 +45,7 @@ public class EyeCandy extends Tweak {
 		public FineTunedUIScale() {
 			super("fineTunedUIScale", false);
 			setTweakAuthor("Jab125");
-			uiScale = addSliderOption("uiScale", 0.8D, 5D);
-			uiScale.set(1d);
+			uiScale = addSliderOption("uiScale", 1D, 0.8D, 5D);
 			uiScale.setConsumer(d -> {if (isEnabled()) Minecraft.getInstance().resizeDisplay();});
 		}
 
@@ -64,8 +62,7 @@ public class EyeCandy extends Tweak {
 			super("sunsetColors", true);
 			setTweakAuthor("Permdog99");
 
-			sunsetColors = addSliderOption("sunsetColors", 1, 3);
-			sunsetColors.set(3);
+			sunsetColors = addSliderOption("sunsetColors", 3, 1, 3);
 		}
 	}
 

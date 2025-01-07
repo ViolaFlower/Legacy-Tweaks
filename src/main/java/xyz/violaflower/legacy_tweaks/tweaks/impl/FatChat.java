@@ -13,10 +13,8 @@ public class FatChat extends Tweak {
         setTweakAuthor("DexrnZacAttack", "Jab125");
         addSubTweak(new DimensionNotification());
         addSubTweak(new NoAdvancementMessage());
-        messageWidthSpansScreen = addBooleanOption("messageWidthSpansScreen");
-        messageWidthSpansScreen.set(true);
-        legacyMessageHeight = addBooleanOption("legacyMessageHeight");
-        legacyMessageHeight.set(true);
+        messageWidthSpansScreen = addBooleanOption("messageWidthSpansScreen", true);
+        legacyMessageHeight = addBooleanOption("legacyMessageHeight", true);
     }
 
     public static class DimensionNotification extends Tweak {
@@ -26,10 +24,8 @@ public class FatChat extends Tweak {
             super("dimensionNotifications", true);
             setTweakAuthor("DexrnZacAttack", "Jab125");
             setTweakVersion("1.0.0");
-            entranceMessage = addBooleanOption("entranceMessage");
-            entranceMessage.set(true);
-            leaveMessage = addBooleanOption("departureMessage");
-            leaveMessage.set(true);
+            entranceMessage = addBooleanOption("entranceMessage", true);
+            leaveMessage = addBooleanOption("departureMessage", true);
         }
     }
 

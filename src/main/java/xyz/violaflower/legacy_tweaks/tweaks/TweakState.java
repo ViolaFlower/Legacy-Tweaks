@@ -82,6 +82,7 @@ public class TweakState<T> {
 	public void setLocalState(@Nullable T state, boolean triggerHooks) {
 		this.localState = state;
 		updateEffectiveState(triggerHooks);
+		TweakManager.save();
 	}
 
 	public void setServerState(@Nullable T state) {
@@ -103,24 +104,40 @@ public class TweakState<T> {
 	}
 
 	// this should only run on the dedicated or integrated server!
-	public void encodeServerState(FriendlyByteBuf byteBuf) {
+	public void encodeLocalState(FriendlyByteBuf byteBuf) {
 		if (this.getLocalState() == null) throw new IllegalStateException(); // no need to encode if it's null
-		T localState1 = getEffectiveState();
+		T localState1 = getLocalState();
 		byteBuf.writeUtf(getId(), 32767);
 		streamCodec.encode(byteBuf, localState1);
 	}
 
-	public static FriendlyByteBuf encodeServerStates() {
+	public static FriendlyByteBuf encodeStates() {
 		FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
-		List<TweakState<?>> list = tweakStates.values().stream().filter(a -> a.getServerState() != null).toList();
+		List<TweakState<?>> list = tweakStates.values().stream().filter(a -> a.getLocalState() != null).toList();
 		buf.writeInt(list.size());
 		for (TweakState<?> value : list) {
-			value.encodeServerState(buf);
+			value.encodeLocalState(buf);
 		}
 		return buf;
 	}
 
-	public static <T> void decodeServerState(FriendlyByteBuf byteBuf) {
+	public static <T> void decodeLocalStates(FriendlyByteBuf byteBuf) {
+		ArrayList<TweakState<?>> list = new ArrayList<>(tweakStates.values());
+		int length = byteBuf.readInt();
+		for (int i = 0; i < length; i++) {
+			String id = byteBuf.readUtf();
+			TweakState<T> tweakState = (TweakState<T>) (Object) tweakStates.get(id);
+			T decoded = tweakState.streamCodec.decode(byteBuf);
+			tweakState.setLocalState(decoded);
+			System.out.println("Set " + tweakState.id + " to " + decoded);
+			list.remove(tweakState);
+		}
+		for (TweakState<?> tweakState : list) {
+			tweakState.setLocalState(null);
+		}
+	}
+
+	public static <T> void decodeServerStates(FriendlyByteBuf byteBuf) {
 		ArrayList<TweakState<?>> list = new ArrayList<>(tweakStates.values());
 		int length = byteBuf.readInt();
 		for (int i = 0; i < length; i++) {

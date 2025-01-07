@@ -8,7 +8,9 @@ import com.mojang.serialization.JsonOps;
 //? if neoforge
 /*import net.neoforged.fml.loading.FMLPaths;*/
 //? if fabric
+import io.netty.buffer.Unpooled;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.network.FriendlyByteBuf;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -38,12 +40,12 @@ public class TweakManager implements TweakParent {
 
     public static final Codec<List<String>> TWEAKS = Codec.STRING.listOf();
     public static void save() {
-        // get enabled tweaks and save them to a JSON?
-        JsonElement jsonElement = TWEAKS.encodeStart(JsonOps.INSTANCE, getInstance().tweaks.entrySet().stream().filter(a -> a.getValue().isEnabled()).map(Map.Entry::getKey).toList()).resultOrPartial(System.err::println).orElseThrow();
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(jsonElement);
+//        // get enabled tweaks and save them to a JSON?
+//        JsonElement jsonElement = TWEAKS.encodeStart(JsonOps.INSTANCE, getInstance().tweaks.entrySet().stream().filter(a -> a.getValue().isEnabled()).map(Map.Entry::getKey).toList()).resultOrPartial(System.err::println).orElseThrow();
+//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//        String json = gson.toJson(jsonElement);
 		try {
-			Files.writeString(getConfigFolder().resolve("legacy-tweaks.json"), json);
+			Files.write(getConfigFolder().resolve("legacy-tweaks.bin"), TweakState.encodeStates().array());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -67,6 +69,11 @@ public class TweakManager implements TweakParent {
 	}
 
     public static void load() {
-        // TODO
-    }
+		if (!getConfigFolder().resolve("legacy-tweaks.bin").toFile().isFile()) save();
+		try {
+			TweakState.decodeLocalStates(new FriendlyByteBuf(Unpooled.buffer()).writeBytes(Files.readAllBytes(getConfigFolder().resolve("legacy-tweaks.bin"))));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

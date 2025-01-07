@@ -59,6 +59,7 @@ public final class LegacyTweaks {
         tweakManager.register(Tweaks.EYE_CANDY);
         tweakManager.register(Tweaks.LEGACY_FOG);
         tweakManager.register(Tweaks.MIPMAPPING);
+        TweakManager.load();
 
         // this only works on Fabric!
         //? if fabric {

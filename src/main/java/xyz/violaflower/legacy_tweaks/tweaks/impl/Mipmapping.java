@@ -21,8 +21,7 @@ public class Mipmapping extends Tweak {
         public MipmapType() {
             super("mipmapType", true);
             setTweakAuthor("Permdog99");
-            mipmapType = addSliderOption("type", 1, 4);
-            mipmapType.set(4);
+            mipmapType = addSliderOption("type", 4, 1, 4);
         }
     }
 }

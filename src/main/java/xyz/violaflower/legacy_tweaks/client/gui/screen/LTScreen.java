@@ -111,7 +111,6 @@ public class LTScreen extends Screen {
                     toggleButton = Button.builder(Component.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"), button -> {
                         tweak.setEnabled(!tweak.isEnabled());
                         button.setMessage(Component.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"));
-                        TweakManager.save();
                     }).size(20, 20).build();
                 } else toggleButton = null;
                 settingsButton = Button.builder(Component.translatable("lt.main.settings"), button -> {
