@@ -33,6 +33,11 @@ public class Networking {
 			context.getServer().getPlayerList().broadcastSystemMessage(Component.literal("[SERVER] Received " + payload + " from connecting client."), true);
 			context.finishCurrentTask(SendCoolConfigurationPacketTask.TYPE);
 		});
+
+		ServerboundConfiguration.registerHandler(TweakStatesResponsePayload.TYPE, (payload, context) -> {
+			System.out.println("Client finished configuring tweaks.");
+			context.finishCurrentTask(SendTweakStatesTask.TYPE);
+		});
 	}
 
 	/// @see ClientNetworking#registerConfigurationTasks()

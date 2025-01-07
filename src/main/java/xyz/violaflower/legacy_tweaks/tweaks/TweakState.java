@@ -85,12 +85,13 @@ public class TweakState<T> {
 	}
 
 	public void setServerState(@Nullable T state) {
-
+		this.serverState = state;
+		updateEffectiveState(true);
 	}
 
 	// null on the server, this is only used on the client.
 	public @Nullable T getServerState() {
-		return localState;
+		return serverState;
 	}
 
 	public @NotNull T getDefaultState() {
@@ -116,7 +117,6 @@ public class TweakState<T> {
 		for (TweakState<?> value : list) {
 			value.encodeServerState(buf);
 		}
-		buf.writeBytes(new byte[]{91,52,45,64});
 		return buf;
 	}
 
@@ -128,6 +128,7 @@ public class TweakState<T> {
 			TweakState<T> tweakState = (TweakState<T>) (Object) tweakStates.get(id);
 			T decoded = tweakState.streamCodec.decode(byteBuf);
 			tweakState.setServerState(decoded);
+			System.out.println("Set " + tweakState.id + " to " + decoded);
 			list.remove(tweakState);
 		}
 		for (TweakState<?> tweakState : list) {

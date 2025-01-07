@@ -19,7 +19,7 @@ public record TweakStatesPayload(FriendlyByteBuf byteBuf) implements CustomPacke
 
 		@Override
 		public void encode(FriendlyByteBuf object, TweakStatesPayload object2) {
-			object.writeByteArray(object2.byteBuf().array());
+			object.writeByteArray(object2.byteBuf.array());
 		}
 	};
 	@Override
