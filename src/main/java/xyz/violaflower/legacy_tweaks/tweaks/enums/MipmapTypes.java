@@ -2,7 +2,7 @@ package xyz.violaflower.legacy_tweaks.tweaks.enums;
 
 import net.minecraft.network.chat.Component;
 
-public enum MipmapType implements EnumTweak {
+public enum MipmapTypes implements EnumTweak {
     TU1("lt.tweak.tu1"),
     TU3("lt.tweak.tu3"),
     TU12("lt.tweak.tu12"),
@@ -11,7 +11,7 @@ public enum MipmapType implements EnumTweak {
     private final String title;
 
 
-    MipmapType(String title)
+    MipmapTypes(String title)
     {
         this.title = title;
     }

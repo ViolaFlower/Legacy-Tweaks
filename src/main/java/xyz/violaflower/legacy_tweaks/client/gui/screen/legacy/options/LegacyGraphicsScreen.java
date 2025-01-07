@@ -9,27 +9,30 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.LegacyLogoRenderer;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.LegacyScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
+import xyz.violaflower.legacy_tweaks.util.ScreenUtil;
 
 import java.util.Objects;
 
-public class LegacyGraphicsScreen extends Screen {
+public class LegacyGraphicsScreen extends LegacyScreen {
     public static final ResourceLocation BACKGROUND_LOC = ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID, "gui_background");
     public static final ResourceLocation INSET_BACKGROUND = ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID,  "inset_background");
     private final Screen parent;
     private final FrameLayout frameLayout;
     private final FrameLayout innerFrameLayout;
-    private LogoRenderer logoRenderer;
+    private LegacyLogoRenderer logoRenderer;
 
     public LegacyGraphicsScreen(Screen parent) {
         super(Component.empty());
         this.parent = parent;
-        frameLayout = new FrameLayout(210, 0);
+        frameLayout = new FrameLayout(getFrameWidth(), 0);
         //frameLayout.newChildLayoutSettings().alignVerticallyTop();
         frameLayout.defaultChildLayoutSetting().align(0.5f, 0).padding(5);
-        innerFrameLayout = new FrameLayout(200, 0);
+        innerFrameLayout = new FrameLayout(getFrameWidth() - 10, 0);
         innerFrameLayout.defaultChildLayoutSetting().alignVerticallyTop().padding(5);
-        this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, () -> new LogoRenderer(false));
+        this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, () -> new LegacyLogoRenderer(false));
     }
 
     @Override
@@ -42,21 +45,21 @@ public class LegacyGraphicsScreen extends Screen {
          */
         linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.graphicsScreen.buttons.renderClouds"), button -> {
             button.setMessage(Component.literal("Oops, this isn't implemented yet!"));
-        }).width(200).build());
+        }).size(getButtonWidth(), getButtonHeight()).build());
 
         /* Requirements:
          * Checkbox Component
          */
         linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.graphicsScreen.buttons.customSkinAnim"), button -> {
             button.setMessage(Component.literal("Oops, this isn't implemented yet!"));
-        }).width(200).build());
+        }).size(getButtonWidth(), getButtonHeight()).build());
 
         /* Requirements:
          * Slider Component
          */
         linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.graphicsScreen.buttons.gamma"), button -> {
             button.setMessage(Component.literal("Oops, this isn't implemented yet!"));
-        }).width(200).build());
+        }).size(getButtonWidth(), getButtonHeight()).build());
 
         /* Requirements:
          * Minigames
@@ -64,7 +67,7 @@ public class LegacyGraphicsScreen extends Screen {
          */
         linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.graphicsScreen.buttons.showGlideGhost"), button -> {
             button.setMessage(Component.literal("Oops, this isn't implemented yet!"));
-        }).width(200).build());
+        }).size(getButtonWidth(), getButtonHeight()).build());
 
         /* Requirements:
          * Minigames
@@ -72,7 +75,7 @@ public class LegacyGraphicsScreen extends Screen {
          */
         linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.graphicsScreen.buttons.showGlideGhostPath"), button -> {
             button.setMessage(Component.literal("Oops, this isn't implemented yet!"));
-        }).width(200).build());
+        }).size(getButtonWidth(), getButtonHeight()).build());
 
 
         linearLayout.addChild(innerFrameLayout);
@@ -85,6 +88,15 @@ public class LegacyGraphicsScreen extends Screen {
     protected void repositionElements() {
         frameLayout.arrangeElements();
         FrameLayout.centerInRectangle(frameLayout, 0, 0, width, height);
+    }
+
+    @Override
+    public int getButtonWidth() {
+        if (ScreenUtil.isLargeGui()) {
+            return 150;
+        } else {
+            return 200;
+        }
     }
 
     @Override

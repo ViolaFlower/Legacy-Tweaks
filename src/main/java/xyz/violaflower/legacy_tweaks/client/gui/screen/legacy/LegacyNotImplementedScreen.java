@@ -10,27 +10,28 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
+import xyz.violaflower.legacy_tweaks.util.ScreenUtil;
 
 import java.util.Objects;
 
 // Used if the thing hasn't been implemented yet.
-public class LegacyNotImplementedScreen extends Screen {
+public class LegacyNotImplementedScreen extends LegacyScreen {
 	public static final ResourceLocation BACKGROUND_LOC = ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID, "gui_background");
 	public static final ResourceLocation INSET_BACKGROUND = ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID,  "inset_background");
 	private final Screen parent;
 	private final FrameLayout frameLayout;
 	private final FrameLayout innerFrameLayout;
-	private LogoRenderer logoRenderer;
+	private LegacyLogoRenderer logoRenderer;
 
 	protected LegacyNotImplementedScreen(Screen parent) {
 		super(Component.empty());
 		this.parent = parent;
-		frameLayout = new FrameLayout(210, 0);
+		frameLayout = new FrameLayout(getFrameWidth(), 0);
 		//frameLayout.newChildLayoutSettings().alignVerticallyTop();
 		frameLayout.defaultChildLayoutSetting().align(0.5f, 0).padding(5);
-		innerFrameLayout = new FrameLayout(200, 0);
+		innerFrameLayout = new FrameLayout(getFrameWidth() - 10, 0);
 		innerFrameLayout.defaultChildLayoutSetting().alignVerticallyTop().padding(5);
-		this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, () -> new LogoRenderer(false));
+		this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, () -> new LegacyLogoRenderer(false));
 	}
 
 	@Override
@@ -39,13 +40,22 @@ public class LegacyNotImplementedScreen extends Screen {
 		LinearLayout linearLayout = LinearLayout.vertical().spacing(4);
 		linearLayout.addChild(Button.builder(Component.literal("Not implemented yet."), button -> {
 			Minecraft.getInstance().setScreen(parent);
-		}).width(200).build());
+		}).size(getButtonWidth(), getButtonHeight()).build());
 
 
 		linearLayout.addChild(innerFrameLayout);
 		frameLayout.addChild(linearLayout);
 		frameLayout.visitWidgets(this::addRenderableWidget);
 		repositionElements();
+	}
+
+	@Override
+	public int getButtonWidth() {
+		if (ScreenUtil.isLargeGui()) {
+			return 150;
+		} else {
+			return 200;
+		}
 	}
 
 	@Override

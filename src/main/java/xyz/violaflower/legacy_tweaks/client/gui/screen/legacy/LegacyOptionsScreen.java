@@ -19,14 +19,14 @@ import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class LegacyOptionsScreen extends Screen {
+public class LegacyOptionsScreen extends LegacyScreen {
 	private FrameLayout frameLayout;
-	private LogoRenderer logoRenderer;
+	private LegacyLogoRenderer logoRenderer;
 
 	public LegacyOptionsScreen() {
 		super(Component.empty());
 
-		this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, () -> new LogoRenderer(false));
+		this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, () -> new LegacyLogoRenderer(false));
 	}
 
 	/* Dexrn says:
@@ -39,15 +39,15 @@ public class LegacyOptionsScreen extends Screen {
 		this.clearFocus();
 		frameLayout = new FrameLayout();
 		LinearLayout linearLayout = LinearLayout.vertical().spacing(21/4);
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.gameOptions"), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).width(225).build());
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.audio"), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).width(225).build());
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.graphics"), button -> setScreen(LegacyGraphicsScreen::new)).width(225).build());
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.userInterface"), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).width(225).build());
-		linearLayout.addChild(Button.builder(Component.translatable("lt.title.ltbutton"), button -> setScreen(LTScreen::new)).width(225).build());
+		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.gameOptions"), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.audio"), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.graphics"), button -> setScreen(LegacyGraphicsScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.userInterface"), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Component.translatable("lt.title.ltbutton"), button -> setScreen(LTScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
 		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.newSettings"), button -> {
 			Minecraft.getInstance().setScreen(new OptionsScreen(new LegacyTitleScreen(), Minecraft.getInstance().options));
-		}).width(225).build());
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.reset"), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).width(225).build());
+		}).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.reset"), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
 
 		frameLayout.addChild(linearLayout);
 		frameLayout.visitWidgets(this::addRenderableWidget);
@@ -62,7 +62,7 @@ public class LegacyOptionsScreen extends Screen {
 	protected void repositionElements() {
 		if (frameLayout == null) return;
 		frameLayout.setMinWidth(this.width);
-		frameLayout.setY(height/2-165/3);
+		frameLayout.setY(getButtonHeightPos());
 		frameLayout.arrangeElements();
 	}
 
