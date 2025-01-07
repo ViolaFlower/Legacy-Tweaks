@@ -9,14 +9,17 @@ import java.util.Locale;
 
 public class EyeCandyClient {
 	public static Integer getWaterColor(Biome biome) {
+		if (Minecraft.getInstance().level == null) return null;
 		return getWaterColor(Minecraft.getInstance().level.registryAccess().registryOrThrow(Registries.BIOME).getKey(biome));
 	}
 
 	public static Integer getWaterFogColor(Biome biome) {
+		if (Minecraft.getInstance().level == null) return null;
 		return getWaterFogColor(Minecraft.getInstance().level.registryAccess().registryOrThrow(Registries.BIOME).getKey(biome));
 	}
 
 	public static Integer getFogColor(Biome biome) {
+		if (Minecraft.getInstance().level == null) return null;
 		return getFogColor(Minecraft.getInstance().level.registryAccess().registryOrThrow(Registries.BIOME).getKey(biome));
 	}
 
