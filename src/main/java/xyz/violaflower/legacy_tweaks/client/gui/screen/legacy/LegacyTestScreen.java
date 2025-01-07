@@ -2,7 +2,6 @@ package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
@@ -86,8 +85,8 @@ public class LegacyTestScreen extends LegacyScreen {
 
 	@Override
 	public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-		super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
-		System.out.println(frameLayout.getWidth());
+//		super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+//		System.out.println(frameLayout.getWidth());
 		guiGraphics.blitSprite(TOP_NAV_LEFT, frameLayout.getX() + frameLayout.getWidth() / 3, frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
 		guiGraphics.blitSprite(TOP_NAV_LEFT, frameLayout.getX() + frameLayout.getWidth() / 3 * 2, frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
 		guiGraphics.blitSprite(BACKGROUND_LOC, frameLayout.getX(), frameLayout.getY(), frameLayout.getWidth(), frameLayout.getHeight());
@@ -97,6 +96,7 @@ public class LegacyTestScreen extends LegacyScreen {
 
 	@Override
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+		this.renderPanorama(guiGraphics, partialTick);
 		super.render(guiGraphics, mouseX, mouseY, partialTick);
 		logoRenderer.renderLogo(guiGraphics, this.width, 1);
 	}

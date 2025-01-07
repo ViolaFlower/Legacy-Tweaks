@@ -1,5 +1,7 @@
 package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.util.ScreenUtil;
@@ -35,5 +37,16 @@ public class LegacyScreen extends Screen {
         } else {
             return 125;
         }
+    }
+
+    // TODO double check if this is even safe; may be better to go with a different system later on
+//    public void tick() {
+//        Minecraft.getInstance().resizeDisplay();
+//        this.init();
+//    }
+
+    @Override
+    protected void renderPanorama(GuiGraphics guiGraphics, float f) {
+        PANORAMA.render(guiGraphics, this.width, this.height, 1, f);
     }
 }

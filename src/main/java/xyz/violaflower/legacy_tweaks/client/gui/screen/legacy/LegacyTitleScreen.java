@@ -1,21 +1,16 @@
 package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy;
 
-import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.layouts.FrameLayout;
-import net.minecraft.client.gui.layouts.LayoutSettings;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
-import net.minecraft.client.gui.screens.options.OptionsScreen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.network.chat.Component;
-import xyz.violaflower.legacy_tweaks.client.gui.screen.LTScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
-import xyz.violaflower.legacy_tweaks.util.ScreenUtil;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -86,11 +81,6 @@ public class LegacyTitleScreen extends LegacyScreen {
 		this.renderPanorama(guiGraphics, f);
 		super.render(guiGraphics, i, j, f);
 		logoRenderer.renderLogo(guiGraphics, this.width, 1);
-	}
-
-	@Override
-	protected void renderPanorama(GuiGraphics guiGraphics, float f) {
-		PANORAMA.render(guiGraphics, this.width, this.height, 1, f);
 	}
 
 	@Override

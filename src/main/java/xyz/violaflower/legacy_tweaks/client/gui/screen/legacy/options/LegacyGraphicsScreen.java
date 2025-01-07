@@ -2,7 +2,6 @@ package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.options;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
@@ -11,7 +10,6 @@ import net.minecraft.resources.ResourceLocation;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.LegacyLogoRenderer;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.LegacyScreen;
-import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.util.ScreenUtil;
 
 import java.util.Objects;
@@ -107,13 +105,14 @@ public class LegacyGraphicsScreen extends LegacyScreen {
 
     @Override
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+//        super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.blitSprite(BACKGROUND_LOC, frameLayout.getX(), frameLayout.getY(), frameLayout.getWidth(), frameLayout.getHeight());
         guiGraphics.blitSprite(INSET_BACKGROUND, innerFrameLayout.getX(), innerFrameLayout.getY(), innerFrameLayout.getWidth(), innerFrameLayout.getHeight());
     }
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        this.renderPanorama(guiGraphics, partialTick);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         logoRenderer.renderLogo(guiGraphics, this.width, 1);
     }
