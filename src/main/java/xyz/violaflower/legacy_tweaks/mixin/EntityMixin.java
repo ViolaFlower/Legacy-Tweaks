@@ -29,12 +29,12 @@ public abstract class EntityMixin {
     )
     private Entity sendChatMessage(Entity instance, DimensionTransition transition, Operation<Entity> original) {
         if (!(this.level() instanceof ServerLevel serverLevel)) return original.call(instance, transition);
-        if (!Tweaks.LEGACY_CHAT.getSubTweak("Dimension Notifications").isEnabled()) {
+        if (!Tweaks.LEGACY_CHAT.getSubTweak("dimensionNotifications").isEnabled()) {
             return original.call(instance, transition);
         }
         if (!(instance instanceof ServerPlayer player)) return original.call(instance, transition);
 
-        FatChat.DimensionNotification dn = Tweaks.LEGACY_CHAT.getSubTweak("Dimension Notifications"); // deez nuts
+        FatChat.DimensionNotification dn = Tweaks.LEGACY_CHAT.getSubTweak("dimensionNotifications"); // deez nuts
 
         ResourceKey<Level> currentDimension = instance.level().dimension();
         ResourceKey<Level> newDimension = (transition.newLevel()).dimension();

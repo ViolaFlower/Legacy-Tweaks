@@ -22,7 +22,8 @@
     "client.PostChainAccessor",
     "client.ScreenMixin",
     "client.WindowMixin",
-    "client.WitchModelMixin"
+    "client.WitchModelMixin",
+    "networking.client.NetworkRegistryMixin"
   ],
   "mixins": [
     "EntityMixin",

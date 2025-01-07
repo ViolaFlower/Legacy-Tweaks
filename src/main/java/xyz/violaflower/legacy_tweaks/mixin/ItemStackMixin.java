@@ -34,7 +34,7 @@ public abstract class ItemStackMixin {
 	@Inject(method = "getComponents", at = @At("RETURN"), cancellable = true)
 	void attributeModifications(CallbackInfoReturnable<DataComponentMap> cir) {
 		lessAxeDamage: {
-			if (!Tweaks.LEGACY_ATTACK.getSubTweak("Less Axe Damage").isEnabled()) break lessAxeDamage;
+			if (!Tweaks.LEGACY_ATTACK.getSubTweak("lessAxeDamage").isEnabled()) break lessAxeDamage;
 			if (this.isEmpty()) return;
 			if (this.getItem() instanceof AxeItem axeItem) {
 				DataComponentMap returnValue = cir.getReturnValue();
@@ -48,7 +48,7 @@ public abstract class ItemStackMixin {
 			}
 		}
 		removeCooldown: {
-			if (!Tweaks.LEGACY_ATTACK.getSubTweak("No Attack Cooldown").isEnabled()) break removeCooldown;
+			if (!Tweaks.LEGACY_ATTACK.getSubTweak("noAttackCooldown").isEnabled()) break removeCooldown;
 			if (this.isEmpty()) return;
 			if (this.getItem() instanceof MaceItem) break removeCooldown;
 			DataComponentMap returnValue = cir.getReturnValue();

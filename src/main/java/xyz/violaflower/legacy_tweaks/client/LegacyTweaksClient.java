@@ -1,5 +1,7 @@
 package xyz.violaflower.legacy_tweaks.client;
 
+import xyz.violaflower.legacy_tweaks.LegacyTweaks;
+import xyz.violaflower.legacy_tweaks.networking.NetworkingAbstractions;
 //? if fabric {
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -7,7 +9,6 @@ import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
-import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
