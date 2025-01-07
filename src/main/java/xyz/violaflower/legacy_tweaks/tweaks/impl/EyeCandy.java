@@ -52,6 +52,7 @@ public class EyeCandy extends Tweak {
 
 		@Override
 		public void onToggled() {
+			if (Minecraft.getInstance().options == null) return;
 			Minecraft.getInstance().resizeDisplay();
 		}
 	}
