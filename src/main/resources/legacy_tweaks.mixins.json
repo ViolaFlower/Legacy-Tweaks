@@ -31,7 +31,8 @@
     "MinecraftMixin",
     "PlayerMixin",
     "client.BiomeMixin",
-    "server.PlayerAdvancementsMixin"
+    "server.PlayerAdvancementsMixin",
+    "settings.client.AbstractSliderButtonAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

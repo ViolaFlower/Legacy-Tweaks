@@ -1,10 +1,7 @@
 package xyz.violaflower.legacy_tweaks.client.gui.screen;
 
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractSliderButton;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.ContainerObjectSelectionList;
-import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.layouts.LinearLayout;
@@ -13,6 +10,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
+import xyz.violaflower.legacy_tweaks.mixin.settings.client.AbstractSliderButtonAccessor;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 
 import java.text.DecimalFormat;
@@ -86,8 +84,10 @@ public class SettingsScreen extends Screen {
 			private final ArrayList<GuiEventListener> children = new ArrayList<>();
 			private AbstractSliderButton sliderButton;
 			private Button toggleButton;
+			private Button resetButton;
 			public <T> SettingEntry(@Nullable Tweak.Option<?> option) {
 				this.option = option;
+				Button[] delayedResetButton = new Button[1];
 				if (option instanceof Tweak.SliderOption<?> sliderOption0) {
 					Tweak.SliderOption<T> sliderOption = (Tweak.SliderOption<T>) sliderOption0;
 					sliderButton = new AbstractSliderButton(100, 0, 100, 20, Component.literal("Value ").append(sliderOption.fancyFormat(sliderOption.get())), sliderOption.normalize()) {
@@ -99,6 +99,7 @@ public class SettingsScreen extends Screen {
 						@Override
 						protected void applyValue() {
 							sliderOption.set(sliderOption.unNormalize(value));
+							delayedResetButton[0].active = true;
 						}
 					};
 					children.add(sliderButton);
@@ -107,8 +108,34 @@ public class SettingsScreen extends Screen {
 					toggleButton = Button.builder(component, b -> {
 						booleanOption.set(!booleanOption.get());
 						b.setMessage(booleanOption.get() ? CommonComponents.OPTION_ON : CommonComponents.OPTION_OFF);
+						delayedResetButton[0].active = true;
 					}).bounds(100, 0, 100, 20).build();
 					children.add(toggleButton);
+				}
+				delayedResetButton[0] = resetButton = Button.builder(Component.translatable("lt.main.reset"), button -> {
+					option.getTweakState().setLocalState(null);
+					if (sliderButton != null) {
+						((AbstractSliderButtonAccessor) sliderButton).callUpdateMessage();
+						((AbstractSliderButtonAccessor) sliderButton).legacyTweaks$setValue(((Tweak.SliderOption)option).normalize());
+					}
+					if (toggleButton != null) {
+						toggleButton.setMessage(((Tweak.BooleanOption) option).get() ? CommonComponents.OPTION_ON : CommonComponents.OPTION_OFF);
+					}
+					button.active = false;
+				}).size(20, 20).build();
+				resetButton.active = option.getTweakState().getLocalState() != null;
+				children.add(resetButton);
+				if (option.getTweakState().isValueLocked()) {
+					resetButton.active = false;
+					resetButton.setTooltip(Tooltip.create(Component.literal("Option locked by server.")));
+					if (sliderButton != null) {
+						sliderButton.active = false;
+						sliderButton.setTooltip(Tooltip.create(Component.literal("Option locked by server.")));
+					}
+					if (toggleButton != null) {
+						toggleButton.active = false;
+						toggleButton.setTooltip(Tooltip.create(Component.literal("Option locked by server.")));
+					}
 				}
 			}
 			@Override
@@ -121,13 +148,18 @@ public class SettingsScreen extends Screen {
 				guiGraphics.drawString(font, option.getName(), left, top + 5, 0xffffffff);
 				if (sliderButton != null) {
 					sliderButton.setY(top);
-					sliderButton.setX(left + width / 2 + 10);
+					sliderButton.setX(left + width / 2 - 12);
 					sliderButton.setWidth(width / 2 - 10);
 				}
 				if (toggleButton != null) {
 					toggleButton.setY(top);
-					toggleButton.setX(left + width / 2 + 10);
+					toggleButton.setX(left + width / 2 - 12);
 					toggleButton.setWidth(width / 2 - 10);
+				}
+				if (resetButton != null) {
+					resetButton.setY(top);
+					resetButton.setX(left + width - 20);
+					resetButton.setWidth(20);
 				}
 				for (GuiEventListener child : this.children) {
 					if (child instanceof Renderable renderable) {
