@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakBuilder;
+import xyz.violaflower.legacy_tweaks.tweaks.enums.SunsetRiseColors;
 
 public class EyeCandy extends Tweak {
 	public final LegacyTextShadows legacyTextShadows;
@@ -56,13 +57,12 @@ public class EyeCandy extends Tweak {
 	}
 
 	public static class SunsetColors extends Tweak {
-		public final IntSliderOption sunsetColors; // TODO change to Enum
+		public final EnumSliderOption<SunsetRiseColors> sunsetColors;
 
 		public SunsetColors() {
 			super("sunsetColors", true);
 			setTweakAuthor("Permdog99");
-
-			sunsetColors = addSliderOption("sunsetColors", 3, 1, 3);
+			sunsetColors = addSliderOption("Sunset Colors", enumProvider(SunsetRiseColors.JAVA, SunsetRiseColors::values, SunsetRiseColors::toString, SunsetRiseColors::getTitle));
 		}
 	}
 

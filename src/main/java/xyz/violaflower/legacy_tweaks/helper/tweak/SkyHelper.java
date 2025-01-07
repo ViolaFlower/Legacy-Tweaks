@@ -4,6 +4,7 @@ package xyz.violaflower.legacy_tweaks.helper.tweak;
 
 import net.minecraft.util.Mth;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
+import xyz.violaflower.legacy_tweaks.tweaks.enums.SunsetRiseColors;
 
 import java.awt.*;
 
@@ -24,13 +25,13 @@ public class SkyHelper {
      */
     public static float[] setSunsetRiseColor(float timeOfDay, float[] sunriseCol) {
         switch (Tweaks.EYE_CANDY.sunsetColors.sunsetColors.get()) {
-            case 1 -> {
+            case SunsetRiseColors.TU1 -> {
                 return getTU1SunsetRiseColor(timeOfDay, sunriseCol);
             }
-            case 2 -> {
+            case SunsetRiseColors.TU5 -> {
                 return getTU5SunsetRiseColor(timeOfDay, sunriseCol);
             }
-            case 3 -> {
+            case SunsetRiseColors.JAVA -> {
                 return getJavaSunsetRiseColor(timeOfDay, sunriseCol);
             }
         }
