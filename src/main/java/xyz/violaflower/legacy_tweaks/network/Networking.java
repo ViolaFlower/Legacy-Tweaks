@@ -6,11 +6,9 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ConfigurationTask;
 import xyz.violaflower.legacy_tweaks.network.client.ClientNetworking;
-import xyz.violaflower.legacy_tweaks.network.payload.CoolConfigurationPacket;
-import xyz.violaflower.legacy_tweaks.network.payload.CoolConfigurationResponsePacket;
-import xyz.violaflower.legacy_tweaks.network.payload.CoolPacket;
-import xyz.violaflower.legacy_tweaks.network.payload.CoolPacket2;
+import xyz.violaflower.legacy_tweaks.network.payload.*;
 import xyz.violaflower.legacy_tweaks.network.task.SendCoolConfigurationPacketTask;
+import xyz.violaflower.legacy_tweaks.network.task.SendTweakStatesTask;
 import xyz.violaflower.legacy_tweaks.networking.NetworkingAbstractions;
 import xyz.violaflower.legacy_tweaks.networking.configuration.ServerboundConfiguration;
 import xyz.violaflower.legacy_tweaks.networking.configuration.event.ServerConfigurationEvents;
@@ -21,6 +19,8 @@ public class Networking {
 		NetworkingAbstractions.registerCodec(CoolPacket.TYPE, CoolPacket.STREAM_CODEC, NetworkingAbstractions.PayloadType.PLAY_S2C);
 		NetworkingAbstractions.registerCodec(CoolPacket2.TYPE, CoolPacket2.STREAM_CODEC, NetworkingAbstractions.PayloadType.PLAY_C2S);
 		NetworkingAbstractions.registerCodec(CoolConfigurationPacket.TYPE, CoolConfigurationPacket.STREAM_CODEC, NetworkingAbstractions.PayloadType.CONFIGURATION_S2C);
+		NetworkingAbstractions.registerCodec(TweakStatesPayload.TYPE, TweakStatesPayload.STREAM_CODEC, NetworkingAbstractions.PayloadType.CONFIGURATION_S2C);
+		NetworkingAbstractions.registerCodec(TweakStatesResponsePayload.TYPE, TweakStatesResponsePayload.STREAM_CODEC, NetworkingAbstractions.PayloadType.CONFIGURATION_C2S);
 		NetworkingAbstractions.registerCodec(CoolConfigurationResponsePacket.TYPE, CoolConfigurationResponsePacket.STREAM_CODEC, NetworkingAbstractions.PayloadType.CONFIGURATION_C2S);
 	}
 
@@ -39,6 +39,7 @@ public class Networking {
 	public static void registerConfigurationTasks() {
 		ServerConfigurationEvents.registerOnConfigure(h -> {
 			h.addTask(new SendCoolConfigurationPacketTask());
+			h.addTask(new SendTweakStatesTask());
 		});
 	}
 }

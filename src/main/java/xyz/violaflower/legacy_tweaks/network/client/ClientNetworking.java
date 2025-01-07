@@ -3,11 +3,10 @@ package xyz.violaflower.legacy_tweaks.network.client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.network.Networking;
-import xyz.violaflower.legacy_tweaks.network.payload.CoolConfigurationPacket;
-import xyz.violaflower.legacy_tweaks.network.payload.CoolConfigurationResponsePacket;
-import xyz.violaflower.legacy_tweaks.network.payload.CoolPacket;
+import xyz.violaflower.legacy_tweaks.network.payload.*;
 import xyz.violaflower.legacy_tweaks.networking.configuration.ClientboundConfiguration;
 import xyz.violaflower.legacy_tweaks.networking.play.ClientboundPlay;
+import xyz.violaflower.legacy_tweaks.tweaks.TweakState;
 
 public class ClientNetworking {
 	public static void registerPayloadHandlers() {
@@ -20,6 +19,12 @@ public class ClientNetworking {
 			CoolConfigurationResponsePacket responsePacket = new CoolConfigurationResponsePacket(13371337);
 			Minecraft.getInstance().gui.getChat().addMessage(Component.literal("Responding with " + responsePacket));
 			context.sendPacket(responsePacket);
+		});
+
+		ClientboundConfiguration.registerHandler(TweakStatesPayload.TYPE, (payload, context) -> {
+			Minecraft.getInstance().gui.getChat().addMessage(Component.literal("Received server configuration"));
+			TweakState.decodeServerState(payload.byteBuf());
+			context.sendPacket(new TweakStatesResponsePayload());
 		});
 	}
 

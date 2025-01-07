@@ -25,14 +25,9 @@ public abstract class Tweak implements TweakParent {
     private Tweak parentTweak;
     private final TweakState<Boolean> tweakState;
 
-    @Deprecated(forRemoval = true)
-    public Tweak(boolean defaultValue) {
-        this.tweakState = new TweakState<>(defaultValue, Codec.BOOL, this::onChange);
-    }
-
     // default value should always be true if it's a group
     public Tweak(String id, boolean defaultValue) {
-        this.tweakState = new TweakState<>(defaultValue, Codec.BOOL, this::onChange);
+        this.tweakState = new TweakState<>("tw:" + id + defaultValue, defaultValue, Codec.BOOL, this::onChange);
         this.id = id;
     }
 
@@ -47,7 +42,7 @@ public abstract class Tweak implements TweakParent {
     }
 
     public Tweak(String id, String author, boolean defaultValue) {
-        this.tweakState = new TweakState<>(defaultValue, Codec.BOOL, this::onChange);
+        this.tweakState = new TweakState<>("twk:" + id + defaultValue, defaultValue, Codec.BOOL, this::onChange);
         this.id = id;
         this.author = author;
     }
