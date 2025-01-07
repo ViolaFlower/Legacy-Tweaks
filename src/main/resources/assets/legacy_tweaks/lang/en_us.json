@@ -4,6 +4,7 @@
   "lt.main.enabled": "E",
   "lt.main.disabled": "D",
   "lt.main.settings": "S",
+  "lt.main.reset": "R",
   "lt.tweak.f3info.setting.showEnabledTweaks": "Show enabled tweaks in F3 menu",
   "lt.tweak.f3info.enabledTweaks": "Active Tweaks (%s): ",
   "lt.legacyScreens.titleScreen.buttons.playButton": "Play Game",

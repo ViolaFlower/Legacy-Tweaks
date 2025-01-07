@@ -105,6 +105,10 @@ public class TweakState<T> {
 		return id;
 	}
 
+	public boolean isValueLocked() {
+		return getServerState() != null;
+	}
+
 	// this should only run on the dedicated or integrated server!
 	public void encodeLocalState(FriendlyByteBuf byteBuf) {
 		if (this.getLocalState() == null) throw new IllegalStateException(); // no need to encode if it's null

@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ContainerObjectSelectionList;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.layouts.LinearLayout;
@@ -101,6 +102,7 @@ public class LTScreen extends Screen {
             private final List<FormattedCharSequence> label;
             private final Button toggleButton;
             private final Button settingsButton;
+            private final Button resetButton;
             protected final List<AbstractWidget> children = Lists.newArrayList();
 
             public SettingEntry(final Tweak tweak) {
@@ -108,17 +110,35 @@ public class LTScreen extends Screen {
                 this.label = LTScreen.this.minecraft.font.split(Component.empty().append(tweak.getTweakDescription()).withStyle(ChatFormatting.GRAY), 175);
 
                 if (!tweak.isGroup()) {
-                    toggleButton = Button.builder(Component.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"), button -> {
+                    Button[] delayedToggleButton = new Button[1];
+                    resetButton = Button.builder(Component.translatable("lt.main.reset"), button -> {
+                        tweak.getTweakState().setLocalState(null);
+                        delayedToggleButton[0].setMessage(Component.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"));
+                        button.active = false;
+                    }).size(20, 20).build();
+                    delayedToggleButton[0] = toggleButton = Button.builder(Component.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"), button -> {
                         tweak.setEnabled(!tweak.isEnabled());
                         button.setMessage(Component.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"));
+                        resetButton.active = true;
                     }).size(20, 20).build();
-                } else toggleButton = null;
+                    resetButton.active = tweak.getTweakState().getLocalState() != null;
+                    if (tweak.getTweakState().isValueLocked()) {
+                        toggleButton.active = false;
+                        toggleButton.setTooltip(Tooltip.create(Component.literal("Tweak locked by server.")));
+                        resetButton.active = false;
+                        resetButton.setTooltip(Tooltip.create(Component.literal("Tweak locked by server.")));
+                    }
+                } else {
+                    resetButton = null;
+                    toggleButton = null;
+                }
                 settingsButton = Button.builder(Component.translatable("lt.main.settings"), button -> {
 //                    // https://www.minecraftforum.net/forums/archive/alpha/alpha-survival-single-player/798878-dohasdoshih-analysis-of-glitched-chunks
 //                    LegacyTweaks.LOGGER.info("DOHASDOSHIH!");
                     Minecraft.getInstance().setScreen(!tweak.getSubTweaks().isEmpty() ? new LTScreen(LTScreen.this, tweak) : new SettingsScreen(LTScreen.this, tweak));
                 }).size(20, 20).build();
                 if (tweak.getSubTweaks().isEmpty() && tweak.getOptions().isEmpty()) settingsButton.active = false;
+                if (resetButton != null) this.children.add(resetButton);
                 if (toggleButton != null) this.children.add(toggleButton);
                 this.children.add(settingsButton);
             }
@@ -146,12 +166,17 @@ public class LTScreen extends Screen {
 
                 int off = 5;
 
+                if (resetButton != null) {
+                    this.resetButton.setX(x + entryWidth - 21);
+                    this.resetButton.setY(y + off);
+                }
                 if (toggleButton != null) {
-                    this.toggleButton.setX(x + entryWidth - 21);
+                    this.toggleButton.setX(x + entryWidth - 42);
                     this.toggleButton.setY(y + off);
                 }
-                this.settingsButton.setX(x + entryWidth - 42);
+                this.settingsButton.setX(x + entryWidth - 63);
                 this.settingsButton.setY(y + off);
+                if (resetButton != null) this.resetButton.render(guiGraphics, mouseX, mouseY, tickDelta);
                 if (toggleButton != null) this.toggleButton.render(guiGraphics, mouseX, mouseY, tickDelta);
                 this.settingsButton.render(guiGraphics, mouseX, mouseY, tickDelta);
             }
