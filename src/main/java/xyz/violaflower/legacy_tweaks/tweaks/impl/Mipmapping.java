@@ -3,6 +3,7 @@ package xyz.violaflower.legacy_tweaks.tweaks.impl;
 import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakBuilder;
+import xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapType;
 
 public class Mipmapping extends Tweak {
     public final MipmapType mipmapType;
@@ -17,12 +18,11 @@ public class Mipmapping extends Tweak {
     }
 
     public static class MipmapType extends Tweak {
-        public final IntSliderOption mipmapType; // TODO change to Enum
+        public final EnumSliderOption<xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapType> mipmapType;
         public MipmapType() {
             super("mipmapType", true);
             setTweakAuthor("Permdog99");
-            mipmapType = addSliderOption("type", 1, 4);
-            mipmapType.set(4);
+            mipmapType = addSliderOption("Mipmap Type", enumProvider(xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapType.JAVA, xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapType::values, xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapType::toString, xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapType::getTitle));
         }
     }
 }

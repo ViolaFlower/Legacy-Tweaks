@@ -122,5 +122,11 @@
   "lt.tweak.windowTitle": "Window Title",
   "lt.tweak.windowTitle.showTUVersion": "Show TU Version",
 
-  "lt.tweak.yellowchat": "Yellow Chat"
+  "lt.tweak.yellowchat": "Yellow Chat",
+
+  "lt.tweak.tu1": "TU1",
+  "lt.tweak.tu3": "TU3",
+  "lt.tweak.tu5": "TU5",
+  "lt.tweak.tu12": "TU12",
+  "lt.tweak.java": "Java"
 }

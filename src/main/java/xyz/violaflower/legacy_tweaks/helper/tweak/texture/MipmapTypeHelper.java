@@ -7,6 +7,7 @@ package xyz.violaflower.legacy_tweaks.helper.tweak.texture;
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.Util;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
+import xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapType;
 
 /**
  * Mipmap helper for creating mipmap types
@@ -23,16 +24,16 @@ public class MipmapTypeHelper {
      */
     public static NativeImage[] setMipmapType(NativeImage[] originals, int mipmapLevel) {
         switch (Tweaks.MIPMAPPING.mipmapType.mipmapType.get()) {
-            case 1 -> {
+            case MipmapType.TU1 -> {
                 return mipmapTU1(originals, mipmapLevel);
             }
-            case 2 -> {
+            case MipmapType.TU3 -> {
                 return mipmapTU3(originals, mipmapLevel);
             }
-            case 3 -> {
+            case MipmapType.TU12 -> {
                 return mipmapTU12(originals, mipmapLevel);
             }
-            case 4 -> {
+            case MipmapType.JAVA -> {
                 return mipmapJava(originals, mipmapLevel);
             }
         }
