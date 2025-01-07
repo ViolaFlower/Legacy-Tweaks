@@ -37,10 +37,10 @@ public class LegacyTitleScreen extends Screen {
 		this.clearWidgets();
 		this.clearFocus();
 		frameLayout = new FrameLayout();
-		LinearLayout linearLayout = LinearLayout.vertical().spacing(3);
+		LinearLayout linearLayout = LinearLayout.vertical().spacing(21/4);
 		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.playButton"), button -> setScreen(SelectWorldScreen::new)).width(225).build());
 		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.minigamesButton"), button -> setScreen(JoinMultiplayerScreen::new)).width(225).build());
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.leaderboardsButton"), button -> setScreen(LTScreen::new)).width(225).build());
+		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.leaderboardsButton"), button -> setScreen(LegacyNotImplementedScreen::new)).width(225).build());
 		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.optionsButton"), button -> {
 			Minecraft.getInstance().setScreen(new LegacyOptionsScreen());
 		}).width(225).build());
@@ -73,15 +73,15 @@ public class LegacyTitleScreen extends Screen {
 	protected void repositionElements() {
 		if (frameLayout == null) return;
 		frameLayout.setMinWidth(this.width);
+		frameLayout.setY(height/2-165/3);
 		frameLayout.arrangeElements();
-		FrameLayout.centerInRectangle(frameLayout, 0, 0, width, height);
 	}
 
 	@Override
 	public void render(GuiGraphics guiGraphics, int i, int j, float f) {
 		this.renderPanorama(guiGraphics, f);
 		super.render(guiGraphics, i, j, f);
-		logoRenderer.renderLogo(guiGraphics, this.width, 1, 10);
+		logoRenderer.renderLogo(guiGraphics, this.width, 1);
 	}
 
 	@Override
