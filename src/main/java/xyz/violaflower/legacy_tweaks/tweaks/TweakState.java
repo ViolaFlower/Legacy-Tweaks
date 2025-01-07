@@ -123,6 +123,7 @@ public class TweakState<T> {
 
 	public static <T> void decodeLocalStates(FriendlyByteBuf byteBuf) {
 		// Dexrn: is there some way to have the server kick the client/do something else if they send the wrong version?
+		System.out.println(tweakStates);
 		ArrayList<TweakState<?>> list = new ArrayList<>(tweakStates.values());
 		short version = byteBuf.readShort();
 
@@ -147,6 +148,7 @@ public class TweakState<T> {
 	}
 
 	public static <T> void decodeServerStates(FriendlyByteBuf byteBuf) {
+		System.out.println(tweakStates);
 		ArrayList<TweakState<?>> list = new ArrayList<>(tweakStates.values());
 		short version = byteBuf.readShort();
 
