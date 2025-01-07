@@ -6,11 +6,10 @@ import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 
 public class LegacyAttack extends Tweak {
     public LegacyAttack() {
-        setTweakID("legacyAttack");
+        super("legacyAttack", false);
         setTweakAuthor("Jab125", "DexrnZacAttack");
         // pls change later
         setTweakVersion("1.0.0");
-        setDefaultEnabled(false);
         setGroup();
         addSubTweak(new LegacyAttack.LessAxeDamage());
         addSubTweak(new LegacyAttack.RemoveCooldown());
@@ -18,18 +17,16 @@ public class LegacyAttack extends Tweak {
 
     public static class RemoveCooldown extends Tweak {
         public RemoveCooldown() {
-            setTweakID("noAttackCooldown");
+            super("noAttackCooldown", false);
             setTweakAuthor("Jab125");
             setTweakVersion("1.0.0");
-            setDefaultEnabled(false);
         }
     }
     public static class LessAxeDamage extends Tweak {
         public LessAxeDamage() {
-            setTweakID("lessAxeDamage");
+            super("lessAxeDamage", false);
             setTweakAuthor("Jab125");
             setTweakVersion("1.0.0");
-            setDefaultEnabled(false);
         }
     }
 }

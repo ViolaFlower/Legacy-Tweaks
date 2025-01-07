@@ -5,7 +5,7 @@ import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 
 public class MapChanges extends Tweak {
     public MapChanges() {
-        setTweakID("mapChanges");
+        super("mapChanges", true);
         setTweakAuthor("Jab125");
         setTweakVersion("1.0.0");
         setGroup();
@@ -14,7 +14,7 @@ public class MapChanges extends Tweak {
     }
     public static class MapCoordinates extends Tweak {
         public MapCoordinates() {
-            setTweakID("mapCoordinates");
+            super("mapCoordinates", true);
             setTweakAuthor("Jab125");
             setTweakVersion("1.1.0");
         }
@@ -22,10 +22,9 @@ public class MapChanges extends Tweak {
 
     public static class SmallerMapContents extends Tweak {
         public SmallerMapContents() {
-            setTweakID("smallerMapContents");
+            super("smallerMapContents", false);
             setTweakAuthor("Jab125");
             setTweakVersion("1.0.0");
-            setDefaultEnabled(false);
         }
     }
 }

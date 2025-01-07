@@ -14,7 +14,7 @@ public class LegacyFog extends Tweak {
     public final ModdedFog moddedFog;
 
     public LegacyFog() {
-        setTweakID("legacyFog");
+        super("legacyFog", true);
         setGroup();
         setTweakAuthor("Permdog99");
 
@@ -29,9 +29,8 @@ public class LegacyFog extends Tweak {
         public final DoubleSliderOption terrainFogStartOverworld;
         public final DoubleSliderOption terrainFogStopOverworld;
         public OverworldFog() {
-            setTweakID("overworldFog");
+            super("overworldFog", true);
             setTweakAuthor("Permdog99");
-            setEnabled(true, false);
 
             terrainFogStartOverworld = addSliderOption("terrainFogStart", 0d, 1d);
             terrainFogStopOverworld = addSliderOption("terrainFogStop", 0d, 1d);
@@ -45,9 +44,8 @@ public class LegacyFog extends Tweak {
         public final DoubleSliderOption terrainFogStartNether;
         public final DoubleSliderOption terrainFogStopNether;
         public NetherFog() {
-            setTweakID("netherFog");
+            super("netherFog", true);
             setTweakAuthor("Permdog99");
-            setEnabled(true, false);
 
             terrainFogStartNether = addSliderOption("terrainFogStart", 0d, 1d);
             terrainFogStopNether = addSliderOption("terrainFogStop", 0d, 1d);
@@ -61,9 +59,8 @@ public class LegacyFog extends Tweak {
         public final DoubleSliderOption terrainFogStartEnd;
         public final DoubleSliderOption terrainFogStopEnd;
         public EndFog() {
-            setTweakID("endFog");
+            super("endFog", true);
             setTweakAuthor("Permdog99");
-            setEnabled(true, false);
 
             terrainFogStartEnd = addSliderOption("terrainFogStart", 0d, 1d);
             terrainFogStopEnd = addSliderOption("terrainFogStop", 0d, 1d);
@@ -77,9 +74,8 @@ public class LegacyFog extends Tweak {
         public final DoubleSliderOption terrainFogStartModded;
         public final DoubleSliderOption terrainFogStopModded;
         public ModdedFog() {
-            setTweakID("moddedDimensionsFog");
+            super("moddedDimensionsFog", true);
             setTweakAuthor("Permdog99");
-            setEnabled(true, false);
 
             terrainFogStartModded = addSliderOption("terrainFogStart", 0d, 1d);
             terrainFogStopModded = addSliderOption("terrainFogEnd", 0d, 1d);

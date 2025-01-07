@@ -37,7 +37,7 @@ public class TweakBuilder {
 	}
 
 	public Tweak build() {
-		Tweak tweak = new Tweak(id) {
+		Tweak tweak = new Tweak(id, defaultEnabled) {
 			@Override
 			public void onEnable() {
 				this.onToggled();
@@ -55,7 +55,6 @@ public class TweakBuilder {
 				onToggled.run();
 			}
 		};
-		tweak.setDefaultEnabled(defaultEnabled);
 		tweak.setTweakAuthor(authors);
 		return tweak;
 	}

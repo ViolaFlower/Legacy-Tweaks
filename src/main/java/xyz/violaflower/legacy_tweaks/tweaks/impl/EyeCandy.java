@@ -16,7 +16,7 @@ public class EyeCandy extends Tweak {
 	public final Tweak legacyWaterColors;
 
 	public EyeCandy() {
-		setTweakID("eyeCandy");
+		super("eyeCandy", true);
 		setGroup();
 		setTweakAuthor("Jab125");
 		addSubTweak(legacyTextShadows = new LegacyTextShadows());
@@ -35,7 +35,7 @@ public class EyeCandy extends Tweak {
 	public static class LegacyTextShadows extends Tweak {
 		public final IntSliderOption shadowOffset;
 		public LegacyTextShadows() {
-			setTweakID("legacyTextShadows");
+			super("legacyTextShadows", true);
 			setTweakAuthor("Jab125");
 			shadowOffset = addSliderOption("shadowOffset", 0, 10);
 			shadowOffset.set(1);
@@ -44,9 +44,8 @@ public class EyeCandy extends Tweak {
 	public static class FineTunedUIScale extends Tweak {
 		public final DoubleSliderOption uiScale;
 		public FineTunedUIScale() {
-			setTweakID("fineTunedUIScale");
+			super("fineTunedUIScale", false);
 			setTweakAuthor("Jab125");
-			setEnabled(false, false);
 			uiScale = addSliderOption("uiScale", 0.8D, 5D);
 			uiScale.set(1d);
 			uiScale.setConsumer(d -> {if (isEnabled()) Minecraft.getInstance().resizeDisplay();});
@@ -62,7 +61,7 @@ public class EyeCandy extends Tweak {
 		public final IntSliderOption sunsetColors; // TODO change to Enum
 
 		public SunsetColors() {
-			setTweakID("sunsetColors");
+			super("sunsetColors", true);
 			setTweakAuthor("Permdog99");
 
 			sunsetColors = addSliderOption("sunsetColors", 1, 3);
@@ -75,7 +74,7 @@ public class EyeCandy extends Tweak {
 		public final Tweak legacyFireworkModel;
 
 		public Models() {
-			setTweakID("models");
+			super("models", true);
 			setTweakAuthor("Permdog99");
 
 			addSubTweak(legacyWitchHat = new TweakBuilder("legacyWitchHat").authors("Permdog99, Legacy4J 1.7.5-beta").setDefaultEnabled(false).build());

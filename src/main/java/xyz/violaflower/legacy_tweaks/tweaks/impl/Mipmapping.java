@@ -9,9 +9,8 @@ public class Mipmapping extends Tweak {
     public final Tweak manualMipmapping;
 
     public Mipmapping() {
-        setTweakID("mipmapping");
+        super("mipmapping", true);
         setTweakAuthor("Permdog99");
-        setEnabled(true, false);
 
         addSubTweak(mipmapType = new MipmapType());
         addSubTweak(manualMipmapping = new TweakBuilder("manualMipmapping").authors("Permdog99").setDefaultEnabled(true).build());
@@ -20,7 +19,7 @@ public class Mipmapping extends Tweak {
     public static class MipmapType extends Tweak {
         public final IntSliderOption mipmapType; // TODO change to Enum
         public MipmapType() {
-            setTweakID("mipmapType");
+            super("mipmapType", true);
             setTweakAuthor("Permdog99");
             mipmapType = addSliderOption("type", 1, 4);
             mipmapType.set(4);

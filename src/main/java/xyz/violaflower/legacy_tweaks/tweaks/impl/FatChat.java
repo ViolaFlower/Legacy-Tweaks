@@ -9,7 +9,7 @@ public class FatChat extends Tweak {
 
     // Dexrn: TODO: Adding a sub tweak breaks top-level settings?
     public FatChat() {
-        setTweakID("legacyChat");
+        super("legacyChat", true);
         setTweakAuthor("DexrnZacAttack", "Jab125");
         addSubTweak(new DimensionNotification());
         addSubTweak(new NoAdvancementMessage());
@@ -23,10 +23,9 @@ public class FatChat extends Tweak {
         public final BooleanOption leaveMessage;
         public final BooleanOption entranceMessage;
         public DimensionNotification() {
-            setTweakID("dimensionNotifications");
+            super("dimensionNotifications", true);
             setTweakAuthor("DexrnZacAttack", "Jab125");
             setTweakVersion("1.0.0");
-            setDefaultEnabled(true);
             entranceMessage = addBooleanOption("entranceMessage");
             entranceMessage.set(true);
             leaveMessage = addBooleanOption("departureMessage");
@@ -36,10 +35,9 @@ public class FatChat extends Tweak {
 
     public static class NoAdvancementMessage extends Tweak {
         public NoAdvancementMessage() {
-            setTweakID("noAchievementAnnouncement");
+            super("noAchievementAnnouncement", false);
             setTweakAuthor("DexrnZacAttack");
             setTweakVersion("1.0.0");
-            setDefaultEnabled(false);
         }
     }
 

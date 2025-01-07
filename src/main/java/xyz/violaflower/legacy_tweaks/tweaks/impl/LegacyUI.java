@@ -10,9 +10,8 @@ public class LegacyUI extends Tweak {
 	public final BooleanOption showQuitButton;
 
 	public LegacyUI() {
-		setTweakID("legacyUI");
+		super("legacyUI", true);
 		setTweakAuthor("Jab125");
-		setEnabled(true);
 		setGroup();
 		legacyTitleScreen = addBooleanOption("legacyTitleScreen");
 		legacyTitleScreen.set(true); // true by default

@@ -7,7 +7,7 @@ public class F3Info extends Tweak {
     public final BooleanOption showEnabledTweaks;
 
     public F3Info() {
-        setTweakID("f3Info");
+        super("f3Info", true);
         setTweakAuthor("DexrnZacAttack", "Jab125");
         // localize hopefully
         // LOCALISED! - S_N00B

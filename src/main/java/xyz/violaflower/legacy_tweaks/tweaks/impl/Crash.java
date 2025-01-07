@@ -8,9 +8,9 @@ import java.lang.reflect.Field;
 
 public class Crash extends Tweak {
     public Crash() {
+        super("crash", false);
         setTweakID("crash");
-        setTweakAuthor("Jeremiah");
-        setEnabled(false);
+        setTweakAuthor("Jeremy");
     }
     @Override
     public void onEnable() {

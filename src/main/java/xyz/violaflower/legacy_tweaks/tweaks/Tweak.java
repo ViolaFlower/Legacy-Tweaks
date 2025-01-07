@@ -1,5 +1,6 @@
 package xyz.violaflower.legacy_tweaks.tweaks;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
@@ -19,42 +20,63 @@ public abstract class Tweak implements TweakParent {
     private String id; // this probably shouldn't have a default
     private String author = "Legacy JohnTweaks";
     private String version = "1.0.0";
-    private boolean isEnabled = true;
     private boolean isGroup = false;
     private final Map<String, Tweak> subTweaks = new LinkedHashMap<>();
     private Tweak parentTweak;
+    private final TweakState<Boolean> tweakState;
 
-    public Tweak() {
-
+    @Deprecated(forRemoval = true)
+    public Tweak(boolean defaultValue) {
+        this.tweakState = new TweakState<>(defaultValue, Codec.BOOL, this::onChange);
     }
 
-    public Tweak(String id) {
+    // default value should always be true if it's a group
+    public Tweak(String id, boolean defaultValue) {
+        this.tweakState = new TweakState<>(defaultValue, Codec.BOOL, this::onChange);
         this.id = id;
     }
 
-    public Tweak(String id, String author) {
-        this.id = id;
-        this.author = author;
-    }
-    public boolean isEnabled() {
-        return isEnabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        setEnabled(enabled, true);
-    }
-    public void setEnabled(boolean enabled, boolean triggerHooks) {
-        boolean changed = isEnabled != enabled;
-        if (!changed) return;
-        isEnabled = enabled;
-        if (!triggerHooks) return;
-        if (isEnabled) {
+    private void onChange(TweakState<Boolean> tweakState) {
+        if (Boolean.TRUE.equals(tweakState.getEffectiveState())) {
             onEnable();
-        } else {
+        } else if (Boolean.FALSE.equals(tweakState.getEffectiveState())) {
             onDisable();
+        } else {
+            System.err.println("???");
         }
     }
 
+    public Tweak(String id, String author, boolean defaultValue) {
+        this.tweakState = new TweakState<>(defaultValue, Codec.BOOL, this::onChange);
+        this.id = id;
+        this.author = author;
+    }
+
+    @Deprecated(forRemoval = true)
+    public boolean isEnabled() {
+        return tweakState.getEffectiveState();
+    }
+
+    @Deprecated(forRemoval = true)
+    public void setEnabled(boolean enabled) {
+        setEnabled(enabled, true);
+    }
+
+    @Deprecated(forRemoval = true)
+    public void setEnabled(boolean enabled, boolean triggerHooks) {
+        tweakState.setLocalState(enabled, triggerHooks);
+//        boolean changed = isEnabled != enabled;
+//        if (!changed) return;
+//        isEnabled = enabled;
+//        if (!triggerHooks) return;
+//        if (isEnabled) {
+//            onEnable();
+//        } else {
+//            onDisable();
+//        }
+    }
+
+    @Deprecated(forRemoval = true)
     public void setDefaultEnabled(boolean enabled) {
         // TODO for when we do file saving
         setEnabled(enabled, false);
