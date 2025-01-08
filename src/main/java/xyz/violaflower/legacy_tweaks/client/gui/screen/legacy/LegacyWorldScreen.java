@@ -31,11 +31,6 @@ public class LegacyWorldScreen extends LegacyScreen {
     }
 
     @Override
-    public void tick() {
-        return;
-    }
-
-    @Override
     public int getButtonSpacing() {
         return 0;
     }

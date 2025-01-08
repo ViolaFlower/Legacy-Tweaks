@@ -62,9 +62,14 @@ public class LegacyScreen extends Screen {
 
 
     @Override
-    public void tick() {
+    public final void tick() {
         super.tick();
+        tick2();
         checkForScreenSize();
+    }
+
+    public void tick2() {
+
     }
 
     private Boolean hadLargeGui = null;

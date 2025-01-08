@@ -15,22 +15,22 @@ import java.util.Objects;
 // playground for testing gui things
 public class LegacyTestScreen extends LegacyScreen {
 	private final Screen parent;
-	private final FrameLayout frameLayout;
-	private final FrameLayout innerFrameLayout;
+	private FrameLayout frameLayout;
+	private FrameLayout innerFrameLayout;
 
 	protected LegacyTestScreen(Screen parent) {
 		super(Component.empty());
 		this.parent = parent;
-		frameLayout = new FrameLayout(getFrameWidth(), 0);
-		//frameLayout.newChildLayoutSettings().alignVerticallyTop();
-		frameLayout.defaultChildLayoutSetting().align(0.5f, 0).padding(5);
-		innerFrameLayout = new FrameLayout(getFrameWidth() - 10, 0);
-		innerFrameLayout.defaultChildLayoutSetting().alignVerticallyTop().padding(5);
 	}
 
 	@Override
 	protected void init() {
 		super.init();
+		frameLayout = new FrameLayout(getFrameWidth(), 0);
+		//frameLayout.newChildLayoutSettings().alignVerticallyTop();
+		frameLayout.defaultChildLayoutSetting().align(0.5f, 0).padding(5);
+		innerFrameLayout = new FrameLayout(getFrameWidth() - 10, 0);
+		innerFrameLayout.defaultChildLayoutSetting().alignVerticallyTop().padding(5);
 		LinearLayout linearLayout = LinearLayout.vertical().spacing(getButtonSpacing());
 		linearLayout.addChild(Button.builder(Component.literal("Button 1"), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
 		linearLayout.addChild(Button.builder(Component.literal("Button 2"), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
@@ -52,13 +52,9 @@ public class LegacyTestScreen extends LegacyScreen {
 
 	@Override
 	protected void repositionElements() {
+		if (this.frameLayout == null) return;
 		frameLayout.arrangeElements();
 		FrameLayout.centerInRectangle(frameLayout, 0, 0, width, height);
-	}
-
-	@Override
-	public void tick() {
-		return;
 	}
 
 	@Override

@@ -16,29 +16,30 @@ import java.util.Objects;
 // Used if the thing hasn't been implemented yet.
 public class LegacyNotImplementedScreen extends LegacyScreen {
 	private final Screen parent;
-	private final FrameLayout frameLayout;
-	private final FrameLayout innerFrameLayout;
+	private FrameLayout frameLayout;
+	private FrameLayout innerFrameLayout;
 	private LegacyLogoRenderer logoRenderer;
 
 	protected LegacyNotImplementedScreen(Screen parent) {
 		super(Component.empty());
 		this.parent = parent;
-		frameLayout = new FrameLayout(getFrameWidth(), 0);
-		//frameLayout.newChildLayoutSettings().alignVerticallyTop();
-		frameLayout.defaultChildLayoutSetting().align(0.5f, 0).padding(5);
-		innerFrameLayout = new FrameLayout(getFrameWidth() - 10, 0);
-		innerFrameLayout.defaultChildLayoutSetting().alignVerticallyTop().padding(5);
 		this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, () -> new LegacyLogoRenderer(false));
 	}
 
 	@Override
 	protected void init() {
 		super.init();
+		this.clearWidgets();
+		this.clearFocus();
+		frameLayout = new FrameLayout(getFrameWidth(), 0);
+		//frameLayout.newChildLayoutSettings().alignVerticallyTop();
+		frameLayout.defaultChildLayoutSetting().align(0.5f, 0).padding(5);
+		innerFrameLayout = new FrameLayout(getFrameWidth() - 10, 0);
+		innerFrameLayout.defaultChildLayoutSetting().alignVerticallyTop().padding(5);
 		LinearLayout linearLayout = LinearLayout.vertical().spacing(getButtonSpacing());
 		linearLayout.addChild(Button.builder(Component.literal("Not implemented yet."), button -> {
 			Minecraft.getInstance().setScreen(parent);
 		}).size(getButtonWidth(), getButtonHeight()).build());
-
 
 		linearLayout.addChild(innerFrameLayout);
 		frameLayout.addChild(linearLayout);
@@ -58,11 +59,6 @@ public class LegacyNotImplementedScreen extends LegacyScreen {
 	@Override
 	public int getButtonSpacing() {
 		return 4;
-	}
-
-	@Override
-	public void tick() {
-		return;
 	}
 
 	@Override
