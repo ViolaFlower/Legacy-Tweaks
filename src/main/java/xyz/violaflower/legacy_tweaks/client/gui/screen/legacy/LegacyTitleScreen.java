@@ -40,7 +40,7 @@ public class LegacyTitleScreen extends LegacyScreen {
 
 		if (this.splashRenderer == null) {
 			// oh no! minecraft can be null?!?!?!?! /s
-			this.splashRenderer = minecraft.getSplashManager().getSplash();
+			this.splashRenderer = Minecraft.getInstance().getSplashManager().getSplash();
 		}
 
 		frameLayout = new FrameLayout();
@@ -101,21 +101,25 @@ public class LegacyTitleScreen extends LegacyScreen {
 			if (!isLargeGui()) {
 				EyeCandyHelper.setCompactText(true);
 				EyeCandyHelper.setLegacyTextShadows(false);
-				this.splashRenderer.render(guiGraphics, width, this.font, 0xffffff00);
+				PoseStack pose = guiGraphics.pose();
+				pose.pushPose();
+				pose.translate(-40, -23, 0);
+				pose.scale(1.5f, 1.5f, 0);
+				this.splashRenderer.render(guiGraphics, (int) (width / 1.5), this.font, 0xffffff00);
+				pose.popPose();
 				EyeCandyHelper.setLegacyTextShadows(true);
 				EyeCandyHelper.setCompactText(false);
 			} else {
 				PoseStack pose = guiGraphics.pose();
 				pose.pushPose();
-				pose.translate(20, -8, 0);
+				pose.translate(-8, -8, 0);
 				pose.scale(0.8f, 0.8f, 1);
 				EyeCandyHelper.setCompactText(true);
 				EyeCandyHelper.setLegacyTextShadows(false);
-				this.splashRenderer.render(guiGraphics, width, this.font, 0xffffff00);
+				this.splashRenderer.render(guiGraphics, (int) (width / 0.8), this.font, 0xffffff00);
 				EyeCandyHelper.setLegacyTextShadows(true);
 				EyeCandyHelper.setCompactText(false);
 				pose.popPose();
-
 			}
 		}
 	}
