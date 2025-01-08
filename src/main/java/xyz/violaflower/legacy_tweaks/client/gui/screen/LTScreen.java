@@ -45,7 +45,6 @@ public class LTScreen extends Screen {
 
     @Override
     public void onClose() {
-        this.minecraft.setScreen(parent);
         if (!(this.parent instanceof SettingsScreen || this.parent instanceof LTScreen)) {
             // check for if the player is in a singleplayer world/integrated server.
             IntegratedServer integratedServer = Minecraft.getInstance().getSingleplayerServer();
@@ -55,6 +54,7 @@ public class LTScreen extends Screen {
                 }
             }
         }
+        this.minecraft.setScreen(parent);
     }
 
     private static Component getTitle(Screen parent, TweakParent tweakParent) {
@@ -76,7 +76,7 @@ public class LTScreen extends Screen {
         this.layout.addTitleHeader(getTitle(), this.font);
         this.settingList = this.layout.addToContents(new SettingList(tweakParent));
         LinearLayout linearLayout = this.layout.addToFooter(LinearLayout.horizontal().spacing(2));
-        linearLayout.addChild(Button.builder(CommonComponents.GUI_DONE, button -> this.minecraft.setScreen(parent)).build());
+        linearLayout.addChild(Button.builder(CommonComponents.GUI_DONE, button -> this.onClose()).build());
         this.layout.visitWidgets(this::addRenderableWidget);
         this.repositionElements();
     }
