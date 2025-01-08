@@ -19,6 +19,8 @@ public class Networking {
 		NetworkingAbstractions.registerCodec(CoolPacket.TYPE, CoolPacket.STREAM_CODEC, NetworkingAbstractions.PayloadType.PLAY_S2C);
 		NetworkingAbstractions.registerCodec(CoolPacket2.TYPE, CoolPacket2.STREAM_CODEC, NetworkingAbstractions.PayloadType.PLAY_C2S);
 		NetworkingAbstractions.registerCodec(TweakStatesPayload.TYPE, TweakStatesPayload.STREAM_CODEC, NetworkingAbstractions.PayloadType.PLAY_S2C);
+		NetworkingAbstractions.registerCodec(TweakStatesResponsePayload.TYPE, TweakStatesResponsePayload.STREAM_CODEC, NetworkingAbstractions.PayloadType.PLAY_C2S);
+
 		NetworkingAbstractions.registerCodec(CoolConfigurationPacket.TYPE, CoolConfigurationPacket.STREAM_CODEC, NetworkingAbstractions.PayloadType.CONFIGURATION_S2C);
 		NetworkingAbstractions.registerCodec(TweakStatesPayload.TYPE, TweakStatesPayload.STREAM_CODEC, NetworkingAbstractions.PayloadType.CONFIGURATION_S2C);
 		NetworkingAbstractions.registerCodec(TweakStatesResponsePayload.TYPE, TweakStatesResponsePayload.STREAM_CODEC, NetworkingAbstractions.PayloadType.CONFIGURATION_C2S);
@@ -39,6 +41,10 @@ public class Networking {
 		ServerboundConfiguration.registerHandler(TweakStatesResponsePayload.TYPE, (payload, context) -> {
 			System.out.println("Client finished configuring tweaks.");
 			context.finishCurrentTask(SendTweakStatesTask.TYPE);
+		});
+
+		ServerboundPlay.registerHandler(TweakStatesResponsePayload.TYPE, (payload, context) -> {
+			System.out.println("Client finished configuring tweaks during play.");
 		});
 	}
 
