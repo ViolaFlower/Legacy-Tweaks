@@ -8,6 +8,7 @@
     "client.accessor.FogDataAccessor",
     "client.accessor.PostChainAccessor",
     "client.networking.NetworkRegistryMixin",
+    "client.screen.ScreenMixin",
     "client.screen.TitleScreenMixin",
     "client.tweak.eye_candy.legacy_text_shadows.GlyphInfoMixin",
     "client.tweak.eye_candy.legacy_water_colors.BiomeMixin",

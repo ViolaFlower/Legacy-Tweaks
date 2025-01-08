@@ -51,13 +51,13 @@ public class LegacyScreen extends Screen {
         return 21/4;
     }
 
-    // TODO ~~double check if this is even safe; may be better to go with a different system later on~~
-    // TODO: update, this is not safe - Jab125
-    public void tick() {
-        Minecraft.getInstance().resizeDisplay();
-        this.init();
-//        super.tick();
-    }
+//    // TODO ~~double check if this is even safe; may be better to go with a different system later on~~
+//    // TODO: update, this is not safe - Jab125
+//    public void tick() {
+//        Minecraft.getInstance().resizeDisplay();
+//        this.init();
+////        super.tick();
+//    }
 
     @Override
     protected void renderPanorama(GuiGraphics guiGraphics, float f) {
