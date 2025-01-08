@@ -8,6 +8,7 @@ import xyz.violaflower.legacy_tweaks.tweaks.TweakBuilder;
 import xyz.violaflower.legacy_tweaks.tweaks.enums.SunsetRiseColors;
 
 public class EyeCandy extends Tweak {
+	public final Tweak autoFindBestUIScale;
 	public final LegacyTextShadows legacyTextShadows;
 	public final FineTunedUIScale fineTunedUIScale;
 	public final SunsetColors sunsetColors;
@@ -20,6 +21,7 @@ public class EyeCandy extends Tweak {
 		super("eyeCandy", true);
 		setGroup();
 		setTweakAuthor("Jab125");
+		addSubTweak(autoFindBestUIScale = new TweakBuilder("autoFindBestUIScale").authors("Permdog99").setDefaultEnabled(true).build());
 		addSubTweak(legacyTextShadows = new LegacyTextShadows());
 		addSubTweak(fineTunedUIScale = new FineTunedUIScale());
 		addSubTweak(sunsetColors = new SunsetColors());
@@ -41,6 +43,7 @@ public class EyeCandy extends Tweak {
 			shadowOffset = addSliderOption("shadowOffset", 1, 0, 10);
 		}
 	}
+
 	public static class FineTunedUIScale extends Tweak {
 		public final DoubleSliderOption uiScale;
 		public FineTunedUIScale() {
