@@ -4,13 +4,14 @@ import com.mojang.blaze3d.platform.Window;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
 public class ScreenUtil {
 
     public static boolean isLargeGui() {
         Window screenWindow = Minecraft.getInstance().getWindow();
-        return screenWindow.getGuiScale() == screenWindow.calculateScale(0, Minecraft.getInstance().isEnforceUnicode());
+        return screenWindow.getGuiScale() == screenWindow.calculateScale(0, Minecraft.getInstance().isEnforceUnicode()) || screenWindow.getGuiScale() == 0;
     }
 
     public static void renderPanorama(GuiGraphics guiGraphics, int width, int height, float fade, float partialTick) {
