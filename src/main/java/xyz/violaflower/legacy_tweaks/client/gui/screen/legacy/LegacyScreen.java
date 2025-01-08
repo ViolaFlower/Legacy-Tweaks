@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import xyz.violaflower.legacy_tweaks.util.ScreenUtil;
+import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 
 public class LegacyScreen extends Screen {
     protected LegacyScreen(Component title) {
@@ -40,10 +40,10 @@ public class LegacyScreen extends Screen {
     }
 
     // TODO double check if this is even safe; may be better to go with a different system later on
-//    public void tick() {
-//        Minecraft.getInstance().resizeDisplay();
-//        this.init();
-//    }
+    public void tick() {
+        Minecraft.getInstance().resizeDisplay();
+        this.init();
+    }
 
     @Override
     protected void renderPanorama(GuiGraphics guiGraphics, float f) {

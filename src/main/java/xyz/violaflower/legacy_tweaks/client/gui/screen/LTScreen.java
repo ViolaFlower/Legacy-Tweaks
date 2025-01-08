@@ -21,6 +21,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.FormattedCharSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.config.SettingsScreen;
 import xyz.violaflower.legacy_tweaks.network.payload.TweakStatesPayload;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
@@ -55,6 +56,15 @@ public class LTScreen extends Screen {
             }
         }
         this.minecraft.setScreen(parent);
+        if (!(this.parent instanceof SettingsScreen || this.parent instanceof LTScreen)) {
+            // check for if the player is in a singleplayer world/integrated server.
+            IntegratedServer integratedServer = Minecraft.getInstance().getSingleplayerServer();
+            if (integratedServer != null) {
+                for (ServerPlayer player : integratedServer.getPlayerList().getPlayers()) {
+                    player.connection.send(new ClientboundCustomPayloadPacket(new TweakStatesPayload(TweakManager.version, TweakState.encodeStates())));
+                }
+            }
+        }
     }
 
     private static Component getTitle(Screen parent, TweakParent tweakParent) {
@@ -111,7 +121,7 @@ public class LTScreen extends Screen {
                     });
         }
 
-        class SettingEntry extends ContainerObjectSelectionList.Entry<SettingEntry> {
+        class SettingEntry extends Entry<SettingEntry> {
             private final Component title;
             private final List<FormattedCharSequence> label;
             private final Button toggleButton;

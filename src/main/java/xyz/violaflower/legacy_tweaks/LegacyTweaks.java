@@ -8,24 +8,17 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallba
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.fabricmc.fabric.impl.networking.CustomPayloadTypeProvider;
 //?}
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.violaflower.legacy_tweaks.client.LegacyTweaksClient;
-import xyz.violaflower.legacy_tweaks.client.gui.screen.LTScreen;
-import xyz.violaflower.legacy_tweaks.items.ItemManager;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.config.LTScreen;
+import xyz.violaflower.legacy_tweaks.helper.manager.item.ItemManager;
 import xyz.violaflower.legacy_tweaks.network.payload.CoolPacket;
 import xyz.violaflower.legacy_tweaks.network.payload.CoolPacket2;
 import xyz.violaflower.legacy_tweaks.networking.LegacyTweaksNetworking;
-import xyz.violaflower.legacy_tweaks.networking.NetworkingAbstractions;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 

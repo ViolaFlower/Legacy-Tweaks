@@ -9,6 +9,8 @@ group = rootProject.maven_group
 version = rootProject.mod_version
 
 
+
+
 apply plugin: 'dev.architectury.loom'
 stonecutter.const("fabric", fabric)
 stonecutter.const("neoforge", neoforge)
@@ -67,18 +69,32 @@ tasks.withType(JavaCompile).configureEach {
     it.options.release = 21
 }
 
-def neoforgeOnlyMixins = ["networking.client.NetworkRegistryMixin"]
+def neoforgeOnlyMixins = ["client.networking.NetworkRegistryMixin"]
 def fabricOnlyMixins = []
 
 processResources {
     def deps = [
             "version": project.version,
+            "id": rootProject.mod_id,
+            "author": rootProject.mod_author,
+            "description": rootProject.mod_description,
+            "license": rootProject.mod_license,
+            "github": rootProject.mod_github,
+            "name": rootProject.mod_name,
+            "logo": rootProject.mod_logo
     ]
     inputs.property "version", project.version
     inputs.property "deps", deps
 
-    filesMatching(["fabric.mod.json", "META-INF/neoforge.mods.toml",  "legacyskins.mixins.json"]) {
-        expand "version": project.version
+    filesMatching(["fabric.mod.json", "META-INF/neoforge.mods.toml",  "legacy_tweaks.mixins.json"]) {
+        expand "version": project.version,
+        "id": rootProject.mod_id,
+        "author": rootProject.mod_author,
+        "description": rootProject.mod_description,
+        "license": rootProject.mod_license,
+        "github": rootProject.mod_github,
+        "name": rootProject.mod_name,
+        "logo": rootProject.mod_logo
     }
 
     if (!neoforge) exclude "META-INF/neoforge.mods.toml"

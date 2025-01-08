@@ -6,17 +6,14 @@ import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import xyz.violaflower.legacy_tweaks.LegacyTweaks;
-import xyz.violaflower.legacy_tweaks.util.ScreenUtil;
+import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
+import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
+import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
 import java.util.Objects;
 
 // playground for testing gui things
 public class LegacyTestScreen extends LegacyScreen {
-	public static final ResourceLocation BACKGROUND_LOC = ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID, "gui_background");
-	public static final ResourceLocation TOP_NAV_LEFT = ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID, "top_nav_left");
-	public static final ResourceLocation INSET_BACKGROUND = ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID,  "inset_background");
 	private final Screen parent;
 	private final FrameLayout frameLayout;
 	private final FrameLayout innerFrameLayout;
@@ -87,11 +84,11 @@ public class LegacyTestScreen extends LegacyScreen {
 	public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 //		super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
 //		System.out.println(frameLayout.getWidth());
-		guiGraphics.blitSprite(TOP_NAV_LEFT, frameLayout.getX() + frameLayout.getWidth() / 3, frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
-		guiGraphics.blitSprite(TOP_NAV_LEFT, frameLayout.getX() + frameLayout.getWidth() / 3 * 2, frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
-		guiGraphics.blitSprite(BACKGROUND_LOC, frameLayout.getX(), frameLayout.getY(), frameLayout.getWidth(), frameLayout.getHeight());
-		guiGraphics.blitSprite(INSET_BACKGROUND, innerFrameLayout.getX(), innerFrameLayout.getY(), innerFrameLayout.getWidth(), innerFrameLayout.getHeight());
-		guiGraphics.blitSprite(TOP_NAV_LEFT, frameLayout.getX(), frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
+		guiGraphics.blitSprite(Sprites.TOP_NAV_LEFT, frameLayout.getX() + frameLayout.getWidth() / 3, frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
+		guiGraphics.blitSprite(Sprites.TOP_NAV_LEFT, frameLayout.getX() + frameLayout.getWidth() / 3 * 2, frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
+		guiGraphics.blitSprite(Sprites.BACKGROUND_LOC, frameLayout.getX(), frameLayout.getY(), frameLayout.getWidth(), frameLayout.getHeight());
+		guiGraphics.blitSprite(Sprites.INSET_BACKGROUND, innerFrameLayout.getX(), innerFrameLayout.getY(), innerFrameLayout.getWidth(), innerFrameLayout.getHeight());
+		guiGraphics.blitSprite(Sprites.TOP_NAV_LEFT, frameLayout.getX(), frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
 	}
 
 	@Override

@@ -1,10 +1,6 @@
 package xyz.violaflower.legacy_tweaks.network;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.network.ConfigurationTask;
 import xyz.violaflower.legacy_tweaks.network.client.ClientNetworking;
 import xyz.violaflower.legacy_tweaks.network.payload.*;
 import xyz.violaflower.legacy_tweaks.network.task.SendCoolConfigurationPacketTask;

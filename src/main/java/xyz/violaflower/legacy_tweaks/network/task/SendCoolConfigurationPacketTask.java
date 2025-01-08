@@ -3,7 +3,7 @@ package xyz.violaflower.legacy_tweaks.network.task;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import xyz.violaflower.legacy_tweaks.network.payload.CoolConfigurationPacket;
 import xyz.violaflower.legacy_tweaks.networking.configuration.event.ServerConfigurationEvents;
-import xyz.violaflower.legacy_tweaks.util.ModAsset;
+import xyz.violaflower.legacy_tweaks.util.common.assets.ModAsset;
 
 import java.util.function.Consumer;
 

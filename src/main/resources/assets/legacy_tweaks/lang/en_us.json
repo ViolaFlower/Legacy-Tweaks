@@ -35,6 +35,8 @@
 
   "lt.tweak.eyeCandy": "Eye Candy",
   "lt.tweak.eyeCandy.description": "Various cosmetic changes",
+  "lt.tweak.eyeCandy.autoFindBestUIScale": "Auto Find Best UI Scale",
+  "lt.tweak.eyeCandy.autoFindBestUIScale.description": "Automatically finds the best GUI scale for the current screen.",
   "lt.tweak.eyeCandy.legacyTextShadows": "Legacy Text Shadows",
   "lt.tweak.eyeCandy.legacyTextShadows.description": "Makes shadows consistent with the screen's actual size, not the scaled size.",
   "lt.tweak.eyeCandy.legacyTextShadows.option.shadowoffset": "Shadow Offset",
