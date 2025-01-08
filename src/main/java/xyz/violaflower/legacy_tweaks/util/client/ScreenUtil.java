@@ -22,12 +22,11 @@ public class ScreenUtil {
         Window screenWindow = Minecraft.getInstance().getWindow();
         int lastGuiScale = screenWindow.calculateScale(0, Minecraft.getInstance().isEnforceUnicode());
         if (screenWindow.getScreenHeight() > 1080) {
-            return lastGuiScale - 2;
+            lastGuiScale = lastGuiScale - 2;
 
         } else if (screenWindow.getScreenHeight() >= 720) {
-            return lastGuiScale - 1;
-        } else {
-            return lastGuiScale;
+            lastGuiScale = lastGuiScale - 1;
         }
+        return Math.max(1, lastGuiScale);
     }
 }
