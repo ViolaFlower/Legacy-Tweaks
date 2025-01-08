@@ -3,6 +3,7 @@ package xyz.violaflower.legacy_tweaks.util;
 import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.Minecraft;
 
+// TODO this should be in the client package
 public class ScreenUtil {
 
     public static boolean isLargeGui() {
