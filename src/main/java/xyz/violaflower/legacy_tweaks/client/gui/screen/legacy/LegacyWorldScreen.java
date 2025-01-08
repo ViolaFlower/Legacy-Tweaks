@@ -22,10 +22,10 @@ public class LegacyWorldScreen extends LegacyScreen {
     protected LegacyWorldScreen(Screen parent) {
         super(Component.empty());
         this.parent = parent;
-        frameLayout = new FrameLayout(getFrameWidth(), 0);
+        frameLayout = new FrameLayout(getFrameWidth(), getFrameHeight());
         //frameLayout.newChildLayoutSettings().alignVerticallyTop();
         frameLayout.defaultChildLayoutSetting().align(0.5f, 0).padding(5);
-        innerFrameLayout = new FrameLayout(getFrameWidth() - 10, 0);
+        innerFrameLayout = new FrameLayout(getFrameWidth() - 20, getFrameHeight() - 20);
         innerFrameLayout.defaultChildLayoutSetting().alignVerticallyTop().padding(5);
         this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, () -> new LegacyLogoRenderer(false));
     }
@@ -36,23 +36,34 @@ public class LegacyWorldScreen extends LegacyScreen {
     }
 
     @Override
+    public int getButtonSpacing() {
+        return 0;
+    }
+
+    @Override
+    public int getButtonHeight() {
+        return 25;
+    }
+
+    @Override
+    public int getFrameWidth() {
+        if (ScreenUtil.isLargeGui()) {
+            return 180;
+        } else {
+            return 300;
+        }
+    }
+
+    @Override
     protected void init() {
         super.init();
-        LinearLayout linearLayout = LinearLayout.vertical().spacing(4);
+        LinearLayout linearLayout = LinearLayout.vertical().spacing(getButtonSpacing());
         linearLayout.addChild(Button.builder(Component.literal("Button 1"), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
         linearLayout.addChild(Button.builder(Component.literal("Button 2"), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
         linearLayout.addChild(Button.builder(Component.literal("Button 3"), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
         linearLayout.addChild(Button.builder(Component.literal("Button 4"), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
 
-
-        {
-            LinearLayout layout = LinearLayout.vertical().spacing(2);
-            layout.addChild(Button.builder(Component.literal("Button 5"), button -> {}).size(getButtonWidthAlt(), 30).build());
-            innerFrameLayout.addChild(layout);
-        }
-
-        linearLayout.addChild(innerFrameLayout);
-        frameLayout.addChild(linearLayout);
+        innerFrameLayout.addChild(linearLayout);
         frameLayout.visitWidgets(this::addRenderableWidget);
         repositionElements();
     }
@@ -66,9 +77,9 @@ public class LegacyWorldScreen extends LegacyScreen {
     @Override
     public int getButtonWidth() {
         if (ScreenUtil.isLargeGui()) {
-            return 150;
+            return 202;
         } else {
-            return 200;
+            return 270;
         }
     }
 
@@ -92,7 +103,7 @@ public class LegacyWorldScreen extends LegacyScreen {
         guiGraphics.blitSprite(Sprites.TOP_NAV_LEFT, frameLayout.getX() + frameLayout.getWidth() / 3, frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
         guiGraphics.blitSprite(Sprites.TOP_NAV_LEFT, frameLayout.getX() + frameLayout.getWidth() / 3 * 2, frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
         guiGraphics.blitSprite(Sprites.BACKGROUND_LOC, frameLayout.getX(), frameLayout.getY(), frameLayout.getWidth(), frameLayout.getHeight());
-        guiGraphics.blitSprite(Sprites.INSET_BACKGROUND, innerFrameLayout.getX(), innerFrameLayout.getY(), innerFrameLayout.getWidth(), innerFrameLayout.getHeight());
+        guiGraphics.blitSprite(Sprites.INSET_BACKGROUND, frameLayout.getX() + 9, frameLayout.getY() + 9, innerFrameLayout.getWidth(), innerFrameLayout.getHeight());
         guiGraphics.blitSprite(Sprites.TOP_NAV_LEFT, frameLayout.getX(), frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
     }
 

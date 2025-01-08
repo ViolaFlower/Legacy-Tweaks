@@ -34,7 +34,7 @@ public class LegacyNotImplementedScreen extends LegacyScreen {
 	@Override
 	protected void init() {
 		super.init();
-		LinearLayout linearLayout = LinearLayout.vertical().spacing(4);
+		LinearLayout linearLayout = LinearLayout.vertical().spacing(getButtonSpacing());
 		linearLayout.addChild(Button.builder(Component.literal("Not implemented yet."), button -> {
 			Minecraft.getInstance().setScreen(parent);
 		}).size(getButtonWidth(), getButtonHeight()).build());
@@ -53,6 +53,11 @@ public class LegacyNotImplementedScreen extends LegacyScreen {
 		} else {
 			return 200;
 		}
+	}
+
+	@Override
+	public int getButtonSpacing() {
+		return 4;
 	}
 
 	@Override

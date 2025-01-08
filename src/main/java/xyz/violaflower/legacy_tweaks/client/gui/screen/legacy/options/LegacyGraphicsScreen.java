@@ -33,7 +33,7 @@ public class LegacyGraphicsScreen extends LegacyScreen {
     @Override
     protected void init() {
         super.init();
-        LinearLayout linearLayout = LinearLayout.vertical().spacing(4);
+        LinearLayout linearLayout = LinearLayout.vertical().spacing(getButtonSpacing());
 
         /* Requirements:
          * Checkbox Component
@@ -77,6 +77,11 @@ public class LegacyGraphicsScreen extends LegacyScreen {
         frameLayout.addChild(linearLayout);
         frameLayout.visitWidgets(this::addRenderableWidget);
         repositionElements();
+    }
+
+    @Override
+    public int getButtonSpacing() {
+        return 4;
     }
 
     @Override

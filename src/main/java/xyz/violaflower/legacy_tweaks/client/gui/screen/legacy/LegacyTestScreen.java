@@ -17,7 +17,6 @@ public class LegacyTestScreen extends LegacyScreen {
 	private final Screen parent;
 	private final FrameLayout frameLayout;
 	private final FrameLayout innerFrameLayout;
-	private LegacyLogoRenderer logoRenderer;
 
 	protected LegacyTestScreen(Screen parent) {
 		super(Component.empty());
@@ -27,13 +26,12 @@ public class LegacyTestScreen extends LegacyScreen {
 		frameLayout.defaultChildLayoutSetting().align(0.5f, 0).padding(5);
 		innerFrameLayout = new FrameLayout(getFrameWidth() - 10, 0);
 		innerFrameLayout.defaultChildLayoutSetting().alignVerticallyTop().padding(5);
-		this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, () -> new LegacyLogoRenderer(false));
 	}
 
 	@Override
 	protected void init() {
 		super.init();
-		LinearLayout linearLayout = LinearLayout.vertical().spacing(4);
+		LinearLayout linearLayout = LinearLayout.vertical().spacing(getButtonSpacing());
 		linearLayout.addChild(Button.builder(Component.literal("Button 1"), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
 		linearLayout.addChild(Button.builder(Component.literal("Button 2"), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
 		linearLayout.addChild(Button.builder(Component.literal("Button 3"), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
@@ -64,12 +62,22 @@ public class LegacyTestScreen extends LegacyScreen {
 	}
 
 	@Override
+	public int getButtonHeight() {
+		return 25;
+	}
+
+	@Override
 	public int getButtonWidth() {
 		if (ScreenUtil.isLargeGui()) {
 			return 150;
 		} else {
 			return 200;
 		}
+	}
+
+	@Override
+	public int getButtonSpacing() {
+		return 0;
 	}
 
 	public int getButtonWidthAlt() {
@@ -100,6 +108,5 @@ public class LegacyTestScreen extends LegacyScreen {
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 		this.renderPanorama(guiGraphics, partialTick);
 		super.render(guiGraphics, mouseX, mouseY, partialTick);
-		logoRenderer.renderLogo(guiGraphics, this.width, 1);
 	}
 }

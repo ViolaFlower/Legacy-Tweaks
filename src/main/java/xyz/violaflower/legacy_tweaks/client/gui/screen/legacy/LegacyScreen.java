@@ -27,6 +27,14 @@ public class LegacyScreen extends Screen {
         }
     }
 
+    public int getFrameHeight() {
+        if (ScreenUtil.isLargeGui()) {
+            return 192;
+        } else {
+            return 256;
+        }
+    }
+
     public int getButtonHeight() {
         return 20;
     }
@@ -37,6 +45,10 @@ public class LegacyScreen extends Screen {
         } else {
             return 125;
         }
+    }
+
+    public int getButtonSpacing() {
+        return 21/4;
     }
 
     // TODO ~~double check if this is even safe; may be better to go with a different system later on~~
