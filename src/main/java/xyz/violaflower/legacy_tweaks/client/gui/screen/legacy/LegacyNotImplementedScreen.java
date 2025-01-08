@@ -56,6 +56,11 @@ public class LegacyNotImplementedScreen extends LegacyScreen {
 	}
 
 	@Override
+	public void tick() {
+		return;
+	}
+
+	@Override
 	protected void repositionElements() {
 		frameLayout.arrangeElements();
 		FrameLayout.centerInRectangle(frameLayout, 0, 0, width, height);

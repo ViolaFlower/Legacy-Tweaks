@@ -59,6 +59,11 @@ public class LegacyTestScreen extends LegacyScreen {
 	}
 
 	@Override
+	public void tick() {
+		return;
+	}
+
+	@Override
 	public int getButtonWidth() {
 		if (ScreenUtil.isLargeGui()) {
 			return 150;
