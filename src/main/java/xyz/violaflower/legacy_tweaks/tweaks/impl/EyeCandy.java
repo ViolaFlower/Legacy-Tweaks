@@ -16,6 +16,7 @@ public class EyeCandy extends Tweak {
 	public final Tweak smallerStars;
 	public final Tweak oldButton;
 	public final Tweak legacyWaterColors;
+	public final Tweak legacyCompactText;
 
 	public EyeCandy() {
 		super("eyeCandy", true);
@@ -34,6 +35,7 @@ public class EyeCandy extends Tweak {
 				Minecraft.getInstance().levelRenderer.allChanged();
 			}
 		}).build());
+		addSubTweak(legacyCompactText = new TweakBuilder("legacyCompactText").authors("Jab125").setDefaultEnabled(true).build());
 	}
 	public static class LegacyTextShadows extends Tweak {
 		public final IntSliderOption shadowOffset;

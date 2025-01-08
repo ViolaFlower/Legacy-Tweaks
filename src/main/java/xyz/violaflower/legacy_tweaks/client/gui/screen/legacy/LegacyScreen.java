@@ -40,6 +40,10 @@ public class LegacyScreen extends Screen {
         return 20;
     }
 
+    public boolean isLargeGui() {
+        return ScreenUtil.isLargeGui();
+    }
+
     public int getButtonHeightPos() {
         if (ScreenUtil.isLargeGui()) {
             return 65;

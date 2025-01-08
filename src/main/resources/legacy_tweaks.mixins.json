@@ -10,6 +10,7 @@
     "client.networking.NetworkRegistryMixin",
     "client.screen.ScreenMixin",
     "client.screen.TitleScreenMixin",
+    "client.tweak.eye_candy.legacy_compact_text.GlyphInfoMixin",
     "client.tweak.eye_candy.legacy_text_shadows.GlyphInfoMixin",
     "client.tweak.eye_candy.legacy_water_colors.BiomeMixin",
     "client.tweak.eye_candy.models.glow_entities.LivingEntityRendererMixin",

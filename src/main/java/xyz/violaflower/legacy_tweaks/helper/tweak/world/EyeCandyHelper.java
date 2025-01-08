@@ -4,10 +4,29 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
 import java.util.Locale;
 
-public class WaterHelper {
+public class EyeCandyHelper {
+	private static boolean compactText;
+	private static boolean legacyTextShadows = true;
+	public static boolean isCompactTextEnabled() {
+		return Tweaks.EYE_CANDY.legacyCompactText.isEnabled() && compactText;
+	}
+
+	public static void setCompactText(boolean b) {
+		compactText = b;
+	}
+
+	public static void setLegacyTextShadows(boolean b) {
+		legacyTextShadows = b;
+	}
+
+	public static boolean isLegacyTextShadowsEnabled() {
+		return Tweaks.EYE_CANDY.legacyTextShadows.isEnabled() && legacyTextShadows;
+	}
+
     public static Integer getWaterColor(Biome biome) {
 		if (Minecraft.getInstance().level == null) return null;
 		return getWaterColor(Minecraft.getInstance().level.registryAccess().registryOrThrow(Registries.BIOME).getKey(biome));
