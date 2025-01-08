@@ -1,5 +1,6 @@
 package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy;
 
+import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -58,6 +59,29 @@ public class LegacyScreen extends Screen {
 //        this.init();
 ////        super.tick();
 //    }
+
+
+    @Override
+    public void tick() {
+        super.tick();
+        checkForScreenSize();
+    }
+
+    private Boolean hadLargeGui = null;
+    private void checkForScreenSize() {
+        Window window = Minecraft.getInstance().getWindow();
+        int screenHeight = window.getScreenHeight();
+        boolean gu = screenHeight >= 720;
+        if (hadLargeGui == null) {
+            hadLargeGui = screenHeight >= 720;
+        }
+        boolean valueChanged = hadLargeGui != gu;
+        if (valueChanged) {
+            Minecraft.getInstance().resizeDisplay();
+            hadLargeGui = gu;
+            this.init();
+        }
+    }
 
     @Override
     protected void renderPanorama(GuiGraphics guiGraphics, float f) {
