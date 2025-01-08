@@ -15,7 +15,7 @@ public class MinecraftMixin {
 
     @Inject(method = "setScreen", at = @At("RETURN"))
     private void setScreenMixin(Screen screen, CallbackInfo ci) {
-        if (Tweaks.LEGACY_UI.legacyTitleScreen.isOn()) {
+        if (Tweaks.LEGACY_UI.legacyTitleScreen.legacyTitleScreen.isOn()) {
             if (screen instanceof TitleScreen) Minecraft.getInstance().setScreen(new LegacyTitleScreen());
         } else {
             if (screen instanceof LegacyTitleScreen) Minecraft.getInstance().setScreen(new TitleScreen());

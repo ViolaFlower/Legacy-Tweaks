@@ -37,22 +37,28 @@ public class LegacyTitleScreen extends LegacyScreen {
 		frameLayout = new FrameLayout();
 		LinearLayout linearLayout = LinearLayout.vertical().spacing(21/4);
 		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.playButton"), button -> setScreen(SelectWorldScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.minigamesButton"), button -> setScreen(JoinMultiplayerScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.leaderboardsButton"), button -> setScreen(LegacyNotImplementedScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
+		if (Tweaks.LEGACY_UI.legacyTitleScreen.showMinigamesButton.isOn()) {
+			linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.minigamesButton"), button -> setScreen(JoinMultiplayerScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
+		} if (Tweaks.LEGACY_UI.legacyTitleScreen.showLeaderboardsButton.isOn()) {
+			linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.leaderboardsButton"), button -> setScreen(LegacyNotImplementedScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
+		}
 		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.optionsButton"), button -> {
 			Minecraft.getInstance().setScreen(new LegacyOptionsScreen());
 		}).size(getButtonWidth(), getButtonHeight()).build());
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.storeButton"), button -> setScreen(LegacyTestScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.launchNewMinecraftButton"), button -> {
-			Tweaks.LEGACY_UI.legacyTitleScreen.set(false);
-			Minecraft.getInstance().reloadResourcePacks();
-			new Thread(() -> {
-				long l = System.currentTimeMillis() + 2000;
-				while (System.currentTimeMillis() < l);
-				Minecraft.getInstance().tell(() -> Minecraft.getInstance().setScreen(new TitleScreen()));
-			}).start();
-		}).size(getButtonWidth(), getButtonHeight()).build());
-		if (Tweaks.LEGACY_UI.showQuitButton.isOn()) {
+		if (Tweaks.LEGACY_UI.legacyTitleScreen.showMinecraftStoreButton.isOn()) {
+			linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.storeButton"), button -> setScreen(LegacyTestScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
+		} if (Tweaks.LEGACY_UI.legacyTitleScreen.showNewMinecraftButton.isOn()) {
+			linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.titleScreen.buttons.launchNewMinecraftButton"), button -> {
+				Tweaks.LEGACY_UI.legacyTitleScreen.legacyTitleScreen.set(false);
+				Minecraft.getInstance().reloadResourcePacks();
+				new Thread(() -> {
+					long l = System.currentTimeMillis() + 2000;
+					while (System.currentTimeMillis() < l) ;
+					Minecraft.getInstance().tell(() -> Minecraft.getInstance().setScreen(new TitleScreen()));
+				}).start();
+			}).size(getButtonWidth(), getButtonHeight()).build());
+		}
+		if (Tweaks.LEGACY_UI.legacyTitleScreen.showQuitButton.isOn()) {
 			linearLayout.addChild(Button.builder(Component.translatable("menu.quit"), button -> {
 				this.minecraft.stop();
 			}).size(getButtonWidth(), getButtonHeight()).build());

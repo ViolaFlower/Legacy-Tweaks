@@ -7,6 +7,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.violaflower.legacy_tweaks.helper.tweak.texture.MipmapTypeHelper;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
+import xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapTypes;
 
 // TODO for 1.21.2+, needs fixing
 @Mixin(MipmapGenerator.class)
@@ -20,7 +22,6 @@ public class MipmapGeneratorMixin {
      */
     @Inject(method = "generateMipLevels", at = @At("HEAD"), cancellable = true)
     private static void changeMipmapType(NativeImage[] nativeImages, int i, CallbackInfoReturnable<NativeImage[]> cir) {
-        cir.setReturnValue(MipmapTypeHelper.setMipmapType(nativeImages, i));
-        cir.cancel();
+        MipmapTypeHelper.setMipmapType(nativeImages, i, cir);
     }
 }

@@ -80,7 +80,9 @@ public class EyeCandy extends Tweak {
 			setTweakAuthor("Permdog99");
 
 			addSubTweak(glowEntities = new TweakBuilder("glowEntities").authors("Permdog99", "Legacy4J 1.7.5-beta").setDefaultEnabled(true).build());
-			addSubTweak(legacyWitchHat = new TweakBuilder("legacyWitchHat").authors("Permdog99", "Legacy4J 1.7.5-beta").setDefaultEnabled(true).build());
+			addSubTweak(legacyWitchHat = new TweakBuilder("legacyWitchHat").authors("Permdog99", "Legacy4J 1.7.5-beta").setDefaultEnabled(true).onToggled(() ->{
+				Minecraft.getInstance().reloadResourcePacks();
+			}).build());
 			addSubTweak(legacyFireworkModel = new TweakBuilder("legacyFirework").authors("Permdog99", "Legacy4J 1.7.5-beta").setDefaultEnabled(true).build());
 		}
 	}

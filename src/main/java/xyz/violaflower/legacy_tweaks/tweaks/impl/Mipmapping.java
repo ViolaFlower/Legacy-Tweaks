@@ -1,5 +1,6 @@
 package xyz.violaflower.legacy_tweaks.tweaks.impl;
 
+import net.minecraft.client.Minecraft;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakBuilder;
 import xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapTypes;
@@ -22,6 +23,7 @@ public class Mipmapping extends Tweak {
             super("mipmapType", true);
             setTweakAuthor("Permdog99");
             mipmapType = addSliderOption("Mipmap Type", enumProvider(MipmapTypes.JAVA, MipmapTypes::values, MipmapTypes::toString, MipmapTypes::getTitle));
+            mipmapType.setConsumer(MipmapTypes -> Minecraft.getInstance().reloadResourcePacks());
         }
     }
 }

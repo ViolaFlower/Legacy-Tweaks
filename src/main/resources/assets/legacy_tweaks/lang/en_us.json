@@ -100,9 +100,15 @@
   "lt.tweak.legacyFog.moddedDimensionsFog.description": "Customize the fog of all modded dimensions.",
 
   "lt.tweak.legacyUI": "Legacy UI",
-  "lt.tweak.legacyUI.option.legacytitlescreen": "Legacy Title Screen",
-  "lt.tweak.legacyUI.option.showquitbutton": "Show Quit Button",
-  "lt.tweak.legacyUI.option.legacypanorama": "Legacy Panorama",
+  "lt.tweak.legacyUI.legacyTitleScreen": "Legacy Title Screen",
+  "lt.tweak.legacyUI.legacyTitleScreen.option.showQuitButton": "Show Quit Button",
+  "lt.tweak.legacyUI.legacyTitleScreen.option.showNewMinecraftButton": "Show New Minecraft Button",
+  "lt.tweak.legacyUI.legacyTitleScreen.option.showMinigamesButton": "Show Minigames Button",
+  "lt.tweak.legacyUI.legacyTitleScreen.option.showLeaderboardsButton": "Show Leaderboards Button",
+  "lt.tweak.legacyUI.legacyTitleScreen.option.showMinecraftStoreButton": "Show Store Button",
+  "lt.tweak.legacyUI.legacyOptionsScreen": "Legacy Options Screen",
+  "lt.tweak.legacyUI.legacyOptionsScreen.option.showJavaOptionsButton": "Show Java Options Button",
+  "lt.tweak.legacyUI.option.legacyPanorama": "Legacy Panorama",
 
   "lt.tweak.mapChanges": "Map Changes",
   "lt.tweak.mapChanges.description": "Various tweaks to maps.",

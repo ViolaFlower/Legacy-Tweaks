@@ -6,6 +6,7 @@ package xyz.violaflower.legacy_tweaks.helper.tweak.texture;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.Util;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapTypes;
 
@@ -20,24 +21,27 @@ public class MipmapTypeHelper {
      * Sets the mipmap type depending on the tweak setting
      * @param originals The original textures before mipped
      * @param mipmapLevel The mipmap level to mip to
-     * @return Returns the mipmap type's method to then mip the textures
+     * @param cir Returns the mipmap type's method to then mip the textures
      */
-    public static NativeImage[] setMipmapType(NativeImage[] originals, int mipmapLevel) {
-        switch (Tweaks.MIPMAPPING.mipmapType.mipmapType.get()) {
-            case MipmapTypes.TU1 -> {
-                return mipmapTU1(originals, mipmapLevel);
-            }
-            case MipmapTypes.TU3 -> {
-                return mipmapTU3(originals, mipmapLevel);
-            }
-            case MipmapTypes.TU12 -> {
-                return mipmapTU12(originals, mipmapLevel);
-            }
-            case MipmapTypes.JAVA -> {
-                return mipmapJava(originals, mipmapLevel);
+    public static void setMipmapType(NativeImage[] originals, int mipmapLevel, CallbackInfoReturnable<NativeImage[]> cir) {
+        if (Tweaks.MIPMAPPING.mipmapType.isEnabled()) {
+            switch (Tweaks.MIPMAPPING.mipmapType.mipmapType.get()) {
+                case MipmapTypes.TU1 -> {
+                    cir.setReturnValue(mipmapTU1(originals, mipmapLevel));
+                    cir.cancel();
+                }
+                case MipmapTypes.TU3 -> {
+                    cir.setReturnValue(mipmapTU3(originals, mipmapLevel));
+                    cir.cancel();
+                }
+                case MipmapTypes.TU12 -> {
+                    cir.setReturnValue(mipmapTU12(originals, mipmapLevel));
+                    cir.cancel();
+                }
+                case MipmapTypes.JAVA -> {
+                }
             }
         }
-        return mipmapJava(originals, mipmapLevel);
     }
 
     /* Mipmap Type Methods */

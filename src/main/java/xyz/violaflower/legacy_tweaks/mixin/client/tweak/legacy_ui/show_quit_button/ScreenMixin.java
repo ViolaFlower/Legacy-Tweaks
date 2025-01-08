@@ -19,12 +19,12 @@ public class ScreenMixin {
 	@Inject(method = "init(Lnet/minecraft/client/Minecraft;II)V", at = @At("HEAD"))
 	void init(Minecraft minecraft, int width, int height, CallbackInfo ci) {
 		if (previousQuitButtonOptionValue == null) {
-			previousQuitButtonOptionValue = Tweaks.LEGACY_UI.showQuitButton.get();
+			previousQuitButtonOptionValue = Tweaks.LEGACY_UI.legacyTitleScreen.showQuitButton.get();
 		}
-		boolean valueChanged = previousQuitButtonOptionValue != Tweaks.LEGACY_UI.showQuitButton.get();
+		boolean valueChanged = previousQuitButtonOptionValue != Tweaks.LEGACY_UI.legacyTitleScreen.showQuitButton.get();
 		Object this_ = this;
 		if (this_ instanceof LegacyTitleScreen screen && valueChanged) {
-			previousQuitButtonOptionValue = Tweaks.LEGACY_UI.showQuitButton.get();
+			previousQuitButtonOptionValue = Tweaks.LEGACY_UI.legacyTitleScreen.showQuitButton.get();
 			initialized = false;
 		}
 	}
