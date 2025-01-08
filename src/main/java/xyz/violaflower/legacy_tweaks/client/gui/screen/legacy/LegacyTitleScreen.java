@@ -47,12 +47,16 @@ public class LegacyTitleScreen extends LegacyScreen {
 		LinearLayout linearLayout = LinearLayout.vertical().spacing(getButtonSpacing());
 		linearLayout.addChild(Button.builder(Lang.TitleScreen.PLAY_GAME.get(), button -> setScreen(Tweaks.LEGACY_UI.legacyPlayGameScreenTweak.playGameScreenType.get() == PlayGameScreen.DISABLED ? SelectWorldScreen::new : LegacyPlayGameScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
 		if (Tweaks.LEGACY_UI.legacyTitleScreen.showMinigamesButton.isOn()) {
-			linearLayout.addChild(Button.builder(Lang.TitleScreen.MINIGAMES.get(), button -> setScreen(JoinMultiplayerScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
+			linearLayout.addChild(Button.builder(Lang.TitleScreen.MINI_GAMES.get(), button -> setScreen(JoinMultiplayerScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
 		} if (Tweaks.LEGACY_UI.legacyTitleScreen.showLeaderboardsButton.isOn()) {
 			linearLayout.addChild(Button.builder(Lang.TitleScreen.LEADERBOARDS.get(), button -> setScreen(LegacyNotImplementedScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
 		}
 		linearLayout.addChild(Button.builder(Lang.TitleScreen.HELP_OPTIONS.get(), button -> {
-			Minecraft.getInstance().setScreen(new LegacyOptionsScreen());
+			if (Tweaks.LEGACY_UI.legacyHelpOptionsScreen.useLegacyHelpOptionsScreen.isOn()) {
+				Minecraft.getInstance().setScreen(new LegacyHelpOptionsScreen(this));
+			} else {
+				Minecraft.getInstance().setScreen(new LegacyOptionsScreen(this));
+			}
 		}).size(getButtonWidth(), getButtonHeight()).build());
 		if (Tweaks.LEGACY_UI.legacyTitleScreen.showMinecraftStoreButton.isOn()) {
 			linearLayout.addChild(Button.builder(Lang.TitleScreen.STORE.get(), button -> setScreen(LegacyTestScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
@@ -77,10 +81,6 @@ public class LegacyTitleScreen extends LegacyScreen {
 		frameLayout.addChild(linearLayout);
 		frameLayout.visitWidgets(this::addRenderableWidget);
 		this.repositionElements();
-	}
-
-	private void setScreen(Function<Screen, Screen> screen) {
-		Minecraft.getInstance().setScreen(screen.apply(this));
 	}
 
 	@Override

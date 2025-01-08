@@ -9,6 +9,7 @@ public class LegacyUI extends Tweak {
 	public final LegacyOptionsTweak legacyOptions;
 	public final GeneralScreenTweaks generalScreenTweaks;
 	public final LegacyPlayGameScreenTweak legacyPlayGameScreenTweak;
+	public final LegacyHelpOptionsScreenTweak legacyHelpOptionsScreen;
 
 	public LegacyUI() {
 		super("legacyUI", true);
@@ -19,6 +20,7 @@ public class LegacyUI extends Tweak {
 		addSubTweak(legacyTitleScreen = new LegacyTitleScreenTweak());
 		addSubTweak(legacyOptions = new LegacyOptionsTweak());
 		addSubTweak(legacyPlayGameScreenTweak = new LegacyPlayGameScreenTweak());
+		addSubTweak(legacyHelpOptionsScreen = new LegacyHelpOptionsScreenTweak());
 	}
 
 	public static class GeneralScreenTweaks extends Tweak {
@@ -74,6 +76,16 @@ public class LegacyUI extends Tweak {
 			setTweakAuthor("dexrn", "Permdog99");
 
 			playGameScreenType = addSliderOption("playGameScreenType", enumProvider(PlayGameScreen.DISABLED, PlayGameScreen::values, PlayGameScreen::toString, PlayGameScreen::getComponent));
+		}
+	}
+
+	public static class LegacyHelpOptionsScreenTweak extends Tweak {
+		public final BooleanOption useLegacyHelpOptionsScreen;
+
+		public LegacyHelpOptionsScreenTweak() {
+			super("legacyHelpOptionsScreen", true);
+
+			useLegacyHelpOptionsScreen = addBooleanOption("useLegacyHelpOptions", true);
 		}
 	}
 }

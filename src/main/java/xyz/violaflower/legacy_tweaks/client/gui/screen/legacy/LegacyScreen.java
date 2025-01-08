@@ -7,6 +7,8 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 
+import java.util.function.Function;
+
 public class LegacyScreen extends Screen {
     protected LegacyScreen(Component title) {
         super(title);
@@ -95,5 +97,9 @@ public class LegacyScreen extends Screen {
     @Override
     protected void renderPanorama(GuiGraphics guiGraphics, float f) {
         PANORAMA.render(guiGraphics, this.width, this.height, 1, f);
+    }
+
+    protected void setScreen(Function<Screen, Screen> screen) {
+        Minecraft.getInstance().setScreen(screen.apply(this));
     }
 }

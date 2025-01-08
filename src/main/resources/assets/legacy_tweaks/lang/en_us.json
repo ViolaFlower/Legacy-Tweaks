@@ -23,8 +23,14 @@
   "gui.legacy_tweaks.optionsScreen.reset": "Reset to Defaults",
   "gui.legacy_tweaks.optionsScreen.javaSettings": "Java Settings",
 
+  "gui.legacy_tweaks.helpOptionsScreen.changeSkin": "Change Skin",
+  "gui.legacy_tweaks.helpOptionsScreen.howToPlay": "How to Play",
+  "gui.legacy_tweaks.helpOptionsScreen.controls": "Controls",
+  "gui.legacy_tweaks.helpOptionsScreen.settings": "Settings",
+  "gui.legacy_tweaks.helpOptionsScreen.credits": "Credits",
+
   "gui.legacy_tweaks.titleScreen.playGame": "Play Game",
-  "gui.legacy_tweaks.titleScreen.minigames": "Minigames",
+  "gui.legacy_tweaks.titleScreen.miniGames": "Mini Games",
   "gui.legacy_tweaks.titleScreen.leaderboards": "Leaderboards",
   "gui.legacy_tweaks.titleScreen.helpOptions": "Help & Options",
   "gui.legacy_tweaks.titleScreen.store": "Minecraft Store",
@@ -157,6 +163,8 @@
   "tweak.legacy_tweaks.setting.legacyUI.legacyPlayGameScreen": "Legacy Play Game Screen",
   "tweak.legacy_tweaks.setting.legacyUI.legacyPlayGameScreen.description": "Various settings to modify the Play Game Screen.",
   "tweak.legacy_tweaks.setting.legacyUI.legacyOptionsScreen.option.playGameScreenType": "Play Game GUI Type",
+  "tweak.legacy_tweaks.setting.legacyUI.legacyHelpOptionsScreen": "Legacy Help & Options Screen",
+  "tweak.legacy_tweaks.setting.legacyUI.legacyHelpOptionsScreen.description": "Various settings to modify the Help & Options Screen.",
 
   "tweak.legacy_tweaks.setting.mapChanges": "Map Changes",
   "tweak.legacy_tweaks.setting.mapChanges.description": "Various tweaks to maps.",

@@ -50,10 +50,24 @@ public interface Lang {
         }
     }
 
+    interface HelpOptionsScreen
+    {
+        Translate CHANGE_SKIN = from("changeSkin");
+        Translate HOW_TO_PLAY = from("howToPlay");
+        Translate CONTROLS = from("controls");
+        Translate SETTINGS = from("settings");
+        Translate CREDITS = from("credits");
+
+        private static Translate from(String name)
+        {
+            return new Translate("gui.legacy_tweaks.helpOptionsScreen." + name);
+        }
+    }
+
     interface TitleScreen
     {
         Translate PLAY_GAME = from("playGame");
-        Translate MINIGAMES = from("minigames");
+        Translate MINI_GAMES = from("miniGames");
         Translate LEADERBOARDS = from("leaderboards");
         Translate HELP_OPTIONS = from("helpOptions");
         Translate STORE = from("store");

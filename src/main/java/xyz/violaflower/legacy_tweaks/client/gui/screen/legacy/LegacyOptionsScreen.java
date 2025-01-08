@@ -18,11 +18,13 @@ import java.util.Objects;
 import java.util.function.Function;
 
 public class LegacyOptionsScreen extends LegacyScreen {
+	private final Screen parent;
 	private FrameLayout frameLayout;
 	private LegacyLogoRenderer logoRenderer;
 
-	public LegacyOptionsScreen() {
+	public LegacyOptionsScreen(Screen parent) {
 		super(Component.empty());
+		this.parent = parent;
 
 		this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, LegacyLogoRenderer::getLegacyLogoRenderer);
 	}
@@ -36,7 +38,7 @@ public class LegacyOptionsScreen extends LegacyScreen {
 		this.clearWidgets();
 		this.clearFocus();
 		frameLayout = new FrameLayout();
-		LinearLayout linearLayout = LinearLayout.vertical().spacing(21/4);
+		LinearLayout linearLayout = LinearLayout.vertical().spacing(getButtonSpacing());
 		linearLayout.addChild(Button.builder(Lang.OptionsScreen.GAME_OPTIONS.get(), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
 		linearLayout.addChild(Button.builder(Lang.OptionsScreen.AUDIO.get(), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
 		linearLayout.addChild(Button.builder(Lang.OptionsScreen.GRAPHICS.get(), button -> setScreen(LegacyGraphicsScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
@@ -54,16 +56,17 @@ public class LegacyOptionsScreen extends LegacyScreen {
 		this.repositionElements();
 	}
 
-	private void setScreen(Function<Screen, Screen> screen) {
-		Minecraft.getInstance().setScreen(screen.apply(this));
-	}
-
 	@Override
 	protected void repositionElements() {
 		if (frameLayout == null) return;
 		frameLayout.setMinWidth(this.width);
 		frameLayout.setY(getButtonHeightPos());
 		frameLayout.arrangeElements();
+	}
+
+	@Override
+	public void onClose() {
+		minecraft.setScreen(parent);
 	}
 
 	@Override
