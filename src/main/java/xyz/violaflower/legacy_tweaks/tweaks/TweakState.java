@@ -83,6 +83,7 @@ public class TweakState<T> {
 
 	public void setLocalState(@Nullable T state, boolean triggerHooks) {
 		this.localState = state;
+		if (isIntegratedServer()) this.serverState = state;
 		updateEffectiveState(triggerHooks);
 		TweakManager.save();
 	}
@@ -106,7 +107,11 @@ public class TweakState<T> {
 	}
 
 	public boolean isValueLocked() {
-		return getServerState() != null;
+		return getServerState() != null && !isIntegratedServer();
+	}
+
+	private boolean isIntegratedServer() {
+		return LegacyTweaks.isIntegratedServer.get();
 	}
 
 	// this should only run on the dedicated or integrated server!

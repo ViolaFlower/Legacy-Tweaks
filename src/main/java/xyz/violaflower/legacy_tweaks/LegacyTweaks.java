@@ -29,12 +29,15 @@ import xyz.violaflower.legacy_tweaks.networking.NetworkingAbstractions;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
+import java.util.function.Supplier;
+
 // TODO properly credit Legacy4J for gamma
 //? if neoforge
 /*@Mod(LegacyTweaks.MOD_ID)*/
 public final class LegacyTweaks {
     public static final String MOD_ID = "legacy_tweaks";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    public static Supplier<Boolean> isIntegratedServer = () -> false;
 
     //? if neoforge {
     /*public LegacyTweaks() {

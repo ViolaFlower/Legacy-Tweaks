@@ -1,5 +1,6 @@
 package xyz.violaflower.legacy_tweaks.client;
 
+import net.minecraft.client.Minecraft;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 import xyz.violaflower.legacy_tweaks.networking.NetworkingAbstractions;
 //? if fabric {
@@ -39,5 +40,8 @@ public class LegacyTweaksClient {
 		});
 		//?} elif neoforge
 		/*((ReloadableResourceManager) Minecraft.getInstance().getResourceManager()).registerReloadListener(new LegacyTweaksResourceManager());*/
+		LegacyTweaks.isIntegratedServer = () -> {
+			return Minecraft.getInstance().getSingleplayerServer() != null;
+		};
 	}
 }
