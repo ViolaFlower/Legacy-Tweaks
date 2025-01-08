@@ -42,9 +42,9 @@ public class LegacyScreen extends Screen {
     // TODO ~~double check if this is even safe; may be better to go with a different system later on~~
     // TODO: update, this is not safe - Jab125
     public void tick() {
-//        Minecraft.getInstance().resizeDisplay();
-//        this.init();
-        super.tick();
+        Minecraft.getInstance().resizeDisplay();
+        this.init();
+//        super.tick();
     }
 
     @Override
