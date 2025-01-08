@@ -26,6 +26,8 @@ public class LegacyTestScreen extends LegacyScreen {
 	@Override
 	protected void init() {
 		super.init();
+		this.clearWidgets();
+		this.clearFocus();
 		frameLayout = new FrameLayout(getFrameWidth(), 0);
 		//frameLayout.newChildLayoutSettings().alignVerticallyTop();
 		frameLayout.defaultChildLayoutSetting().align(0.5f, 0).padding(5);
