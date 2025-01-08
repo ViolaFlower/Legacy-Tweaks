@@ -18,12 +18,14 @@ public class Networking {
 	public static void registerNetworkingCodecs() {
 		NetworkingAbstractions.registerCodec(CoolPacket.TYPE, CoolPacket.STREAM_CODEC, NetworkingAbstractions.PayloadType.PLAY_S2C);
 		NetworkingAbstractions.registerCodec(CoolPacket2.TYPE, CoolPacket2.STREAM_CODEC, NetworkingAbstractions.PayloadType.PLAY_C2S);
+		NetworkingAbstractions.registerCodec(TweakStatesPayload.TYPE, TweakStatesPayload.STREAM_CODEC, NetworkingAbstractions.PayloadType.PLAY_S2C);
 		NetworkingAbstractions.registerCodec(CoolConfigurationPacket.TYPE, CoolConfigurationPacket.STREAM_CODEC, NetworkingAbstractions.PayloadType.CONFIGURATION_S2C);
 		NetworkingAbstractions.registerCodec(TweakStatesPayload.TYPE, TweakStatesPayload.STREAM_CODEC, NetworkingAbstractions.PayloadType.CONFIGURATION_S2C);
 		NetworkingAbstractions.registerCodec(TweakStatesResponsePayload.TYPE, TweakStatesResponsePayload.STREAM_CODEC, NetworkingAbstractions.PayloadType.CONFIGURATION_C2S);
 		NetworkingAbstractions.registerCodec(CoolConfigurationResponsePacket.TYPE, CoolConfigurationResponsePacket.STREAM_CODEC, NetworkingAbstractions.PayloadType.CONFIGURATION_C2S);
 	}
 
+	/// @see ClientNetworking#registerPayloadHandlers()
 	public static void registerPayloadHandlers() {
 		ServerboundPlay.registerHandler(CoolPacket2.TYPE, (payload, context) -> {
 			System.out.println("[SERVER] received packet " + payload);
