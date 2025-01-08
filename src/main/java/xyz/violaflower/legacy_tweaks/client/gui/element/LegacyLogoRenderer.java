@@ -13,7 +13,8 @@ public class LegacyLogoRenderer {
     private static LegacyLogoRenderer legacyLogoRenderer;
 
     public static LegacyLogoRenderer getLegacyLogoRenderer() {
-        if (legacyLogoRenderer == null) return new LegacyLogoRenderer(false);
+        if (legacyLogoRenderer == null) legacyLogoRenderer = new LegacyLogoRenderer(false);
+        return legacyLogoRenderer;
     }
 
     public static void setLegacyLogoRenderer(boolean keepLogoThroughFade) {
