@@ -9,6 +9,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.network.event.RegisterConfigurationTasksEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 *///?}
 import org.jetbrains.annotations.ApiStatus;
 import xyz.violaflower.legacy_tweaks.network.Networking;
