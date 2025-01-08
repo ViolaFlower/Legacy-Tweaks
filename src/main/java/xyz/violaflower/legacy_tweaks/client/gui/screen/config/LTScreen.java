@@ -13,14 +13,19 @@ import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.FormattedCharSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import xyz.violaflower.legacy_tweaks.network.payload.TweakStatesPayload;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakParent;
+import xyz.violaflower.legacy_tweaks.tweaks.TweakState;
 
 import java.util.List;
 
@@ -41,6 +46,15 @@ public class LTScreen extends Screen {
     @Override
     public void onClose() {
         this.minecraft.setScreen(parent);
+        if (!(this.parent instanceof SettingsScreen || this.parent instanceof LTScreen)) {
+            // check for if the player is in a singleplayer world/integrated server.
+            IntegratedServer integratedServer = Minecraft.getInstance().getSingleplayerServer();
+            if (integratedServer != null) {
+                for (ServerPlayer player : integratedServer.getPlayerList().getPlayers()) {
+                    player.connection.send(new ClientboundCustomPayloadPacket(new TweakStatesPayload(TweakManager.version, TweakState.encodeStates())));
+                }
+            }
+        }
     }
 
     private static Component getTitle(Screen parent, TweakParent tweakParent) {
