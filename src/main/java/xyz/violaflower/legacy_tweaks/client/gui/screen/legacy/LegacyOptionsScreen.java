@@ -8,7 +8,8 @@ import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.OptionsScreen;
 import net.minecraft.network.chat.Component;
-import xyz.violaflower.legacy_tweaks.client.gui.screen.LTScreen;
+import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.config.LTScreen;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.options.LegacyGraphicsScreen;
 
 import java.util.Objects;

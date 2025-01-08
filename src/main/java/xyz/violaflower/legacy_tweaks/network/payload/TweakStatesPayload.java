@@ -1,11 +1,10 @@
 package xyz.violaflower.legacy_tweaks.network.payload;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import xyz.violaflower.legacy_tweaks.util.ModAsset;
+import xyz.violaflower.legacy_tweaks.util.common.assets.ModAsset;
 
 public record TweakStatesPayload(int configVersion, FriendlyByteBuf byteBuf) implements CustomPacketPayload {
 	public static final Type<TweakStatesPayload> TYPE = new Type<>(ModAsset.getResourceLocation("tweak_states_payload"));

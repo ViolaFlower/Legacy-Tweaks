@@ -1,6 +1,9 @@
 // Credits: Legacy4J 1.7.5
 package xyz.violaflower.legacy_tweaks.client;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
@@ -9,10 +12,12 @@ import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.PostChain;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
+import org.apache.commons.io.FilenameUtils;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.impl.Gamma;
 
@@ -21,6 +26,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class LegacyTweaksResourceManager implements ResourceManagerReloadListener {
+	public static final LoadingCache<ResourceLocation, Optional<RenderType>> GLOW_LAYERS = CacheBuilder.newBuilder().build(CacheLoader.from(l-> Optional.of(ResourceLocation.fromNamespaceAndPath(l.getNamespace(), FilenameUtils.removeExtension(l.getPath()) + "_glow." + FilenameUtils.getExtension(l.getPath()))).map(g-> Minecraft.getInstance().getResourceManager().getResource(g).isPresent() ? RenderType.entityTranslucentEmissive(g) : null)));
 	public static final ResourceLocation GAMMA_LOCATION = ResourceLocation.fromNamespaceAndPath(LegacyTweaks.MOD_ID, "shaders/post/gamma.json");
 	public static final Codec<List<ResourceLocation>> RESOURCE_LOCATION_LIST_CODEC = ResourceLocation.CODEC.listOf();
 	public static final Codec<List<ResourceLocation>> INTROS_CODEC = RecordCodecBuilder.create(instance ->
@@ -32,6 +38,7 @@ public class LegacyTweaksResourceManager implements ResourceManagerReloadListene
 	@Override
 	public void onResourceManagerReload(ResourceManager resourceManager) {
 		Minecraft minecraft = Minecraft.getInstance();
+		GLOW_LAYERS.invalidateAll();
 		if (Gamma.gammaEffect != null) {
 			Gamma.gammaEffect.close();
 		}

@@ -1,26 +1,24 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
 #issueTrackerURL = ""
-license = "Insert License Here"
+license = "${license}"
 
 [[mods]]
-modId = "legacy_tweaks"
+modId = "${id}"
 version = "${version}"
-displayName = "Legacy Tweaks"
-authors = "Me!"
-description = '''
-This is an example description! Tell everyone what your mod is about!
-'''
+displayName = "${name}"
+authors = "${author}"
+description = "${description}"
 logoFile = "assets/legacy_tweaks/icon.png"
 
-[[dependencies.legacy_tweaks]]
+[[dependencies.${id}]]
 modId = "neoforge"
 type = "required"
 versionRange = "[21.0,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.legacy_tweaks]]
+[[dependencies.${id}]]
 modId = "minecraft"
 type = "required"
 versionRange = "[1.21,)"
