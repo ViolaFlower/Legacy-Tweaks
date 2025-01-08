@@ -7,6 +7,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.Mth;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
+import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -106,7 +107,7 @@ public abstract class Tweak implements TweakParent {
     }
 
     public Component getTweakName() {
-        return Component.translatable("lt.tweak." + getTweakTranslationId());
+        return Lang.geTweakLangKey(getTweakTranslationId()).get();
     }
 
     public void setTweakAuthor(String... author) {
@@ -118,11 +119,11 @@ public abstract class Tweak implements TweakParent {
     }
 
     public Component getTweakDescription() {
-        return Component.translatable("lt.tweak." + getTweakTranslationId() + ".description");
+        return Lang.geTweakLangKey(getTweakTranslationId() + ".description").get();
     }
 
     public Component getTweakExtendedDescription() {
-        return Component.translatable("lt.tweak." + getTweakTranslationId() + ".extendedDescription");
+        return Lang.geTweakLangKey(getTweakTranslationId() + ".extendedDescription").get();
     }
 
     public void setTweakVersion(String version) {

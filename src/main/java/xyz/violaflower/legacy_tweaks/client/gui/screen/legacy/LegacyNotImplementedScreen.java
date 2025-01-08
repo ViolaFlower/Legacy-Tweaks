@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
 import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
+import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
 import java.util.Objects;
 
@@ -37,7 +38,7 @@ public class LegacyNotImplementedScreen extends LegacyScreen {
 		innerFrameLayout = new FrameLayout(getFrameWidth() - 10, 0);
 		innerFrameLayout.defaultChildLayoutSetting().alignVerticallyTop().padding(5);
 		LinearLayout linearLayout = LinearLayout.vertical().spacing(getButtonSpacing());
-		linearLayout.addChild(Button.builder(Component.literal("Not implemented yet."), button -> {
+		linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {
 			Minecraft.getInstance().setScreen(parent);
 		}).size(getButtonWidth(), getButtonHeight()).build());
 

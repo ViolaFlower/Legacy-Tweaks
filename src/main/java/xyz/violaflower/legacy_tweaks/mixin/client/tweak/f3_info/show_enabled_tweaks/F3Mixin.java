@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
+import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class F3Mixin {
                 ArrayList<String> strings = new ArrayList<>(returnValue);
                 Map<String, Tweak> tweaks = TweakManager.getInstance().tweaks;
                 // TODO: localize
-                strings.add("Active Tweaks (%s): ".formatted(tweaks.size()) + tweaks.values().stream().filter(Tweak::isEnabled).map(Tweak::getTweakID).collect(Collectors.joining(", ")));
+                strings.add(Lang.ACTIVE_TWEAKS.getString().formatted(tweaks.size()) + tweaks.values().stream().filter(Tweak::isEnabled).map(Tweak::getTweakID).collect(Collectors.joining(", ")));
                 cir.setReturnValue(strings);
         }
 }

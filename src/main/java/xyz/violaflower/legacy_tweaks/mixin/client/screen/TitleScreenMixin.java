@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.config.LTScreen;
+import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
 @Mixin(TitleScreen.class)
 public abstract class TitleScreenMixin extends Screen {
@@ -21,7 +22,7 @@ public abstract class TitleScreenMixin extends Screen {
     private void initInject(CallbackInfo ci) {
         // Dexrn: this is in a bad location :thumbsup:
         this.addRenderableWidget(Button.builder(
-                Component.translatable("lt.title.ltbutton"),
+                Lang.ConfigScreen.TITLE.get(),
                 button -> {
                     assert minecraft != null;
                     Screen old = minecraft.screen;

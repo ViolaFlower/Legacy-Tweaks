@@ -13,7 +13,7 @@ import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 public class PanoramaRendererMixin {
 	@Inject(method = "render", at = @At("HEAD"), cancellable = true)
 	private void rneder(GuiGraphics guiGraphics, int i, int j, float f, float g, CallbackInfo ci) {
-		if (Tweaks.LEGACY_UI.legacyPanorama.isOn()) {
+		if (Tweaks.LEGACY_UI.generalScreenTweaks.legacyPanorama.isOn()) {
 			ScreenUtil.renderPanorama(guiGraphics, i, j, f, g);
 			ci.cancel();
 		}

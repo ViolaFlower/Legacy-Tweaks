@@ -12,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 import xyz.violaflower.legacy_tweaks.mixin.client.accessor.AbstractSliderButtonAccessor;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
+import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ public class SettingsScreen extends Screen {
 		this.settingList = this.layout.addToContents(new SettingList(tweak));
 		LinearLayout linearLayout = this.layout.addToFooter(LinearLayout.horizontal().spacing(8));
 		linearLayout.addChild(Button.builder(CommonComponents.GUI_DONE, button -> this.minecraft.setScreen(parent)).build());
-		linearLayout.addChild(Button.builder(Component.literal("Sub tyaska"), button -> this.minecraft.setScreen(new LTScreen(this, tweak))).build());
+		linearLayout.addChild(Button.builder(Lang.ConfigScreen.SUB_TYASKA.get(), button -> this.minecraft.setScreen(new LTScreen(this, tweak))).build());
 		this.layout.visitWidgets(this::addRenderableWidget);
 		this.repositionElements();
 	}
@@ -89,10 +90,10 @@ public class SettingsScreen extends Screen {
 				Button[] delayedResetButton = new Button[1];
 				if (option instanceof Tweak.SliderOption<?> sliderOption0) {
 					Tweak.SliderOption<T> sliderOption = (Tweak.SliderOption<T>) sliderOption0;
-					sliderButton = new AbstractSliderButton(100, 0, 100, 20, Component.literal("Value ").append(sliderOption.fancyFormat(sliderOption.get())), sliderOption.normalize()) {
+					sliderButton = new AbstractSliderButton(100, 0, 100, 20, Lang.ConfigScreen.VALUE.get().append(sliderOption.fancyFormat(sliderOption.get())), sliderOption.normalize()) {
 						@Override
 						protected void updateMessage() {
-							setMessage(Component.literal("Value ").append(sliderOption.fancyFormat(sliderOption.get())));
+							setMessage(Lang.ConfigScreen.VALUE.get().append(sliderOption.fancyFormat(sliderOption.get())));
 						}
 
 						@Override
@@ -111,7 +112,7 @@ public class SettingsScreen extends Screen {
 					}).bounds(100, 0, 100, 20).build();
 					children.add(toggleButton);
 				}
-				delayedResetButton[0] = resetButton = Button.builder(Component.translatable("lt.main.reset"), button -> {
+				delayedResetButton[0] = resetButton = Button.builder(Lang.ConfigScreen.RESET.get(), button -> {
 					option.getTweakState().setLocalState(null);
 					if (sliderButton != null) {
 						((AbstractSliderButtonAccessor) sliderButton).callUpdateMessage();
@@ -126,14 +127,14 @@ public class SettingsScreen extends Screen {
 				children.add(resetButton);
 				if (option.getTweakState().isValueLocked()) {
 					resetButton.active = false;
-					resetButton.setTooltip(Tooltip.create(Component.literal("Option locked by server.")));
+					resetButton.setTooltip(Tooltip.create(Lang.ConfigScreen.LOCKED_SERVER.get()));
 					if (sliderButton != null) {
 						sliderButton.active = false;
-						sliderButton.setTooltip(Tooltip.create(Component.literal("Option locked by server.")));
+						sliderButton.setTooltip(Tooltip.create(Lang.ConfigScreen.LOCKED_SERVER.get()));
 					}
 					if (toggleButton != null) {
 						toggleButton.active = false;
-						toggleButton.setTooltip(Tooltip.create(Component.literal("Option locked by server.")));
+						toggleButton.setTooltip(Tooltip.create(Lang.ConfigScreen.LOCKED_SERVER.get()));
 					}
 				}
 			}

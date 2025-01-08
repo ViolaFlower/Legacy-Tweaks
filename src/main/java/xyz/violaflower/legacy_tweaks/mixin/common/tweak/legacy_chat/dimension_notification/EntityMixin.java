@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.impl.FatChat;
+import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
 
 @Mixin(Entity.class)
@@ -38,9 +39,9 @@ public abstract class EntityMixin {
         Component displayName = player.getDisplayName();
 
         if (newDimension.equals(Level.END) && dn.entranceMessage.get()) {
-			serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("lt.tweaks.dimensionNotification.endEntranceMessage", displayName), false);
+			serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.translatable(Lang.Dimension.ENTRANCE.getString(), displayName), false);
 		} else if (currentDimension.equals(Level.END) && dn.leaveMessage.get()) {
-			serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("lt.tweaks.dimensionNotification.endLeaveMessage", displayName), false);
+			serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.translatable(Lang.Dimension.LEAVE.getString(), displayName), false);
 		}
 
         return original.call(instance, transition);

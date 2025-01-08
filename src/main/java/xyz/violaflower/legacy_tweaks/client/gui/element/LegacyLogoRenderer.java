@@ -3,6 +3,7 @@ package xyz.violaflower.legacy_tweaks.client.gui.element;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.RandomSource;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
@@ -32,11 +33,15 @@ public class LegacyLogoRenderer {
     public void renderLogo(GuiGraphics guiGraphics, int screenWidth, float transparency, int height) {
         guiGraphics.setColor(1.0F, 1.0F, 1.0F, this.keepLogoThroughFade ? 1.0F : transparency);
         RenderSystem.enableBlend();
-        int i = screenWidth / 2 - getLogoWidth()/2;
-        guiGraphics.blit(this.showEasterEgg ? Sprites.EASTER_EGG_LOGO : Sprites.MINECRAFT_LOGO, i, height, 0.0F, 0.0F, getLogoWidth(), getLogoHeight(), getLogoWidth(), getLogoTextureHeight());
+        int i = screenWidth / 2 - getLogoWidth() / 2;
         int j = screenWidth / 2 - getLogoTextureHeight();
         int k = height + getEditionHeightPos();
-        guiGraphics.blit(Sprites.MINECRAFT_EDITION, j, k, 0.0F, 0.0F, getEditionWidth(), getEditionHeight(), getEditionWidth(), getEditionTextureHeight());
+        if (Tweaks.LEGACY_UI.generalScreenTweaks.useLegacyTitleLogo.isOn()) {
+            guiGraphics.blit(Sprites.MINECRAFT_LEGACY,i, height,0.0F,0.0F, getLogoWidth(), getLogoHeight(), getLogoWidth(), getLogoHeight());
+        } else {
+            guiGraphics.blit(this.showEasterEgg ? Sprites.EASTER_EGG_LOGO : Sprites.MINECRAFT_LOGO, i, height, 0.0F, 0.0F, getLogoWidth(), getLogoHeight(), getLogoWidth(), getLogoTextureHeight());
+            guiGraphics.blit(Sprites.MINECRAFT_EDITION, j, k, 0.0F, 0.0F, getEditionWidth(), getEditionHeight(), getEditionWidth(), getEditionTextureHeight());
+        }
         guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.disableBlend();
     }
@@ -58,6 +63,13 @@ public class LegacyLogoRenderer {
     }
 
     private static int getLogoWidth() {
+        if (Tweaks.LEGACY_UI.generalScreenTweaks.useLegacyTitleLogo.isOn()) {
+            if (ScreenUtil.isLargeGui()) {
+                return 179;
+            } else {
+                return 286;
+            }
+        }
         if (ScreenUtil.isLargeGui()) {
             return 160;
         } else {
@@ -66,6 +78,13 @@ public class LegacyLogoRenderer {
     }
 
     private static int getLogoHeight() {
+        if (Tweaks.LEGACY_UI.generalScreenTweaks.useLegacyTitleLogo.isOn()) {
+            if (ScreenUtil.isLargeGui()) {
+                return 43;
+            } else {
+                return 69;
+            }
+        }
         if (ScreenUtil.isLargeGui()) {
             return 27;
         } else {

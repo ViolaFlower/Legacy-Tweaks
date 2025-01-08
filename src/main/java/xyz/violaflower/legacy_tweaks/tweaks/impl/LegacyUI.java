@@ -2,21 +2,36 @@ package xyz.violaflower.legacy_tweaks.tweaks.impl;
 
 import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
+import xyz.violaflower.legacy_tweaks.tweaks.enums.PlayGameScreen;
 
 public class LegacyUI extends Tweak {
 	public final LegacyTitleScreenTweak legacyTitleScreen;
 	public final LegacyOptionsTweak legacyOptions;
-	public final BooleanOption legacyPanorama;
-
+	public final GeneralScreenTweaks generalScreenTweaks;
+	public final LegacyPlayGameScreenTweak legacyPlayGameScreenTweak;
 
 	public LegacyUI() {
 		super("legacyUI", true);
 		setTweakAuthor("Jab125", "Permdog99");
 		setGroup();
 
-		legacyPanorama = addBooleanOption("legacyPanorama", true);
+		addSubTweak(generalScreenTweaks = new GeneralScreenTweaks());
 		addSubTweak(legacyTitleScreen = new LegacyTitleScreenTweak());
 		addSubTweak(legacyOptions = new LegacyOptionsTweak());
+		addSubTweak(legacyPlayGameScreenTweak = new LegacyPlayGameScreenTweak());
+	}
+
+	public static class GeneralScreenTweaks extends Tweak {
+		public final BooleanOption legacyPanorama;
+		public final BooleanOption useLegacyTitleLogo;
+
+		public GeneralScreenTweaks() {
+            super("generalScreenTweaks", true);
+			setTweakAuthor("Jab125", "Permdog99");
+
+			legacyPanorama = addBooleanOption("legacyPanorama", true);
+			useLegacyTitleLogo = addBooleanOption("useLegacyTitleLogo", true);
+        }
 	}
 
 	public static class LegacyTitleScreenTweak extends Tweak {
@@ -48,6 +63,17 @@ public class LegacyUI extends Tweak {
 			setTweakAuthor("Jab125", "Permdog99");
 
 			showJavaOptionsButton = addBooleanOption("showJavaOptionsButton", false);
+		}
+	}
+
+	public static class LegacyPlayGameScreenTweak extends Tweak {
+		public final EnumSliderOption<PlayGameScreen> playGameScreenType;
+
+		public LegacyPlayGameScreenTweak() {
+			super("legacyPlayGameScreen", true);
+			setTweakAuthor("dexrn", "Permdog99");
+
+			playGameScreenType = addSliderOption("playGameScreenType", enumProvider(PlayGameScreen.DISABLED, PlayGameScreen::values, PlayGameScreen::toString, PlayGameScreen::getComponent));
 		}
 	}
 }

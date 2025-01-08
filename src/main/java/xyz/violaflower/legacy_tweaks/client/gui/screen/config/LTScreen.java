@@ -26,11 +26,11 @@ import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakParent;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakState;
+import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
 import java.util.List;
 
 public class LTScreen extends Screen {
-    private static final Component TITLE = Component.translatable("lt.screens.ltscreen.title");
     private final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
     private final Screen parent;
     @Nullable
@@ -64,7 +64,7 @@ public class LTScreen extends Screen {
         if (parent instanceof SettingsScreen settingsScreen) {
             return getTitle(settingsScreen.getParent(), tweakParent);
         }
-        else return TITLE;
+        else return Lang.ConfigScreen.TITLE.get();
     }
 
     public LTScreen(Screen parent) {
@@ -125,28 +125,28 @@ public class LTScreen extends Screen {
 
                 if (!tweak.isGroup()) {
                     Button[] delayedToggleButton = new Button[1];
-                    resetButton = Button.builder(Component.translatable("lt.main.reset"), button -> {
+                    resetButton = Button.builder(Lang.ConfigScreen.RESET.get(), button -> {
                         tweak.getTweakState().setLocalState(null);
-                        delayedToggleButton[0].setMessage(Component.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"));
+                        delayedToggleButton[0].setMessage(Component.translatable(tweak.isEnabled() ? Lang.ConfigScreen.ENABLED.getString() : Lang.ConfigScreen.DISABLED.getString()));
                         button.active = false;
                     }).size(20, 20).build();
-                    delayedToggleButton[0] = toggleButton = Button.builder(Component.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"), button -> {
+                    delayedToggleButton[0] = toggleButton = Button.builder(Component.translatable(tweak.isEnabled() ? Lang.ConfigScreen.ENABLED.getString() : Lang.ConfigScreen.DISABLED.getString()), button -> {
                         tweak.setEnabled(!tweak.isEnabled());
-                        button.setMessage(Component.translatable(tweak.isEnabled() ? "lt.main.enabled" : "lt.main.disabled"));
+                        button.setMessage(Component.translatable(tweak.isEnabled() ? Lang.ConfigScreen.ENABLED.getString() : Lang.ConfigScreen.DISABLED.getString()));
                         resetButton.active = true;
                     }).size(20, 20).build();
                     resetButton.active = tweak.getTweakState().getLocalState() != null;
                     if (tweak.getTweakState().isValueLocked()) {
                         toggleButton.active = false;
-                        toggleButton.setTooltip(Tooltip.create(Component.literal("Tweak locked by server.")));
+                        toggleButton.setTooltip(Tooltip.create(Lang.ConfigScreen.LOCKED_SERVER.get()));
                         resetButton.active = false;
-                        resetButton.setTooltip(Tooltip.create(Component.literal("Tweak locked by server.")));
+                        resetButton.setTooltip(Tooltip.create(Lang.ConfigScreen.LOCKED_SERVER.get()));
                     }
                 } else {
                     resetButton = null;
                     toggleButton = null;
                 }
-                settingsButton = Button.builder(Component.translatable("lt.main.settings"), button -> {
+                settingsButton = Button.builder(Lang.ConfigScreen.SETTINGS.get(), button -> {
 //                    // https://www.minecraftforum.net/forums/archive/alpha/alpha-survival-single-player/798878-dohasdoshih-analysis-of-glitched-chunks
 //                    LegacyTweaks.LOGGER.info("DOHASDOSHIH!");
                     Minecraft.getInstance().setScreen(!tweak.getSubTweaks().isEmpty() ? new LTScreen(LTScreen.this, tweak) : new SettingsScreen(LTScreen.this, tweak));

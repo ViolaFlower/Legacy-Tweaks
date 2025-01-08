@@ -12,6 +12,7 @@ import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.config.LTScreen;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.options.LegacyGraphicsScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
+import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -36,17 +37,17 @@ public class LegacyOptionsScreen extends LegacyScreen {
 		this.clearFocus();
 		frameLayout = new FrameLayout();
 		LinearLayout linearLayout = LinearLayout.vertical().spacing(21/4);
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.gameOptions"), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.audio"), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.graphics"), button -> setScreen(LegacyGraphicsScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.userInterface"), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
-		linearLayout.addChild(Button.builder(Component.translatable("lt.title.ltbutton"), button -> setScreen(LTScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Lang.OptionsScreen.GAME_OPTIONS.get(), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Lang.OptionsScreen.AUDIO.get(), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Lang.OptionsScreen.GRAPHICS.get(), button -> setScreen(LegacyGraphicsScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Lang.OptionsScreen.UI.get(), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Lang.ConfigScreen.TITLE.get(), button -> setScreen(LTScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
 		if (Tweaks.LEGACY_UI.legacyOptions.showJavaOptionsButton.isOn()) {
-			linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.newSettings"), button -> {
+			linearLayout.addChild(Button.builder(Lang.OptionsScreen.JAVA_SETTINGS.get(), button -> {
 				Minecraft.getInstance().setScreen(new OptionsScreen(new LegacyTitleScreen(), Minecraft.getInstance().options));
 			}).size(getButtonWidth(), getButtonHeight()).build());
 		}
-		linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.optionsScreen.buttons.reset"), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Lang.OptionsScreen.RESET.get(), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
 
 		frameLayout.addChild(linearLayout);
 		frameLayout.visitWidgets(this::addRenderableWidget);

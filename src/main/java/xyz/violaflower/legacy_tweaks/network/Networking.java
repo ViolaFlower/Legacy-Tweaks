@@ -9,6 +9,7 @@ import xyz.violaflower.legacy_tweaks.networking.NetworkingAbstractions;
 import xyz.violaflower.legacy_tweaks.networking.configuration.ServerboundConfiguration;
 import xyz.violaflower.legacy_tweaks.networking.configuration.event.ServerConfigurationEvents;
 import xyz.violaflower.legacy_tweaks.networking.play.ServerboundPlay;
+import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
 public class Networking {
 	public static void registerNetworkingCodecs() {
@@ -30,7 +31,7 @@ public class Networking {
 		});
 		ServerboundConfiguration.registerHandler(CoolConfigurationResponsePacket.TYPE, (payload, context) -> {
 			//MinecraftServer server = context.;
-			context.getServer().getPlayerList().broadcastSystemMessage(Component.literal("[SERVER] Received " + payload + " from connecting client."), true);
+			context.getServer().getPlayerList().broadcastSystemMessage(Component.literal(Lang.Networking.SERVER_RECEIVED.getString() + payload + Lang.Networking.FROM_CONNECT_CLIENT.getString()), true);
 			context.finishCurrentTask(SendCoolConfigurationPacketTask.TYPE);
 		});
 

@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
+import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
 @Mixin(targets = "net/minecraft/client/gui/MapRenderer$MapInstance")
 public class MapRendererMixin {
@@ -24,7 +25,7 @@ public class MapRendererMixin {
 			int x = minecraft.player.getBlockX();
 			int y = (int)minecraft.player.getEyeY();
 			int z = minecraft.player.getBlockZ();
-			minecraft.font.drawInBatch("X:%s,Y:%s,Z:%s".formatted(x, y, z), /* I have no idea what these 3 numbers are */ 0, 0, 0, false, arg.last().pose(), bufferSource, Font.DisplayMode.NORMAL, 0, packedLight);
+			minecraft.font.drawInBatch(Lang.Gameplay.MAP_COORDS.getString().formatted(x, y, z), /* I have no idea what these 3 numbers are */ 0, 0, 0, false, arg.last().pose(), bufferSource, Font.DisplayMode.NORMAL, 0, packedLight);
 			arg.popPose();
 		}
 

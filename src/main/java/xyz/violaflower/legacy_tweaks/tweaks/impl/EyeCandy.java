@@ -68,7 +68,7 @@ public class EyeCandy extends Tweak {
 		public SunsetColors() {
 			super("sunsetColors", true);
 			setTweakAuthor("Permdog99");
-			sunsetColors = addSliderOption("Sunset Colors", enumProvider(SunsetRiseColors.JAVA, SunsetRiseColors::values, SunsetRiseColors::toString, SunsetRiseColors::getTitle));
+			sunsetColors = addSliderOption("Sunset Colors", enumProvider(SunsetRiseColors.JAVA, SunsetRiseColors::values, SunsetRiseColors::toString, SunsetRiseColors::getComponent));
 		}
 	}
 

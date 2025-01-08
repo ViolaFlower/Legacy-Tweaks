@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
 import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
+import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
 import java.util.Objects;
 
@@ -34,15 +35,15 @@ public class LegacyTestScreen extends LegacyScreen {
 		innerFrameLayout = new FrameLayout(getFrameWidth() - 10, 0);
 		innerFrameLayout.defaultChildLayoutSetting().alignVerticallyTop().padding(5);
 		LinearLayout linearLayout = LinearLayout.vertical().spacing(getButtonSpacing());
-		linearLayout.addChild(Button.builder(Component.literal("Button 1"), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
-		linearLayout.addChild(Button.builder(Component.literal("Button 2"), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
-		linearLayout.addChild(Button.builder(Component.literal("Button 3"), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
-		linearLayout.addChild(Button.builder(Component.literal("Button 4"), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
 
 
 		{
 			LinearLayout layout = LinearLayout.vertical().spacing(2);
-			layout.addChild(Button.builder(Component.literal("Button 5"), button -> {}).size(getButtonWidthAlt(), 30).build());
+			layout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {}).size(getButtonWidthAlt(), 30).build());
 			innerFrameLayout.addChild(layout);
 		}
 

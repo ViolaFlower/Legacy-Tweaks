@@ -5,22 +5,19 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.storage.LevelStorageSource;
-import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
 import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
-import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
-public class LegacyWorldScreen extends LegacyScreen {
+public class LegacyPlayGameScreen extends LegacyScreen {
     private final Screen parent;
     private FrameLayout frameLayout;
     private FrameLayout innerFrameLayout;
 
-    protected LegacyWorldScreen(Screen parent) {
+    protected LegacyPlayGameScreen(Screen parent) {
         super(Component.empty());
         this.parent = parent;
     }

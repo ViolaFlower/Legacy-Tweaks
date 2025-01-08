@@ -10,6 +10,7 @@ import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.LegacyScreen;
 import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
+import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
 import java.util.Objects;
 
@@ -41,38 +42,38 @@ public class LegacyGraphicsScreen extends LegacyScreen {
         /* Requirements:
          * Checkbox Component
          */
-        linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.graphicsScreen.buttons.renderClouds"), button -> {
-            button.setMessage(Component.literal("Oops, this isn't implemented yet!"));
+        linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {
+            button.setMessage(Lang.ScreenNotImplemented.WARN.get());
         }).size(getButtonWidth(), getButtonHeight()).build());
 
         /* Requirements:
          * Checkbox Component
          */
-        linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.graphicsScreen.buttons.customSkinAnim"), button -> {
-            button.setMessage(Component.literal("Oops, this isn't implemented yet!"));
+        linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {
+            button.setMessage(Lang.ScreenNotImplemented.WARN.get());
         }).size(getButtonWidth(), getButtonHeight()).build());
 
         /* Requirements:
          * Slider Component
          */
-        linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.graphicsScreen.buttons.gamma"), button -> {
-            button.setMessage(Component.literal("Oops, this isn't implemented yet!"));
+        linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {
+            button.setMessage(Lang.ScreenNotImplemented.WARN.get());
         }).size(getButtonWidth(), getButtonHeight()).build());
 
         /* Requirements:
          * Minigames
          * Checkbox Component
          */
-        linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.graphicsScreen.buttons.showGlideGhost"), button -> {
-            button.setMessage(Component.literal("Oops, this isn't implemented yet!"));
+        linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {
+            button.setMessage(Lang.ScreenNotImplemented.WARN.get());
         }).size(getButtonWidth(), getButtonHeight()).build());
 
         /* Requirements:
          * Minigames
          * Checkbox Component
          */
-        linearLayout.addChild(Button.builder(Component.translatable("lt.legacyScreens.graphicsScreen.buttons.showGlideGhostPath"), button -> {
-            button.setMessage(Component.literal("Oops, this isn't implemented yet!"));
+        linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {
+            button.setMessage(Lang.ScreenNotImplemented.WARN.get());
         }).size(getButtonWidth(), getButtonHeight()).build());
 
 

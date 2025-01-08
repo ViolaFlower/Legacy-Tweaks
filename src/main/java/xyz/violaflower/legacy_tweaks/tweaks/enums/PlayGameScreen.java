@@ -4,14 +4,14 @@ import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Translate;
 
-public enum SunsetRiseColors implements EnumTweak {
+public enum PlayGameScreen implements EnumTweak {
+    DISABLED(Lang.EnumTweak.DISABLED),
     TU1(Lang.TitleUpdates.TU1),
-    TU5(Lang.TitleUpdates.TU5),
-    JAVA(Lang.EnumTweak.JAVA);
+    TU25(Lang.TitleUpdates.TU25);
 
     private final Translate title;
 
-    SunsetRiseColors(Translate title)
+    PlayGameScreen(Translate title)
     {
         this.title = title;
     }

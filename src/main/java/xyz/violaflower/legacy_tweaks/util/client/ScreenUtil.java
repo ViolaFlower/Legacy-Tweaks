@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.Window;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
 public class ScreenUtil {

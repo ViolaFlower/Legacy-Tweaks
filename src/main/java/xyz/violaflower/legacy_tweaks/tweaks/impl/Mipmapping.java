@@ -22,7 +22,7 @@ public class Mipmapping extends Tweak {
         public MipmapType() {
             super("mipmapType", true);
             setTweakAuthor("Permdog99");
-            mipmapType = addSliderOption("Mipmap Type", enumProvider(MipmapTypes.JAVA, MipmapTypes::values, MipmapTypes::toString, MipmapTypes::getTitle));
+            mipmapType = addSliderOption("Mipmap Type", enumProvider(MipmapTypes.JAVA, MipmapTypes::values, MipmapTypes::toString, MipmapTypes::getComponent));
             mipmapType.setConsumer(MipmapTypes -> Minecraft.getInstance().reloadResourcePacks());
         }
     }

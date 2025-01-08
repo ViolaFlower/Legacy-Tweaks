@@ -10,6 +10,8 @@ public interface Sprites {
     ResourceLocation PANORAMA_DAY = ModAsset.guiLocation("panorama/panorama_day.png");
     ResourceLocation PANORAMA_NIGHT = ModAsset.guiLocation("panorama/panorama_night.png");
 
+    ResourceLocation MINECRAFT_LEGACY = ModAsset.guiLocation("title/minecraft.png");
+
     ResourceLocation OLD_BUTTON_HIGHLIGHTED = ModAsset.getResourceLocation("widget/old_button_highlighted");
 
     ResourceLocation MINECRAFT_LOGO = ResourceLocation.withDefaultNamespace("textures/gui/title/minecraft.png");

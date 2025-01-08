@@ -9,6 +9,7 @@ import xyz.violaflower.legacy_tweaks.networking.configuration.ClientboundConfigu
 import xyz.violaflower.legacy_tweaks.networking.play.ClientboundPlay;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakState;
+import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
 public class ClientNetworking {
 	/// @see Networking#registerPayloadHandlers()
@@ -18,9 +19,9 @@ public class ClientNetworking {
 		});
 
 		ClientboundConfiguration.registerHandler(CoolConfigurationPacket.TYPE, (payload, context) -> {
-			Minecraft.getInstance().gui.getChat().addMessage(Component.literal("Received " + payload + " from the server while negotiating."));
+			Minecraft.getInstance().gui.getChat().addMessage(Component.literal(Lang.Networking.RECEIVED.getString() + payload + Lang.Networking.FROM_SERVER.getString()));
 			CoolConfigurationResponsePacket responsePacket = new CoolConfigurationResponsePacket(13371337);
-			Minecraft.getInstance().gui.getChat().addMessage(Component.literal("Responding with " + responsePacket));
+			Minecraft.getInstance().gui.getChat().addMessage(Component.literal(Lang.Networking.RESPONDING.getString() + responsePacket));
 			context.sendPacket(responsePacket);
 		});
 
@@ -35,10 +36,10 @@ public class ClientNetworking {
 	}
 
 	private static void handleTweakStates(TweakStatesPayload payload, NetworkingAbstractions.Context context) {
-		Minecraft.getInstance().gui.getChat().addMessage(Component.literal("Received server configuration"));
+		Minecraft.getInstance().gui.getChat().addMessage(Lang.Networking.RECEIVED_CONFIG.get());
 		int configVersion = payload.configVersion();
 		if (TweakManager.version != configVersion) {
-			context.disconnect(Component.literal("The server uses config version " + payload.configVersion() + " , you have config version " + TweakManager.version));
+			context.disconnect(Component.literal(Lang.Networking.SERVER_CONFIG_VER.getString() + payload.configVersion() + Lang.Networking.PLAYER_CONFIG_VER.getString() + TweakManager.version));
 		}
 		TweakState.decodeServerStates(payload.byteBuf());
 		context.sendPacket(new TweakStatesResponsePayload());
