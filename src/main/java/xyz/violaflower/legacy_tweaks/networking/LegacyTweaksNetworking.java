@@ -11,7 +11,6 @@ import net.neoforged.neoforge.network.event.RegisterConfigurationTasksEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 *///?}
 import org.jetbrains.annotations.ApiStatus;
-import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 import xyz.violaflower.legacy_tweaks.network.Networking;
 
 @ApiStatus.Internal

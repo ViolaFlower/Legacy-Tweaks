@@ -11,7 +11,7 @@ import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
-import xyz.violaflower.legacy_tweaks.util.Sprites;
+import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
 /**
  * Helper for model related changes

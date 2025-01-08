@@ -1,10 +1,9 @@
 package xyz.violaflower.legacy_tweaks.tweaks.impl;
 
-import net.minecraft.network.chat.Component;
-import xyz.violaflower.legacy_tweaks.mixin.client.FogDataAccessor;
+import xyz.violaflower.legacy_tweaks.mixin.client.accessor.FogDataAccessor;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
-import xyz.violaflower.legacy_tweaks.util.PlayerUtil;
+import xyz.violaflower.legacy_tweaks.util.common.game.PlayerUtil;
 
 // TODO find best settings for the Nether and End, based on PS4 and XONE render distance
 public class LegacyFog extends Tweak {

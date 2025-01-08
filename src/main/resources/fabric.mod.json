@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "id": "legacy_tweaks",
+  "id": "${id}",
   "version": "${version}",
-  "name": "Legacy Tweaks",
-  "description": "Legacy Tweaks is a mod which brings back many Legacy Console Edition features as configurable tweaks!",
+  "name": "${name}",
+  "description": "${description}",
   "authors": [
-    "ViolaFlower"
+    "${author}"
   ],
   "contact": {
-    "sources": "https://github.com/ViolaFlower/Legacy-Tweaks"
+    "sources": "${github}"
   },
   "license": "LGPL-2.1",
   "icon": "assets/legacy_tweaks/icon.png",
@@ -29,5 +29,9 @@
   },
   "suggests": {
     "another-mod": "*"
+  },
+  "breaks": {
+    "legacy": "*",
+    "bedrockwaters": "*"
   }
 }
