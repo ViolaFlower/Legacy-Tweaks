@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+// TODO: Need to add versioning to the json file.
 public class TweakState<T> {
 	public static final HashMap<String, TweakState<?>> tweakStates = new HashMap<>();
 	private final Codec<T> codec;
