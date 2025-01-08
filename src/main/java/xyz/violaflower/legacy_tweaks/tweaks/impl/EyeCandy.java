@@ -73,13 +73,15 @@ public class EyeCandy extends Tweak {
 	public static class Models extends Tweak {
 		public final Tweak legacyWitchHat;
 		public final Tweak legacyFireworkModel;
+		public final Tweak glowEntities;
 
 		public Models() {
 			super("models", true);
 			setTweakAuthor("Permdog99");
 
-			addSubTweak(legacyWitchHat = new TweakBuilder("legacyWitchHat").authors("Permdog99, Legacy4J 1.7.5-beta").setDefaultEnabled(false).build());
-			addSubTweak(legacyFireworkModel = new TweakBuilder("legacyFirework").authors("Permdog99, Legacy4J 1.7.5-beta").setDefaultEnabled(true).build());
+			addSubTweak(glowEntities = new TweakBuilder("glowEntities").authors("Permdog99", "Legacy4J 1.7.5-beta").setDefaultEnabled(true).build());
+			addSubTweak(legacyWitchHat = new TweakBuilder("legacyWitchHat").authors("Permdog99", "Legacy4J 1.7.5-beta").setDefaultEnabled(true).build());
+			addSubTweak(legacyFireworkModel = new TweakBuilder("legacyFirework").authors("Permdog99", "Legacy4J 1.7.5-beta").setDefaultEnabled(true).build());
 		}
 	}
 }

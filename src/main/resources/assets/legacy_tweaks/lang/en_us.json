@@ -48,6 +48,8 @@
   "lt.tweak.eyeCandy.sunsetColors.option.sunsetcolor": "Sunset Colors",
   "lt.tweak.eyeCandy.models": "Models",
   "lt.tweak.eyeCandy.models.description": "Legacy-styled models for entities and other objects.",
+  "lt.tweak.eyeCandy.models.glowEntities": "Glow Entities",
+  "lt.tweak.eyeCandy.models.glowEntities.description": "Allows RPs to set glow overlays. Ghast and Drowned by default.",
   "lt.tweak.eyeCandy.models.legacyWitchHat": "Legacy Witch Hat",
   "lt.tweak.eyeCandy.models.legacyWitchHat.description": "Legacy-styled witch hat.",
   "lt.tweak.eyeCandy.models.legacyFirework": "Legacy Firework Model",
