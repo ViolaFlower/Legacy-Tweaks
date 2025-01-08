@@ -21,7 +21,7 @@ public class AbstractButtonMixin implements ButtonExtension {
 	private long clickDecay = Long.MIN_VALUE;
 	@Inject(method = "onClick", at = @At("HEAD"))
 	void onClick(double mouseX, double mouseY, CallbackInfo ci) {
-		legacyTweaks$setClickDecayTo(Util.getMillis() + 125);
+		legacyTweaks$setClickDecayTo(Util.getMillis() + 100);
 	}
 
 
