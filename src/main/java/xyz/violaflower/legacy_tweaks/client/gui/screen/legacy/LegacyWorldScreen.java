@@ -17,17 +17,12 @@ import java.util.concurrent.ExecutionException;
 
 public class LegacyWorldScreen extends LegacyScreen {
     private final Screen parent;
-    private final FrameLayout frameLayout;
-    private final FrameLayout innerFrameLayout;
+    private FrameLayout frameLayout;
+    private FrameLayout innerFrameLayout;
 
     protected LegacyWorldScreen(Screen parent) {
         super(Component.empty());
         this.parent = parent;
-        frameLayout = new FrameLayout(getFrameWidth(), getFrameHeight());
-        //frameLayout.newChildLayoutSettings().alignVerticallyTop();
-        frameLayout.defaultChildLayoutSetting().align(0.5f, 0).padding(5);
-        innerFrameLayout = new FrameLayout(getFrameWidth() - 23, getFrameHeight() - 23);
-        innerFrameLayout.defaultChildLayoutSetting().alignVerticallyTop().padding(5);
     }
 
     @Override
@@ -52,6 +47,11 @@ public class LegacyWorldScreen extends LegacyScreen {
     @Override
     protected void init() {
         super.init();
+        frameLayout = new FrameLayout(getFrameWidth(), getFrameHeight());
+        //frameLayout.newChildLayoutSettings().alignVerticallyTop();
+        frameLayout.defaultChildLayoutSetting().align(0.5f, 0).padding(5);
+        innerFrameLayout = new FrameLayout(getFrameWidth() - 23, getFrameHeight() - 23);
+        innerFrameLayout.defaultChildLayoutSetting().alignVerticallyTop().padding(5);
         LevelStorageSource.LevelCandidates cd = this.minecraft.getLevelSource().findLevelCandidates();
         java.util.List<net.minecraft.world.level.storage.LevelSummary> summaries = null;
         try {
