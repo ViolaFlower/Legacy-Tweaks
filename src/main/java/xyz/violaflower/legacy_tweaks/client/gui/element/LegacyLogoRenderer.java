@@ -10,7 +10,17 @@ public class LegacyLogoRenderer {
     private final boolean showEasterEgg = (double) RandomSource.create().nextFloat() < 1.0E-4;
     private final boolean keepLogoThroughFade;
 
-    public LegacyLogoRenderer(boolean keepLogoThroughFade) {
+    private static LegacyLogoRenderer legacyLogoRenderer;
+
+    public static LegacyLogoRenderer getLegacyLogoRenderer() {
+        if (legacyLogoRenderer == null) return new LegacyLogoRenderer(false);
+    }
+
+    public static void setLegacyLogoRenderer(boolean keepLogoThroughFade) {
+        LegacyLogoRenderer.legacyLogoRenderer = new LegacyLogoRenderer(keepLogoThroughFade);
+    }
+
+    protected LegacyLogoRenderer(boolean keepLogoThroughFade) {
         this.keepLogoThroughFade = keepLogoThroughFade;
     }
 

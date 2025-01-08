@@ -23,7 +23,7 @@ public class LegacyGraphicsScreen extends LegacyScreen {
         super(Component.empty());
         this.parent = parent;
 
-        this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, () -> new LegacyLogoRenderer(false));
+        this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, LegacyLogoRenderer::getLegacyLogoRenderer);
     }
 
     @Override

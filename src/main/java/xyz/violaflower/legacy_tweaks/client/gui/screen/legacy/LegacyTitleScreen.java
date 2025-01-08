@@ -23,7 +23,7 @@ public class LegacyTitleScreen extends LegacyScreen {
 	public LegacyTitleScreen() {
 		super(Component.empty());
 
-		this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, () -> new LegacyLogoRenderer(false));
+		this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, LegacyLogoRenderer::getLegacyLogoRenderer);
 	}
 
 	/* Dexrn says:
