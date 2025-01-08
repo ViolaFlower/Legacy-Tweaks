@@ -417,7 +417,7 @@ public abstract class Tweak implements TweakParent {
             this.onChanged = onChanged;
             this.codec = codec;
             this.streamCodec = streamCodec;
-            this.state = new TweakState<>("opt!" + this.getClass().toString().hashCode() + name + "//"  + Tweak.this.getTweakID() + "?!" + defaultValue, defaultValue, codec, streamCodec, t -> onChanged.accept(t.getEffectiveState()));
+            this.state = new TweakState<>("opt!" + this.getClass().toString().hashCode() + name + "//"  + Tweak.this.getTweakID() + "?!" + defaultValue, defaultValue, codec, streamCodec, t -> this.onChanged.accept(t.getEffectiveState()));
         }
 
         /// _more like `getId()`_
