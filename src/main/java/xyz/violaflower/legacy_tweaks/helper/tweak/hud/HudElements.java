@@ -1,32 +1,31 @@
 package xyz.violaflower.legacy_tweaks.helper.tweak.hud;
 
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
-import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
-import xyz.violaflower.legacy_tweaks.tweaks.impl.LegacyUI;
 
 import static xyz.violaflower.legacy_tweaks.helper.tweak.hud.HudHelper.guiHudTweaks;
 
 public enum HudElements {
-    HOTBAR(guiHudTweaks.applyHudDistanceHotbar, guiHudTweaks.applyHudScaleHotbar),
-    EXPERIENCE(guiHudTweaks.applyHudDistanceHotbar, guiHudTweaks.applyHudScaleHotbar),
-    CHAT(guiHudTweaks.applyHudDistanceChat, guiHudTweaks.applyHudScaleChat),
-    SCOREBOARD(guiHudTweaks.applyHudDistanceScoreboard, guiHudTweaks.applyHudScaleScoreboard),
-    EFFECTS(guiHudTweaks.applyHudDistanceEffects, guiHudTweaks.applyHudScaleEffects),
-    PAPER_DOLL(guiHudTweaks.applyHudDistancePaperDoll, guiHudTweaks.applyHudScalePaperDoll),
-    BOSS_HEALTH(guiHudTweaks.applyHudDistanceBossHealth, guiHudTweaks.applyHudScaleBossHealth),
-    TOAST(guiHudTweaks.applyHudDistanceToast, guiHudTweaks.applyHudScaleToast),
-    OTHER(guiHudTweaks.applyHudDistanceOther, guiHudTweaks.applyHudScaleOther);
+    HOTBAR(guiHudTweaks.hotbarTweaks.applyScreenSpacingHotbar, guiHudTweaks.hotbarTweaks.applyHudScaleHotbar),
+    EXPERIENCE(guiHudTweaks.hotbarTweaks.applyScreenSpacingHotbar, guiHudTweaks.hotbarTweaks.applyHudScaleHotbar),
+    CHAT(guiHudTweaks.chatTweaks.applyScreenSpacingChat, guiHudTweaks.chatTweaks.applyHudScaleChat),
+    SCOREBOARD(guiHudTweaks.scoreboardTweaks.applyScreenSpacingScoreboard, guiHudTweaks.scoreboardTweaks.applyHudScaleScoreboard),
+    EFFECTS(guiHudTweaks.effectsTweaks.applyScreenSpacingEffects, guiHudTweaks.effectsTweaks.applyHudScaleEffects),
+    PAPER_DOLL(guiHudTweaks.paperDollTweaks.applyScreenSpacingPaperDoll, guiHudTweaks.paperDollTweaks.applyHudScalePaperDoll),
+    BOSS_HEALTH(guiHudTweaks.bossBarTweaks.applyScreenSpacingBossHealth, guiHudTweaks.bossBarTweaks.applyHudScaleBossHealth),
+    TOAST(guiHudTweaks.generalTweaks.applyScreenSpacingToast, guiHudTweaks.generalTweaks.applyHudScaleToast),
+    ITEM_OVERLAY(guiHudTweaks.hotbarTweaks.applyScreenSpacingHotbar, guiHudTweaks.generalTweaks.applyHudScaleTooltip),
+    OTHER(guiHudTweaks.moddedTweaks.applyScreenSpacingOther, guiHudTweaks.moddedTweaks.applyHudScaleOther);
 
-    private final Tweak.BooleanOption distanceTweak;
+    private final Tweak.BooleanOption spacingTweak;
     private final Tweak.BooleanOption scaleTweak;
 
-    HudElements(Tweak.BooleanOption distanceTweak, Tweak.BooleanOption scaleTweak) {
-        this.distanceTweak = distanceTweak;
+    HudElements(Tweak.BooleanOption spacingTweak, Tweak.BooleanOption scaleTweak) {
+        this.spacingTweak = spacingTweak;
         this.scaleTweak = scaleTweak;
     }
 
     public boolean isDistanceTweakOff() {
-        return !this.distanceTweak.isOn();
+        return !this.spacingTweak.isOn();
     }
 
     public boolean isScaleTweakOff() {

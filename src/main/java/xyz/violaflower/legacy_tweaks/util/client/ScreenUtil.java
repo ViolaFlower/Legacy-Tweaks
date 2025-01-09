@@ -5,10 +5,12 @@ import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
 public class ScreenUtil {
+    public static MultiBufferSource.BufferSource guiBufferSourceOverride = null;
 
     public static boolean isLargeGui() {
         Window screenWindow = Minecraft.getInstance().getWindow();
@@ -36,6 +38,10 @@ public class ScreenUtil {
         return screenWindow.getScreenHeight() >= 720 && screenWindow.getScreenHeight() < 1080;
     }
 
+    public static void drawOutlinedString(GuiGraphics graphics, Font font, Component component, int x, int y, int color, int outlineColor, float outline) {
+        drawStringOutline(graphics,font,component,x,y,outlineColor,outline);
+        graphics.drawString(font,component, x, y, color,false);
+    }
 
     public static void drawStringOutline(GuiGraphics graphics, Font font, Component component, int x, int y, int outlineColor, float outline) {
         float[] translations = new float[]{0,outline,-outline};

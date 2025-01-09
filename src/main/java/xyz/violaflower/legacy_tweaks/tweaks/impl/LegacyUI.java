@@ -26,71 +26,167 @@ public class LegacyUI extends Tweak {
 	}
 
 	public static class GuiHudTweaks extends Tweak {
-		public final IntSliderOption hudDistance;
-		public final IntSliderOption hudScale;
-		public final IntSliderOption hudOpacity;
-
-		public final BooleanOption applyHudDistanceHotbar;
-		public final BooleanOption applyHudDistanceChat;
-		public final BooleanOption applyHudDistanceScoreboard;
-		public final BooleanOption applyHudDistanceEffects;
-		public final BooleanOption applyHudDistancePaperDoll;
-		public final BooleanOption applyHudDistanceBossHealth;
-		public final BooleanOption applyHudDistanceToast;
-		public final BooleanOption applyHudDistanceOther;
-
-		public final BooleanOption applyHudScaleHotbar;
-		public final BooleanOption applyHudScaleChat;
-		public final BooleanOption applyHudScaleScoreboard;
-		public final BooleanOption applyHudScaleEffects;
-		public final BooleanOption applyHudScalePaperDoll;
-		public final BooleanOption applyHudScaleBossHealth;
-		public final BooleanOption applyHudScaleToast;
-		public final BooleanOption applyHudScaleOther;
-
-		public final BooleanOption inGameTooltips;
-		public final IntSliderOption otherDistanceX;
-		public final IntSliderOption otherDistanceY;
-		public final BooleanOption useLegacyHotbarTexture;
-		public final BooleanOption legacyExperienceBar;
-		public final BooleanOption legacyEffects;
-		public final BooleanOption legacyScoreboard;
-		public final BooleanOption hideHudInScreen;
+		public final GeneralTweaks generalTweaks;
+		public final HotbarTweaks hotbarTweaks;
+		public final ChatTweaks chatTweaks;
+		public final BossBarTweaks bossBarTweaks;
+		public final EffectsTweaks effectsTweaks;
+		public final ModdedTweaks moddedTweaks;
+		public final ScoreboardTweaks scoreboardTweaks;
+		public final PaperDollTweaks paperDollTweaks;
 
 		public GuiHudTweaks() {
 			super("guiHudTweaks", true);
 			setTweakAuthor("Permdog99");
 
-			hudDistance = addSliderOption("hudDistance", 100, 0, 100);
-			hudScale = addSliderOption("hudScale", 3, 1, 3);
-			hudOpacity = addSliderOption("hudOpacity", 80, 0, 100);
+			addSubTweak(generalTweaks = new GeneralTweaks());
+			addSubTweak(hotbarTweaks = new HotbarTweaks());
+			addSubTweak(chatTweaks = new ChatTweaks());
+			addSubTweak(paperDollTweaks = new PaperDollTweaks());
+			addSubTweak(scoreboardTweaks = new ScoreboardTweaks());
+			addSubTweak(bossBarTweaks = new BossBarTweaks());
+			addSubTweak(effectsTweaks = new EffectsTweaks());
+			addSubTweak(moddedTweaks = new ModdedTweaks());
+		}
 
-			applyHudDistanceHotbar = addBooleanOption("applyHudDistanceHotbar", true);
-			applyHudDistanceChat = addBooleanOption("applyHudDistanceChat", true);
-			applyHudDistanceScoreboard = addBooleanOption("applyHudDistanceScoreboard", true);
-			applyHudDistanceEffects = addBooleanOption("applyHudDistanceEffects", true);
-			applyHudDistancePaperDoll = addBooleanOption("applyHudDistancePaperDoll", true);
-			applyHudDistanceBossHealth = addBooleanOption("applyHudDistanceBossHealth", true);
-			applyHudDistanceToast = addBooleanOption("applyHudDistanceToast", true);
-			applyHudDistanceOther = addBooleanOption("applyHudDistanceOther", true);
+		public static class GeneralTweaks extends Tweak {
+			public final IntSliderOption screenSpacing;
+			public final IntSliderOption hudScale;
+			public final IntSliderOption hudOpacity;
+			public final BooleanOption applyScreenSpacingToast;
+			public final BooleanOption applyHudScaleToast;
+			public final BooleanOption inGameTooltips;
+			public final BooleanOption hideHudInScreen;
+			public final BooleanOption applyHudScaleTooltip;
+			public final BooleanOption vignette;
+			public final BooleanOption forceDisableHudScale;
 
-			applyHudScaleHotbar = addBooleanOption("applyHudScaleHotbar", true);
-			applyHudScaleChat = addBooleanOption("applyHudScaleChat", false);
-			applyHudScaleScoreboard = addBooleanOption("applyHudScaleScoreboard", false);
-			applyHudScaleEffects = addBooleanOption("applyHudScaleEffects", false);
-			applyHudScalePaperDoll = addBooleanOption("applyHudScalePaperDoll", false);
-			applyHudScaleBossHealth = addBooleanOption("applyHudScaleBossHealth", false);
-			applyHudScaleToast = addBooleanOption("applyHudScaleBossHealth", false);
-			applyHudScaleOther = addBooleanOption("applyHudScaleOther", false);
+			public GeneralTweaks() {
+				super("generalTweaks", true);
+				setTweakAuthor("Permdog99");
 
-			otherDistanceX = addSliderOption("otherDistanceX", 100, 0, 100);
-			otherDistanceY = addSliderOption("otherDistanceY", 100, 0, 100);
-			inGameTooltips = addBooleanOption("inGameTooltips", true);
-			useLegacyHotbarTexture = addBooleanOption("useLegacyHotbarTexture", true);
-			legacyExperienceBar = addBooleanOption("legacyExperienceBar", true);
-			legacyEffects = addBooleanOption("legacyEffects", true);
-			legacyScoreboard = addBooleanOption("legacyScoreboard", true);
-			hideHudInScreen = addBooleanOption("hideHudInScreen", true);
+				screenSpacing = addSliderOption("screenSpacing", 100, 0, 100);
+				hudScale = addSliderOption("hudScale", 3, 1, 3);
+				hudOpacity = addSliderOption("hudOpacity", 80, 0, 100);
+				applyScreenSpacingToast = addBooleanOption("applyScreenSpacingToast", true);
+				applyHudScaleToast = addBooleanOption("applyHudScaleBossHealth", false);
+				inGameTooltips = addBooleanOption("inGameTooltips", true);
+				hideHudInScreen = addBooleanOption("hideHudInScreen", true);
+				applyHudScaleTooltip = addBooleanOption("applyHudScaleTooltip", false);
+				vignette = addBooleanOption("vignette", true);
+				forceDisableHudScale = addBooleanOption("forceDisableHudScale", false);
+			}
+		}
+
+		public static class HotbarTweaks extends Tweak {
+			public final BooleanOption applyScreenSpacingHotbar;
+			public final BooleanOption applyHudScaleHotbar;
+			public final BooleanOption useLegacyHotbarTexture;
+			public final BooleanOption legacyExperienceText;
+			public final BooleanOption fastHealthBlink;
+			public final BooleanOption legacyItemOverlay;
+
+			public HotbarTweaks() {
+				super("healthTweaks", true);
+				setTweakAuthor("Permdog99");
+
+				legacyExperienceText = addBooleanOption("legacyExperienceText", true);
+				applyScreenSpacingHotbar = addBooleanOption("applyScreenSpacingHotbar", true);
+				applyHudScaleHotbar = addBooleanOption("applyHudScaleHotbar", true);
+				useLegacyHotbarTexture = addBooleanOption("useLegacyHotbarTexture", true);
+				fastHealthBlink = addBooleanOption("fastHealthBlink", true);
+				legacyItemOverlay = addBooleanOption("legacyItemOverlay", true);
+			}
+		}
+
+		public static class ChatTweaks extends Tweak {
+			public final BooleanOption applyScreenSpacingChat;
+			public final BooleanOption applyHudScaleChat;
+
+			public ChatTweaks() {
+				super("chatTweaks", true);
+				setTweakAuthor("Permdog99");
+
+				applyScreenSpacingChat = addBooleanOption("applyScreenSpacingChat", true);
+				applyHudScaleChat = addBooleanOption("applyHudScaleChat", false);
+			}
+		}
+
+		public static class BossBarTweaks extends Tweak {
+			public final BooleanOption legacyBossBar;
+			public final BooleanOption applyScreenSpacingBossHealth;
+			public final BooleanOption applyHudScaleBossHealth;
+
+			public BossBarTweaks() {
+				super("bossBarTweaks", true);
+				setTweakAuthor("Permdog99");
+
+				legacyBossBar = addBooleanOption("legacyBossBar", true);
+				applyScreenSpacingBossHealth = addBooleanOption("applyScreenSpacingBossHealth", true);
+				applyHudScaleBossHealth = addBooleanOption("applyHudScaleBossHealth", false);
+			}
+		}
+
+		public static class EffectsTweaks extends Tweak {
+			public final BooleanOption legacyEffects;
+			public final BooleanOption applyScreenSpacingEffects;
+			public final BooleanOption applyHudScaleEffects;
+
+			public EffectsTweaks() {
+				super("effectsTweaks", true);
+				setTweakAuthor("Permdog99");
+
+				legacyEffects = addBooleanOption("legacyEffects", true);
+				applyScreenSpacingEffects = addBooleanOption("applyScreenSpacingEffects", true);
+				applyHudScaleEffects = addBooleanOption("applyHudScaleEffects", false);
+			}
+		}
+
+		public static class ModdedTweaks extends Tweak {
+			public final IntSliderOption otherScreenSpacingX;
+			public final IntSliderOption otherScreenSpacingY;
+			public final BooleanOption applyScreenSpacingOther;
+			public final BooleanOption applyHudScaleOther;
+
+			public ModdedTweaks() {
+				super("moddedTweaks", true);
+				setTweakAuthor("Permdog99");
+
+				otherScreenSpacingX = addSliderOption("otherScreenSpacingX", 100, 0, 100);
+				otherScreenSpacingY = addSliderOption("otherScreenSpacingY", 100, 0, 100);
+				applyScreenSpacingOther = addBooleanOption("applyScreenSpacingOther", true);
+				applyHudScaleOther = addBooleanOption("applyHudScaleOther", false);
+			}
+		}
+
+		public static class ScoreboardTweaks extends Tweak {
+			public final BooleanOption legacyScoreboard;
+			public final BooleanOption applyScreenSpacingScoreboard;
+			public final BooleanOption applyHudScaleScoreboard;
+
+			public ScoreboardTweaks() {
+				super("scoreboardTweaks", true);
+				setTweakAuthor("Permdog99");
+
+				legacyScoreboard = addBooleanOption("legacyScoreboard", true);
+				applyScreenSpacingScoreboard = addBooleanOption("applyScreenSpacingScoreboard", true);
+				applyHudScaleScoreboard = addBooleanOption("applyHudScaleScoreboard", false);
+			}
+		}
+
+		public static class PaperDollTweaks extends Tweak {
+			public final BooleanOption showPaperDoll;
+			public final BooleanOption applyScreenSpacingPaperDoll;
+			public final BooleanOption applyHudScalePaperDoll;
+
+			public PaperDollTweaks() {
+				super("extraTweaks", true);
+				setTweakAuthor("Permdog99");
+
+				showPaperDoll = addBooleanOption("showPaperDoll", true);
+				applyScreenSpacingPaperDoll = addBooleanOption("applyScreenSpacingPaperDoll", false);
+				applyHudScalePaperDoll = addBooleanOption("applyHudScalePaperDoll", true);
+			}
 		}
 	}
 
