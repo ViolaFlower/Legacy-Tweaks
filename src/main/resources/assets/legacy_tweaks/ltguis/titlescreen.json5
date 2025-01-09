@@ -50,6 +50,13 @@
         "action": "SplashRenderer.render",
         "args": ["^0", "?width", "?font", -256 /*0xffffff00*/]
       }
+    ],
+    "onClose": [
+      {
+        "type": "action",
+        "action": "setScreen",
+        "args": [":parent"]
+      }
     ]
   }
 }
