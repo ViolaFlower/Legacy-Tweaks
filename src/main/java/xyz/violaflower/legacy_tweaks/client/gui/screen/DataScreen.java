@@ -291,6 +291,15 @@ public class DataScreen extends LegacyScreen {
 						}
 					}
 					break c;
+				} else if (type.equals("ifNotNull")) {
+					JsonElement value = object.get("value");
+					if (fromJsonElement(_this, value, optArgs).get() != null) {
+						JsonArray actions = object.getAsJsonArray("actions");
+						for (JsonElement action : actions) {
+							fromJsonElement(_this, action, optArgs);
+						}
+					}
+					break c;
 				}
 			}
 		}
