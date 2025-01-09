@@ -3,7 +3,9 @@ package xyz.violaflower.legacy_tweaks.util.client;
 import com.mojang.blaze3d.platform.Window;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
 public class ScreenUtil {
@@ -27,5 +29,25 @@ public class ScreenUtil {
             lastGuiScale = lastGuiScale - 1;
         }
         return Math.max(1, lastGuiScale);
+    }
+
+    public static boolean is720p() {
+        Window screenWindow = Minecraft.getInstance().getWindow();
+        return screenWindow.getScreenHeight() >= 720 && screenWindow.getScreenHeight() < 1080;
+    }
+
+
+    public static void drawStringOutline(GuiGraphics graphics, Font font, Component component, int x, int y, int outlineColor, float outline) {
+        float[] translations = new float[]{0,outline,-outline};
+        for (float t : translations) {
+            for (float t1 : translations) {
+                if (t != 0 || t1 != 0) {
+                    graphics.pose().pushPose();
+                    graphics.pose().translate(t,t1,0F);
+                    graphics.drawString(font, component, x, y, outlineColor, false);
+                    graphics.pose().popPose();
+                }
+            }
+        }
     }
 }
