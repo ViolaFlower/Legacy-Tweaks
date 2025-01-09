@@ -1,5 +1,6 @@
 package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.layouts.FrameLayout;
@@ -7,6 +8,8 @@ import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.util.client.screen.ScreenUtil;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.DataScreen;
+import xyz.violaflower.legacy_tweaks.util.common.assets.ModAsset;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
@@ -32,7 +35,9 @@ public class LegacyTestScreen extends LegacyScreen {
 		innerFrameLayout = new FrameLayout(getFrameWidth() - 10, 0);
 		innerFrameLayout.defaultChildLayoutSetting().alignVerticallyTop().padding(5);
 		LinearLayout linearLayout = LinearLayout.vertical().spacing(getButtonSpacing());
-		linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
+		linearLayout.addChild(Button.builder(Component.literal("Data driven screen"), button -> {
+			minecraft.setScreen(DataScreen.makeDataDrivenScreen(this, ModAsset.getResourceLocation("ltguis/titlescreen.json5")));
+		}).size(getButtonWidth(), getButtonHeight()).build());
 		linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
 		linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
 		linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {}).size(getButtonWidth(), getButtonHeight()).build());

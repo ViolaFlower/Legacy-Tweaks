@@ -4,9 +4,7 @@ package xyz.violaflower.legacy_tweaks.client;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSyntaxException;
+import com.google.gson.*;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -22,7 +20,9 @@ import xyz.violaflower.legacy_tweaks.LegacyTweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.impl.EyeCandy.Gamma;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class LegacyTweaksResourceManager implements ResourceManagerReloadListener {
@@ -35,8 +35,11 @@ public class LegacyTweaksResourceManager implements ResourceManagerReloadListene
 			).apply(instance, resourceLocations -> resourceLocations)
 	);
 
+	public static final Map<ResourceLocation, JsonObject> dataGuis = new HashMap<>();
+
 	@Override
 	public void onResourceManagerReload(ResourceManager resourceManager) {
+		dataGuis.clear();
 		Minecraft minecraft = Minecraft.getInstance();
 		GLOW_LAYERS.invalidateAll();
 		if (Gamma.gammaEffect != null) {
@@ -63,5 +66,13 @@ public class LegacyTweaksResourceManager implements ResourceManagerReloadListene
 			System.out.println("Intros: " + resourceLocations);
 			//TODO please actually implement this
 		}
+		resourceManager.listResources("ltguis", resourceLocation -> resourceLocation.getPath().endsWith(".json") || resourceLocation.getPath().endsWith(".json5")).forEach((resourceLocation, resource1) -> {
+			try {
+				dataGuis.put(resourceLocation, new GsonBuilder().setLenient().create().fromJson(new String(resource1.open().readAllBytes()), JsonObject.class));
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		});
+		System.out.println(dataGuis);
 	}
 }
