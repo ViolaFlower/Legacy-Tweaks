@@ -75,7 +75,7 @@ public class GuiMixin {
         }
     }
 
-    @Redirect(method="renderPlayerHealth", at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/Gui;healthBlinkTime:J", opcode = Opcodes.PUTFIELD, ordinal = 1))
+    @Redirect(method = /*? if (neoforge) {*//*"renderHealthLevel"*//*?} else {*/"renderPlayerHealth"/*?}*/, at = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/Gui;healthBlinkTime:J", opcode = Opcodes.PUTFIELD, ordinal = 1))
     private void renderPlayerHealth(Gui instance, long value) {
         if (Tweaks.LEGACY_UI.guiHudTweaks.hotbarTweaks.fastHealthBlink.isOn()) healthBlinkTime = value - 6;
     }

@@ -25,8 +25,9 @@ public class LegacyBufferSourceWrapper extends MultiBufferSource.BufferSource {
             public VertexConsumer getBuffer(RenderType renderType) {
                 if (renderType == RenderType.cutout() || renderType == RenderType.solid() || renderType == RenderType.cutoutMipped())
                     return super.getBuffer(RenderType.translucent());
-                if (renderType.format() == DefaultVertexFormat.NEW_ENTITY && renderType instanceof RenderType.CompositeRenderType r && ((CompositeStateAccessor)(Object) ((CompositeRenderTypeAccessor)(Object) r).legacyTweaks$getState()).legacyTweaks$getTextureState() instanceof RenderStateShard.TextureStateShard s && ((TextureStateShardAccessor) s).legacyTweaks$getTexture().isPresent())
-                    return super.getBuffer(RenderType.entityTranslucentCull(((TextureStateShardAccessor) s).legacyTweaks$getTexture().get()));
+                if (renderType.format() == DefaultVertexFormat.NEW_ENTITY && renderType instanceof /*? if (neoforge) {*//*RenderType*//*?} else {*/RenderType.CompositeRenderType/*?}*/ r && ((CompositeStateAccessor) (Object) ((CompositeRenderTypeAccessor) (Object) r).legacyTweaks$getState()).legacyTweaks$getTextureState() instanceof RenderStateShard.TextureStateShard s) {
+                    ((TextureStateShardAccessor) s).legacyTweaks$getTexture();
+                }
                 return super.getBuffer(renderType);
             }
         };
