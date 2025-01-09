@@ -33,7 +33,7 @@ public abstract class SplashRendererMixin {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     private void render(GuiGraphics guiGraphics, int screenWidth, Font font, int color, CallbackInfo ci) {
-        int y = -8;
+        int y = 0;
         float scale = 1.5f;
         float xPos = 0;
         float yPos = 0;
