@@ -25,7 +25,6 @@ public class LegacyTitleScreen extends LegacyScreen {
 	private SplashRenderer splashRenderer;
 	public LegacyTitleScreen() {
 		super(Component.empty());
-
 		this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, LegacyLogoRenderer::getLegacyLogoRenderer);
 	}
 
@@ -104,5 +103,15 @@ public class LegacyTitleScreen extends LegacyScreen {
 
 	@Override
 	public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f) {
+	}
+
+	@Override
+	public boolean isPauseScreen() {
+		return false;
+	}
+
+	@Override
+	public boolean shouldCloseOnEsc() {
+		return false;
 	}
 }
