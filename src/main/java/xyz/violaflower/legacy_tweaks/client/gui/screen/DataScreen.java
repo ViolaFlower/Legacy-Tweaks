@@ -120,7 +120,7 @@ public class DataScreen extends LegacyScreen {
 
 		ACTIONS.put("newFrameLayout", noArgsMethod().of((_this, _return) -> _return.set(new FrameLayout())));
 		ACTIONS.put("newSplashRenderer", noArgsMethod().of((_this, _return) -> _return.set(Minecraft.getInstance().getSplashManager().getSplash())));
-		ACTIONS.put("splashManagerWithCustomText", oneArgMethod().of((_this, _return, arg) -> _return.set(new SplashRenderer(arg.get()))));
+		ACTIONS.put("newSplashManagerWithCustomText", oneArgMethod().of((_this, _return, arg) -> _return.set(new SplashRenderer(arg.get()))));
 		ACTIONS.put("getLegacyLogoRenderer", noArgsMethod().of((_this, _return) -> _return.set(LegacyLogoRenderer.getLegacyLogoRenderer())));
 
 		ACTIONS.put("print", oneArgMethod().of((_this, arg) -> System.out.println(arg)));
