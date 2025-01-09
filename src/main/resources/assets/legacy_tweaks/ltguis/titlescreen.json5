@@ -64,11 +64,17 @@
         "args": ["^0", "?width", 1]
       },
       {
-        "type": "actionTo",
-        "instance": ":splashRenderer",
-        "action": "SplashRenderer.render",
-        "args": ["^0", "?width", "?font", -256 /*0xffffff00*/]
-      }
+        "type": "ifNotNull",
+        "value": ":splashRenderer",
+        "actions": [
+          {
+            "type": "actionTo",
+            "instance": ":splashRenderer",
+            "action": "SplashRenderer.render",
+            "args": ["^0", "?width", "?font", -256 /*0xffffff00*/]
+          }
+        ]
+      },
     ],
     "onClose": [
       {
