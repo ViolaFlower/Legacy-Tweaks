@@ -123,6 +123,9 @@ public class DataScreen extends LegacyScreen {
 		ACTIONS.put("getLegacyLogoRenderer", noArgsMethod().of((_this, _return) -> _return.set(LegacyLogoRenderer.getLegacyLogoRenderer())));
 
 		ACTIONS.put("print", oneArgMethod().of((_this, arg) -> System.out.println(arg)));
+		ACTIONS.put("renderPanorama", (_this, _return, args) -> {
+			this.renderPanorama(args[0].get(), args[1].getAsFloat());
+		});
 	}
 
 	private NoArgsActionBuilder noArgsMethod() {
