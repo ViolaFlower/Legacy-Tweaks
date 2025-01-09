@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.apache.commons.lang3.function.TriConsumer;
 import org.jetbrains.annotations.Nullable;
 import xyz.violaflower.legacy_tweaks.client.LegacyTweaksResourceManager;
+import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.LegacyScreen;
 
 import java.util.Arrays;
@@ -41,6 +42,7 @@ public class DataScreen extends LegacyScreen {
 		GLOBALS.put("null", new Reference(null));
 		this.data = data;
 		setup();
+		ACTIONS.get("<init>").execute(new Reference(this), _void());
 	}
 
 	private final Map<String, Reference> GLOBALS = new HashMap<>();
@@ -54,6 +56,7 @@ public class DataScreen extends LegacyScreen {
 	}
 
 	public void addActions() {
+		ACTIONS.put("<init>", noArgsMethod().of((_this) -> {}));
 		ACTIONS.put("width", noArgsMethod().of((_this, _return) -> {
 			_return.set(_this.<DataScreen>get().width);
 		}));
@@ -78,7 +81,15 @@ public class DataScreen extends LegacyScreen {
 		});
 		ACTIONS.put("SplashRenderer.render", (_this, _return, args) -> {
 			System.out.println(Arrays.toString(args));
-			_this.<SplashRenderer>get().render(args[0].get(), args[1].get(), args[2].get(), args[3].get());
+			_this.<SplashRenderer>get().render(args[0].get(), args[1].getAsInt(), args[2].get(), args[3].getAsInt());
+		});
+		ACTIONS.put("LegacyLogoRenderer.renderLogo", (_this, _return, args) -> {
+			System.out.println(Arrays.toString(args));
+			if (args.length == 3) {
+				_this.<LegacyLogoRenderer>get().renderLogo(args[0].get(), args[1].getAsInt(), args[2].getAsFloat());
+			} else if (args.length == 4) {
+				_this.<LegacyLogoRenderer>get().renderLogo(args[0].get(), args[1].getAsInt(), args[2].getAsFloat(), args[3].getAsInt());
+			} else fail();
 		});
 		ACTIONS.put("super", (_this, _return, args) -> {
 			if (args.length >= 1) {
@@ -94,7 +105,7 @@ public class DataScreen extends LegacyScreen {
 					} case "render" -> {
 						// super.render(guiGraphics, mouseX, mouseY, partialTick);
 						if (args.length != 5) fail();
-						super.render(args[1].get(), args[2].get(), args[3].get(), args[4].get());
+						super.render(args[1].get(), args[2].getAsInt(), args[3].getAsInt(), args[4].getAsFloat());
 					}
 				}
 				return;
@@ -106,6 +117,7 @@ public class DataScreen extends LegacyScreen {
 
 		ACTIONS.put("newFrameLayout", noArgsMethod().of((_this, _return) -> _return.set(new FrameLayout())));
 		ACTIONS.put("newSplashRenderer", noArgsMethod().of((_this, _return) -> _return.set(Minecraft.getInstance().getSplashManager().getSplash())));
+		ACTIONS.put("getLegacyLogoRenderer", noArgsMethod().of((_this, _return) -> _return.set(LegacyLogoRenderer.getLegacyLogoRenderer())));
 
 		ACTIONS.put("print", oneArgMethod().of((_this, arg) -> System.out.println(arg)));
 	}
@@ -156,6 +168,18 @@ public class DataScreen extends LegacyScreen {
 		private Object t;
 		<T> T get() {
 			return (T) t;
+		}
+
+		int getAsInt() {
+			return getAsNumber().intValue();
+		}
+
+		float getAsFloat() {
+			return getAsNumber().floatValue();
+		}
+
+		private Number getAsNumber() {
+			return this.get();
 		}
 
 		void setReference(Reference reference) {
@@ -230,7 +254,7 @@ public class DataScreen extends LegacyScreen {
 					//throw new RuntimeException();
 				}
 			} else if (element instanceof JsonPrimitive primitive && primitive.isNumber()) {
-				r.set(element.getAsInt());
+				r.set(element.getAsNumber());
 				break c;
 			} else if (element instanceof JsonObject object) {
 				String type = object.get("type").getAsString();
