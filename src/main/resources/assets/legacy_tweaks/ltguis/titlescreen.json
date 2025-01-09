@@ -1,0 +1,42 @@
+{
+  "actions": {
+    "init": [
+      {
+        "type": "action",
+        "action": "super",
+        "args": [
+          "init"
+        ]
+      },
+      "?clearWidgets",
+      "?clearFocus",
+      "?makeSplashRendererIfNull",
+      {
+        "type": "putGlobal",
+        "name": "frameLayout",
+        "value": "?newFrameLayout"
+      },
+      {
+        "type": "actionOn",
+        "on": ":frameLayout",
+        "action": "?exampleaction"
+      }
+    ],
+    "makeSplashRenderIfNull": [
+      {
+        "type": "ifNull",
+        "value": {
+          "type": "getGlobal",
+          "name": "splashRenderer"
+        },
+        "actions": [
+          {
+            "type": "putGlobal",
+            "name": "splashRenderer",
+            "value": "?newSplashRenderer"
+          }
+        ]
+      }
+    ]
+  }
+}
