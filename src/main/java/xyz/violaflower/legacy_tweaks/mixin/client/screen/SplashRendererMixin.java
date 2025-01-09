@@ -24,6 +24,9 @@ public abstract class SplashRendererMixin {
     @Shadow
     private final String splash;
 
+    @Shadow @Final private static int WIDTH_OFFSET;
+    @Shadow @Final private static int HEIGH_OFFSET; // why...
+
     protected SplashRendererMixin(String splash) {
         this.splash = splash;
     }
@@ -41,14 +44,14 @@ public abstract class SplashRendererMixin {
             yPos = (float) -34.5;
         }
         guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate((float) screenWidth / 2.0F + 123.0F + xPos, 69.0F + yPos, 0.0F);
+        guiGraphics.pose().translate(screenWidth / 2f + WIDTH_OFFSET + xPos, HEIGH_OFFSET + yPos, 0.0F);
         guiGraphics.pose().mulPose(Axis.ZP.rotationDegrees(-15.0F));
-        float f = 1.8F - Mth.abs(Mth.sin((float) (Util.getMillis() % 1000L) / 1000.0F * ((float) Math.PI * 2F)) * 0.1F);
-        f = (f * 100.0F / (float) (font.width(this.splash) + 32));
-        guiGraphics.pose().scale(f * scale, f * scale, f * scale);
+        float animScale = 1.8F - Mth.abs(Mth.sin((float) (Util.getMillis() % 1000L) / 1000F * ((float) Math.PI * 2F)) * 0.1F);
+        animScale = (animScale * 100.0F / (float) (font.width(this.splash) + 32));
+        guiGraphics.pose().scale(animScale * scale, animScale * scale, animScale * scale);
         EyeCandyHelper.setCompactText(true);
         EyeCandyHelper.setLegacyTextShadows(false);
-        guiGraphics.drawCenteredString(font, this.splash, 0, y, 16776960 | color);
+        guiGraphics.drawCenteredString(font, this.splash, 0, y, 0xffff00 | color);
         EyeCandyHelper.setLegacyTextShadows(true);
         EyeCandyHelper.setCompactText(false);
         guiGraphics.pose().popPose();
