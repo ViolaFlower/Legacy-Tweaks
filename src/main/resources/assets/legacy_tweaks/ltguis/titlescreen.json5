@@ -1,7 +1,7 @@
 {
   "actions": {
     "init": [
-      { // this somehow breaks stuff
+      {
         "type": "action",
         "action": "super",
         "args": [
