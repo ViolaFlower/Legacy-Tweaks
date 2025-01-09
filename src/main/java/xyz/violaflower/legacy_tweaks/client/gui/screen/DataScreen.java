@@ -302,6 +302,7 @@ public class DataScreen extends LegacyScreen {
 					break c;
 				}
 			}
+			fail();
 		}
 		return r;
 	}
