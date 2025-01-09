@@ -1,5 +1,18 @@
 {
   "actions": {
+    "<init>": [
+      {
+        "type": "ifNull",
+        "value": ":logoRenderer",
+        "actions": [
+          {
+            "type": "putGlobal",
+            "name": "logoRenderer",
+            "value": "?getLegacyLogoRenderer"
+          }
+        ]
+      }
+    ],
     "init": [
       {
         "type": "action",
@@ -43,6 +56,12 @@
         "type": "action",
         "action": "super",
         "args": ["render", "^0", "^1", "^2", "^3"]
+      },
+      {
+        "type": "actionTo",
+        "instance": ":logoRenderer",
+        "action": "LegacyLogoRenderer.renderLogo",
+        "args": ["^0", "?width", 1]
       },
       {
         "type": "actionTo",
