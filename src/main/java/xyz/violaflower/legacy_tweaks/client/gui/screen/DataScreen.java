@@ -16,10 +16,7 @@ import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.LegacyScreen;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -191,7 +188,7 @@ public class DataScreen extends LegacyScreen {
 			if (this.get() instanceof Number number) return number;
 			else if (this.get() instanceof String string) {
 				try {
-					return NumberFormat.getInstance().parse(string);
+					return NumberFormat.getInstance(Locale.ROOT).parse(string);
 				} catch (ParseException e) {
 					throw new RuntimeException(e);
 				}
