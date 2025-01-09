@@ -1,9 +1,6 @@
 package xyz.violaflower.legacy_tweaks.client.gui.screen;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
+import com.google.gson.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.SplashRenderer;
@@ -75,9 +72,10 @@ public class DataScreen extends LegacyScreen {
 			Minecraft.getInstance().setScreen(screen.get());
 		}));
 		ACTIONS.put("render", (_this, _return, args) -> {
-			if (_this.get() instanceof DataScreen) {
-				ACTIONS.get("super").execute(_this, _void(), args[0], args[1], args[2], args[3]);
-			}
+			ACTIONS.get("super").execute(_this, _void(), new Reference("render"), args[0], args[1], args[2], args[3]);
+		});
+		ACTIONS.put("renderBackground", (_this, _return, args) -> {
+			ACTIONS.get("super").execute(_this, _void(), new Reference("renderBackground"), args[0], args[1], args[2], args[3]);
 		});
 		ACTIONS.put("SplashRenderer.render", (_this, _return, args) -> {
 			System.out.println(Arrays.toString(args));
@@ -91,6 +89,8 @@ public class DataScreen extends LegacyScreen {
 				_this.<LegacyLogoRenderer>get().renderLogo(args[0].get(), args[1].getAsInt(), args[2].getAsFloat(), args[3].getAsInt());
 			} else fail();
 		});
+
+		// TODO, shouldn't this be its own type like putGlobal?
 		ACTIONS.put("super", (_this, _return, args) -> {
 			if (args.length >= 1) {
 				Reference arg = args[0];
@@ -106,6 +106,9 @@ public class DataScreen extends LegacyScreen {
 						// super.render(guiGraphics, mouseX, mouseY, partialTick);
 						if (args.length != 5) fail();
 						super.render(args[1].get(), args[2].getAsInt(), args[3].getAsInt(), args[4].getAsFloat());
+					} case "renderBackground" -> {
+						if (args.length != 5) fail();
+						super.renderBackground(args[1].get(), args[2].getAsInt(), args[3].getAsInt(), args[4].getAsFloat());
 					}
 				}
 				return;
@@ -204,6 +207,9 @@ public class DataScreen extends LegacyScreen {
 	private static void fail() {
 		throw new RuntimeException("Failed to interpret action!");
 	}
+	private static void fail(JsonElement e) {
+		throw new RuntimeException("Failed to interpret action! " + e);
+	}
 
 	public static Screen makeDataDrivenScreen(Screen parent, ResourceLocation location) {
 		return makeDataDrivenScreen(parent, LegacyTweaksResourceManager.dataGuis.get(location));
@@ -256,6 +262,9 @@ public class DataScreen extends LegacyScreen {
 			} else if (element instanceof JsonPrimitive primitive && primitive.isNumber()) {
 				r.set(element.getAsNumber());
 				break c;
+			} else if (element instanceof JsonNull) {
+				r.set(null);
+				break c;
 			} else if (element instanceof JsonObject object) {
 				String type = object.get("type").getAsString();
 				if (type.equals("action")) {
@@ -302,7 +311,7 @@ public class DataScreen extends LegacyScreen {
 					break c;
 				}
 			}
-			fail();
+			fail(element);
 		}
 		return r;
 	}
@@ -325,5 +334,10 @@ public class DataScreen extends LegacyScreen {
 		ACTIONS.get("render").execute(new Reference(this), _void(), new Reference(guiGraphics), new Reference(mouseX), new Reference(mouseY), new Reference(partialTick));
 //		SplashRenderer renderer = null;
 //		renderer.render(guiGraphics, width, font, 0xffffff00);
+	}
+
+	@Override
+	public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+		ACTIONS.get("renderBackground").execute(new Reference(this), _void(), new Reference(guiGraphics), new Reference(mouseX), new Reference(mouseY), new Reference(partialTick));
 	}
 }
