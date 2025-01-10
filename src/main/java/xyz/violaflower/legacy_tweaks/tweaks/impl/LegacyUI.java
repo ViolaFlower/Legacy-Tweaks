@@ -66,14 +66,14 @@ public class LegacyUI extends Tweak {
 				setTweakAuthor("Permdog99");
 
 				screenSpacing = addSliderOption("screenSpacing", 100, 0, 100);
-				hudScale = addSliderOption("hudScale", 3, 1, 3);
+				hudScale = addSliderOption("hudScale", 2, 1, 3);
 				hudOpacity = addSliderOption("hudOpacity", 80, 0, 100);
 				applyScreenSpacingToast = addBooleanOption("applyScreenSpacingToast", true);
 				applyHudScaleToast = addBooleanOption("applyHudScaleBossHealth", false);
 				inGameTooltips = addBooleanOption("inGameTooltips", true);
 				hideHudInScreen = addBooleanOption("hideHudInScreen", true);
 				applyHudScaleTooltip = addBooleanOption("applyHudScaleTooltip", false);
-				vignette = addBooleanOption("vignette", true);
+				vignette = addBooleanOption("vignette", false);
 				forceDisableHudScale = addBooleanOption("forceDisableHudScale", false);
 			}
 		}
@@ -176,16 +176,18 @@ public class LegacyUI extends Tweak {
 
 		public static class PaperDollTweaks extends Tweak {
 			public final BooleanOption showPaperDoll;
+			public final BooleanOption smoothPaperDoll;
 			public final BooleanOption applyScreenSpacingPaperDoll;
 			public final BooleanOption applyHudScalePaperDoll;
 
 			public PaperDollTweaks() {
-				super("extraTweaks", true);
+				super("paperDollTweaks", true);
 				setTweakAuthor("Permdog99");
 
 				showPaperDoll = addBooleanOption("showPaperDoll", true);
+				smoothPaperDoll = addBooleanOption("smoothPaperDoll", false);
 				applyScreenSpacingPaperDoll = addBooleanOption("applyScreenSpacingPaperDoll", false);
-				applyHudScalePaperDoll = addBooleanOption("applyHudScalePaperDoll", true);
+				applyHudScalePaperDoll = addBooleanOption("applyHudScalePaperDoll", false);
 			}
 		}
 	}

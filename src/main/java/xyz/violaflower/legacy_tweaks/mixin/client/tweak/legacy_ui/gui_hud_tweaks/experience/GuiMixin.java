@@ -17,10 +17,11 @@ public abstract class GuiMixin {
     public void startExperienceRender(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if (HudHelper.guiHudTweaks.hotbarTweaks.legacyExperienceText.isOn()) {
             ci.cancel();
-            HudHelper.startAlt(guiGraphics, HudElements.EXPERIENCE);
+            HudHelper.startNew(guiGraphics, false, true, 3f/HudHelper.getHudScale(HudElements.EXPERIENCE), HudHelper.getHudOpacity(), 0f, -HudHelper.getHudSpacing(true, false));
+//            HudHelper.startAlt(guiGraphics, HudElements.EXPERIENCE);
             HudHelper.createLegacyExperienceText(guiGraphics);
         } else {
-            HudHelper.start(guiGraphics, HudElements.EXPERIENCE);
+            HudHelper.start(guiGraphics, HudElements.EXPERIENCE, true);
         }
     }
 

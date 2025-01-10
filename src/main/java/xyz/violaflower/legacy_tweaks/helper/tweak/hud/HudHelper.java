@@ -17,7 +17,7 @@ public class HudHelper {
     public static final LegacyUI.GuiHudTweaks guiHudTweaks = Tweaks.LEGACY_UI.guiHudTweaks;
     public static long lastHotbarSelectionChange = -1;
 
-    public static void start(GuiGraphics guiGraphics, HudElements hudElements) {
+    public static void start(GuiGraphics guiGraphics, HudElements hudElements, boolean useHudScale) {
         PoseStack poseStack = guiGraphics.pose();
         poseStack.pushPose();
         RenderSystem.enableBlend();
@@ -27,11 +27,33 @@ public class HudHelper {
 
         setScreenSpacingOffset(guiGraphics, hudElements);
         startHudScaleOffsetTranslate(guiGraphics, hudElements);
-        poseStack.scale(3f/getHudScale(hudElements), 3f/getHudScale(hudElements), 3f/getHudScale(hudElements));
+        if (useHudScale) poseStack.scale(3f/getHudScale(hudElements), 3f/getHudScale(hudElements), 3f/getHudScale(hudElements));
         endHudScaleOffsetTranslate(guiGraphics, hudElements);
         guiGraphics.setColor(1.0f,1.0f,1.0f, getHudOpacity());
 
         if (HudHelper.getHudOpacity() < 1.0) {
+            ScreenUtil.guiBufferSourceOverride = LegacyBufferSourceWrapper.translucent(guiGraphics.bufferSource());
+        }
+    }
+
+    public static void startNew(GuiGraphics guiGraphics, boolean extraScale, boolean useLegacyText,  float hudScale, float hudOpacity, float screenSpaceX, float screenSpaceY) {
+        PoseStack poseStack = guiGraphics.pose();
+        poseStack.pushPose();
+        RenderSystem.enableBlend();
+
+        if (!useLegacyText) {
+            EyeCandyHelper.setCompactText(true);
+            EyeCandyHelper.setLegacyTextShadows(false);
+        }
+
+        poseStack.translate(screenSpaceX, screenSpaceY, 0f);
+        guiGraphics.pose().translate(guiGraphics.guiWidth()/2f, guiGraphics.guiHeight(),0.0F);
+        poseStack.scale(hudScale, hudScale, hudScale);
+        if (extraScale) poseStack.scale(hudScale, hudScale, hudScale);
+        guiGraphics.pose().translate(-guiGraphics.guiWidth()/2, -guiGraphics.guiHeight(),0);
+        guiGraphics.setColor(1.0f,1.0f,1.0f, hudOpacity);
+
+        if (hudOpacity < 1.0) {
             ScreenUtil.guiBufferSourceOverride = LegacyBufferSourceWrapper.translucent(guiGraphics.bufferSource());
         }
     }
@@ -46,8 +68,10 @@ public class HudHelper {
 
         float guiScale = guiHudTweaks.generalTweaks.hudScale.get().floatValue();
         float scaled = guiScale == 1 ? 1.0f : 1.5f;
+        startHudScaleOffsetTranslate(guiGraphics, hudElements);
         poseStack.scale(1.0f/scaled, 1.0f/scaled, 1.0f/scaled);
-        if (guiScale != 1) guiGraphics.pose().translate(150d, 150d,0d);
+//        if (guiScale != 1) guiGraphics.pose().translate(150d, 150d,0d);
+        endHudScaleOffsetTranslate(guiGraphics, hudElements);
         guiGraphics.setColor(1.0f,1.0f,1.0f, getHudOpacity());
     }
 
@@ -70,9 +94,9 @@ public class HudHelper {
         PoseStack poseStack = guiGraphics.pose();
         switch (hudElements) {
             case HOTBAR -> poseStack.translate(0f, -getHudSpacing(true, false), 0f);
-            case ITEM_OVERLAY -> poseStack.translate(0f, -getHudSpacing(true, false)/5f, 0f);
+            case ITEM_OVERLAY -> poseStack.translate(0f, 0, 0f);
             case EXPERIENCE -> poseStack.translate(0f, -getHudSpacing(true, false) - (guiHudTweaks.hotbarTweaks.legacyExperienceText.isOn() ? 0.0f : 2.2f * getHudScaleAlt(HudElements.HOTBAR)), 0f);
-            case CHAT -> poseStack.translate(0f, -getHudSpacing(true, false) * getHudScaleAlt(HudElements.HOTBAR), 0f);
+            case CHAT -> poseStack.translate(-getHudSpacing(true, false)/getHudScaleAlt(HudElements.HOTBAR), -getHudSpacing(true, false) * getHudScaleAlt(HudElements.HOTBAR), 0f);
             case SCOREBOARD -> poseStack.translate(-getHudSpacing(false, true), 0f, 0f);
             case BOSS_HEALTH -> poseStack.translate(0f, 12f + 16f * guiHudTweaks.generalTweaks.screenSpacing.get().floatValue()/100, 0f);
             case TOAST -> poseStack.translate(-getHudSpacing(false, true), getHudSpacing(false, true), 0f);
@@ -81,13 +105,15 @@ public class HudHelper {
     }
 
     public static void startHudScaleOffsetTranslate(GuiGraphics guiGraphics, HudElements hudElements) {
-        if (hudElements.isScaleTweakOff()) return;
         guiGraphics.pose().translate(guiGraphics.guiWidth()/2f, guiGraphics.guiHeight(),0.0F);
     }
 
     public static void endHudScaleOffsetTranslate(GuiGraphics guiGraphics, HudElements hudElements) {
-        if (hudElements.isScaleTweakOff()) return;
         guiGraphics.pose().translate(-guiGraphics.guiWidth()/2, -guiGraphics.guiHeight(),0);
+    }
+
+    public static void fixHudScaleOffsetTranslate(GuiGraphics guiGraphics, HudElements hudElements) {
+        guiGraphics.pose().translate(-guiGraphics.guiWidth()/3, -guiGraphics.guiHeight()/1.5,0);
     }
 
     public static float getHudScale(HudElements hudElements) {

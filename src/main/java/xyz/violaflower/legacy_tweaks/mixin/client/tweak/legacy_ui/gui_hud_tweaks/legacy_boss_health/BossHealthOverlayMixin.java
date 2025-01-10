@@ -56,7 +56,7 @@ public abstract class BossHealthOverlayMixin {
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;push(Ljava/lang/String;)V"))
     private void startBossBarTranslate(GuiGraphics guiGraphics, CallbackInfo ci) {
-        HudHelper.start(guiGraphics, HudElements.BOSS_HEALTH);
+        HudHelper.start(guiGraphics, HudElements.BOSS_HEALTH, true);
     }
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V", shift = At.Shift.AFTER))

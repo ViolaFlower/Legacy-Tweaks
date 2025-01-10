@@ -15,7 +15,7 @@ public class GuiMixin {
 
     @Inject(method = "renderEffects", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;enableBlend()V"))
     private void startSetEffectsDistance(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
-        HudHelper.start(guiGraphics, HudElements.EFFECTS);
+        HudHelper.start(guiGraphics, HudElements.EFFECTS, false);
     }
 
     @Inject(method = "renderEffects", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;disableBlend()V", shift = At.Shift.AFTER))
