@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.client.gui.layouts.FrameLayout;
+import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -77,11 +78,11 @@ public class DataScreen extends LegacyScreen {
 			ACTIONS.get("super").execute(_this, _void(), new Reference("renderBackground"), args[0], args[1], args[2], args[3]);
 		});
 		ACTIONS.put("SplashRenderer.render", (_this, _return, args) -> {
-			System.out.println(Arrays.toString(args));
+			//System.out.println(Arrays.toString(args));
 			_this.<SplashRenderer>get().render(args[0].get(), args[1].getAsInt(), args[2].get(), args[3].getAsInt());
 		});
 		ACTIONS.put("LegacyLogoRenderer.renderLogo", (_this, _return, args) -> {
-			System.out.println(Arrays.toString(args));
+			//System.out.println(Arrays.toString(args));
 			if (args.length == 3) {
 				_this.<LegacyLogoRenderer>get().renderLogo(args[0].get(), args[1].getAsInt(), args[2].getAsFloat());
 			} else if (args.length == 4) {
@@ -118,6 +119,7 @@ public class DataScreen extends LegacyScreen {
 		ACTIONS.put("clearFocus", noArgsMethod().of(this_ -> this_.<DataScreen>get().clearFocus()));
 
 		ACTIONS.put("newFrameLayout", noArgsMethod().of((_this, _return) -> _return.set(new FrameLayout())));
+		ACTIONS.put("newLinearLayout", oneArgMethod().of((_this, _return, arg) -> _return.set("vertical".equals(arg.get()) ? LinearLayout.vertical() : "horizontal".equals(arg.get()) ? LinearLayout.horizontal() : fail())));
 		ACTIONS.put("newSplashRenderer", noArgsMethod().of((_this, _return) -> _return.set(Minecraft.getInstance().getSplashManager().getSplash())));
 		ACTIONS.put("newSplashManagerWithCustomText", oneArgMethod().of((_this, _return, arg) -> _return.set(new SplashRenderer(arg.get()))));
 		ACTIONS.put("getLegacyLogoRenderer", noArgsMethod().of((_this, _return) -> _return.set(LegacyLogoRenderer.getLegacyLogoRenderer())));
@@ -215,10 +217,10 @@ public class DataScreen extends LegacyScreen {
 		void execute(Reference this_, Reference return_, Reference... args);
 	}
 
-	private static void fail() {
+	private static <T> T fail() {
 		throw new RuntimeException("Failed to interpret action!");
 	}
-	private static void fail(JsonElement e) {
+	private static <T> T fail(JsonElement e) {
 		throw new RuntimeException("Failed to interpret action! " + e);
 	}
 
@@ -244,10 +246,10 @@ public class DataScreen extends LegacyScreen {
 	}
 
 	private Reference fromJsonElement(Reference _this, JsonElement element) {
-		return fromJsonElement(_this, element, null);
+		return fromJsonElement(_this, element, _void(), null);
 	}
 	// perfect
-	private Reference fromJsonElement(Reference _this, JsonElement element, @Nullable Reference[] optArgs) {
+	private Reference fromJsonElement(Reference _this, JsonElement element, Reference _return, @Nullable Reference[] optArgs) {
 		//@Nullable Reference[] optArgs;
 		//if (_optArgs != null) optArgs = Arrays.stream(_optArgs).map(a -> new Reference(a.get())).toArray(Reference[]::new);
 		//else optArgs = null;
@@ -262,7 +264,7 @@ public class DataScreen extends LegacyScreen {
 					r.setReference(GLOBALS.get(string.substring(1)));
 					break c; // returns the result
 				} else if (string.startsWith("^") && optArgs != null) {
-					System.out.println(Arrays.toString(optArgs));
+					//System.out.println(Arrays.toString(optArgs));
 					r.setReference(optArgs[Integer.parseInt(string.substring(1))]);
 					break c;
 				} else {
@@ -281,22 +283,22 @@ public class DataScreen extends LegacyScreen {
 				if (type.equals("action")) {
 					Reference[] args = new Reference[0];
 					if (object.has("args")) {
-						args = object.getAsJsonArray("args").asList().stream().map(a -> fromJsonElement(_this, a, optArgs)).toList().toArray(Reference[]::new);
+						args = object.getAsJsonArray("args").asList().stream().map(a -> fromJsonElement(_this, a, _return, optArgs)).toList().toArray(Reference[]::new);
 					}
 					ACTIONS.get(object.get("action").getAsString()).execute(_this, r, args);
 					break c; // returns the result
 				} else if (type.equals("actionTo")) {
-					Reference instance = fromJsonElement(_this, object.get("instance"), optArgs);
+					Reference instance = fromJsonElement(_this, object.get("instance"), _return, optArgs);
 					Reference[] args = new Reference[0];
 					if (object.has("args")) {
-						args = object.getAsJsonArray("args").asList().stream().map(a -> fromJsonElement(_this, a, optArgs)).toList().toArray(Reference[]::new);
+						args = object.getAsJsonArray("args").asList().stream().map(a -> fromJsonElement(_this, a, _return, optArgs)).toList().toArray(Reference[]::new);
 					}
 					ACTIONS.get(object.get("action").getAsString()).execute(instance, r, args);
 					break c; // returns the result
 				} else if (type.equals("putGlobal")) {
 					String name = object.get("name").getAsString();
 					JsonElement jsonElement = object.get("value");
-					GLOBALS.put(name, fromJsonElement(_this, jsonElement, optArgs));
+					GLOBALS.put(name, fromJsonElement(_this, jsonElement, _return, optArgs));
 					break c; // returns null
 				} else if (type.equals("getGlobal")) {
 					String name = object.get("name").getAsString();
@@ -304,21 +306,25 @@ public class DataScreen extends LegacyScreen {
 					break c; // returns the global
 				} else if (type.equals("ifNull")) {
 					JsonElement value = object.get("value");
-					if (fromJsonElement(_this, value, optArgs).get() == null) {
+					if (fromJsonElement(_this, value, _return, optArgs).get() == null) {
 						JsonArray actions = object.getAsJsonArray("actions");
 						for (JsonElement action : actions) {
-							fromJsonElement(_this, action, optArgs);
+							fromJsonElement(_this, action, _return, optArgs);
 						}
 					}
 					break c;
 				} else if (type.equals("ifNotNull")) {
 					JsonElement value = object.get("value");
-					if (fromJsonElement(_this, value, optArgs).get() != null) {
+					if (fromJsonElement(_this, value, _return, optArgs).get() != null) {
 						JsonArray actions = object.getAsJsonArray("actions");
 						for (JsonElement action : actions) {
-							fromJsonElement(_this, action, optArgs);
+							fromJsonElement(_this, action, _return, optArgs);
 						}
 					}
+					break c;
+				} else if (type.equals("return")) {
+					JsonElement value = object.get("value");
+					_return.setReference(fromJsonElement(_this, value, _return, optArgs));
 					break c;
 				}
 			}
@@ -330,7 +336,7 @@ public class DataScreen extends LegacyScreen {
 	private Action fromJsonArray(JsonArray array) {
 		return (_this, _return, args) -> {
 			for (JsonElement jsonElement : array) {
-				fromJsonElement(_this, jsonElement, args);
+				fromJsonElement(_this, jsonElement, _return, args);
 			}
 		};
 	}
