@@ -72,6 +72,9 @@ public class MipmapTypeHelper {
         }
     }
 
+    // Dynamically added to MipmapGenerator via a mixin plugin
+    public static void aastoreMarker() {}
+
     /// Adds manual mipmaps in `textures/ltmipmaps`
     public static void addManualMipmaps(int mipmapLevels, NativeImage[] mipmaps, ResourceLocation currentResourceLocation) {
         if (!Tweaks.MIPMAPPING.manualMipmapping.isEnabled()) return;

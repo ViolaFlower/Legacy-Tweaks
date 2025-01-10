@@ -1,8 +1,10 @@
 package xyz.violaflower.legacy_tweaks.mixin.client.tweak.mipmapping;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.renderer.texture.MipmapGenerator;
 import net.minecraft.resources.ResourceLocation;
+import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -27,10 +29,9 @@ public class MipmapGeneratorMixin {
         MipmapTypeHelper.setMipmapType(nativeImages, i, currentResourceLocation, cir);
     }
 
-    @Inject(method = "generateMipLevels", at = @At("RETURN"))
-    private static void changeJavaMipmaps(NativeImage[] images, int mipmapLevels, CallbackInfoReturnable<NativeImage[]> cir) {
-        ResourceLocation currentResourceLocation = MipmapTypeHelper.currentResourceLocation;
-        if (currentResourceLocation == null) return; // if it's already been canceled, don't do it again.
-        MipmapTypeHelper.addManualMipmaps(mipmapLevels, cir.getReturnValue(), currentResourceLocation);
+    @Dynamic // this is some cursed stuff
+    @Inject(method = "generateMipLevels", at = @At(value = "INVOKE", target = "Lxyz/violaflower/legacy_tweaks/helper/tweak/texture/MipmapTypeHelper;aastoreMarker()V", ordinal = 2))
+    private static void changeJavaMipmaps(NativeImage[] images, int mipmapLevels, CallbackInfoReturnable<NativeImage[]> cir, @Local(ordinal = 1) int level, @Local(ordinal = 1) NativeImage[] nativeImages) {
+        MipmapTypeHelper.maybeGetMipmapForLevel(level, g -> nativeImages[level] = g, MipmapTypeHelper.currentResourceLocation);
     }
 }
