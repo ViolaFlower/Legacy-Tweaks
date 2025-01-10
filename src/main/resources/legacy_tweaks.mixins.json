@@ -35,6 +35,7 @@
     "client.tweak.legacy_chat.ChatComponentMixin",
     "client.tweak.legacy_fog.FogRendererMixin",
     "client.tweak.legacy_ui.gui_hud_tweaks.chat.GuiMixin",
+    "client.tweak.legacy_ui.gui_hud_tweaks.crosshair.GuiMixin",
     "client.tweak.legacy_ui.gui_hud_tweaks.effects.GuiMixin",
     "client.tweak.legacy_ui.gui_hud_tweaks.experience.GuiMixin",
     "client.tweak.legacy_ui.gui_hud_tweaks.hotbar.GuiMixin",
