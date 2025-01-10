@@ -141,6 +141,8 @@ public class MipmapTypeHelper {
             for(int i = 1; i <= mipmap; ++i) {
                 if (i < originals.length) {
                     nativeImages[i] = originals[i];
+                    int finalI = i;
+                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
                 } else {
                     NativeImage nativeImage = nativeImages[i - 1];
                     NativeImage nativeImage2 = new NativeImage(nativeImage.getWidth() >> 1, nativeImage.getHeight() >> 1, false);
@@ -179,6 +181,8 @@ public class MipmapTypeHelper {
             for(int i = 1; i <= mipmap; ++i) {
                 if (i < originals.length) {
                     nativeImages[i] = originals[i];
+                    int finalI = i;
+                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
                 } else {
                     NativeImage nativeImage = nativeImages[i - 1];
                     NativeImage nativeImage2 = new NativeImage(nativeImage.getWidth() >> 1, nativeImage.getHeight() >> 1, false);
@@ -217,6 +221,8 @@ public class MipmapTypeHelper {
             for(int i = 1; i <= mipmap; ++i) {
                 if (i < originals.length) {
                     nativeImages[i] = originals[i];
+                    int finalI = i;
+                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
                 } else {
                     NativeImage nativeImage = nativeImages[i == 2 ? 0 : i - 1];
                     NativeImage nativeImage2 = new NativeImage(i == 2 ? (nativeImage.getWidth() >> 2) : (nativeImage.getWidth() >> 1), i == 2 ? (nativeImage.getHeight() >> 2) : (nativeImage.getHeight() >> 1), false);
@@ -246,7 +252,9 @@ public class MipmapTypeHelper {
      * @param originals The original textures before mipped
      * @param mipmap The mipmap level to mip to
      * @return Returns the created mipped textures
+     * @deprecated This isn't used.
      */
+    @Deprecated
     public static NativeImage[] mipmapJava(NativeImage[] originals, int mipmap) {
         if (mipmap + 1 <= originals.length) {
             return originals;
@@ -258,6 +266,8 @@ public class MipmapTypeHelper {
             for(int i = 1; i <= mipmap; ++i) {
                 if (i < originals.length) {
                     nativeImages[i] = originals[i];
+                    int finalI = i;
+                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
                 } else {
                     NativeImage nativeImage = nativeImages[i - 1];
                     NativeImage nativeImage2 = new NativeImage(nativeImage.getWidth() >> 1, nativeImage.getHeight() >> 1, false);
