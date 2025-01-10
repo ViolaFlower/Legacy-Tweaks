@@ -147,7 +147,7 @@
             "args": ["^0", "?width", "?font", 0xffffff00]
           }
         ]
-      },
+      }
     ],
     "onClose": [
       {
