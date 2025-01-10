@@ -29,6 +29,7 @@ public class MipmapGeneratorMixin {
         MipmapTypeHelper.setMipmapType(nativeImages, i, currentResourceLocation, cir);
     }
 
+    // Since there is no way to inject after an AASTORE instruction, a mixin plugin is used to add aastoreMarker() after every AASTORE call.
     @Dynamic // this is some cursed stuff
     @Inject(method = "generateMipLevels", at = @At(value = "INVOKE", target = "Lxyz/violaflower/legacy_tweaks/helper/tweak/texture/MipmapTypeHelper;aastoreMarker()V", ordinal = 2))
     private static void changeJavaMipmaps(NativeImage[] images, int mipmapLevels, CallbackInfoReturnable<NativeImage[]> cir, @Local(ordinal = 1) int level, @Local(ordinal = 1) NativeImage[] nativeImages) {

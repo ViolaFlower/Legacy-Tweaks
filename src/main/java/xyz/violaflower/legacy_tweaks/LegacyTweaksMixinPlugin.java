@@ -39,11 +39,12 @@ public class LegacyTweaksMixinPlugin implements IMixinConfigPlugin {
 
 	@Override
 	public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
-		if (mixinClassName.contains("MipmapGeneratorMixin")) {
-			System.out.println(mixinClassName);
+		// we need to inject after an AASTORE instruction
+		if (mixinClassName.equals("xyz.violaflower.legacy_tweaks.mixin.client.tweak.mipmapping.MipmapGeneratorMixin")) {
 			for (MethodNode method : targetClass.methods) {
 				for (AbstractInsnNode instruction : method.instructions) {
 					if (instruction.getOpcode() == Opcodes.AASTORE) {
+						// add a call to aastoreMarker()
 						method.instructions.insert(instruction, new MethodInsnNode(Opcodes.INVOKESTATIC, "xyz/violaflower/legacy_tweaks/helper/tweak/texture/MipmapTypeHelper", "aastoreMarker", "()V"));
 					}
 				}
