@@ -31,7 +31,9 @@
     "another-mod": "*"
   },
   "breaks": {
-    "legacy": "*",
     "bedrockwaters": "*"
+  },
+  "conflicts": {
+    "legacy": "*"
   }
 }
