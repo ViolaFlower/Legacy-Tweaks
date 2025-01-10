@@ -179,7 +179,7 @@
   "tweak.legacy_tweaks.setting.mipmapping.mipmapType.description": "Set the mipmapping/LOD style based on a specific LCE update.",
   "tweak.legacy_tweaks.setting.mipmapping.mipmapType.option.type": "Type",
   "tweak.legacy_tweaks.setting.mipmapping.manualMipmapping": "Manual Mipmapping",
-  "tweak.legacy_tweaks.setting.mipmapping.manualMipmapping.description": "[CURRENTLY DOES NOTHING] Allow resource packs to add in manual mipmaps for fine tuning.",
+  "tweak.legacy_tweaks.setting.mipmapping.manualMipmapping.description": "Allow resource packs to add in manual mipmaps for fine tuning.",
 
   "tweak.legacy_tweaks.setting.stubTweak": "Stub Tweak",
   "tweak.legacy_tweaks.setting.stubTweak.description": "This does absolutely nothing.",

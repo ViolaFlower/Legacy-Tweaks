@@ -6,14 +6,17 @@ package xyz.violaflower.legacy_tweaks.helper.tweak.texture;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.Util;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapTypes;
 
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.InputStream;
 import java.nio.file.Path;
+import java.util.Optional;
 
 /**
  * Mipmap helper for creating mipmap types
@@ -34,31 +37,78 @@ public class MipmapTypeHelper {
             switch (Tweaks.MIPMAPPING.mipmapType.mipmapType.get()) {
                 case MipmapTypes.TU1 -> {
                     cir.setReturnValue(mipmapTU1(originals, mipmapLevel));
+                    currentResourceLocation = null;
                     cir.cancel();
                 }
                 case MipmapTypes.TU3 -> {
                     cir.setReturnValue(mipmapTU3(originals, mipmapLevel));
+                    currentResourceLocation = null;
                     cir.cancel();
                 }
                 case MipmapTypes.TU12 -> {
                     cir.setReturnValue(mipmapTU12(originals, mipmapLevel));
+                    currentResourceLocation = null;
                     cir.cancel();
                 }
                 case MipmapTypes.JAVA -> {
                 }
             }
-            Path path = Path.of("images/" + mipmapLevel);
-            path.toFile().mkdirs();
-            int i = 0;
-            NativeImage[] returnValue = cir.getReturnValue();
-            if (returnValue == null) return;
-            for (NativeImage nativeImage : returnValue) {
-                Path resolve = path.resolve(resourceLocation + "/" + i + ".png");
-                resolve.getParent().toFile().mkdirs();
-                nativeImage.writeToFile(resolve);
-                i++;
+            // uncomment to export the generated mipmaps
+            // exportGeneratedMipmaps(cir.getReturnValue(), resourceLocation);
+        }
+    }
+
+    private static void exportGeneratedMipmaps(NativeImage[] images, ResourceLocation resourceLocation) throws IOException {
+        if (images == null) return;
+        Path path = Path.of("images/");
+        path.toFile().mkdirs();
+        int i = 0;
+        for (NativeImage nativeImage : images) {
+            Path resolve = path.resolve(resourceLocation + "/" + i + ".png");
+            resolve.getParent().toFile().mkdirs();
+            nativeImage.writeToFile(resolve);
+            i++;
+        }
+    }
+
+    /// Adds manual mipmaps in `textures/ltmipmaps`
+    public static void addManualMipmaps(int mipmapLevels, NativeImage[] mipmaps, ResourceLocation currentResourceLocation) {
+        if (!Tweaks.MIPMAPPING.manualMipmapping.isEnabled()) return;
+        if (currentResourceLocation == null) return;
+        for (int level = 0; level < mipmapLevels; level++) {
+            Optional<NativeImage> nativeImage = fromResource(ResourceLocation.fromNamespaceAndPath(currentResourceLocation.getNamespace(), "textures/ltmipmaps/" + currentResourceLocation.getPath() + "/" + level + ".png"));
+            if (nativeImage.isPresent()) {
+                mipmaps[level] = nativeImage.get();
             }
         }
+    }
+
+
+    /// Gets an {@link Optional}`<`{@link NativeImage}`>` from a {@link ResourceLocation}
+    private static Optional<NativeImage> fromResource(ResourceLocation resourceLocation) {
+        Optional<Resource> resource1 = Minecraft.getInstance().getResourceManager().getResource(resourceLocation);
+        if (resource1.isEmpty()) return Optional.empty();
+        Resource resource = resource1.get();
+        NativeImage nativeImage;
+        try (InputStream inputStream = resource.open()){
+
+
+            try {
+                nativeImage = NativeImage.read(inputStream);
+            } catch (Throwable var10) {
+                try {
+                    inputStream.close();
+                } catch (Throwable var8) {
+                    var10.addSuppressed(var8);
+                }
+
+                throw var10;
+            }
+        } catch (IOException var11) {
+            System.err.println("Using missing texture, unable to load %s: %s".formatted(resourceLocation, var11));
+            return Optional.empty();
+        }
+        return Optional.of(nativeImage);
     }
 
     /* Mipmap Type Methods */

@@ -11,10 +11,15 @@ public class Mipmapping extends Tweak {
 
     public Mipmapping() {
         super("mipmapping", true);
-        setTweakAuthor("Permdog99");
+        setTweakAuthor("Permdog99", "Jab125");
 
         addSubTweak(mipmapType = new MipmapType());
-        addSubTweak(manualMipmapping = new TweakBuilder("manualMipmapping").authors("Permdog99").setDefaultEnabled(true).build());
+        addSubTweak(manualMipmapping = new TweakBuilder("manualMipmapping").authors("Jab125").setDefaultEnabled(true).onToggled(() -> {
+            Minecraft mc = Minecraft.getInstance();
+            //noinspection ConstantValue
+            if (mc.getResourceManager() != null)
+                mc.reloadResourcePacks();
+        }).build());
     }
 
     public static class MipmapType extends Tweak {
@@ -25,7 +30,6 @@ public class Mipmapping extends Tweak {
             mipmapType = addSliderOption("Mipmap Type", enumProvider(MipmapTypes.JAVA, MipmapTypes::values, MipmapTypes::toString, MipmapTypes::getComponent));
             mipmapType.setConsumer(t -> {
                 Minecraft mc = Minecraft.getInstance();
-
                 //noinspection ConstantValue
                 if (mc.getResourceManager() != null)
                     mc.reloadResourcePacks();

@@ -8,8 +8,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.violaflower.legacy_tweaks.helper.tweak.texture.MipmapTypeHelper;
-import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
-import xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapTypes;
 
 import java.io.IOException;
 
@@ -26,7 +24,16 @@ public class MipmapGeneratorMixin {
     @Inject(method = "generateMipLevels", at = @At("HEAD"), cancellable = true)
     private static void changeMipmapType(NativeImage[] nativeImages, int i, CallbackInfoReturnable<NativeImage[]> cir) throws IOException {
         ResourceLocation currentResourceLocation = MipmapTypeHelper.currentResourceLocation;
-        MipmapTypeHelper.currentResourceLocation = null;
         MipmapTypeHelper.setMipmapType(nativeImages, i, currentResourceLocation, cir);
+        if (cir.isCancelled()) {
+            MipmapTypeHelper.addManualMipmaps(i, cir.getReturnValue(), currentResourceLocation);
+        }
+    }
+
+    @Inject(method = "generateMipLevels", at = @At("RETURN"))
+    private static void changeJavaMipmaps(NativeImage[] images, int mipmapLevels, CallbackInfoReturnable<NativeImage[]> cir) {
+        ResourceLocation currentResourceLocation = MipmapTypeHelper.currentResourceLocation;
+        if (currentResourceLocation == null) return; // if it's already been canceled, don't do it again.
+        MipmapTypeHelper.addManualMipmaps(mipmapLevels, cir.getReturnValue(), currentResourceLocation);
     }
 }

@@ -18,7 +18,7 @@ public class SpriteContentsMixin {
 	private void legacyTweaks$increaseMipLevel(int mipLevel, CallbackInfo ci) {
 		MipmapTypeHelper.currentResourceLocation = this.name;
 		if (this.name == null) {
-			System.out.println(this.name + " is null!");
+			System.err.println(this.name + " is null!");
 		}
 	}
 }
