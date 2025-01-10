@@ -58,7 +58,7 @@
       {
         "type": "action",
         "action": "addButtonToLayoutConditional",
-        "args": ["?_internal.customization.showLeaderboardsButton", ",gui.legacy_tweaks.titleScreen.leaderboards", "@openNotImplementedScreen"]
+        "args": ["?_internal.customization.showLeaderboardsButton", "gui.legacy_tweaks.titleScreen.leaderboards", "@openNotImplementedScreen"]
       },
       {
         "type": "action",
