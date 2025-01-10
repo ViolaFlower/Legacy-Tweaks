@@ -29,11 +29,79 @@
         "name": "frameLayout",
         "value": "?newFrameLayout"
       },
+      {
+        "type": "putGlobal",
+        "name": "linearLayout",
+        "value": "?newVerticalLinearLayout"
+      },
+      {
+        "type": "action",
+        "action": "print",
+        "args": [":linearLayout"]
+      },
+      {
+        "type": "actionTo",
+        "instance": ":linearLayout",
+        "action": "LinearLayout.spacing",
+        "args": ["?getButtonSpacing"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.titleScreen.playGame"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.titleScreen.miniGames"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.titleScreen.leaderboards"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.titleScreen.helpOptions"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.titleScreen.store"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.titleScreen.java"]
+      },
+      {
+        "type": "actionTo",
+        "instance": ":frameLayout",
+        "action": "FrameLayout.addChild",
+        "args": [":linearLayout"]
+      },
+      {
+        "type": "action",
+        "action": "addLayoutWidgets",
+        "args": [":frameLayout"]
+      },
+      "?repositionElements"
 //      {
 //        "type": "actionTo",
 //        "instance": ":frameLayout",
 //        "action": "?exampleaction"
 //      }
+    ],
+    "newVerticalLinearLayout": [
+      {
+        "type": "return",
+        "value": {
+          "type": "action",
+          "action": "newLinearLayout",
+          "args": ["vertical"]
+        }
+      }
     ],
     "makeSplashRendererIfNull": [
       {
@@ -94,6 +162,58 @@
         "action": "renderPanorama",
         "args": ["^0", 1]
       }
-    ]
+    ],
+    "repositionElements": [
+      {
+        "type": "ifNotNull",
+        "value": ":frameLayout",
+        "actions": [
+          {
+            "type": "actionTo",
+            "instance": ":frameLayout",
+            "action": "FrameLayout.setMinWidth",
+            "args": ["?width"]
+          },
+          {
+            "type": "actionTo",
+            "instance": ":frameLayout",
+            "action": "AbstractLayout.setY",
+            "args": ["?getButtonHeightPos"]
+          },
+          {
+            "type": "actionTo",
+            "instance": ":frameLayout",
+            "action": "AbstractLayout.arrangeElements"
+          }
+        ]
+      }
+    ],
+    // helper to more easily add buttons to the linear layout
+    "addButtonToLayout": [{
+      "type": "actionTo",
+      "instance": ":linearLayout",
+      "action": "LinearLayout.addChild",
+      "args": [
+        {
+          "type": "actionTo",
+          "instance": {
+            "type": "actionTo",
+            "instance": {
+              "type": "action",
+              "action": "newButtonBuilder",
+              "args": [
+                {
+                  "type": "action",
+                  "action": "Component.translatable",
+                  "args": ["^0"]
+                }
+              ]
+            },
+            "action": "buttonAutoSize"
+          },
+          "action": "Button.Builder.build"
+        }
+      ]
+    }]
   }
 }

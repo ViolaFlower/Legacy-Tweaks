@@ -3,8 +3,11 @@ package xyz.violaflower.legacy_tweaks.client.gui.screen;
 import com.google.gson.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.SplashRenderer;
+import net.minecraft.client.gui.layouts.AbstractLayout;
 import net.minecraft.client.gui.layouts.FrameLayout;
+import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -52,10 +55,32 @@ public class DataScreen extends LegacyScreen {
 		ACTIONS.get("onClose").execute(new Reference(this), _void());
 	}
 
+	@Override
+	public int getButtonSpacing() {
+		Reference reference = _return();
+		ACTIONS.get("getButtonSpacing").execute(new Reference(this), _return());
+		return reference.getAsInt();
+	}
+
+	@Override
+	public int getButtonHeightPos() {
+		Reference reference = _return();
+		ACTIONS.get("getButtonHeightPos").execute(new Reference(this), _return());
+		return reference.getAsInt();
+	}
+
+	@Override
+	protected void repositionElements() {
+		ACTIONS.get("repositionElements").execute(new Reference(this), _void());
+	}
+
 	public void addActions() {
 		ACTIONS.put("<init>", noArgsMethod().of((_this) -> {}));
 		ACTIONS.put("width", noArgsMethod().of((_this, _return) -> {
 			_return.set(_this.<DataScreen>get().width);
+		}));
+		ACTIONS.put("getButtonSpacing", noArgsMethod().of((_this, _return) -> {
+			ACTIONS.get("super").execute(_this, _return, new Reference("getButtonSpacing"));
 		}));
 		ACTIONS.put("font", noArgsMethod().of((_this, _return) -> {
 			_return.set(_this.<DataScreen>get().font);
@@ -67,6 +92,9 @@ public class DataScreen extends LegacyScreen {
 		}));
 		ACTIONS.put("init", noArgsMethod().of(_this -> {
 			ACTIONS.get("super").execute(_this, _void(), new Reference("init"));
+		}));
+		ACTIONS.put("repositionElements", noArgsMethod().of(_this -> {
+			ACTIONS.get("super").execute(_this, _void(), new Reference("repositionElements"));
 		}));
 		ACTIONS.put("setScreen", oneArgMethod().of((_this, screen) -> {
 			Minecraft.getInstance().setScreen(screen.get());
@@ -90,6 +118,14 @@ public class DataScreen extends LegacyScreen {
 			} else fail();
 		});
 
+		ACTIONS.put("LinearLayout.spacing", oneArgMethod().of((_this, _return, _arg) -> {
+			_return.set(_this.<LinearLayout>get().spacing(_arg.getAsInt()));
+		}));
+
+		ACTIONS.put("getButtonHeightPos", noArgsMethod().of((_this, _return) -> {
+			ACTIONS.get("super").execute(_this, _return, new Reference("getButtonHeightPos"));
+		}));
+
 		// TODO, shouldn't this be its own type like putGlobal?
 		ACTIONS.put("super", (_this, _return, args) -> {
 			if (args.length >= 1) {
@@ -102,6 +138,15 @@ public class DataScreen extends LegacyScreen {
 					} case "onClose" -> {
 						if (args.length != 1) fail();
 						super.onClose();
+					} case "repositionElements" -> {
+						if (args.length != 1) fail();
+						super.repositionElements();
+					} case "getButtonSpacing" -> {
+						if (args.length != 1) fail();
+						_return.set(super.getButtonSpacing());
+					} case "getButtonHeightPos" -> {
+						if (args.length != 1) fail();
+						_return.set(super.getButtonHeightPos());
 					} case "render" -> {
 						// super.render(guiGraphics, mouseX, mouseY, partialTick);
 						if (args.length != 5) fail();
@@ -127,6 +172,41 @@ public class DataScreen extends LegacyScreen {
 		ACTIONS.put("print", oneArgMethod().of((_this, arg) -> System.out.println(arg)));
 		ACTIONS.put("renderPanorama", (_this, _return, args) -> {
 			this.renderPanorama(args[0].get(), args[1].getAsFloat());
+		});
+
+		ACTIONS.put("Component.translatable", oneArgMethod().of((_this, _return, arg) -> {
+			_return.set(Component.translatable(arg.get()));
+		}));
+		ACTIONS.put("newButtonBuilder", (_this, _return, _args) -> {
+			_return.set(Button.builder(_args[0].get(), b -> {} /* TODO button actions */));
+		});
+		ACTIONS.put("Button.Builder.build", (_this, _return, _args) -> {
+			_return.set(_this.<Button.Builder>get().build());
+		});
+		ACTIONS.put("LinearLayout.addChild", (_this, _return, args) -> {
+			// i guess we return void?
+			_this.<LinearLayout>get().addChild(args[0].get());
+		});
+		ACTIONS.put("FrameLayout.addChild", (_this, _return, args) -> {
+			// i guess we return void?
+			_this.<FrameLayout>get().addChild(args[0].get());
+		});
+		ACTIONS.put("FrameLayout.setMinWidth", (_this, _return, args) -> {
+			_this.<FrameLayout>get().setMinWidth(args[0].get());
+			_return.setReference(_this);
+		});
+		ACTIONS.put("AbstractLayout.setY", (_this, _return, args) -> {
+			_this.<AbstractLayout>get().setY(args[0].get());
+		});
+		ACTIONS.put("AbstractLayout.arrangeElements", (_this, _return, args) -> {
+			_this.<AbstractLayout>get().arrangeElements();
+		});
+		ACTIONS.put("buttonAutoSize", (_this, _return, args) -> {
+			_this.<Button.Builder>get().size(this.getButtonWidth(), this.getButtonHeight());
+			_return.setReference(_this);
+		});
+		ACTIONS.put("addLayoutWidgets", (_this, _return, args) -> {
+			args[0].<Layout>get().visitWidgets(_this.<DataScreen>get()::addRenderableWidget);
 		});
 	}
 
@@ -344,6 +424,8 @@ public class DataScreen extends LegacyScreen {
 	@Override
 	protected void init() {
 		ACTIONS.get("init").execute(new Reference(this), _void());
+		//LinearLayout linearLayout = GLOBALS.get("linearLayout").get();
+
 	}
 
 	@Override
