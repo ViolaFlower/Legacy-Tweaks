@@ -10,7 +10,7 @@ Legacy Tweaks is a mod that brings back many Legacy Console Edition features as 
 
 Inspired by Adrenix's [Nostalgic Tweaks](https://modrinth.com/mod/nostalgic-tweaks) and Wilyicaro's [Legacy4J](https://modrinth.com/mod/legacy4j), Legacy Tweaks brings many old Legacy Console Edition features to Java Edition.
 
-Legacy Tweaks contains over 30 tweaks as of version 0.1.0, including everything from GUIs, tooltips, gameplay features, to even recreations of old LCE version menus!
+Legacy Tweaks contains over 40 tweaks as of version 0.1.0, including everything from GUIs, tooltips, gameplay features, to even recreations of old LCE version menus!
 
 # 💬 Join the Community
 Consider joining the [ViolaFlower Discord](https://discord.com/invite/dsBrDdJysn) for sneak peeks and updates on development! By joining, you can:
@@ -20,7 +20,7 @@ Consider joining the [ViolaFlower Discord](https://discord.com/invite/dsBrDdJysn
 - And just hang out with the rest of our community!
 
 ## ❓ Why Choose Legacy Tweaks Over Legacy4J?
-Legacy4J was built as an all-in-one LCE recreation. While on paper, that sounds like a good idea, in reality, it caused problems. Legacy4J is bloated, uncustomizable, and can cause issues with mod compatibility.  
+Legacy4J was built as an all-in-one LCE recreation. While on paper, that sounds like a good idea, in reality, it causes problems. Legacy4J is bloated, not customizable, and can cause issues with mod compatibility.  
 Legacy Tweaks fixes these problems by being built with customizability and mod compatibility in mind.
 
 Overall, Legacy Tweaks was designed to address the issues that plagued Legacy4J from the beginning.
@@ -33,20 +33,20 @@ Please use the issue tracker linked at the top of the page if you are experienci
 
 # ⭐ Features
 
-### 🔍 Accuracy
-- Legacy Tweaks is made up of many accurate tweaks and addons, such as gamma, the crafting menu, the creative menu, accurate tooltips, and much more!
+### ⭐ Legacy Console Edition accuracy
+Legacy Tweaks reimplements a lot of old Legacy Console Edition features into Java Edition! Enjoy classic menu's, the gamma system and more!
 
 ### 🔧 Customizable
-- Unlike other alternatives, Legacy Tweaks is highly customizable. You can disable anything you don't like with just a click of a button!
+Unlike other alternatives, Legacy Tweaks is highly customizable. You can disable anything you don't like with just a click of a button!
 
-### 🚀 Performant and Lightweight
-- Legacy Tweaks addresses key performance issues found in all-in-one alternatives, while being lightweight, customizable, and compatible with other mods.
+### 🚀 Compatibility
+Legacy Tweaks has very good compatibility when it comes to other mods, with them in most cases working fine!
 
 ### 🔨 Multi-loader
-- Legacy Tweaks is available for both Fabric and NeoForge.
+Legacy Tweaks is available for both Fabric and NeoForge.
 
 ### 📩 Up to Date
-- Legacy Tweaks aims to update quickly to new Minecraft versions.
+Legacy Tweaks aims to update quickly to new Minecraft versions.
 
 <img alt="blank" width="500" src="https://cdn.modrinth.com/data/cached_images/ec86d1e5cda784c3f3550b865c0f68532671571d_0.webp">
 
@@ -127,6 +127,7 @@ WIP
 - Jab125
 - Kyrptonaught
 - LimeGradient
+- Permdog99
 
 ### Texture/Model Creation
 - mzov_jen
