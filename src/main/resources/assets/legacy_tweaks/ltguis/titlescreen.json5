@@ -114,12 +114,12 @@
           {
             "type": "putGlobal",
             "name": "splashRenderer",
-            //"value": "?newSplashRenderer"
-            "value": {
-              "type": "action",
-              "action": "newSplashManagerWithCustomText",
-              "args": ["Data driven!"]
-            }
+            "value": "?newSplashRenderer"
+//            "value": {
+//              "type": "action",
+//              "action": "newSplashManagerWithCustomText",
+//              "args": ["Data driven!"]
+//            }
           }
         ]
       }
