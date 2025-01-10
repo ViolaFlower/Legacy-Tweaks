@@ -17,6 +17,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import xyz.violaflower.legacy_tweaks.helper.tweak.hud.HudElements;
 import xyz.violaflower.legacy_tweaks.helper.tweak.hud.HudHelper;
+import xyz.violaflower.legacy_tweaks.helper.tweak.hud.PaperDollHelper;
+import xyz.violaflower.legacy_tweaks.helper.tweak.world.EyeCandyHelper;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
@@ -31,11 +34,11 @@ public class GuiMixin {
 
     @Inject(method = "renderHotbarAndDecorations", at = @At("HEAD"))
     private void startHotbarRender(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
-
+        PaperDollHelper.renderPaperDollStartEnd(guiGraphics, deltaTracker);
         int newSelection = Minecraft.getInstance().player != null ? Minecraft.getInstance().player.getInventory().selected : -1;
         if (lastHotbarSelection >= 0 && lastHotbarSelection != newSelection) HudHelper.lastHotbarSelectionChange = Util.getMillis();
         lastHotbarSelection = newSelection;
-        HudHelper.start(guiGraphics, HudElements.HOTBAR);
+        HudHelper.startNew(guiGraphics, false, false, 3f/HudHelper.getHudScale(HudElements.HOTBAR), HudHelper.getHudOpacity(), 0f, -HudHelper.getHudSpacing(true, false));
     }
 
     @Inject(method = "renderHotbarAndDecorations", at = @At("TAIL"))
@@ -45,7 +48,7 @@ public class GuiMixin {
 
     @Inject(method = "renderOverlayMessage", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;push(Ljava/lang/String;)V"), cancellable = true)
     private void startTooltipRender(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
-        HudHelper.start(guiGraphics, HudElements.HOTBAR);
+        HudHelper.startNew(guiGraphics, false, false, 3f/HudHelper.getHudScale(HudElements.HOTBAR), HudHelper.getHudOpacity(), 0f, -HudHelper.getHudSpacing(true, false));
     }
 
     @Inject(method = "renderOverlayMessage", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V", shift = At.Shift.AFTER))
@@ -55,16 +58,19 @@ public class GuiMixin {
 
     @Inject(method = "renderSelectedItemName", at = @At("HEAD"))
     private void startItemNameRender(GuiGraphics guiGraphics, CallbackInfo ci) {
-        if (HudHelper.guiHudTweaks.hotbarTweaks.legacyItemOverlay.isOn()) {
-            HudHelper.startTooltip(guiGraphics, HudElements.ITEM_OVERLAY);
+        float guiScale = HudHelper.guiHudTweaks.generalTweaks.hudScale.get().floatValue();
+        boolean tweak = HudHelper.guiHudTweaks.hotbarTweaks.legacyItemOverlay.isOn();
+        float scaled = !tweak ? 1.0f : guiScale == 1 ? 1.0f : 1.5f;
+        if (tweak) {
+            EyeCandyHelper.setLegacyTextShadows(true);
+            EyeCandyHelper.setCompactText(false);
         }
+        HudHelper.startNew(guiGraphics, false, true, tweak ? 1.0f/scaled : 1f, HudHelper.getHudOpacity(), 0f, guiScale != 1 ? !tweak ? 0f : -15f : 0f);
     }
 
     @Inject(method = "renderSelectedItemName", at = @At("TAIL"))
     private void endItemNameRender(GuiGraphics guiGraphics, CallbackInfo ci) {
-        if (HudHelper.guiHudTweaks.hotbarTweaks.legacyItemOverlay.isOn()) {
-            HudHelper.end(guiGraphics);
-        }
+        HudHelper.end(guiGraphics);
     }
 
     @ModifyArgs(method = "renderItemHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lnet/minecraft/resources/ResourceLocation;IIII)V", ordinal = 1))

@@ -13,6 +13,7 @@
     "client.accessor.PostChainAccessor",
     "client.accessor.TextureStateShardAccessor",
     "client.networking.NetworkRegistryMixin",
+    "client.screen.AbstractContainerScreenMixin",
     "client.screen.GuiGraphicsMixin",
     "client.screen.ScreenMixin",
     "client.screen.SplashRendererMixin",

@@ -15,7 +15,9 @@ public class GuiMixin {
 
     @Inject(method = "renderChat", at = @At("HEAD"))
     private void startSetChatDistance(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
-        HudHelper.start(guiGraphics, HudElements.CHAT);
+        float guiScale = HudHelper.guiHudTweaks.generalTweaks.hudScale.get().floatValue();
+        float scaled = guiScale == 1 ? 1.0f : guiScale == 2 ? 1.5f : 2.0f;
+        HudHelper.startNew(guiGraphics, false, true, 1.0f/scaled, 1.0f, 0.0f, 0.0f);
     }
 
     @Inject(method = "renderChat", at = @At("TAIL"))
