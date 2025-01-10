@@ -48,32 +48,37 @@
       {
         "type": "action",
         "action": "addButtonToLayout",
-        "args": ["gui.legacy_tweaks.titleScreen.playGame"]
+        "args": ["gui.legacy_tweaks.titleScreen.playGame", "@openSelectWorldScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayoutConditional",
+        "args": ["?_internal.customization.showMinigamesButton", "gui.legacy_tweaks.titleScreen.miniGames", "@openMultiplayerScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayoutConditional",
+        "args": ["?_internal.customization.showLeaderboardsButton", ",gui.legacy_tweaks.titleScreen.leaderboards", "@openNotImplementedScreen"]
       },
       {
         "type": "action",
         "action": "addButtonToLayout",
-        "args": ["gui.legacy_tweaks.titleScreen.miniGames"]
+        "args": ["gui.legacy_tweaks.titleScreen.helpOptions", "@openHelpOptionsScreen"]
       },
       {
         "type": "action",
-        "action": "addButtonToLayout",
-        "args": ["gui.legacy_tweaks.titleScreen.leaderboards"]
+        "action": "addButtonToLayoutConditional",
+        "args": ["?_internal.customization.showMinecraftStoreButton", "gui.legacy_tweaks.titleScreen.store", "@openTestScreen"]
       },
       {
         "type": "action",
-        "action": "addButtonToLayout",
-        "args": ["gui.legacy_tweaks.titleScreen.helpOptions"]
+        "action": "addButtonToLayoutConditional",
+        "args": ["?_internal.customization.showNewMinecraftButton", "gui.legacy_tweaks.titleScreen.java", "@switchToNewMinecraft"]
       },
       {
         "type": "action",
-        "action": "addButtonToLayout",
-        "args": ["gui.legacy_tweaks.titleScreen.store"]
-      },
-      {
-        "type": "action",
-        "action": "addButtonToLayout",
-        "args": ["gui.legacy_tweaks.titleScreen.java"]
+        "action": "addButtonToLayoutConditional",
+        "args": ["?_internal.customization.showQuitButton", "gui.legacy_tweaks.titleScreen.quit", "@quitGame"]
       },
       {
         "type": "actionTo",
@@ -87,11 +92,6 @@
         "args": [":frameLayout"]
       },
       "?repositionElements"
-//      {
-//        "type": "actionTo",
-//        "instance": ":frameLayout",
-//        "action": "?exampleaction"
-//      }
     ],
     "newVerticalLinearLayout": [
       {
@@ -206,7 +206,8 @@
                   "type": "action",
                   "action": "Component.translatable",
                   "args": ["^0"]
-                }
+                },
+                "^1"
               ]
             },
             "action": "buttonAutoSize"
@@ -214,6 +215,32 @@
           "action": "Button.Builder.build"
         }
       ]
-    }]
+    }],
+    // helper to avoid overly verbose stuff
+    "addButtonToLayoutConditional": [
+      {
+        "type": "ifTrue",
+        "value": "^0",
+        "actions": [
+          {
+            "type": "action",
+            "action": "addButtonToLayout",
+            "args": ["^1", "^2"]
+          }
+        ]
+      }
+    ],
+    "shouldCloseOnEsc": [
+      {
+        "type": "return",
+        "value": false
+      }
+    ],
+    "isPauseScreen": [
+      {
+        "type": "return",
+        "value": false
+      }
+    ]
   }
 }

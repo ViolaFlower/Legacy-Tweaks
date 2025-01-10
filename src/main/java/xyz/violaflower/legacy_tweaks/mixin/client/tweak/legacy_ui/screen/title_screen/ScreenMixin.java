@@ -8,8 +8,9 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.LegacyTitleScreen;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.DataScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
+import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 
 @Mixin(Screen.class)
 public class ScreenMixin {
@@ -23,7 +24,7 @@ public class ScreenMixin {
 		}
 		boolean valueChanged = previousQuitButtonOptionValue != Tweaks.LEGACY_UI.legacyTitleScreen.showQuitButton.get();
 		Object this_ = this;
-		if (this_ instanceof LegacyTitleScreen screen && valueChanged) {
+		if (this_ instanceof DataScreen screen && screen.getId().equals(ScreenUtil.TITLE_SCREEN) && valueChanged) {
 			previousQuitButtonOptionValue = Tweaks.LEGACY_UI.legacyTitleScreen.showQuitButton.get();
 			initialized = false;
 		}

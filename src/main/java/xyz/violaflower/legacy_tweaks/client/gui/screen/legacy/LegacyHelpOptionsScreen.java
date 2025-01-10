@@ -27,7 +27,7 @@ public class LegacyHelpOptionsScreen extends LegacyScreen {
     private FrameLayout frameLayout;
     private LegacyLogoRenderer logoRenderer;
 
-    protected LegacyHelpOptionsScreen(Screen parent) {
+    public LegacyHelpOptionsScreen(Screen parent) {
         super(Component.empty());
         this.parent = parent;
         this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, LegacyLogoRenderer::getLegacyLogoRenderer);

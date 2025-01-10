@@ -19,7 +19,7 @@ public class LegacyTestScreen extends LegacyScreen {
 	private FrameLayout frameLayout;
 	private FrameLayout innerFrameLayout;
 
-	protected LegacyTestScreen(Screen parent) {
+	public LegacyTestScreen(Screen parent) {
 		super(Component.empty());
 		this.parent = parent;
 	}
@@ -36,7 +36,7 @@ public class LegacyTestScreen extends LegacyScreen {
 		innerFrameLayout.defaultChildLayoutSetting().alignVerticallyTop().padding(5);
 		LinearLayout linearLayout = LinearLayout.vertical().spacing(getButtonSpacing());
 		linearLayout.addChild(Button.builder(Component.literal("Data driven screen"), button -> {
-			minecraft.setScreen(DataScreen.makeDataDrivenScreen(this, ModAsset.getResourceLocation("ltguis/titlescreen.json5")));
+			minecraft.setScreen(DataScreen.makeDataDrivenScreen(this, ScreenUtil.TITLE_SCREEN));
 		}).size(getButtonWidth(), getButtonHeight()).build());
 		linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
 		linearLayout.addChild(Button.builder(Lang.ScreenNotImplemented.PLACEHOLDER_BUTTON.get(), button -> {}).size(getButtonWidth(), getButtonHeight()).build());
