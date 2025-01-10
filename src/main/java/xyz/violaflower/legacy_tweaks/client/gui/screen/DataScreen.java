@@ -10,23 +10,31 @@ import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.commons.lang3.function.TriConsumer;
 import org.jetbrains.annotations.Nullable;
 import xyz.violaflower.legacy_tweaks.client.LegacyTweaksResourceManager;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
-import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.LegacyScreen;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.*;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
+import xyz.violaflower.legacy_tweaks.tweaks.impl.LegacyUI;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class DataScreen extends LegacyScreen {
 	private final JsonObject data;
 	private final Screen parent;
+	private final ResourceLocation location;
+
 	// use this as a dummy when a method isn't meant to return anything
 	private Reference _void() {
 		return new Reference();
@@ -35,12 +43,13 @@ public class DataScreen extends LegacyScreen {
 	private Reference _return() {
 		return new Reference();
 	}
-	public DataScreen(Screen parent, JsonObject data) {
+	public DataScreen(Screen parent, ResourceLocation location) {
 		super(Component.empty());
 		this.parent = parent;
+		this.location = location;
 		GLOBALS.put("parent", new Reference(this.parent));
 		GLOBALS.put("null", new Reference(null));
-		this.data = data;
+		this.data = LegacyTweaksResourceManager.dataGuis.get(location);
 		setup();
 		ACTIONS.get("<init>").execute(new Reference(this), _void());
 	}
@@ -76,6 +85,8 @@ public class DataScreen extends LegacyScreen {
 
 	public void addActions() {
 		ACTIONS.put("<init>", noArgsMethod().of((_this) -> {}));
+		ACTIONS.put("isPauseScreen", noArgsMethod().of((_this, _return) -> ACTIONS.get("super").execute(_this, _return, new Reference("isPauseScreen"))));
+		ACTIONS.put("shouldCloseOnEsc", noArgsMethod().of((_this, _return) -> ACTIONS.get("super").execute(_this, _return, new Reference("shouldCloseOnEsc"))));
 		ACTIONS.put("width", noArgsMethod().of((_this, _return) -> {
 			_return.set(_this.<DataScreen>get().width);
 		}));
@@ -147,6 +158,12 @@ public class DataScreen extends LegacyScreen {
 					} case "getButtonHeightPos" -> {
 						if (args.length != 1) fail();
 						_return.set(super.getButtonHeightPos());
+					} case "isPauseScreen" -> {
+						if (args.length != 1) fail();
+						_return.set(super.isPauseScreen());
+					} case "shouldCloseOnEsc" -> {
+						if (args.length != 1) fail();
+						_return.set(super.shouldCloseOnEsc());
 					} case "render" -> {
 						// super.render(guiGraphics, mouseX, mouseY, partialTick);
 						if (args.length != 5) fail();
@@ -178,7 +195,8 @@ public class DataScreen extends LegacyScreen {
 			_return.set(Component.translatable(arg.get()));
 		}));
 		ACTIONS.put("newButtonBuilder", (_this, _return, _args) -> {
-			_return.set(Button.builder(_args[0].get(), b -> {} /* TODO button actions */));
+			Consumer<Button> consumer = _args.length < 2 ? b -> {} : b -> _args[1].<Action>get().execute(new Reference(b), _void());
+			_return.set(Button.builder(_args[0].get(), consumer::accept));
 		});
 		ACTIONS.put("Button.Builder.build", (_this, _return, _args) -> {
 			_return.set(_this.<Button.Builder>get().build());
@@ -208,6 +226,35 @@ public class DataScreen extends LegacyScreen {
 		ACTIONS.put("addLayoutWidgets", (_this, _return, args) -> {
 			args[0].<Layout>get().visitWidgets(_this.<DataScreen>get()::addRenderableWidget);
 		});
+		Map<String, Runnable> runnableActions = Map.of(
+				"quitGame", () -> Minecraft.getInstance().stop(),
+				"openMultiplayerScreen", () -> setScreen(JoinMultiplayerScreen::new),
+				"openSelectWorldScreen", () -> setScreen(SelectWorldScreen::new),
+				"openNotImplementedScreen", () -> setScreen(LegacyNotImplementedScreen::new),
+				"openHelpOptionsScreen", () -> setScreen(LegacyHelpOptionsScreen::new),
+				"openTestScreen", () -> setScreen(LegacyTestScreen::new),
+				"switchToNewMinecraft", () -> {
+					Tweaks.LEGACY_UI.legacyTitleScreen.legacyTitleScreen.set(false);
+					Minecraft.getInstance().reloadResourcePacks();
+					new Thread(() -> {
+						long l = System.currentTimeMillis() + 2000;
+						while (System.currentTimeMillis() < l) ;
+						Minecraft.getInstance().tell(() -> Minecraft.getInstance().setScreen(new TitleScreen()));
+					}).start();
+				}
+		);
+		runnableActions.forEach((k, v) -> ACTIONS.put(k, noArgsMethod().of(r -> v.run())));
+		LegacyUI.LegacyTitleScreenTweak legacyTitleScreen = Tweaks.LEGACY_UI.legacyTitleScreen;
+		LegacyUI.LegacyHelpOptionsScreenTweak legacyHelpOptionsScreen = Tweaks.LEGACY_UI.legacyHelpOptionsScreen;
+		Map<String, Supplier<Boolean>> customizationStuff = Map.of(
+				"showMinigamesButton", legacyTitleScreen.showMinigamesButton::isOn,
+				"showLeaderboardsButton", legacyTitleScreen.showLeaderboardsButton::isOn,
+				"useLegacyHelpOptionsScreen", legacyHelpOptionsScreen.useLegacyHelpOptionsScreen::isOn,
+				"showMinecraftStoreButton", legacyTitleScreen.showMinecraftStoreButton::isOn,
+				"showNewMinecraftButton", legacyTitleScreen.showNewMinecraftButton::isOn,
+				"showQuitButton", legacyTitleScreen.showQuitButton::isOn
+		);
+		customizationStuff.forEach((k, v) -> ACTIONS.put("_internal.customization." + k, noArgsMethod().of((r, a) -> a.set(v.get()))));
 	}
 
 	private NoArgsActionBuilder noArgsMethod() {
@@ -266,6 +313,13 @@ public class DataScreen extends LegacyScreen {
 			return getAsNumber().floatValue();
 		}
 
+		boolean getAsBoolean() {
+			if (this.get() instanceof Boolean _boolean) return _boolean;
+			if (this.get() instanceof Number number) return number.doubleValue() > 0;
+			if (this.get() instanceof String string) return Boolean.parseBoolean(string);
+			return Boolean.parseBoolean(Objects.toString(this.get()));
+		}
+
 		private Number getAsNumber() {
 			if (this.get() instanceof Number number) return number;
 			else if (this.get() instanceof String string) {
@@ -281,6 +335,11 @@ public class DataScreen extends LegacyScreen {
 		void setReference(Reference reference) {
 			if (reference == null) this.t = null;
 			else this.t = reference.get();
+		}
+
+		<T> void setReferenceBypass(T t) {
+			if (!(t instanceof Reference)) throw new RuntimeException("NOT A REFERENCE");
+			this.t = t;
 		}
 
 		<T> void set(T t) {
@@ -305,15 +364,7 @@ public class DataScreen extends LegacyScreen {
 	}
 
 	public static Screen makeDataDrivenScreen(Screen parent, ResourceLocation location) {
-		return makeDataDrivenScreen(parent, LegacyTweaksResourceManager.dataGuis.get(location));
-	}
-
-	private static Screen makeDataDrivenScreen(Screen parent, JsonObject object) {
-		return new DataScreen(parent, object);
-	}
-
-	public class ScreenData {
-
+		return new DataScreen(parent, location);
 	}
 
 	private void setup() {
@@ -347,6 +398,9 @@ public class DataScreen extends LegacyScreen {
 					//System.out.println(Arrays.toString(optArgs));
 					r.setReference(optArgs[Integer.parseInt(string.substring(1))]);
 					break c;
+				} else if (string.startsWith("@")) {
+					r.set(ACTIONS.get(string.substring(1)));
+					break c;
 				} else {
 					r.set(string);
 					break c; // returns the steing
@@ -357,6 +411,9 @@ public class DataScreen extends LegacyScreen {
 				break c;
 			} else if (element instanceof JsonNull) {
 				r.set(null);
+				break c;
+			} else if (element instanceof JsonPrimitive primitive && primitive.isBoolean() && ((Boolean)primitive.getAsBoolean()) instanceof Boolean _boolean) {
+				r.set(_boolean);
 				break c;
 			} else if (element instanceof JsonObject object) {
 				String type = object.get("type").getAsString();
@@ -402,6 +459,16 @@ public class DataScreen extends LegacyScreen {
 						}
 					}
 					break c;
+				} else if (type.equals("ifTrue")) {
+					JsonElement value = object.get("value");
+					//noinspection PointlessBooleanExpression as it is easier to read this way.
+					if (fromJsonElement(_this, value, _return, optArgs).getAsBoolean() == true) {
+						JsonArray actions = object.getAsJsonArray("actions");
+						for (JsonElement action : actions) {
+							fromJsonElement(_this, action, _return, optArgs);
+						}
+					}
+					break c;
 				} else if (type.equals("return")) {
 					JsonElement value = object.get("value");
 					_return.setReference(fromJsonElement(_this, value, _return, optArgs));
@@ -438,5 +505,23 @@ public class DataScreen extends LegacyScreen {
 	@Override
 	public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 		ACTIONS.get("renderBackground").execute(new Reference(this), _void(), new Reference(guiGraphics), new Reference(mouseX), new Reference(mouseY), new Reference(partialTick));
+	}
+
+	@Override
+	public boolean isPauseScreen() {
+		Reference reference = _return();
+		ACTIONS.get("isPauseScreen").execute(new Reference(this), reference);
+		return reference.getAsBoolean();
+	}
+
+	@Override
+	public boolean shouldCloseOnEsc() {
+		Reference reference = _return();
+		ACTIONS.get("shouldCloseOnEsc").execute(new Reference(this), reference);
+		return reference.getAsBoolean();
+	}
+
+	public ResourceLocation getId() {
+		return location;
 	}
 }

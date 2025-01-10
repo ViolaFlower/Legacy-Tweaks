@@ -12,11 +12,14 @@ import net.minecraft.util.FastColor;
 import net.minecraft.util.FormattedCharSequence;
 import org.jetbrains.annotations.Nullable;
 import xyz.violaflower.legacy_tweaks.mixin.client.accessor.GuiGraphicsAccessor;
+import net.minecraft.resources.ResourceLocation;
+import xyz.violaflower.legacy_tweaks.util.common.assets.ModAsset;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
 import java.util.Objects;
 
 public class ScreenUtil {
+    public static final ResourceLocation TITLE_SCREEN = ModAsset.getResourceLocation("ltguis/titlescreen.json5");
     public static MultiBufferSource.BufferSource guiBufferSourceOverride = null;
 
     public static boolean isLargeGui() {
