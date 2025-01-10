@@ -19,7 +19,7 @@ import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 import java.util.Objects;
 
 public class ScreenUtil {
-    public static final ResourceLocation TITLE_SCREEN = ModAsset.getResourceLocation("ltguis/titlescreen.json5");
+    public static final ResourceLocation TITLE_SCREEN = ModAsset.getResourceLocation("ltguis/titlescreen.json");
     public static MultiBufferSource.BufferSource guiBufferSourceOverride = null;
 
     public static boolean isLargeGui() {
