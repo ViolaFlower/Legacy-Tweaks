@@ -6,14 +6,20 @@ package xyz.violaflower.legacy_tweaks.helper.tweak.texture;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.Util;
+import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapTypes;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * Mipmap helper for creating mipmap types
  */
 public class MipmapTypeHelper {
+    public static ResourceLocation currentResourceLocation;
 
     /* Main Method */
 
@@ -23,7 +29,7 @@ public class MipmapTypeHelper {
      * @param mipmapLevel The mipmap level to mip to
      * @param cir Returns the mipmap type's method to then mip the textures
      */
-    public static void setMipmapType(NativeImage[] originals, int mipmapLevel, CallbackInfoReturnable<NativeImage[]> cir) {
+    public static void setMipmapType(NativeImage[] originals, int mipmapLevel, ResourceLocation resourceLocation, CallbackInfoReturnable<NativeImage[]> cir) throws IOException {
         if (Tweaks.MIPMAPPING.mipmapType.isEnabled()) {
             switch (Tweaks.MIPMAPPING.mipmapType.mipmapType.get()) {
                 case MipmapTypes.TU1 -> {
@@ -40,6 +46,17 @@ public class MipmapTypeHelper {
                 }
                 case MipmapTypes.JAVA -> {
                 }
+            }
+            Path path = Path.of("images/" + mipmapLevel);
+            path.toFile().mkdirs();
+            int i = 0;
+            NativeImage[] returnValue = cir.getReturnValue();
+            if (returnValue == null) return;
+            for (NativeImage nativeImage : returnValue) {
+                Path resolve = path.resolve(resourceLocation + "/" + i + ".png");
+                resolve.getParent().toFile().mkdirs();
+                nativeImage.writeToFile(resolve);
+                i++;
             }
         }
     }

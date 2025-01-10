@@ -44,6 +44,7 @@
     "client.tweak.legacy_ui.legacy_title_screen.MinecraftMixin",
     "client.tweak.legacy_ui.show_quit_button.ScreenMixin",
     "client.tweak.mipmapping.MipmapGeneratorMixin",
+    "client.tweak.mipmapping.SpriteContentsMixin",
     "client.tweak.window_title.MinecraftMixin",
     "common.tweak.map_changes.MapRendererMixin"
   ],
