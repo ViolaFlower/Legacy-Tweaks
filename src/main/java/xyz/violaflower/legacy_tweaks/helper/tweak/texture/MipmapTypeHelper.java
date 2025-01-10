@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 /**
  * Mipmap helper for creating mipmap types
@@ -83,6 +84,14 @@ public class MipmapTypeHelper {
         }
     }
 
+    /// Adds manual mipmaps in `textures/ltmipmaps`
+    public static void maybeGetMipmapForLevel(int level, Consumer<NativeImage> consumer, ResourceLocation currentResourceLocation) {
+        if (!Tweaks.MIPMAPPING.manualMipmapping.isEnabled()) return;
+        if (currentResourceLocation == null) return;
+        Optional<NativeImage> nativeImage = fromResource(ResourceLocation.fromNamespaceAndPath(currentResourceLocation.getNamespace(), "textures/ltmipmaps/" + currentResourceLocation.getPath() + "/" + level + ".png"));
+		nativeImage.ifPresent(consumer::accept);
+    }
+
 
     /// Gets an {@link Optional}`<`{@link NativeImage}`>` from a {@link ResourceLocation}
     private static Optional<NativeImage> fromResource(ResourceLocation resourceLocation) {
@@ -143,6 +152,8 @@ public class MipmapTypeHelper {
                         }
                     }
                     nativeImages[i] = nativeImage2;
+                    int finalI = i;
+                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
                 }
             }
             return nativeImages;
@@ -179,6 +190,8 @@ public class MipmapTypeHelper {
                         }
                     }
                     nativeImages[i] = nativeImage2;
+                    int finalI = i;
+                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
                 }
             }
             return nativeImages;
@@ -217,6 +230,8 @@ public class MipmapTypeHelper {
                         }
                     }
                     nativeImages[i] = nativeImage2;
+                    int finalI = i;
+                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
                 }
             }
             return nativeImages;
@@ -253,6 +268,8 @@ public class MipmapTypeHelper {
                     }
 
                     nativeImages[i] = nativeImage2;
+                    int finalI = i;
+                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
                 }
             }
 

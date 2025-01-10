@@ -25,9 +25,6 @@ public class MipmapGeneratorMixin {
     private static void changeMipmapType(NativeImage[] nativeImages, int i, CallbackInfoReturnable<NativeImage[]> cir) throws IOException {
         ResourceLocation currentResourceLocation = MipmapTypeHelper.currentResourceLocation;
         MipmapTypeHelper.setMipmapType(nativeImages, i, currentResourceLocation, cir);
-        if (cir.isCancelled()) {
-            MipmapTypeHelper.addManualMipmaps(i, cir.getReturnValue(), currentResourceLocation);
-        }
     }
 
     @Inject(method = "generateMipLevels", at = @At("RETURN"))
