@@ -1,0 +1,46 @@
+{
+  "actions": {
+    // String translationId, Action<Button> buttonAction -> void
+    "addButtonToLayout": [{
+      "type": "actionTo",
+      "instance": ":linearLayout",
+      "action": "LinearLayout.addChild",
+      "args": [
+        {
+          "type": "actionTo",
+          "instance": {
+            "type": "actionTo",
+            "instance": {
+              "type": "action",
+              "action": "newButtonBuilder",
+              "args": [
+                {
+                  "type": "action",
+                  "action": "Component.translatable",
+                  "args": ["^0"]
+                },
+                "^1"
+              ]
+            },
+            "action": "buttonAutoSize"
+          },
+          "action": "Button.Builder.build"
+        }
+      ]
+    }],
+    // boolean condition, String translationId, Action<Button> buttonAction -> void
+    "addButtonToLayoutConditional": [
+      {
+        "type": "ifTrue",
+        "value": "^0",
+        "actions": [
+          {
+            "type": "action",
+            "action": "addButtonToLayout",
+            "args": ["^1", "^2"]
+          }
+        ]
+      }
+    ]
+  }
+}
