@@ -3,21 +3,15 @@
     {
       "type": "importActionsFrom",
       "file": "legacy_tweaks:ltguis/layoututils.json"
+    },
+    {
+      "type": "importActionsFrom",
+      "file": "legacy_tweaks:ltguis/simplebackground.json"
     }
   ],
   "actions": {
     "<init>": [
-      {
-        "type": "ifNull",
-        "value": ":logoRenderer",
-        "actions": [
-          {
-            "type": "putGlobal",
-            "name": "logoRenderer",
-            "value": "?getLegacyLogoRenderer"
-          }
-        ]
-      }
+      "?initLegacyLogoRenderer"
     ],
     "init": [
       {
@@ -51,6 +45,74 @@
         "action": "LinearLayout.spacing",
         "args": ["?getButtonSpacing"]
       },
+      "?addTitleScreenButtons",
+      {
+        "type": "actionTo",
+        "instance": ":frameLayout",
+        "action": "FrameLayout.addChild",
+        "args": [":linearLayout"]
+      },
+      {
+        "type": "action",
+        "action": "addLayoutWidgets",
+        "args": [":frameLayout"]
+      },
+      "?repositionElements"
+    ],
+    "makeSplashRendererIfNull": [
+      {
+        "type": "ifNull",
+        "value": {
+          "type": "getGlobal",
+          "name": "splashRenderer"
+        },
+        "actions": [
+          {
+            "type": "putGlobal",
+            "name": "splashRenderer",
+            "value": "?newSplashRenderer"
+          }
+        ]
+      }
+    ],
+    "render": [
+      {
+        "type": "action",
+        "action": "super",
+        "args": ["render", "^0", "^1", "^2", "^3"]
+      },
+      {
+        "type": "actionTo",
+        "instance": ":logoRenderer",
+        "action": "LegacyLogoRenderer.renderLogo",
+        "args": ["^0", "?width", 1]
+      },
+      {
+        "type": "ifNotNull",
+        "value": ":splashRenderer",
+        "actions": [
+          {
+            "type": "actionTo",
+            "instance": ":splashRenderer",
+            "action": "SplashRenderer.render",
+            "args": ["^0", "?width", "?font", 0xffffff00]
+          }
+        ]
+      }
+    ],
+    "shouldCloseOnEsc": [
+      {
+        "type": "return",
+        "value": false
+      }
+    ],
+    "isPauseScreen": [
+      {
+        "type": "return",
+        "value": false
+      }
+    ],
+    "addTitleScreenButtons": [
       {
         "type": "action",
         "action": "addButtonToLayout",
@@ -85,125 +147,6 @@
         "type": "action",
         "action": "addButtonToLayoutConditional",
         "args": ["?_internal.customization.showQuitButton", "gui.legacy_tweaks.titleScreen.quit", "@quitGame"]
-      },
-      {
-        "type": "actionTo",
-        "instance": ":frameLayout",
-        "action": "FrameLayout.addChild",
-        "args": [":linearLayout"]
-      },
-      {
-        "type": "action",
-        "action": "addLayoutWidgets",
-        "args": [":frameLayout"]
-      },
-      "?repositionElements"
-    ],
-    "newVerticalLinearLayout": [
-      {
-        "type": "return",
-        "value": {
-          "type": "action",
-          "action": "newLinearLayout",
-          "args": ["vertical"]
-        }
-      }
-    ],
-    "makeSplashRendererIfNull": [
-      {
-        "type": "ifNull",
-        "value": {
-          "type": "getGlobal",
-          "name": "splashRenderer"
-        },
-        "actions": [
-          {
-            "type": "putGlobal",
-            "name": "splashRenderer",
-            "value": "?newSplashRenderer"
-//            "value": {
-//              "type": "action",
-//              "action": "newSplashManagerWithCustomText",
-//              "args": ["Data driven!"]
-//            }
-          }
-        ]
-      }
-    ],
-    "render": [
-      {
-        "type": "action",
-        "action": "super",
-        "args": ["render", "^0", "^1", "^2", "^3"]
-      },
-      {
-        "type": "actionTo",
-        "instance": ":logoRenderer",
-        "action": "LegacyLogoRenderer.renderLogo",
-        "args": ["^0", "?width", 1]
-      },
-      {
-        "type": "ifNotNull",
-        "value": ":splashRenderer",
-        "actions": [
-          {
-            "type": "actionTo",
-            "instance": ":splashRenderer",
-            "action": "SplashRenderer.render",
-            "args": ["^0", "?width", "?font", 0xffffff00]
-          }
-        ]
-      }
-    ],
-    "onClose": [
-      {
-        "type": "action",
-        "action": "setScreen",
-        "args": [":parent"]
-      }
-    ],
-    "renderBackground": [
-      {
-        "type": "action",
-        "action": "renderPanorama",
-        "args": ["^0", 1]
-      }
-    ],
-    "repositionElements": [
-      {
-        "type": "ifNotNull",
-        "value": ":frameLayout",
-        "actions": [
-          {
-            "type": "actionTo",
-            "instance": ":frameLayout",
-            "action": "FrameLayout.setMinWidth",
-            "args": ["?width"]
-          },
-          {
-            "type": "actionTo",
-            "instance": ":frameLayout",
-            "action": "AbstractLayout.setY",
-            "args": ["?getButtonHeightPos"]
-          },
-          {
-            "type": "actionTo",
-            "instance": ":frameLayout",
-            "action": "AbstractLayout.arrangeElements"
-          }
-        ]
-      }
-    ],
-    "shouldCloseOnEsc": [
-      {
-        "type": "return",
-        "value": false
-      }
-    ],
-    "isPauseScreen": [
-      {
-        "type": "return",
-        "value": false
       }
     ]
   }

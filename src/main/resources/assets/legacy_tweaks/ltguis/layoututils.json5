@@ -41,6 +41,54 @@
           }
         ]
       }
+    ],
+    "initLegacyLogoRenderer": [
+      {
+        "type": "ifNull",
+        "value": ":logoRenderer",
+        "actions": [
+          {
+            "type": "putGlobal",
+            "name": "logoRenderer",
+            "value": "?getLegacyLogoRenderer"
+          }
+        ]
+      }
+    ],
+    "newVerticalLinearLayout": [
+      {
+        "type": "return",
+        "value": {
+          "type": "action",
+          "action": "newLinearLayout",
+          "args": ["vertical"]
+        }
+      }
+    ],
+    "repositionElements": [
+      {
+        "type": "ifNotNull",
+        "value": ":frameLayout",
+        "actions": [
+          {
+            "type": "actionTo",
+            "instance": ":frameLayout",
+            "action": "FrameLayout.setMinWidth",
+            "args": ["?width"]
+          },
+          {
+            "type": "actionTo",
+            "instance": ":frameLayout",
+            "action": "AbstractLayout.setY",
+            "args": ["?getButtonHeightPos"]
+          },
+          {
+            "type": "actionTo",
+            "instance": ":frameLayout",
+            "action": "AbstractLayout.arrangeElements"
+          }
+        ]
+      }
     ]
   }
 }
