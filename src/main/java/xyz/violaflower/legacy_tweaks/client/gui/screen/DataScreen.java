@@ -264,13 +264,15 @@ public class DataScreen extends LegacyScreen {
 		runnableActions2.forEach((k, v) -> ACTIONS.put(k, noArgsMethod().of(r -> v.run())));
 		LegacyUI.LegacyTitleScreenTweak legacyTitleScreen = Tweaks.LEGACY_UI.legacyTitleScreen;
 		LegacyUI.LegacyHelpOptionsScreenTweak legacyHelpOptionsScreen = Tweaks.LEGACY_UI.legacyHelpOptionsScreen;
+		LegacyUI.LegacyOptionsTweak legacyOptions = Tweaks.LEGACY_UI.legacyOptions;
 		Map<String, Supplier<Boolean>> customizationStuff = Map.of(
 				"showMinigamesButton", legacyTitleScreen.showMinigamesButton::isOn,
 				"showLeaderboardsButton", legacyTitleScreen.showLeaderboardsButton::isOn,
 				"useLegacyHelpOptionsScreen", legacyHelpOptionsScreen.useLegacyHelpOptionsScreen::isOn,
 				"showMinecraftStoreButton", legacyTitleScreen.showMinecraftStoreButton::isOn,
 				"showNewMinecraftButton", legacyTitleScreen.showNewMinecraftButton::isOn,
-				"showQuitButton", legacyTitleScreen.showQuitButton::isOn
+				"showQuitButton", legacyTitleScreen.showQuitButton::isOn,
+				"showJavaOptionsButton", legacyOptions.showJavaOptionsButton::isOn
 		);
 		customizationStuff.forEach((k, v) -> ACTIONS.put("_internal.customization." + k, noArgsMethod().of((r, a) -> a.set(v.get()))));
 	}
