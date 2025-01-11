@@ -7,24 +7,28 @@
       "action": "LinearLayout.addChild",
       "args": [
         {
-          "type": "actionTo",
-          "instance": {
+          "type": "putGlobal",
+          "name": "newlyCreatedWidget",
+          "value": {
             "type": "actionTo",
             "instance": {
-              "type": "action",
-              "action": "newButtonBuilder",
-              "args": [
-                {
-                  "type": "action",
-                  "action": "Component.translatable",
-                  "args": ["^0"]
-                },
-                "^1"
-              ]
+              "type": "actionTo",
+              "instance": {
+                "type": "action",
+                "action": "newButtonBuilder",
+                "args": [
+                  {
+                    "type": "action",
+                    "action": "Component.translatable",
+                    "args": ["^0"]
+                  },
+                  "^1"
+                ]
+              },
+              "action": "buttonAutoSize"
             },
-            "action": "buttonAutoSize"
-          },
-          "action": "Button.Builder.build"
+            "action": "Button.Builder.build"
+          }
         }
       ]
     }],
