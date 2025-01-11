@@ -230,6 +230,9 @@ public class DataScreen extends LegacyScreen {
 		ACTIONS.put("addLayoutWidgets", (_this, _return, args) -> {
 			args[0].<Layout>get().visitWidgets(_this.<DataScreen>get()::addRenderableWidget);
 		});
+		ACTIONS.put("AbstractWidget.active", oneArgMethod().of((_this, _return, _arg) -> {
+			_this.<Button>get().active = _arg.getAsBoolean();
+		}));
 		Map<String, Runnable> runnableActions = Map.of(
 				"quitGame", () -> Minecraft.getInstance().stop(),
 				"openMultiplayerScreen", () -> setScreen(JoinMultiplayerScreen::new),
