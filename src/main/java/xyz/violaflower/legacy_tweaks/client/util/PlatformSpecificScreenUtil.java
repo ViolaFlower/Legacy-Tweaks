@@ -16,4 +16,11 @@ public class PlatformSpecificScreenUtil {
 		*///?} elif fabric
 		return LegacyNotImplementedScreen::new;
 	}
+
+	public static boolean hasModsList() {
+		//? if neoforge {
+		/*return true;
+		*///?} elif fabric
+		return false;
+	}
 }
