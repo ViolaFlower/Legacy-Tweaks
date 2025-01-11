@@ -474,7 +474,9 @@ public class DataScreen extends LegacyScreen {
 				} else if (type.equals("putGlobal")) {
 					String name = object.get("name").getAsString();
 					JsonElement jsonElement = object.get("value");
-					GLOBALS.put(name, fromJsonElement(_this, jsonElement, _return, optArgs));
+					Reference value = fromJsonElement(_this, jsonElement, _return, optArgs);
+					GLOBALS.put(name, value);
+					r.setReference(value);
 					break c; // returns null
 				} else if (type.equals("getGlobal")) {
 					String name = object.get("name").getAsString();
