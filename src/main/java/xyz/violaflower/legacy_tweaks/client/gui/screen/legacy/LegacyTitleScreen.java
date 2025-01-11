@@ -58,7 +58,7 @@ public class LegacyTitleScreen extends LegacyScreen {
 			if (Tweaks.LEGACY_UI.legacyHelpOptionsScreen.useLegacyHelpOptionsScreen.isOn()) {
 				Minecraft.getInstance().setScreen(DataScreen.makeDataDrivenScreen(this, ModAsset.getResourceLocation("ltguis/help-and-options-screen.json")));
 			} else {
-				Minecraft.getInstance().setScreen(new LegacyOptionsScreen(this));
+				Minecraft.getInstance().setScreen(DataScreen.makeDataDrivenScreen(this, ModAsset.getResourceLocation("ltguis/optionsscreen.json")));
 			}
 		}).size(getButtonWidth(), getButtonHeight()).build());
 		if (Tweaks.LEGACY_UI.legacyTitleScreen.showMinecraftStoreButton.isOn()) {
