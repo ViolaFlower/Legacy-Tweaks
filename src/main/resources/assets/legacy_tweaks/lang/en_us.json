@@ -166,6 +166,27 @@
   "tweak.legacy_tweaks.setting.legacyUI.legacyHelpOptionsScreen": "Legacy Help & Options Screen",
   "tweak.legacy_tweaks.setting.legacyUI.legacyHelpOptionsScreen.description": "Various settings to modify the Help & Options Screen.",
 
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks": "GUI HUD Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.description": "Various settings to modify GUI HUD Tweaks",
+
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.generalTweaks": "GUI HUD Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.generalTweaks.description": "Various settings to modify General HUD Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.healthTweaks": "GUI HUD Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.healthTweaks.description": "Various settings to modify Health HUD Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.chatTweaks": "Chat Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.chatTweaks.description": "Various settings to modify Chat HUD Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.paperDollTweaks": "PaperDoll Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.paperDollTweaks.description": "Various settings to modify PaperDoll HUD Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.scoreboardTweaks": "Scoreboard Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.scoreboardTweaks.description": "Various settings to modify Scoreboard HUD Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.bossBarTweaks": "Boss Bar Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.bossBarTweaks.description": "Various settings to modify Boss Bar HUD Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.effectsTweaks": "Legacy HUD Effects Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.effectsTweaks.description": "Various settings to modify Legacy HUD Effects Tweaks Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.moddedTweaks": "Modded HUD Tweaks",
+  "tweak.legacy_tweaks.setting.legacyUI.guiHudTweaks.moddedTweaks.description": "Various settings to modify Modded HUD Effects Tweaks Tweaks",
+
+
   "tweak.legacy_tweaks.setting.mapChanges": "Map Changes",
   "tweak.legacy_tweaks.setting.mapChanges.description": "Various tweaks to maps.",
   "tweak.legacy_tweaks.setting.mapChanges.mapCoordinates": "Map Coordinates",
