@@ -3,6 +3,7 @@ package xyz.violaflower.legacy_tweaks.client.gui.screen;
 import com.google.gson.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.client.gui.layouts.AbstractLayout;
@@ -231,7 +232,7 @@ public class DataScreen extends LegacyScreen {
 			args[0].<Layout>get().visitWidgets(_this.<DataScreen>get()::addRenderableWidget);
 		});
 		ACTIONS.put("AbstractWidget.active", oneArgMethod().of((_this, _return, _arg) -> {
-			_this.<Button>get().active = _arg.getAsBoolean();
+			_this.<AbstractWidget>get().active = _arg.getAsBoolean();
 		}));
 		Map<String, Runnable> runnableActions = Map.of(
 				"quitGame", () -> Minecraft.getInstance().stop(),
