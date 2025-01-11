@@ -369,6 +369,26 @@ public class DataScreen extends LegacyScreen {
 
 	private void setup() {
 		addActions();
+		if (data.has("imports")) {
+			for (JsonElement element : data.getAsJsonArray("imports")) {
+				if (element instanceof JsonObject object) {
+					if (object.get("type").getAsString().equals("importActionsFrom")) {
+						String file = object.get("file").getAsString();
+						JsonObject actions = LegacyTweaksResourceManager.dataGuis.get(ResourceLocation.parse(file)).getAsJsonObject("actions");
+						if (object.has("actions")) {
+							for (JsonElement jsonElement : object.getAsJsonArray("actions")) {
+								ACTIONS.put(jsonElement.getAsString(), fromJsonArray(actions.getAsJsonArray(jsonElement.getAsString())));
+							}
+						} else {
+							for (String key : actions.keySet()) {
+								JsonArray array = actions.getAsJsonArray(key);
+								ACTIONS.put(key, fromJsonArray(array));
+							}
+						}
+					}
+				}
+			}
+		}
 		for (String key : data.getAsJsonObject("actions").keySet()) {
 			JsonArray array = data.getAsJsonObject("actions").getAsJsonArray(key);
 			ACTIONS.put(key, fromJsonArray(array));
