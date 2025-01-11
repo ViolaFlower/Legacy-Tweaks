@@ -12,8 +12,10 @@ import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.DataScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.enums.PlayGameScreen;
+import xyz.violaflower.legacy_tweaks.util.common.assets.ModAsset;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
 import java.util.Objects;
@@ -54,7 +56,7 @@ public class LegacyTitleScreen extends LegacyScreen {
 		}
 		linearLayout.addChild(Button.builder(Lang.TitleScreen.HELP_OPTIONS.get(), button -> {
 			if (Tweaks.LEGACY_UI.legacyHelpOptionsScreen.useLegacyHelpOptionsScreen.isOn()) {
-				Minecraft.getInstance().setScreen(new LegacyHelpOptionsScreen(this));
+				Minecraft.getInstance().setScreen(DataScreen.makeDataDrivenScreen(this, ModAsset.getResourceLocation("ltguis/help-and-options-screen.json")));
 			} else {
 				Minecraft.getInstance().setScreen(new LegacyOptionsScreen(this));
 			}

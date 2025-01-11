@@ -9,9 +9,12 @@ import net.minecraft.client.gui.layouts.AbstractLayout;
 import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
+import net.minecraft.client.gui.screens.CreditsAndAttributionScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+import net.minecraft.client.gui.screens.options.SkinCustomizationScreen;
+import net.minecraft.client.gui.screens.options.controls.ControlsScreen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -22,6 +25,7 @@ import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.*;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.impl.LegacyUI;
+import xyz.violaflower.legacy_tweaks.util.common.assets.ModAsset;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -231,7 +235,7 @@ public class DataScreen extends LegacyScreen {
 				"openMultiplayerScreen", () -> setScreen(JoinMultiplayerScreen::new),
 				"openSelectWorldScreen", () -> setScreen(SelectWorldScreen::new),
 				"openNotImplementedScreen", () -> setScreen(LegacyNotImplementedScreen::new),
-				"openHelpOptionsScreen", () -> setScreen(LegacyHelpOptionsScreen::new),
+				"openHelpOptionsScreen", () -> setScreen(screen -> new DataScreen(screen, ModAsset.getResourceLocation("ltguis/help-and-options-screen.json"))),
 				"openTestScreen", () -> setScreen(LegacyTestScreen::new),
 				"switchToNewMinecraft", () -> {
 					Tweaks.LEGACY_UI.legacyTitleScreen.legacyTitleScreen.set(false);
@@ -241,12 +245,19 @@ public class DataScreen extends LegacyScreen {
 						while (System.currentTimeMillis() < l) ;
 						Minecraft.getInstance().tell(() -> Minecraft.getInstance().setScreen(new TitleScreen()));
 					}).start();
-				}
+				},
+				"openSkinCustomizationScreen", () -> setScreen(screen -> new SkinCustomizationScreen(screen, minecraft.options)),
+				"openControlsScreen", () -> setScreen(screen -> new ControlsScreen(screen, minecraft.options)),
+				"openSettingsScreen", () -> setScreen(LegacyOptionsScreen::new)
+		);
+		Map<String, Runnable> runnableActions2 = Map.of(
+				"openCreditsScreen", () -> setScreen(CreditsAndAttributionScreen::new)
 		);
 
-		ACTIONS.put("openDataScreen", oneArgMethod().of((_this, _return, arg) -> Minecraft.getInstance().setScreen(makeDataDrivenScreen(_this.get(), arg.getAsResourceLocation()))));
+		ACTIONS.put("openDataScreen", oneArgMethod().of((_this, _return, arg) -> setScreen(screen -> makeDataDrivenScreen(screen, arg.getAsResourceLocation()))));
 
 		runnableActions.forEach((k, v) -> ACTIONS.put(k, noArgsMethod().of(r -> v.run())));
+		runnableActions2.forEach((k, v) -> ACTIONS.put(k, noArgsMethod().of(r -> v.run())));
 		LegacyUI.LegacyTitleScreenTweak legacyTitleScreen = Tweaks.LEGACY_UI.legacyTitleScreen;
 		LegacyUI.LegacyHelpOptionsScreenTweak legacyHelpOptionsScreen = Tweaks.LEGACY_UI.legacyHelpOptionsScreen;
 		Map<String, Supplier<Boolean>> customizationStuff = Map.of(
