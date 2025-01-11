@@ -21,7 +21,7 @@ public class LegacyNotImplementedScreen extends LegacyScreen {
 	private FrameLayout innerFrameLayout;
 	private LegacyLogoRenderer logoRenderer;
 
-	protected LegacyNotImplementedScreen(Screen parent) {
+	public LegacyNotImplementedScreen(Screen parent) {
 		super(Component.empty());
 		this.parent = parent;
 		this.logoRenderer = Objects.requireNonNullElseGet(logoRenderer, LegacyLogoRenderer::getLegacyLogoRenderer);
