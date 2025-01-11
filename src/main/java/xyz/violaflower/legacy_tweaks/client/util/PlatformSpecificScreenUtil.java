@@ -10,14 +10,14 @@ import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.LegacyNotImplement
 import java.util.function.Function;
 
 public class PlatformSpecificScreenUtil {
-	public static Function<Screen, Screen> openModsScreen() {
+	public static Function<Screen, Screen> getModsScreen() {
 		//? if neoforge {
 		/*return ModListScreen::new;
 		*///?} elif fabric
 		return LegacyNotImplementedScreen::new;
 	}
 
-	public static boolean hasModsList() {
+	public static boolean hasModsScreen() {
 		//? if neoforge {
 		/*return true;
 		*///?} elif fabric
