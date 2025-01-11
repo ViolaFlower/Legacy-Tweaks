@@ -53,6 +53,25 @@
     ],
     "beginInit": [
       "?makeSplashRendererIfNull"
+    ],
+    "openHelpOptionsScreen": [
+      {
+        "type": "action",
+        "action": "openDataScreen",
+        "args": ["legacy_tweaks:ltguis/help-and-options-screen.json"]
+      }
+    ],
+    "shouldCloseOnEsc": [
+      {
+        "type": "return",
+        "value": false
+      }
+    ],
+    "isPauseScreen": [
+      {
+        "type": "return",
+        "value": false
+      }
     ]
   }
 }

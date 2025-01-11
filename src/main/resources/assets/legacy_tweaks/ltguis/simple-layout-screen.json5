@@ -101,18 +101,6 @@
         ]
       }
     ],
-    "shouldCloseOnEsc": [
-      {
-        "type": "return",
-        "value": false
-      }
-    ],
-    "isPauseScreen": [
-      {
-        "type": "return",
-        "value": false
-      }
-    ],
     "beginInit": []
   }
 }
