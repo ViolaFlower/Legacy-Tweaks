@@ -243,6 +243,9 @@ public class DataScreen extends LegacyScreen {
 					}).start();
 				}
 		);
+
+		ACTIONS.put("openDataScreen", oneArgMethod().of((_this, _return, arg) -> Minecraft.getInstance().setScreen(makeDataDrivenScreen(_this.get(), arg.getAsResourceLocation()))));
+
 		runnableActions.forEach((k, v) -> ACTIONS.put(k, noArgsMethod().of(r -> v.run())));
 		LegacyUI.LegacyTitleScreenTweak legacyTitleScreen = Tweaks.LEGACY_UI.legacyTitleScreen;
 		LegacyUI.LegacyHelpOptionsScreenTweak legacyHelpOptionsScreen = Tweaks.LEGACY_UI.legacyHelpOptionsScreen;
@@ -350,6 +353,10 @@ public class DataScreen extends LegacyScreen {
 		@Override
 		public String toString() {
 			return Objects.toString(t);
+		}
+
+		public ResourceLocation getAsResourceLocation() {
+			return ResourceLocation.parse(get());
 		}
 	}
 	public interface Action {
