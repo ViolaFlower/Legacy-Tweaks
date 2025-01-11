@@ -17,6 +17,8 @@ import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 import java.util.Objects;
 import java.util.function.Function;
 
+/// @deprecated See the data-screens branch
+@Deprecated(forRemoval = true)
 public class LegacyOptionsScreen extends LegacyScreen {
 	private final Screen parent;
 	private FrameLayout frameLayout;

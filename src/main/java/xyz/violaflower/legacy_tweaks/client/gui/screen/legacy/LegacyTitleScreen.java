@@ -19,6 +19,8 @@ import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 import java.util.Objects;
 import java.util.function.Function;
 
+/// @deprecated See the data-screens branch
+@Deprecated(forRemoval = true)
 public class LegacyTitleScreen extends LegacyScreen {
 	private FrameLayout frameLayout;
 	private LegacyLogoRenderer logoRenderer;
