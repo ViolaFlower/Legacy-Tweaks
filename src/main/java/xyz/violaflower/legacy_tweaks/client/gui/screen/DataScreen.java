@@ -14,6 +14,7 @@ import net.minecraft.client.gui.screens.CreditsAndAttributionScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+import net.minecraft.client.gui.screens.options.OptionsScreen;
 import net.minecraft.client.gui.screens.options.SkinCustomizationScreen;
 import net.minecraft.client.gui.screens.options.controls.ControlsScreen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
@@ -23,7 +24,9 @@ import org.apache.commons.lang3.function.TriConsumer;
 import org.jetbrains.annotations.Nullable;
 import xyz.violaflower.legacy_tweaks.client.LegacyTweaksResourceManager;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.config.LTScreen;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.*;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.options.LegacyGraphicsScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.impl.LegacyUI;
 import xyz.violaflower.legacy_tweaks.util.common.assets.ModAsset;
@@ -255,7 +258,10 @@ public class DataScreen extends LegacyScreen {
 				"openSettingsScreen", () -> setScreen(LegacyOptionsScreen::new)
 		);
 		Map<String, Runnable> runnableActions2 = Map.of(
-				"openCreditsScreen", () -> setScreen(CreditsAndAttributionScreen::new)
+				"openCreditsScreen", () -> setScreen(CreditsAndAttributionScreen::new),
+				"openGraphicsScreen", () -> setScreen(LegacyGraphicsScreen::new),
+				"openTweaksScreen", () -> setScreen(LTScreen::new),
+				"openJavaOptionsScreen", () -> setScreen(screen -> new OptionsScreen(screen, minecraft.options))
 		);
 
 		ACTIONS.put("openDataScreen", oneArgMethod().of((_this, _return, arg) -> setScreen(screen -> makeDataDrivenScreen(screen, arg.getAsResourceLocation()))));
