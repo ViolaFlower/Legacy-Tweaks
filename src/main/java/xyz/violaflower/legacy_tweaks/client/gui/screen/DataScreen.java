@@ -389,6 +389,7 @@ public class DataScreen extends LegacyScreen {
 						} else {
 							for (String key : actions.keySet()) {
 								JsonArray array = actions.getAsJsonArray(key);
+								System.out.println("added " + key + " from " + file);
 								ACTIONS.put(key, fromJsonArray(array));
 							}
 						}
