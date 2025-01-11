@@ -27,6 +27,7 @@ import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.config.LTScreen;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.*;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.options.LegacyGraphicsScreen;
+import xyz.violaflower.legacy_tweaks.client.util.PlatformSpecificScreenUtil;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.impl.LegacyUI;
 import xyz.violaflower.legacy_tweaks.util.common.assets.ModAsset;
@@ -261,7 +262,8 @@ public class DataScreen extends LegacyScreen {
 				"openCreditsScreen", () -> setScreen(CreditsAndAttributionScreen::new),
 				"openGraphicsScreen", () -> setScreen(LegacyGraphicsScreen::new),
 				"openTweaksScreen", () -> setScreen(LTScreen::new),
-				"openJavaOptionsScreen", () -> setScreen(screen -> new OptionsScreen(screen, minecraft.options))
+				"openJavaOptionsScreen", () -> setScreen(screen -> new OptionsScreen(screen, minecraft.options)),
+				"openModsScreen", () -> setScreen(PlatformSpecificScreenUtil.getModsScreen())
 		);
 
 		ACTIONS.put("openDataScreen", oneArgMethod().of((_this, _return, arg) -> setScreen(screen -> makeDataDrivenScreen(screen, arg.getAsResourceLocation()))));
@@ -279,7 +281,8 @@ public class DataScreen extends LegacyScreen {
 				"showNewMinecraftButton", legacyTitleScreen.showNewMinecraftButton::isOn,
 				"showQuitButton", legacyTitleScreen.showQuitButton::isOn,
 				"showJavaOptionsButton", legacyOptions.showJavaOptionsButton::isOn,
-				"isLegacyOptionsOn", legacyOptions::isEnabled
+				"isLegacyOptionsOn", legacyOptions::isEnabled,
+				"hasModsScreen", PlatformSpecificScreenUtil::hasModsScreen
 		);
 		customizationStuff.forEach((k, v) -> ACTIONS.put("_internal.customization." + k, noArgsMethod().of((r, a) -> a.set(v.get()))));
 	}
