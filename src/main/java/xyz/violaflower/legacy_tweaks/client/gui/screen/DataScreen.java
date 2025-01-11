@@ -255,7 +255,7 @@ public class DataScreen extends LegacyScreen {
 				},
 				"openSkinCustomizationScreen", () -> setScreen(screen -> new SkinCustomizationScreen(screen, minecraft.options)),
 				"openControlsScreen", () -> setScreen(screen -> new ControlsScreen(screen, minecraft.options)),
-				"openSettingsScreen", () -> setScreen(LegacyOptionsScreen::new)
+				"openSettingsScreen", () -> setScreen(screen -> new DataScreen(screen, ModAsset.getResourceLocation("ltguis/optionsscreen.json")))
 		);
 		Map<String, Runnable> runnableActions2 = Map.of(
 				"openCreditsScreen", () -> setScreen(CreditsAndAttributionScreen::new),
@@ -278,7 +278,8 @@ public class DataScreen extends LegacyScreen {
 				"showMinecraftStoreButton", legacyTitleScreen.showMinecraftStoreButton::isOn,
 				"showNewMinecraftButton", legacyTitleScreen.showNewMinecraftButton::isOn,
 				"showQuitButton", legacyTitleScreen.showQuitButton::isOn,
-				"showJavaOptionsButton", legacyOptions.showJavaOptionsButton::isOn
+				"showJavaOptionsButton", legacyOptions.showJavaOptionsButton::isOn,
+				"isLegacyOptionsOn", legacyOptions::isEnabled
 		);
 		customizationStuff.forEach((k, v) -> ACTIONS.put("_internal.customization." + k, noArgsMethod().of((r, a) -> a.set(v.get()))));
 	}
@@ -516,6 +517,16 @@ public class DataScreen extends LegacyScreen {
 					JsonElement value = object.get("value");
 					//noinspection PointlessBooleanExpression as it is easier to read this way.
 					if (fromJsonElement(_this, value, _return, optArgs).getAsBoolean() == true) {
+						JsonArray actions = object.getAsJsonArray("actions");
+						for (JsonElement action : actions) {
+							fromJsonElement(_this, action, _return, optArgs);
+						}
+					}
+					break c;
+				} else if (type.equals("ifFalse")) {
+					JsonElement value = object.get("value");
+					//noinspection PointlessBooleanExpression as it is easier to read this way.
+					if (fromJsonElement(_this, value, _return, optArgs).getAsBoolean() == false) {
 						JsonArray actions = object.getAsJsonArray("actions");
 						for (JsonElement action : actions) {
 							fromJsonElement(_this, action, _return, optArgs);

@@ -33,12 +33,35 @@
       {
         "type": "action",
         "action": "addButtonToLayout",
-        "args": ["gui.legacy_tweaks.helpOptionsScreen.settings", "@openSettingsScreen"]
+        "args": ["gui.legacy_tweaks.helpOptionsScreen.settings", "@openSettingsScreen2"]
       },
       {
         "type": "action",
         "action": "addButtonToLayout",
         "args": [ "gui.legacy_tweaks.helpOptionsScreen.credits", "@openCreditsScreen"]
+      }
+    ],
+    "openSettingsScreen": [
+      {
+        "type": "action",
+        "action": "openDataScreen",
+        "args": ["legacy_tweaks:ltguis/optionsscreen.json"]
+      }
+    ],
+    "openSettingsScreen2": [
+      {
+        "type": "ifTrue",
+        "value": "?_internal.customization.isLegacyOptionsOn",
+        "actions": [
+          "?openSettingsScreen"
+        ]
+      },
+      {
+        "type": "ifFalse",
+        "value": "?_internal.customization.isLegacyOptionsOn",
+        "actions": [
+          "?openJavaOptionsScreen"
+        ]
       }
     ]
   }

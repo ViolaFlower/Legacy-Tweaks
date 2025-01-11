@@ -13,7 +13,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
 import net.minecraft.client.gui.screens.Screen;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.DataScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
+import xyz.violaflower.legacy_tweaks.util.common.assets.ModAsset;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 import xyz.violaflower.legacy_tweaks.util.common.sound.SoundUtil;
 import xyz.violaflower.legacy_tweaks.util.common.sound.Sounds;
@@ -43,7 +45,7 @@ public class LegacyHelpOptionsScreen extends LegacyScreen {
         linearLayout.addChild(Button.builder(Lang.HelpOptionsScreen.CHANGE_SKIN.get(), button -> setScreen(something -> new SkinCustomizationScreen(this, Minecraft.getInstance().options))).size(getButtonWidth(), getButtonHeight()).build());
         linearLayout.addChild(Button.builder(Lang.HelpOptionsScreen.HOW_TO_PLAY.get(), button -> setScreen(something -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
         linearLayout.addChild(Button.builder(Lang.HelpOptionsScreen.CONTROLS.get(), button -> setScreen(something -> new ControlsScreen(this, Minecraft.getInstance().options))).size(getButtonWidth(), getButtonHeight()).build());
-        linearLayout.addChild(Button.builder(Lang.HelpOptionsScreen.SETTINGS.get(), button -> setScreen(something -> Tweaks.LEGACY_UI.legacyOptions.isEnabled() ? new LegacyOptionsScreen(this) : new OptionsScreen(this, Minecraft.getInstance().options))).size(getButtonWidth(), getButtonHeight()).build());
+        linearLayout.addChild(Button.builder(Lang.HelpOptionsScreen.SETTINGS.get(), button -> setScreen(something -> Tweaks.LEGACY_UI.legacyOptions.isEnabled() ? DataScreen.makeDataDrivenScreen(this, ModAsset.getResourceLocation("ltguis/optionsscreen.json")) : new OptionsScreen(this, Minecraft.getInstance().options))).size(getButtonWidth(), getButtonHeight()).build());
         linearLayout.addChild(Button.builder(Lang.HelpOptionsScreen.CREDITS.get(), button -> setScreen(something -> new CreditsAndAttributionScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
 
         frameLayout.addChild(linearLayout);
