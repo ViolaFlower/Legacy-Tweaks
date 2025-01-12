@@ -54,6 +54,7 @@
     "common.tweak.map_changes.MapRendererMixin"
   ],
   "mixins": [
+    "common.tweak.gameplay.EntityMixin",
     "common.tweak.legacy_attack.ItemStackMixin",
     "common.tweak.legacy_attack.PlayerMixin",
     "common.tweak.legacy_chat.dimension_notification.EntityMixin",

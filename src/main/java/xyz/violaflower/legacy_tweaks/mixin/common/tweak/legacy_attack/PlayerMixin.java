@@ -13,7 +13,7 @@ import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 public abstract class PlayerMixin {
 	@Inject(method = "getCurrentItemAttackStrengthDelay", at = @At("RETURN"), cancellable = true)
 	private void getAttribute(CallbackInfoReturnable<Float> cir) {
-		if (!Tweaks.LEGACY_ATTACK.getSubTweak("noAttackCooldown").isEnabled()) return;
+		if (!Tweaks.GAMEPLAY.combatMechanics.noAttackCooldown.isOn()) return;
 		if (((LivingEntity)(Object)this).getMainHandItem().getItem() instanceof MaceItem) return;
 		cir.setReturnValue(0.0f);
 	}

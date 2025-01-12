@@ -50,7 +50,7 @@ public final class LegacyTweaks {
         tweakManager.register(Tweaks.F3INFO);
         tweakManager.register(Tweaks.LEGACY_CHAT);
         tweakManager.register(Tweaks.CRASH);
-        tweakManager.register(Tweaks.LEGACY_ATTACK);
+        tweakManager.register(Tweaks.GAMEPLAY);
         tweakManager.register(Tweaks.LEGACY_UI);
         tweakManager.register(Tweaks.EYE_CANDY);
         tweakManager.register(Tweaks.LEGACY_FOG);

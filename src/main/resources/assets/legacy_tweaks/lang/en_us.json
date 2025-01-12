@@ -108,6 +108,13 @@
   "tweak.legacy_tweaks.setting.f3Info.description": "Adds LegacyTweaks related info to the F3 debug screen.",
   "tweak.legacy_tweaks.setting.f3Info.option.showenabledtweaks": "Show enabled tweaks",
 
+  "tweak.legacy_tweaks.setting.gameplay": "Gameplay",
+  "tweak.legacy_tweaks.setting.gameplay.description": "Various gameplay-based mechanics settings.",
+  "tweak.legacy_tweaks.setting.gameplay.waterMechanics": "Water Mechanics",
+  "tweak.legacy_tweaks.setting.gameplay.waterMechanics.description": "Various water-based mechanics settings.",
+  "tweak.legacy_tweaks.setting.gameplay.combatMechanics": "Combat Mechanics",
+  "tweak.legacy_tweaks.setting.gameplay.combatMechanics.description": "Various combat-based mechanics settings.",
+
   "tweak.legacy_tweaks.setting.legacyChat": "Legacy Chat",
   "tweak.legacy_tweaks.setting.legacyChat.description": "Various tweaks to make the chat look and function like it does in LCE.",
   "tweak.legacy_tweaks.setting.legacyChat.option.messagewidthspansscreen": "Show enabled tweaks",
