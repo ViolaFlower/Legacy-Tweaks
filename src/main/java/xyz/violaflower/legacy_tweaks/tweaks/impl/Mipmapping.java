@@ -9,6 +9,7 @@ public class Mipmapping extends Tweak {
     public final MipmapType mipmapType;
     public final Tweak manualMipmapping;
     public final Tweak fullCutoutMips;
+    public final Tweak halfCutoutMips;
 
     public Mipmapping() {
         super("mipmapping", true);
@@ -22,7 +23,13 @@ public class Mipmapping extends Tweak {
                 mc.reloadResourcePacks();
         }).build());
 
-        addSubTweak(fullCutoutMips = new TweakBuilder("fullCutoutMips").authors("Permdog99").setDefaultEnabled(true).onToggled(() -> {
+        addSubTweak(fullCutoutMips = new TweakBuilder("fullCutoutMips").authors("Permdog99").setDefaultEnabled(false).onToggled(() -> {
+            Minecraft mc = Minecraft.getInstance();
+            //noinspection ConstantValue
+            if (mc.getResourceManager() != null)
+                mc.reloadResourcePacks();
+        }).build());
+        addSubTweak(halfCutoutMips = new TweakBuilder("halfCutoutMips").authors("Permdog99").setDefaultEnabled(true).onToggled(() -> {
             Minecraft mc = Minecraft.getInstance();
             //noinspection ConstantValue
             if (mc.getResourceManager() != null)

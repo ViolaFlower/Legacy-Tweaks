@@ -203,6 +203,8 @@
   "tweak.legacy_tweaks.setting.mipmapping.manualMipmapping.description": "Allow resource packs to add in manual mipmaps for fine tuning.",
   "tweak.legacy_tweaks.setting.mipmapping.fullCutoutMips": "Full Cutout Mips",
   "tweak.legacy_tweaks.setting.mipmapping.fullCutoutMips.description": "[REQUIRES RESTART] Makes all non-full blocks (cutouts) have mipped textures.",
+  "tweak.legacy_tweaks.setting.mipmapping.halfCutoutMips": "Half Cutout Mips",
+  "tweak.legacy_tweaks.setting.mipmapping.halfCutoutMips.description": "[REQUIRES RESTART] Makes some non-full blocks (cutouts) have mipped textures, similar to LE.",
 
   "tweak.legacy_tweaks.setting.stubTweak": "Stub Tweak",
   "tweak.legacy_tweaks.setting.stubTweak.description": "This does absolutely nothing.",

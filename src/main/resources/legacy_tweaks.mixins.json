@@ -46,6 +46,7 @@
     "client.tweak.legacy_ui.legacy_panorama.PanoramaRendererMixin",
     "client.tweak.legacy_ui.legacy_title_screen.MinecraftMixin",
     "client.tweak.legacy_ui.show_quit_button.ScreenMixin",
+    "client.tweak.mipmapping.ItemRenderBlockTypesMixin",
     "client.tweak.mipmapping.MipmapGeneratorMixin",
     "client.tweak.mipmapping.RenderStateShardMixin",
     "client.tweak.mipmapping.SpriteContentsMixin",
