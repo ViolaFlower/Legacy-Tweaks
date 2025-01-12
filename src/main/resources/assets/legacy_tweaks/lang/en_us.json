@@ -194,7 +194,7 @@
   "tweak.legacy_tweaks.setting.mapChanges.smallerMapContents": "Smaller Map Contents",
   "tweak.legacy_tweaks.setting.mapChanges.smallerMapContents.description": "Makes the contents of maps smaller.",
 
-  "tweak.legacy_tweaks.setting.mipmapping": "Mipmappings",
+  "tweak.legacy_tweaks.setting.mipmapping": "Mipmapping",
   "tweak.legacy_tweaks.setting.mipmapping.description": "Various mipmap settings",
   "tweak.legacy_tweaks.setting.mipmapping.mipmapType": "Mipmapping Type",
   "tweak.legacy_tweaks.setting.mipmapping.mipmapType.description": "Set the mipmapping/LOD style based on a specific LCE update.",
