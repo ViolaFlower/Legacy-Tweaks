@@ -17,7 +17,7 @@ public abstract class GuiMixin {
     public void startExperienceRender(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if (HudHelper.guiHudTweaks.hotbarTweaks.legacyExperienceText.isOn()) {
             ci.cancel();
-            HudHelper.startNew(guiGraphics, false, true, 3f/HudHelper.getHudScale(HudElements.EXPERIENCE), HudHelper.getHudOpacity(), 0f, -HudHelper.getHudSpacing(true, false));
+            HudHelper.startNew(guiGraphics, false, true, 3f/HudHelper.getHudScale(HudElements.EXPERIENCE), HudHelper.getHudOpacity(), 0f, -HudHelper.getHudSpacing(true, false), 2f, 2f);
 //            HudHelper.startAlt(guiGraphics, HudElements.EXPERIENCE);
             HudHelper.createLegacyExperienceText(guiGraphics);
         } else {

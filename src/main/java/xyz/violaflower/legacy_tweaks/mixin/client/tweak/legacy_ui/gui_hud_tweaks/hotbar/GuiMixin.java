@@ -38,7 +38,7 @@ public class GuiMixin {
         int newSelection = Minecraft.getInstance().player != null ? Minecraft.getInstance().player.getInventory().selected : -1;
         if (lastHotbarSelection >= 0 && lastHotbarSelection != newSelection) HudHelper.lastHotbarSelectionChange = Util.getMillis();
         lastHotbarSelection = newSelection;
-        HudHelper.startNew(guiGraphics, false, false, 3f/HudHelper.getHudScale(HudElements.HOTBAR), HudHelper.getHudOpacity(), 0f, -HudHelper.getHudSpacing(true, false));
+        HudHelper.startNew(guiGraphics, false, false, 3f/HudHelper.getHudScale(HudElements.HOTBAR), HudHelper.getHudOpacity(), 0f, -HudHelper.getHudSpacing(true, false), 2f, 1f);
     }
 
     @Inject(method = "renderHotbarAndDecorations", at = @At("TAIL"))
@@ -48,7 +48,7 @@ public class GuiMixin {
 
     @Inject(method = "renderOverlayMessage", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;push(Ljava/lang/String;)V"), cancellable = true)
     private void startTooltipRender(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
-        HudHelper.startNew(guiGraphics, false, false, 3f/HudHelper.getHudScale(HudElements.HOTBAR), HudHelper.getHudOpacity(), 0f, -HudHelper.getHudSpacing(true, false));
+        HudHelper.startNew(guiGraphics, false, false, 3f/HudHelper.getHudScale(HudElements.HOTBAR), HudHelper.getHudOpacity(), 0f, -HudHelper.getHudSpacing(true, false), 2f, 1f);
     }
 
     @Inject(method = "renderOverlayMessage", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V", shift = At.Shift.AFTER))
@@ -65,7 +65,7 @@ public class GuiMixin {
             EyeCandyHelper.setLegacyTextShadows(true);
             EyeCandyHelper.setCompactText(false);
         }
-        HudHelper.startNew(guiGraphics, false, true, tweak ? 1.0f/scaled : 1f, HudHelper.getHudOpacity(), 0f, guiScale != 1 ? !tweak ? 0f : -15f : 0f);
+        HudHelper.startNew(guiGraphics, false, true, tweak ? 1.0f/scaled : 1f, HudHelper.getHudOpacity(), 0f, guiScale != 1 ? !tweak ? 0f : -15f : 0f, 2f, 1f);
     }
 
     @Inject(method = "renderSelectedItemName", at = @At("TAIL"))

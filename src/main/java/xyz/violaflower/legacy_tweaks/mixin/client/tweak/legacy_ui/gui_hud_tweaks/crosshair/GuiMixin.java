@@ -15,7 +15,7 @@ public class GuiMixin {
 
     @Inject(method = "renderCrosshair", at = @At("HEAD"))
     public void startCrosshairRender(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
-        HudHelper.startNew(guiGraphics, false, false, 3f/ HudHelper.getHudScale(HudElements.HOTBAR), HudHelper.getHudOpacity(), 0f, HudHelper.guiHudTweaks.generalTweaks.hudScale.get() == 1 ? 0f : HudHelper.guiHudTweaks.generalTweaks.hudScale.get() == 2 ? 95f : 190f);
+        HudHelper.startNew(guiGraphics, false, false, 3f/ HudHelper.getHudScale(HudElements.HOTBAR), HudHelper.getHudOpacity(), 0f, 0f, 2f, 2f);
     }
 
     @Inject(method = "renderCrosshair", at = @At("RETURN"))

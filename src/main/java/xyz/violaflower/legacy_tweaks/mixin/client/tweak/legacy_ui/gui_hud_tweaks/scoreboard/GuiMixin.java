@@ -16,7 +16,7 @@ public class GuiMixin {
     @Inject(method = "renderScoreboardSidebar(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V", at = @At("HEAD"))
     private void startSetScoreboardDistance(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
 //        HudHelper.start(guiGraphics, HudElements.SCOREBOARD, false);
-        HudHelper.startNew(guiGraphics, false, false, 1f, HudHelper.getHudOpacity(), 0f, 0f);
+        HudHelper.startNew(guiGraphics, false, false, 1f, HudHelper.getHudOpacity(), 0f, 0f, 2f, 1f);
     }
 
     @Inject(method = "renderScoreboardSidebar(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V", at = @At("TAIL"))

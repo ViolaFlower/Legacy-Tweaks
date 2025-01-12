@@ -36,7 +36,7 @@ public class HudHelper {
         }
     }
 
-    public static void startNew(GuiGraphics guiGraphics, boolean extraScale, boolean useLegacyText,  float hudScale, float hudOpacity, float screenSpaceX, float screenSpaceY) {
+    public static void startNew(GuiGraphics guiGraphics, boolean extraScale, boolean useLegacyText, float hudScale, float hudOpacity, float screenSpaceX, float screenSpaceY, float guiXDiv, float guiYDiv) {
         PoseStack poseStack = guiGraphics.pose();
         poseStack.pushPose();
         RenderSystem.enableBlend();
@@ -47,10 +47,10 @@ public class HudHelper {
         }
 
         poseStack.translate(screenSpaceX, screenSpaceY, 0f);
-        guiGraphics.pose().translate(guiGraphics.guiWidth()/2f, guiGraphics.guiHeight(),0.0F);
+        guiGraphics.pose().translate(guiGraphics.guiWidth()/guiXDiv, guiGraphics.guiHeight()/guiYDiv,0.0F);
         poseStack.scale(hudScale, hudScale, hudScale);
         if (extraScale) poseStack.scale(hudScale, hudScale, hudScale);
-        guiGraphics.pose().translate(-guiGraphics.guiWidth()/2, -guiGraphics.guiHeight(),0);
+        guiGraphics.pose().translate((float) -guiGraphics.guiWidth()/guiXDiv, -guiGraphics.guiHeight()/guiYDiv,0);
         guiGraphics.setColor(1.0f,1.0f,1.0f, hudOpacity);
 
         if (hudOpacity < 1.0) {
@@ -118,11 +118,13 @@ public class HudHelper {
 
     public static float getHudScale(HudElements hudElements) {
         if (hudElements.isScaleTweakOff() || guiHudTweaks.generalTweaks.forceDisableHudScale.isOn()) return 3f;
+        if (Minecraft.getInstance().getWindow().getWidth() < 720 && guiHudTweaks.generalTweaks.hudScale.get() == 3) return 2f;
         return Math.max(1.5f, 4 - Tweaks.LEGACY_UI.guiHudTweaks.generalTweaks.hudScale.get());
     }
 
     public static float getHudScaleAlt(HudElements hudElements) {
         if (hudElements.isScaleTweakOff() || guiHudTweaks.generalTweaks.forceDisableHudScale.isOn()) return 3f;
+        if (Minecraft.getInstance().getWindow().getScreenHeight() < 720 && guiHudTweaks.generalTweaks.hudScale.get() == 3) return 2f;
         return Math.max(1.5f, Tweaks.LEGACY_UI.guiHudTweaks.generalTweaks.hudScale.get());
     }
 
