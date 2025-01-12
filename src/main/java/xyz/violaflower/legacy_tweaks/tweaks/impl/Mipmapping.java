@@ -8,6 +8,7 @@ import xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapTypes;
 public class Mipmapping extends Tweak {
     public final MipmapType mipmapType;
     public final Tweak manualMipmapping;
+    public final Tweak fullCutoutMips;
 
     public Mipmapping() {
         super("mipmapping", true);
@@ -15,6 +16,13 @@ public class Mipmapping extends Tweak {
 
         addSubTweak(mipmapType = new MipmapType());
         addSubTweak(manualMipmapping = new TweakBuilder("manualMipmapping").authors("Jab125").setDefaultEnabled(true).onToggled(() -> {
+            Minecraft mc = Minecraft.getInstance();
+            //noinspection ConstantValue
+            if (mc.getResourceManager() != null)
+                mc.reloadResourcePacks();
+        }).build());
+
+        addSubTweak(fullCutoutMips = new TweakBuilder("fullCutoutMips").authors("Permdog99").setDefaultEnabled(true).onToggled(() -> {
             Minecraft mc = Minecraft.getInstance();
             //noinspection ConstantValue
             if (mc.getResourceManager() != null)
