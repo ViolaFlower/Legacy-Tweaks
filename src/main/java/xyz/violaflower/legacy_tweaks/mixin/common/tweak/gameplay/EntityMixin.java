@@ -1,5 +1,7 @@
 package xyz.violaflower.legacy_tweaks.mixin.common.tweak.gameplay;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -9,8 +11,8 @@ import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 @Mixin(Entity.class)
 public class EntityMixin {
 
-    @Redirect(method = "updateSwimming", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isUnderWater()Z"))
-    protected boolean updateSwimming(Entity instance) {
+    @WrapOperation(method = "updateSwimming", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isUnderWater()Z"))
+    protected boolean updateSwimming(Entity instance, Operation<Boolean> original) {
         return Tweaks.GAMEPLAY.waterMechanics.alwaysSwimInWater.isOn() && instance.isInWater();
     }
 }
