@@ -72,7 +72,6 @@ public class ItemRenderBlockTypesMixin {
             hashMap.put(Blocks.TALL_SEAGRASS, renderType2);
             hashMap.put(Blocks.OAK_DOOR, renderType2);
             hashMap.put(Blocks.IRON_DOOR, renderType2);
-            hashMap.put(Blocks.CACTUS, renderType2);
             hashMap.put(Blocks.REPEATER, renderType2);
             hashMap.put(Blocks.OAK_TRAPDOOR, renderType2);
             hashMap.put(Blocks.SPRUCE_TRAPDOOR, renderType2);
@@ -302,6 +301,7 @@ public class ItemRenderBlockTypesMixin {
             hashMap.put(Blocks.WAXED_EXPOSED_COPPER_GRATE, renderType3);
             hashMap.put(Blocks.WAXED_WEATHERED_COPPER_GRATE, renderType3);
             hashMap.put(Blocks.WAXED_OXIDIZED_COPPER_GRATE, renderType3);
+            hashMap.put(Blocks.CACTUS, renderType3);
             RenderType renderType4 = RenderType.translucent();
             hashMap.put(Blocks.ICE, renderType4);
             hashMap.put(Blocks.NETHER_PORTAL, renderType4);
