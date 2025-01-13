@@ -48,7 +48,7 @@ public class LegacyOptionsScreen extends LegacyScreen {
 		linearLayout.addChild(Button.builder(Lang.ConfigScreen.TITLE.get(), button -> setScreen(LTScreen::new)).size(getButtonWidth(), getButtonHeight()).build());
 		if (Tweaks.LEGACY_UI.legacyOptions.showJavaOptionsButton.isOn()) {
 			linearLayout.addChild(Button.builder(Lang.OptionsScreen.JAVA_SETTINGS.get(), button -> {
-				Minecraft.getInstance().setScreen(new OptionsScreen(new LegacyTitleScreen(), Minecraft.getInstance().options));
+				Minecraft.getInstance().setScreen(new OptionsScreen(this, Minecraft.getInstance().options));
 			}).size(getButtonWidth(), getButtonHeight()).build());
 		}
 		linearLayout.addChild(Button.builder(Lang.OptionsScreen.RESET.get(), button -> setScreen(something  -> new LegacyNotImplementedScreen(this))).size(getButtonWidth(), getButtonHeight()).build());
