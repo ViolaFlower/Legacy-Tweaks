@@ -7,7 +7,11 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.FastColor;
+import net.minecraft.util.FormattedCharSequence;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
+
+import java.util.Objects;
 
 public class ScreenUtil {
     public static MultiBufferSource.BufferSource guiBufferSourceOverride = null;
@@ -55,5 +59,20 @@ public class ScreenUtil {
                 }
             }
         }
+    }
+
+    public static int drawStringWithBackdrop(GuiGraphics guiGraphics, Font font, FormattedCharSequence text, int x, int y, int xOffset, int color) {
+        Minecraft minecraft = Minecraft.getInstance();
+        int i = minecraft.options.getBackgroundColor(0.0F);
+        if (i != 0) {
+            int j = 2;
+            int var10001 = x - 2;
+            int var10002 = y - 2;
+            int var10003 = x + xOffset + 2;
+            Objects.requireNonNull(font);
+            guiGraphics.fill(var10001, var10002, var10003, y + 9 + 2, FastColor.ARGB32.multiply(i, color));
+        }
+
+        return guiGraphics.drawString(font, text, x, y, color, true);
     }
 }

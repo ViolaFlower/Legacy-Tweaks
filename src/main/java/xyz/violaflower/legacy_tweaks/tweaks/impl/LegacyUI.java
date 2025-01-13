@@ -60,6 +60,7 @@ public class LegacyUI extends Tweak {
 			public final BooleanOption applyHudScaleTooltip;
 			public final BooleanOption vignette;
 			public final BooleanOption forceDisableHudScale;
+			public final BooleanOption applyHudScaleCrosshair;
 
 			public GeneralTweaks() {
 				super("generalTweaks", true);
@@ -75,10 +76,12 @@ public class LegacyUI extends Tweak {
 				applyHudScaleTooltip = addBooleanOption("applyHudScaleTooltip", false);
 				vignette = addBooleanOption("vignette", false);
 				forceDisableHudScale = addBooleanOption("forceDisableHudScale", false);
+				applyHudScaleCrosshair = addBooleanOption("applyHudScaleCrosshair", true);
 			}
 		}
 
 		public static class HotbarTweaks extends Tweak {
+			public final BooleanOption legacyHotbar;
 			public final BooleanOption applyScreenSpacingHotbar;
 			public final BooleanOption applyHudScaleHotbar;
 			public final BooleanOption useLegacyHotbarTexture;
@@ -90,6 +93,7 @@ public class LegacyUI extends Tweak {
 				super("healthTweaks", true);
 				setTweakAuthor("Permdog99");
 
+				legacyHotbar = addBooleanOption("legacyHotbar", true);
 				legacyExperienceText = addBooleanOption("legacyExperienceText", true);
 				applyScreenSpacingHotbar = addBooleanOption("applyScreenSpacingHotbar", true);
 				applyHudScaleHotbar = addBooleanOption("applyHudScaleHotbar", true);
@@ -100,15 +104,23 @@ public class LegacyUI extends Tweak {
 		}
 
 		public static class ChatTweaks extends Tweak {
+			public final BooleanOption legacyChat;
+			public final BooleanOption grayChatBackground;
+			public final BooleanOption messageWidthSpansScreen;
+			public final BooleanOption legacyMessageHeight;
 			public final BooleanOption applyScreenSpacingChat;
 			public final BooleanOption applyHudScaleChat;
 
 			public ChatTweaks() {
 				super("chatTweaks", true);
-				setTweakAuthor("Permdog99");
+				setTweakAuthor("Permdog99", "DexrnZacAttack", "Jab125");
 
+				legacyChat = addBooleanOption("legacyChat", true);
+				grayChatBackground = addBooleanOption("grayChatBackground", true);
 				applyScreenSpacingChat = addBooleanOption("applyScreenSpacingChat", true);
 				applyHudScaleChat = addBooleanOption("applyHudScaleChat", false);
+				messageWidthSpansScreen = addBooleanOption("messageWidthSpansScreen", true);
+				legacyMessageHeight = addBooleanOption("legacyMessageHeight", true);
 			}
 		}
 

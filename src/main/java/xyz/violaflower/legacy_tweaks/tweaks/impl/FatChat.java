@@ -37,7 +37,5 @@ public class FatChat extends Tweak {
         }
     }
 
-    public double getLineHeight() {
-        return 1.0;
-    }
+
 }

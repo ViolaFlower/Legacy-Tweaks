@@ -69,13 +69,13 @@ public class PaperDollHelper {
     }
 
     public static void renderPaperDollStartEnd(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
-        float guiScale = HudElements.PAPER_DOLL.isScaleTweakOff () ? 1.5f : HudHelper.getHudScale(HudElements.PAPER_DOLL);
-        float screenSpacing = HudElements.PAPER_DOLL.isDistanceTweakOff() ? guiScale : (HudHelper.guiHudTweaks.generalTweaks.screenSpacing.get().floatValue()/100) * guiScale;
+        float guiScale = !HudHelper.guiHudTweaks.paperDollTweaks.applyHudScalePaperDoll.isOn() ? 1.5f : HudHelper.getHudScale();
+        float screenSpacing = !HudHelper.guiHudTweaks.paperDollTweaks.applyScreenSpacingPaperDoll.isOn() ? guiScale : (HudHelper.guiHudTweaks.generalTweaks.screenSpacing.get().floatValue()/100) * guiScale;
         PoseStack poseStack = guiGraphics.pose();
         poseStack.pushPose();
         RenderSystem.enableBlend();
 
         renderPaperDoll(guiGraphics, deltaTracker, 10f * screenSpacing, 36f * screenSpacing, 12f * guiScale);
-        HudHelper.end(guiGraphics);
+        HudHelper.end(guiGraphics, true);
     }
 }
