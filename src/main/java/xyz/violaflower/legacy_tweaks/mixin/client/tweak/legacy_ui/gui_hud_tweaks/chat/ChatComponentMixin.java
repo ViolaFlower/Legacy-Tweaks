@@ -18,13 +18,17 @@ import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import xyz.violaflower.legacy_tweaks.helper.tweak.hud.HudHelper;
-import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 
 @Mixin(value = ChatComponent.class, priority = -999999999)
 public abstract class ChatComponentMixin {
 
     @Shadow protected abstract double screenToChatX(double d);
+
+    @Shadow
+    public static int getWidth(double width) {
+        throw new RuntimeException("Failed to mixin!");
+    }
 
     @ModifyArg(method = "render",at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;fill(IIIII)V", ordinal = 0), index = 4)
     private int changeChatBackground(int i) {
@@ -89,6 +93,12 @@ public abstract class ChatComponentMixin {
         if (!HudHelper.guiHudTweaks.chatTweaks.legacyChat.isOn() || !HudHelper.guiHudTweaks.chatTweaks.messageWidthSpansScreen.get()) { original.call(instance, minX, minY, maxX, maxY, color); return; }
         // Dexrn: This was all done on my own, it may or may not work well.
         original.call(instance, minX, minY, Minecraft.getInstance().getWindow().getWidth() - minX, maxY, color);
+    }
+
+    @WrapOperation(method = "getWidth()I", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;getWidth(D)I"))
+    private int changeChatWidth(double width, Operation<Integer> original) {
+        if (!HudHelper.guiHudTweaks.chatTweaks.legacyChat.isOn() || !HudHelper.guiHudTweaks.chatTweaks.messageWidthSpansScreen.get()) return original.call(width);
+        return (int) (Minecraft.getInstance().getWindow().getGuiScaledWidth() - HudHelper.getChatScreenSpacing() * 2);
     }
 
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/OptionInstance;get()Ljava/lang/Object;", ordinal = 2))

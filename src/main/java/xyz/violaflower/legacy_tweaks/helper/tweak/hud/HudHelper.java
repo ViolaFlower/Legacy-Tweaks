@@ -113,8 +113,8 @@ public class HudHelper {
         return Minecraft.getInstance().player.jumpableVehicle() == null && Minecraft.getInstance().gameMode.hasExperience();
     }
 
-    public static float getChatScreenSpacing(){
-        return 29 * guiHudTweaks.generalTweaks.screenSpacing.get().floatValue()/100;
+    public static float getChatScreenSpacing() {
+        return 29 * guiHudTweaks.generalTweaks.screenSpacing.get().floatValue() / 100;
     }
 
     public static double getLineHeight() {
