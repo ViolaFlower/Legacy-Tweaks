@@ -14,14 +14,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.violaflower.legacy_tweaks.mixin.client.accessor.PostChainAccessor;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
-import static xyz.violaflower.legacy_tweaks.tweaks.impl.Gamma.gammaEffect;
+import static xyz.violaflower.legacy_tweaks.tweaks.impl.EyeCandy.Gamma.gammaEffect;
 
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
 	@Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;flush()V"))
 	private void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
-		if (gammaEffect != null && Tweaks.GAMMA.isEnabled()) {
-			float gamma = (float) /* Yuck! */ (double) Tweaks.GAMMA.potency.get();
+		if (gammaEffect != null && Tweaks.EYE_CANDY.gamma.isEnabled()) {
+			float gamma = (float) /* Yuck! */ (double) Tweaks.EYE_CANDY.gamma.potency.get();
 			guiGraphics.flush();
 			RenderSystem.enableBlend();
 			RenderSystem.disableDepthTest();

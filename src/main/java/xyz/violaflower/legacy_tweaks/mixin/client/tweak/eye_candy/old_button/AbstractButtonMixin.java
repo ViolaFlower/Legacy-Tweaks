@@ -28,7 +28,7 @@ public class AbstractButtonMixin implements ButtonExtension {
 	@WrapOperation(method = "renderWidget", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/WidgetSprites;get(ZZ)Lnet/minecraft/resources/ResourceLocation;"))
 	ResourceLocation renderWidget(WidgetSprites instance, boolean enabled, boolean focused, Operation<ResourceLocation> original) {
 		l: {
-			if (!Tweaks.EYE_CANDY.oldButton.isEnabled()) break l;
+			if (!Tweaks.LEGACY_UI.generalScreenTweaks.oldButton.isOn()) break l;
 			if (enabled && focused) return Sprites.OLD_BUTTON_HIGHLIGHTED;
 		}
 		return original.call(instance, enabled, focused);

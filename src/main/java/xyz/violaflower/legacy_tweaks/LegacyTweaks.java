@@ -43,18 +43,9 @@ public final class LegacyTweaks {
         ItemManager.init();
 
         TweakManager tweakManager = TweakManager.getInstance();
-        tweakManager.register(Tweaks.WINDOW_TITLE);
-        tweakManager.register(Tweaks.STUB);
-        tweakManager.register(Tweaks.MAP_CHANGES);
-        tweakManager.register(Tweaks.GAMMA);
-        tweakManager.register(Tweaks.F3INFO);
-        tweakManager.register(Tweaks.LEGACY_CHAT);
-        tweakManager.register(Tweaks.CRASH);
         tweakManager.register(Tweaks.GAMEPLAY);
         tweakManager.register(Tweaks.LEGACY_UI);
         tweakManager.register(Tweaks.EYE_CANDY);
-        tweakManager.register(Tweaks.LEGACY_FOG);
-        tweakManager.register(Tweaks.MIPMAPPING);
         TweakManager.load();
 
         // this only works on Fabric!

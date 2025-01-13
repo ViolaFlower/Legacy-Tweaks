@@ -47,11 +47,11 @@ public class MapRendererMixin {
 	}
 	@Unique
 	private static boolean mapCoords() {
-		return Tweaks.MAP_CHANGES.getSubTweak("mapCoordinates").isEnabled();
+		return Tweaks.GAMEPLAY.mapMechanics.mapCoordinates.isOn();
 	}
 
 	@Unique
 	private static boolean smallerMapContents() {
-		return Tweaks.MAP_CHANGES.getSubTweak("smallerMapContents").isEnabled();
+		return Tweaks.GAMEPLAY.mapMechanics.smallerMapContents.isOn();
 	}
 }

@@ -34,8 +34,8 @@ public class MipmapTypeHelper {
      * @param cir Returns the mipmap type's method to then mip the textures
      */
     public static void setMipmapType(NativeImage[] originals, int mipmapLevel, ResourceLocation resourceLocation, CallbackInfoReturnable<NativeImage[]> cir) throws IOException {
-        if (Tweaks.MIPMAPPING.mipmapType.isEnabled()) {
-            switch (Tweaks.MIPMAPPING.mipmapType.mipmapType.get()) {
+        if (Tweaks.EYE_CANDY.mipmapping.mipmapType.isEnabled()) {
+            switch (Tweaks.EYE_CANDY.mipmapping.mipmapType.mipmapType.get()) {
                 case MipmapTypes.TU1 -> {
                     cir.setReturnValue(mipmapTU1(originals, mipmapLevel));
                     currentResourceLocation = null;
@@ -77,7 +77,7 @@ public class MipmapTypeHelper {
 
     /// Adds manual mipmaps in `textures/ltmipmaps`
     public static void addManualMipmaps(int mipmapLevels, NativeImage[] mipmaps, ResourceLocation currentResourceLocation) {
-        if (!Tweaks.MIPMAPPING.manualMipmapping.isEnabled()) return;
+        if (!Tweaks.EYE_CANDY.mipmapping.manualMipmapping.isEnabled()) return;
         if (currentResourceLocation == null) return;
         for (int level = 0; level < mipmapLevels; level++) {
             Optional<NativeImage> nativeImage = fromResource(ResourceLocation.fromNamespaceAndPath(currentResourceLocation.getNamespace(), "textures/ltmipmaps/" + currentResourceLocation.getPath() + "/" + level + ".png"));
@@ -89,7 +89,7 @@ public class MipmapTypeHelper {
 
     /// Adds manual mipmaps in `textures/ltmipmaps`
     public static void maybeGetMipmapForLevel(int level, Consumer<NativeImage> consumer, ResourceLocation currentResourceLocation) {
-        if (!Tweaks.MIPMAPPING.manualMipmapping.isEnabled()) return;
+        if (!Tweaks.EYE_CANDY.mipmapping.manualMipmapping.isEnabled()) return;
         if (currentResourceLocation == null) return;
         Optional<NativeImage> nativeImage = fromResource(ResourceLocation.fromNamespaceAndPath(currentResourceLocation.getNamespace(), "textures/ltmipmaps/" + currentResourceLocation.getPath() + "/" + level + ".png"));
 		nativeImage.ifPresent(consumer::accept);

@@ -22,7 +22,7 @@ public abstract class AbstractWidgetMixin {
 			AbstractWidget instance, Operation<Component> original
 	) {
 		bloc:if (this instanceof ButtonExtension buttonExtension) {
-			if (Tweaks.EYE_CANDY.oldButton.isEnabled()) {
+			if (Tweaks.LEGACY_UI.generalScreenTweaks.oldButton.isOn()) {
 				if (!this.active) break bloc;                                                 // mom: we have goto at home
 				if (!buttonExtension.legacyTweaks$isDecayed() && this.isHoveredOrFocused()) { // goto at home:
 					return original.call(instance).copy().withStyle(ChatFormatting.YELLOW);

@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
-import xyz.violaflower.legacy_tweaks.tweaks.impl.FatChat;
+import xyz.violaflower.legacy_tweaks.tweaks.impl.Gameplay;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
 
@@ -27,12 +27,12 @@ public abstract class EntityMixin {
     )
     private Entity sendChatMessage(Entity instance, DimensionTransition transition, Operation<Entity> original) {
         if (!(this.level() instanceof ServerLevel serverLevel)) return original.call(instance, transition);
-        if (!Tweaks.LEGACY_CHAT.getSubTweak("dimensionNotifications").isEnabled()) {
+        if (!Tweaks.GAMEPLAY.chatMechanics.dimensionNotifications.isEnabled()) {
             return original.call(instance, transition);
         }
         if (!(instance instanceof ServerPlayer player)) return original.call(instance, transition);
 
-        FatChat.DimensionNotification dn = Tweaks.LEGACY_CHAT.getSubTweak("dimensionNotifications"); // deez nuts
+        Gameplay.ChatMechanics.DimensionNotifications dn = Tweaks.GAMEPLAY.chatMechanics.dimensionNotifications; // deez nuts
 
         ResourceKey<Level> currentDimension = instance.level().dimension();
         ResourceKey<Level> newDimension = (transition.newLevel()).dimension();

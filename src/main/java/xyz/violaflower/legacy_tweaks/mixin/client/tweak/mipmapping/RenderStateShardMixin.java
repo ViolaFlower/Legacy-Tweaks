@@ -22,6 +22,6 @@ public class RenderStateShardMixin {
 
     @Inject(method = "<clinit>", at = @At("RETURN"))
     private static void changeBlockSheet(CallbackInfo ci) {
-        if (Tweaks.MIPMAPPING.fullCutoutMips.isEnabled()) BLOCK_SHEET = new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, true);
+        if (Tweaks.EYE_CANDY.mipmapping.fullCutoutMips.isEnabled()) BLOCK_SHEET = new RenderStateShard.TextureStateShard(TextureAtlas.LOCATION_BLOCKS, false, true);
     }
 }

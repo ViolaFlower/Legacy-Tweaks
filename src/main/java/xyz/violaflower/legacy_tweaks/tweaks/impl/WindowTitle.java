@@ -15,22 +15,9 @@ public class WindowTitle extends Tweak {
         this.addSubTweak(showTUVersion);
     }
 
-    public String getTitle() {
-        ShowTUVersion showTUVersion = this.getSubTweak("showTUVersion");
-        if (showTUVersion != null && showTUVersion.isEnabled()) {
-            return String.format(Lang.WINDOW_TITLE_TU.getString(), showTUVersion.getTUVersion());
-        } else {
-            return String.format(Lang.WINDOW_TITLE.getString(), SharedConstants.getCurrentVersion().getName());
-        }
-    }
-
     public static class ShowTUVersion extends Tweak {
         public ShowTUVersion() {
             super("showTUVersion", false);
-        }
-
-        public String getTUVersion() {
-            return Lang.TitleUpdates.TU_VERSION.getString();
         }
 
         @Override

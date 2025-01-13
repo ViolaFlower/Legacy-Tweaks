@@ -12,7 +12,7 @@ public class EyeCandyHelper {
 	private static boolean compactText;
 	private static boolean legacyTextShadows = true;
 	public static boolean isCompactTextEnabled() {
-		return Tweaks.EYE_CANDY.legacyCompactText.isEnabled() && compactText;
+		return Tweaks.LEGACY_UI.generalScreenTweaks.legacyCompactText.isOn() && compactText;
 	}
 
 	public static void setCompactText(boolean b) {
@@ -24,7 +24,7 @@ public class EyeCandyHelper {
 	}
 
 	public static boolean isLegacyTextShadowsEnabled() {
-		return Tweaks.EYE_CANDY.legacyTextShadows.isEnabled() && legacyTextShadows;
+		return Tweaks.LEGACY_UI.generalScreenTweaks.legacyTextShadows.isOn() && legacyTextShadows;
 	}
 
     public static Integer getWaterColor(Biome biome) {

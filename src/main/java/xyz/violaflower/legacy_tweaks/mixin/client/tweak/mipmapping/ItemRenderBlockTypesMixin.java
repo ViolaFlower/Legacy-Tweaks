@@ -26,7 +26,7 @@ public class ItemRenderBlockTypesMixin {
 
     @Inject(method = "<clinit>", at = @At("RETURN"))
     private static void changeRenderTypes(CallbackInfo ci) {
-        if (Tweaks.MIPMAPPING.halfCutoutMips.isEnabled()) TYPE_BY_BLOCK = Util.make(Maps.newHashMap(), (hashMap) -> {
+        if (Tweaks.EYE_CANDY.mipmapping.halfCutoutMips.isEnabled()) TYPE_BY_BLOCK = Util.make(Maps.newHashMap(), (hashMap) -> {
             RenderType renderTypeSolid = RenderType.solid();
 
             RenderType renderType = RenderType.tripwire();

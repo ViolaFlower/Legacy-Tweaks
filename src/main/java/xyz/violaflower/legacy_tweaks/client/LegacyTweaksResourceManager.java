@@ -19,7 +19,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import org.apache.commons.io.FilenameUtils;
 import xyz.violaflower.legacy_tweaks.LegacyTweaks;
-import xyz.violaflower.legacy_tweaks.tweaks.impl.Gamma;
+import xyz.violaflower.legacy_tweaks.tweaks.impl.EyeCandy.Gamma;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,5 +1,6 @@
 package xyz.violaflower.legacy_tweaks.tweaks.impl;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.enums.PlayGameScreen;
@@ -11,6 +12,8 @@ public class LegacyUI extends Tweak {
 	public final LegacyPlayGameScreenTweak legacyPlayGameScreenTweak;
 	public final LegacyHelpOptionsScreenTweak legacyHelpOptionsScreen;
 	public final GuiHudTweaks guiHudTweaks;
+	public final F3Info f3Info;
+	public final WindowTitle windowTitle;
 
 	public LegacyUI() {
 		super("legacyUI", true);
@@ -23,6 +26,8 @@ public class LegacyUI extends Tweak {
 		addSubTweak(legacyOptions = new LegacyOptionsTweak());
 		addSubTweak(legacyPlayGameScreenTweak = new LegacyPlayGameScreenTweak());
 		addSubTweak(legacyHelpOptionsScreen = new LegacyHelpOptionsScreenTweak());
+		addSubTweak(f3Info = new F3Info());
+		addSubTweak(windowTitle = new WindowTitle());
 	}
 
 	public static class GuiHudTweaks extends Tweak {
@@ -90,7 +95,7 @@ public class LegacyUI extends Tweak {
 			public final BooleanOption legacyItemOverlay;
 
 			public HotbarTweaks() {
-				super("healthTweaks", true);
+				super("hotbarTweaks", true);
 				setTweakAuthor("Permdog99");
 
 				legacyHotbar = addBooleanOption("legacyHotbar", true);
@@ -207,6 +212,13 @@ public class LegacyUI extends Tweak {
 	public static class GeneralScreenTweaks extends Tweak {
 		public final BooleanOption legacyPanorama;
 		public final BooleanOption useLegacyTitleLogo;
+		public final BooleanOption autoFindBestUIScale;
+		public final BooleanOption legacyTextShadows;
+		public final IntSliderOption legacyTextShadowOffset;
+		public final BooleanOption forceDisableFineTunedUIScale;
+		public final DoubleSliderOption fineTunedUIScale;
+		public final BooleanOption legacyCompactText;
+		public final BooleanOption oldButton;
 
 		public GeneralScreenTweaks() {
             super("generalScreenTweaks", true);
@@ -214,6 +226,14 @@ public class LegacyUI extends Tweak {
 
 			legacyPanorama = addBooleanOption("legacyPanorama", true);
 			useLegacyTitleLogo = addBooleanOption("useLegacyTitleLogo", true);
+			autoFindBestUIScale = addBooleanOption("autoFindBestUIScale", false);
+			legacyTextShadows = addBooleanOption("legacyTextShadows", true);
+			legacyTextShadowOffset = addSliderOption("shadowOffset", 1, 0, 10);
+			forceDisableFineTunedUIScale = addBooleanOption("forceDisableFineTunedUIScale", true);
+			fineTunedUIScale = addSliderOption("fineTunedUIScale", 1D, 0.8D, 5D);
+			fineTunedUIScale.setConsumer(d -> {if (forceDisableFineTunedUIScale.isOn()) Minecraft.getInstance().resizeDisplay();});
+			legacyCompactText = addBooleanOption("legacyCompactText", true);
+			oldButton = addBooleanOption("oldButton", true);
         }
 	}
 
@@ -268,6 +288,45 @@ public class LegacyUI extends Tweak {
 			setTweakAuthor("Permdog99");
 
 			useLegacyHelpOptionsScreen = addBooleanOption("useLegacyHelpOptions", true);
+		}
+	}
+
+	public static class F3Info extends Tweak {
+		public final BooleanOption showEnabledTweaks;
+
+		public F3Info() {
+			super("f3Info", true);
+			setTweakAuthor("DexrnZacAttack", "Jab125");
+			// localize hopefully
+			// LOCALISED! - S_N00B
+			showEnabledTweaks = addBooleanOption("showEnabledTweaks", true);
+		}
+	}
+
+	public static class WindowTitle extends Tweak {
+		public final ShowTUVersion showTUVersion;
+		public WindowTitle() {
+			super("windowTitle", true);
+			setTweakAuthor("LimeGradient", "Jab125");
+			addSubTweak(showTUVersion = new ShowTUVersion());
+		}
+
+		public static class ShowTUVersion extends Tweak {
+			public ShowTUVersion() {
+				super("showTUVersion", false);
+			}
+
+			@Override
+			public void onToggled() {
+				if (Minecraft.getInstance().getWindow() == null) return;
+				Minecraft.getInstance().updateTitle();
+			}
+		}
+
+		@Override
+		public void onToggled() {
+			if (Minecraft.getInstance().getWindow() == null) return;
+			Minecraft.getInstance().updateTitle();
 		}
 	}
 }

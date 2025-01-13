@@ -17,7 +17,7 @@ public class PlayerAdvancementsMixin {
                 at = @At(value = "INVOKE", target = "Lnet/minecraft/server/players/PlayerList;broadcastSystemMessage(Lnet/minecraft/network/chat/Component;Z)V", ordinal = 0)
         )
         void noAdvancement(PlayerList instance, Component message, boolean bypassHiddenChat, Operation<Void> original) {
-                if (!Tweaks.LEGACY_CHAT.getSubTweak("noAchievementAnnouncement").isEnabled())
+                if (!Tweaks.GAMEPLAY.chatMechanics.advancementsChat.noAdvancementMessage.isOn())
                         original.call(instance, message, bypassHiddenChat);
         }
 }
