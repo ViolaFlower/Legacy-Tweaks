@@ -1,7 +1,6 @@
 package xyz.violaflower.legacy_tweaks.tweaks.impl;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.enums.PlayGameScreen;
 
@@ -10,6 +9,7 @@ public class LegacyUI extends Tweak {
 	public final LegacyOptionsTweak legacyOptions;
 	public final GeneralScreenTweaks generalScreenTweaks;
 	public final LegacyPlayGameScreenTweak legacyPlayGameScreenTweak;
+	public final LegacyPauseScreenTweak legacyPauseScreenTweak;
 	public final LegacyHelpOptionsScreenTweak legacyHelpOptionsScreen;
 	public final GuiHudTweaks guiHudTweaks;
 	public final F3Info f3Info;
@@ -24,6 +24,7 @@ public class LegacyUI extends Tweak {
 		addSubTweak(generalScreenTweaks = new GeneralScreenTweaks());
 		addSubTweak(legacyTitleScreen = new LegacyTitleScreenTweak());
 		addSubTweak(legacyOptions = new LegacyOptionsTweak());
+		addSubTweak(legacyPauseScreenTweak = new LegacyPauseScreenTweak());
 		addSubTweak(legacyPlayGameScreenTweak = new LegacyPlayGameScreenTweak());
 		addSubTweak(legacyHelpOptionsScreen = new LegacyHelpOptionsScreenTweak());
 		addSubTweak(f3Info = new F3Info());
@@ -231,7 +232,7 @@ public class LegacyUI extends Tweak {
 			legacyTextShadowOffset = addSliderOption("shadowOffset", 1, 0, 10);
 			forceDisableFineTunedUIScale = addBooleanOption("forceDisableFineTunedUIScale", true);
 			fineTunedUIScale = addSliderOption("fineTunedUIScale", 1D, 0.8D, 5D);
-			fineTunedUIScale.setConsumer(d -> {if (forceDisableFineTunedUIScale.isOn()) Minecraft.getInstance().resizeDisplay();});
+			fineTunedUIScale.setConsumer(d -> {if (isEnabled()) Minecraft.getInstance().resizeDisplay();});
 			legacyCompactText = addBooleanOption("legacyCompactText", true);
 			oldButton = addBooleanOption("oldButton", true);
         }
@@ -256,6 +257,16 @@ public class LegacyUI extends Tweak {
 			showLeaderboardsButton = addBooleanOption("showLeaderboardsButton", false);
 			showMinecraftStoreButton = addBooleanOption("showMinecraftStoreButton", false);
         }
+	}
+
+	public static class LegacyPauseScreenTweak extends Tweak {
+		public final BooleanOption useLegacyPauseMenu;
+		public LegacyPauseScreenTweak() {
+			super("legacyPauseScreen", true);
+			setTweakAuthor("Permdog99");
+
+			useLegacyPauseMenu = addBooleanOption("useLegacyPauseMenu", true);
+		}
 	}
 
 	public static class LegacyOptionsTweak extends Tweak {

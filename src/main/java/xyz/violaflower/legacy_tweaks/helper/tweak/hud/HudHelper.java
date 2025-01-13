@@ -44,6 +44,10 @@ public class HudHelper {
         return Math.max(1.5f, 4 - Tweaks.LEGACY_UI.guiHudTweaks.generalTweaks.hudScale.get());
     }
 
+    public static float getHudScaleAlt() {
+        return Math.max(1.5f, Tweaks.LEGACY_UI.guiHudTweaks.generalTweaks.hudScale.get());
+    }
+
     public static float getHudOpacity() {
         float f = (Util.getMillis() - lastHotbarSelectionChange) / 1200f;
         return getHudOpacitySetting() <= 0.8f ? Math.min(0.8f, getHudOpacitySetting() + (1 - getHudOpacitySetting()) * (f >= 3f ? Math.max(4 - f, 0) : 1)) : getHudOpacitySetting();

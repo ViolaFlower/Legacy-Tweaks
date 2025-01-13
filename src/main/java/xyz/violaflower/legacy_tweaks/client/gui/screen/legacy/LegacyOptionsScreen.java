@@ -73,12 +73,13 @@ public class LegacyOptionsScreen extends LegacyScreen {
 
 	@Override
 	public void render(GuiGraphics guiGraphics, int i, int j, float f) {
-		this.renderPanorama(guiGraphics, f);
+		if (minecraft.level == null) this.renderPanorama(guiGraphics, f);
 		super.render(guiGraphics, i, j, f);
 		logoRenderer.renderLogo(guiGraphics, this.width, 1);
 	}
 
 	@Override
 	public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f) {
+		if (minecraft.level !=null) super.renderBackground(guiGraphics, i, j, f);
 	}
 }

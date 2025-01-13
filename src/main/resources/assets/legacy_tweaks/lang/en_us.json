@@ -23,6 +23,11 @@
   "gui.legacy_tweaks.optionsScreen.reset": "Reset to Defaults",
   "gui.legacy_tweaks.optionsScreen.javaSettings": "Java Settings",
 
+  "gui.legacy_tweaks.pauseScreen.resumeGame": "Resume Game",
+  "gui.legacy_tweaks.pauseScreen.achievements": "Achievements",
+  "gui.legacy_tweaks.pauseScreen.disconnect": "Disconnect",
+  "gui.legacy_tweaks.pauseScreen.exitGame": "Exit Game",
+
   "gui.legacy_tweaks.helpOptionsScreen.changeSkin": "Change Skin",
   "gui.legacy_tweaks.helpOptionsScreen.howToPlay": "How to Play",
   "gui.legacy_tweaks.helpOptionsScreen.controls": "Controls",

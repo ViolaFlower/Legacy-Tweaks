@@ -31,8 +31,8 @@ public class GuiMixin {
     @Unique
     private int lastHotbarSelection = -1;
 
-    @Inject(method = "renderItemHotbar", at = @At("HEAD"), cancellable = true)
-    private void startItemHotbarRender(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+    @Inject(method = "renderHotbarAndDecorations", at = @At("HEAD"), cancellable = true)
+    private void startHotbarRender(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if (Minecraft.getInstance().screen != null && Minecraft.getInstance().level != null && HudHelper.guiHudTweaks.generalTweaks.hideHudInScreen.isOn()) {
             ci.cancel();
             return;
@@ -44,8 +44,8 @@ public class GuiMixin {
         HudHelper.start(guiGraphics, HudHelper.guiHudTweaks.hotbarTweaks.legacyHotbar.isOn(), HudHelper.guiHudTweaks.hotbarTweaks.applyHudScaleHotbar.isOn(), HudHelper.guiHudTweaks.hotbarTweaks.applyScreenSpacingHotbar.isOn(), true, false, 3f/HudHelper.getHudScale(), 0f, -HudHelper.getHotbarSpacing(true, false), 2f, 1f);
     }
 
-    @Inject(method = "renderItemHotbar", at = @At("TAIL"), cancellable = true)
-    private void endItemHotbarRender(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+    @Inject(method = "renderHotbarAndDecorations", at = @At("TAIL"), cancellable = true)
+    private void endHotbarRender(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if (Minecraft.getInstance().screen != null && Minecraft.getInstance().level != null && HudHelper.guiHudTweaks.generalTweaks.hideHudInScreen.isOn()) {
             ci.cancel();
             return;
@@ -53,23 +53,45 @@ public class GuiMixin {
         HudHelper.end(guiGraphics, HudHelper.guiHudTweaks.hotbarTweaks.legacyHotbar.isOn());
     }
 
-    @Inject(method = "renderPlayerHealth", at = @At("HEAD"), cancellable = true)
-    private void startHealthRender(GuiGraphics guiGraphics, CallbackInfo ci) {
-        if (Minecraft.getInstance().screen != null && Minecraft.getInstance().level != null && HudHelper.guiHudTweaks.generalTweaks.hideHudInScreen.isOn()) {
-            ci.cancel();
-            return;
-        }
-        HudHelper.start(guiGraphics, HudHelper.guiHudTweaks.hotbarTweaks.legacyHotbar.isOn(), HudHelper.guiHudTweaks.hotbarTweaks.applyHudScaleHotbar.isOn(), HudHelper.guiHudTweaks.hotbarTweaks.applyScreenSpacingHotbar.isOn(), true, false, 3f/HudHelper.getHudScale(), 0f, -HudHelper.getHotbarSpacing(true, false), 2f, 1f);
-    }
-
-    @Inject(method = "renderPlayerHealth", at = @At("TAIL"), cancellable = true)
-    private void endHealthRender(GuiGraphics guiGraphics, CallbackInfo ci) {
-        if (Minecraft.getInstance().screen != null && Minecraft.getInstance().level != null && HudHelper.guiHudTweaks.generalTweaks.hideHudInScreen.isOn()) {
-            ci.cancel();
-            return;
-        }
-        HudHelper.end(guiGraphics, HudHelper.guiHudTweaks.hotbarTweaks.legacyHotbar.isOn());
-    }
+//    @Inject(method = "renderItemHotbar", at = @At("HEAD"), cancellable = true)
+//    private void startItemHotbarRender(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+//        if (Minecraft.getInstance().screen != null && Minecraft.getInstance().level != null && HudHelper.guiHudTweaks.generalTweaks.hideHudInScreen.isOn()) {
+//            ci.cancel();
+//            return;
+//        }
+//        PaperDollHelper.renderPaperDollStartEnd(guiGraphics, deltaTracker);
+//        int newSelection = Minecraft.getInstance().player != null ? Minecraft.getInstance().player.getInventory().selected : -1;
+//        if (lastHotbarSelection >= 0 && lastHotbarSelection != newSelection) HudHelper.lastHotbarSelectionChange = Util.getMillis();
+//        lastHotbarSelection = newSelection;
+//        HudHelper.start(guiGraphics, HudHelper.guiHudTweaks.hotbarTweaks.legacyHotbar.isOn(), HudHelper.guiHudTweaks.hotbarTweaks.applyHudScaleHotbar.isOn(), HudHelper.guiHudTweaks.hotbarTweaks.applyScreenSpacingHotbar.isOn(), true, false, 3f/HudHelper.getHudScale(), 0f, -HudHelper.getHotbarSpacing(true, false), 2f, 1f);
+//    }
+//
+//    @Inject(method = "renderItemHotbar", at = @At("TAIL"), cancellable = true)
+//    private void endItemHotbarRender(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+//        if (Minecraft.getInstance().screen != null && Minecraft.getInstance().level != null && HudHelper.guiHudTweaks.generalTweaks.hideHudInScreen.isOn()) {
+//            ci.cancel();
+//            return;
+//        }
+//        HudHelper.end(guiGraphics, HudHelper.guiHudTweaks.hotbarTweaks.legacyHotbar.isOn());
+//    }
+//
+//    @Inject(method = "renderPlayerHealth", at = @At("HEAD"), cancellable = true)
+//    private void startHealthRender(GuiGraphics guiGraphics, CallbackInfo ci) {
+//        if (Minecraft.getInstance().screen != null && Minecraft.getInstance().level != null && HudHelper.guiHudTweaks.generalTweaks.hideHudInScreen.isOn()) {
+//            ci.cancel();
+//            return;
+//        }
+//        HudHelper.start(guiGraphics, HudHelper.guiHudTweaks.hotbarTweaks.legacyHotbar.isOn(), HudHelper.guiHudTweaks.hotbarTweaks.applyHudScaleHotbar.isOn(), HudHelper.guiHudTweaks.hotbarTweaks.applyScreenSpacingHotbar.isOn(), true, false, 3f/HudHelper.getHudScale(), 0f, -HudHelper.getHotbarSpacing(true, false), 2f, 1f);
+//    }
+//
+//    @Inject(method = "renderPlayerHealth", at = @At("TAIL"), cancellable = true)
+//    private void endHealthRender(GuiGraphics guiGraphics, CallbackInfo ci) {
+//        if (Minecraft.getInstance().screen != null && Minecraft.getInstance().level != null && HudHelper.guiHudTweaks.generalTweaks.hideHudInScreen.isOn()) {
+//            ci.cancel();
+//            return;
+//        }
+//        HudHelper.end(guiGraphics, HudHelper.guiHudTweaks.hotbarTweaks.legacyHotbar.isOn());
+//    }
 
     @Inject(method = "renderSelectedItemName", at = @At("HEAD"), cancellable = true)
     private void startItemNameRender(GuiGraphics guiGraphics, CallbackInfo ci) {
@@ -79,15 +101,18 @@ public class GuiMixin {
         }
         float guiScale = HudHelper.guiHudTweaks.generalTweaks.hudScale.get().floatValue();
         boolean tweak = HudHelper.guiHudTweaks.hotbarTweaks.legacyItemOverlay.isOn();
-        float scaled = 3f/HudHelper.getHudScale();
-        float textPos = 1.5f;
-        if (tweak) {
+        float scaled = 1f;
+        float textPos = 0f;
+        float textPosMultipier = 1.5f;
+        if (tweak) { // TODO fix the setting for when legacyTextOverlay is disabled
             EyeCandyHelper.setLegacyTextShadows(true);
             EyeCandyHelper.setCompactText(false);
-            scaled = 1f;
-            textPos = guiScale == 1 ? 1.5f : guiScale == 2 ? 2f : 2.5f;
+            scaled = 1f/(guiScale == 1 ? 1f : 1.5f);
+//            textPos = guiScale == 1 ? 1.5f : guiScale == 2 ? 2f : 2.5f;
+            textPos = 13f;
+            textPosMultipier = 1f;
         }
-        HudHelper.start(guiGraphics, HudHelper.guiHudTweaks.hotbarTweaks.legacyHotbar.isOn(), HudHelper.guiHudTweaks.hotbarTweaks.applyHudScaleHotbar.isOn(), HudHelper.guiHudTweaks.hotbarTweaks.applyScreenSpacingHotbar.isOn(), true, tweak, scaled, 0f, (-HudHelper.getHotbarSpacing(true, false) * textPos), 2f, 1f);
+        HudHelper.start(guiGraphics, HudHelper.guiHudTweaks.hotbarTweaks.legacyHotbar.isOn(), HudHelper.guiHudTweaks.hotbarTweaks.applyHudScaleHotbar.isOn(), HudHelper.guiHudTweaks.hotbarTweaks.applyScreenSpacingHotbar.isOn(), true, tweak, scaled, 0f, (-HudHelper.getHotbarSpacing(true, false) * textPosMultipier) + textPos, 2f, 1f);
     }
 
     @Inject(method = "renderSelectedItemName", at = @At("TAIL"), cancellable = true)

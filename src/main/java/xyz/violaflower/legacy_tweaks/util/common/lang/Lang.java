@@ -64,6 +64,19 @@ public interface Lang {
         }
     }
 
+    interface PauseScreen
+    {
+        Translate RESUME_GAME = from("resumeGame");
+        Translate ACHIEVEMENTS = from("achievements");
+        Translate DISCONNECT = from("disconnect");
+        Translate EXIT_GAME = from("exitGame");
+
+        private static Translate from(String name)
+        {
+            return new Translate("gui.legacy_tweaks.pauseScreen." + name);
+        }
+    }
+
     interface TitleScreen
     {
         Translate PLAY_GAME = from("playGame");
@@ -141,6 +154,20 @@ public interface Lang {
         private static Translate from(String name)
         {
             return new Translate("tweak.legacy_tweaks.enum." + name);
+        }
+    }
+
+    interface Resolution
+    {
+        Translate RES544P = from("544p");
+        Translate RES720P = from("720p");
+        Translate RES1080P = from("1080p");
+        Translate RES1440P = from("1440p");
+        Translate RES2160P = from("2160p");
+
+        private static Translate from(String name)
+        {
+            return new Translate("common.legacy_tweaks.resolution." + name);
         }
     }
 
