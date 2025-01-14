@@ -1,6 +1,7 @@
 package xyz.violaflower.legacy_tweaks.util.common.assets;
 
 import net.minecraft.resources.ResourceLocation;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
 public interface Sprites {
     ResourceLocation FIREWORK_LEGACY = ModAsset.textureLocation("entity/projectiles/firework.png");
@@ -11,6 +12,13 @@ public interface Sprites {
     ResourceLocation PANORAMA_NIGHT = ModAsset.guiLocation("panorama/panorama_night.png");
 
     ResourceLocation HOTBAR_SELECTION = ModAsset.getResourceLocation("hud/hotbar_selection");
+    ResourceLocation INVENTORY = ModAsset.guiLocation(Tweaks.LEGACY_UI.legacyInventoryScreenTweak.noOffhand.isOn() ? "container/classic_inventory.png" : "container/classic_inventory_tu53.png");
+
+    ResourceLocation EMPTY_ARMOR_SLOT_HELMET = ResourceLocation.withDefaultNamespace("item/legacy_armor_slot_helmet");
+    ResourceLocation EMPTY_ARMOR_SLOT_CHESTPLATE = ResourceLocation.withDefaultNamespace("item/legacy_armor_slot_chestplate");
+    ResourceLocation EMPTY_ARMOR_SLOT_LEGGINGS = ResourceLocation.withDefaultNamespace("item/legacy_armor_slot_leggings");
+    ResourceLocation EMPTY_ARMOR_SLOT_BOOTS = ResourceLocation.withDefaultNamespace("item/legacy_armor_slot_boots");
+    ResourceLocation EMPTY_ARMOR_SLOT_SHIELD = ResourceLocation.withDefaultNamespace("item/legacy_armor_slot_shield");
 
     ResourceLocation MINECRAFT_LEGACY = ModAsset.guiLocation("title/minecraft.png");
 

@@ -11,6 +11,7 @@ public class LegacyUI extends Tweak {
 	public final LegacyPlayGameScreenTweak legacyPlayGameScreenTweak;
 	public final LegacyPauseScreenTweak legacyPauseScreenTweak;
 	public final LegacyHelpOptionsScreenTweak legacyHelpOptionsScreen;
+	public final LegacyInventoryScreenTweak legacyInventoryScreenTweak;
 	public final GuiHudTweaks guiHudTweaks;
 	public final F3Info f3Info;
 	public final WindowTitle windowTitle;
@@ -27,6 +28,7 @@ public class LegacyUI extends Tweak {
 		addSubTweak(legacyPauseScreenTweak = new LegacyPauseScreenTweak());
 		addSubTweak(legacyPlayGameScreenTweak = new LegacyPlayGameScreenTweak());
 		addSubTweak(legacyHelpOptionsScreen = new LegacyHelpOptionsScreenTweak());
+		addSubTweak(legacyInventoryScreenTweak = new LegacyInventoryScreenTweak());
 		addSubTweak(f3Info = new F3Info());
 		addSubTweak(windowTitle = new WindowTitle());
 	}
@@ -299,6 +301,19 @@ public class LegacyUI extends Tweak {
 			setTweakAuthor("Permdog99");
 
 			useLegacyHelpOptionsScreen = addBooleanOption("useLegacyHelpOptions", true);
+		}
+	}
+
+	public static class LegacyInventoryScreenTweak extends Tweak {
+		public final BooleanOption useLegacyInventory;
+		public final BooleanOption noOffhand;
+		public final BooleanOption hideRecipeBook;
+		public LegacyInventoryScreenTweak() {
+			super("legacyInventoryScreen", true);
+			setTweakAuthor("Permdog99");
+			useLegacyInventory = addBooleanOption("useLegacyInventory", true);
+			noOffhand = addBooleanOption("noOffhand", false);
+			hideRecipeBook = addBooleanOption("hideRecipeBook", true);
 		}
 	}
 
