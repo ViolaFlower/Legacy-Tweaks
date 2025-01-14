@@ -42,6 +42,8 @@
   "gui.legacy_tweaks.titleScreen.java": "Launch New Minecraft",
   "gui.legacy_tweaks.titleScreen.quit": "Exit Game",
 
+  "gui.legacy_tweaks.container.inventory": "Inventory",
+
   "game.legacy_tweaks.dimension.entrance": "%s has entered %s",
   "game.legacy_tweaks.dimension.leave": "%s has left %s",
 

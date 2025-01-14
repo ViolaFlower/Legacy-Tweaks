@@ -2,6 +2,7 @@ package xyz.violaflower.legacy_tweaks.mixin.client.tweak.legacy_ui.container;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -28,6 +29,9 @@ public class AbstractContainerScreenMixin {
     @Unique
     private int currentMouseY;
 
+    @Unique
+    private int currentMouseX;
+
     @Shadow
     private ItemStack draggingItem;
 
@@ -49,6 +53,7 @@ public class AbstractContainerScreenMixin {
     @Inject(method = "render", at = @At("HEAD"))
     private void setCurrentMouseY(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
         currentMouseY = mouseY;
+        currentMouseX = mouseX;
     }
 
     @Inject(method = "renderSlot", at = @At("HEAD"))
@@ -103,8 +108,16 @@ public class AbstractContainerScreenMixin {
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderFloatingItem(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V", ordinal = 0))
     private void changeSlotSizeItem(AbstractContainerScreen instance, GuiGraphics guiGraphics, ItemStack itemStack, int x, int y, String text, Operation<Void> original) {
         if (currentSlot instanceof LegacySlot) {
-            int l = this.draggingItem.isEmpty() ? 8 : ((LegacySlot) currentSlot).scale;
-            this.renderFloatingItem(guiGraphics, itemStack, x, currentMouseY - this.topPos - l, text);
+            int l = this.draggingItem.isEmpty() ? 20 : ((LegacySlot) currentSlot).scale;
+            PoseStack poseStack = guiGraphics.pose();
+            poseStack.pushPose();
+//
+//            poseStack.translate(1/1.25f, 1/1.25f, 1/1.25f);
+            guiGraphics.pose().translate(guiGraphics.guiWidth()/2f, guiGraphics.guiHeight()/2f,0.0F);
+            poseStack.scale(1.5f, 1.5f, 1.5f);
+            guiGraphics.pose().translate(-guiGraphics.guiWidth()/2f, -guiGraphics.guiHeight()/2f,0);
+            GraphicsUtil.renderFloatingItem(instance, 28, guiGraphics, itemStack, currentMouseX, currentMouseY, text);
+            poseStack.popPose();
         }
     }
 
@@ -129,7 +142,7 @@ public class AbstractContainerScreenMixin {
     @WrapOperation(method = "renderSlot", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V"))
     private void changeSlotItemDecorationsRender(GuiGraphics instance, Font l, ItemStack i, int j, int k, String i1, Operation<Void> original) {
         if (currentSlot instanceof LegacySlot) {
-            GraphicsUtil.renderItemDecorations(instance, (LegacySlot) currentSlot, l, i, j + 2, k + 2, i1);
+            GraphicsUtil.renderItemDecorations(instance, ((LegacySlot) currentSlot).scale, l, i, j + 2, k + 2, i1, true);
         } else {
             original.call(instance, l, i, j, k, i1);
         }

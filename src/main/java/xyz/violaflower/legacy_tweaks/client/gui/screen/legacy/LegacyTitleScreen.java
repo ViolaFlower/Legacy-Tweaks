@@ -95,16 +95,11 @@ public class LegacyTitleScreen extends LegacyScreen {
 
 	@Override
 	public void render(GuiGraphics guiGraphics, int i, int j, float f) {
-		this.renderPanorama(guiGraphics, f);
 		super.render(guiGraphics, i, j, f);
 		logoRenderer.renderLogo(guiGraphics, this.width, 1);
 		if (this.splashRenderer != null) {
 			this.splashRenderer.render(guiGraphics, width, this.font, 0xffffff00);
 		}
-	}
-
-	@Override
-	public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f) {
 	}
 
 	@Override

@@ -93,6 +93,16 @@ public interface Lang {
         }
     }
 
+    interface Container
+    {
+        Translate INVENTORY = from("inventory");
+
+        private static Translate from(String name)
+        {
+            return new Translate("gui.legacy_tweaks.container." + name);
+        }
+    }
+
     interface Dimension
     {
         Translate ENTRANCE = from("entrance");

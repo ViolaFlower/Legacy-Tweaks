@@ -1,7 +1,9 @@
 package xyz.violaflower.legacy_tweaks.util.common.assets;
 
 import net.minecraft.resources.ResourceLocation;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweak;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
+import xyz.violaflower.legacy_tweaks.tweaks.impl.LegacyUI;
 
 public interface Sprites {
     ResourceLocation FIREWORK_LEGACY = ModAsset.textureLocation("entity/projectiles/firework.png");
@@ -12,7 +14,7 @@ public interface Sprites {
     ResourceLocation PANORAMA_NIGHT = ModAsset.guiLocation("panorama/panorama_night.png");
 
     ResourceLocation HOTBAR_SELECTION = ModAsset.getResourceLocation("hud/hotbar_selection");
-    ResourceLocation INVENTORY = ModAsset.guiLocation(Tweaks.LEGACY_UI.legacyInventoryScreenTweak.noOffhand.isOn() ? "container/classic_inventory.png" : "container/classic_inventory_tu53.png");
+//    ResourceLocation INVENTORY = ModAsset.guiLocation(Tweaks.LEGACY_UI.legacyInventoryScreenTweak.noOffhand.isOn() ? "container/classic_inventory.png" : "container/classic_inventory_tu53.png");
 
     ResourceLocation EMPTY_ARMOR_SLOT_HELMET = ResourceLocation.withDefaultNamespace("item/legacy_armor_slot_helmet");
     ResourceLocation EMPTY_ARMOR_SLOT_CHESTPLATE = ResourceLocation.withDefaultNamespace("item/legacy_armor_slot_chestplate");
@@ -22,9 +24,23 @@ public interface Sprites {
 
     ResourceLocation MINECRAFT_LEGACY = ModAsset.guiLocation("title/minecraft.png");
 
+    ResourceLocation MENU_BACKGROUND = ModAsset.guiLocation("menu_background.png");
+
     ResourceLocation OLD_BUTTON_HIGHLIGHTED = ModAsset.getResourceLocation("widget/old_button_highlighted");
 
     ResourceLocation MINECRAFT_LOGO = ResourceLocation.withDefaultNamespace("textures/gui/title/minecraft.png");
     ResourceLocation EASTER_EGG_LOGO = ResourceLocation.withDefaultNamespace("textures/gui/title/minceraft.png");
     ResourceLocation MINECRAFT_EDITION = ResourceLocation.withDefaultNamespace("textures/gui/title/edition.png");
+
+    static ResourceLocation INVENTORY() {
+        LegacyUI.LegacyInventoryScreenTweak tweak = Tweaks.LEGACY_UI.legacyInventoryScreenTweak;
+        if (tweak.classicCrafting.isOn()) {
+            if (tweak.noOffhand.isOn()) return ModAsset.guiLocation("container/classic_inventory.png");
+            return ModAsset.guiLocation("container/classic_inventory_tu53.png");
+        }
+
+        if (tweak.noOffhand.isOn())
+            return ModAsset.guiLocation("container/main_inventory.png");
+        return ModAsset.guiLocation("container/main_inventory_tu53.png");
+    }
 }

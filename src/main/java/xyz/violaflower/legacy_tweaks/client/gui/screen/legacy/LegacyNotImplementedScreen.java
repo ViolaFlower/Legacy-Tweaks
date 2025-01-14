@@ -75,8 +75,7 @@ public class LegacyNotImplementedScreen extends LegacyScreen {
 
 	@Override
 	public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-		this.renderPanorama(guiGraphics, partialTick);
-//		super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+		super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
 		guiGraphics.blitSprite(Sprites.BACKGROUND_LOC, frameLayout.getX(), frameLayout.getY(), frameLayout.getWidth(), frameLayout.getHeight());
 		guiGraphics.blitSprite(Sprites.INSET_BACKGROUND, innerFrameLayout.getX(), innerFrameLayout.getY(), innerFrameLayout.getWidth(), innerFrameLayout.getHeight());
 	}

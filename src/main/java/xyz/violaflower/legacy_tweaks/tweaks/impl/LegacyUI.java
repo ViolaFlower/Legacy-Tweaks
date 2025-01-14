@@ -308,12 +308,14 @@ public class LegacyUI extends Tweak {
 		public final BooleanOption useLegacyInventory;
 		public final BooleanOption noOffhand;
 		public final BooleanOption hideRecipeBook;
+		public final BooleanOption classicCrafting;
 		public LegacyInventoryScreenTweak() {
 			super("legacyInventoryScreen", true);
 			setTweakAuthor("Permdog99");
 			useLegacyInventory = addBooleanOption("useLegacyInventory", true);
 			noOffhand = addBooleanOption("noOffhand", false);
 			hideRecipeBook = addBooleanOption("hideRecipeBook", true);
+			classicCrafting = addBooleanOption("classicCrafting", false);
 		}
 	}
 

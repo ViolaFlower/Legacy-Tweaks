@@ -102,7 +102,7 @@ public class LegacyPlayGameScreen extends LegacyScreen {
 
     @Override
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-//		super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+		super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
 //		System.out.println(frameLayout.getWidth());
         guiGraphics.blitSprite(Sprites.TOP_NAV_LEFT, frameLayout.getX() + frameLayout.getWidth() / 3, frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
         guiGraphics.blitSprite(Sprites.TOP_NAV_LEFT, frameLayout.getX() + frameLayout.getWidth() / 3 * 2, frameLayout.getY() - 15, frameLayout.getWidth() / 3, 19);
@@ -113,7 +113,6 @@ public class LegacyPlayGameScreen extends LegacyScreen {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        this.renderPanorama(guiGraphics, partialTick);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
     }
 }

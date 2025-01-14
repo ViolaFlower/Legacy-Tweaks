@@ -105,7 +105,6 @@ public class LegacyTestScreen extends LegacyScreen {
 
 	@Override
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-		this.renderPanorama(guiGraphics, partialTick);
 		super.render(guiGraphics, mouseX, mouseY, partialTick);
 	}
 }

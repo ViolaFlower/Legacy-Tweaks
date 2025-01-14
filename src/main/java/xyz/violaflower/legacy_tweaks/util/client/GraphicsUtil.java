@@ -12,6 +12,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.navigation.ScreenRectangle;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderType;
@@ -33,6 +34,7 @@ import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacySlot;
+import xyz.violaflower.legacy_tweaks.mixin.client.accessor.AbstractContainerScreenAccessor;
 import xyz.violaflower.legacy_tweaks.mixin.client.accessor.GuiGraphicsAccessor;
 
 public class GraphicsUtil {
@@ -189,7 +191,7 @@ public class GraphicsUtil {
             PoseStack pose = guiGraphics.pose();
             pose.pushPose();
             pose.translate((float)(x + 8), (float)(y + 8), (float)(150 + (bakedmodel.isGui3d() ? guiOffset : 0)));
-
+            pose.translate(-0.5f, -0.5f, 0f);
             try {
                 float scale = slot.scale;
                 pose.scale(scale, -scale, scale);
@@ -217,15 +219,23 @@ public class GraphicsUtil {
 
     }
 
-    public static void renderItemDecorations(GuiGraphics guiGraphics, LegacySlot slot, Font font, ItemStack stack, int x, int y) {
-        renderItemDecorations(guiGraphics, slot, font, stack, x, y, (String)null);
+    public static void renderFloatingItem(AbstractContainerScreen screen, float scale, GuiGraphics guiGraphics, ItemStack stack, int x, int y, String text) {
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(0.0F, 0.0F, 0.0F);
+        guiGraphics.renderItem(stack, x, y);
+        renderItemDecorations(guiGraphics, scale, Minecraft.getInstance().font, stack, x, y - (((AbstractContainerScreenAccessor) screen).legacyTweaks$getDraggingItem().isEmpty() ? 0 : 0), text, false);
+        guiGraphics.pose().popPose();
     }
 
-    public static void renderItemDecorations(GuiGraphics guiGraphics, LegacySlot slot, Font font, ItemStack stack, int x, int y, @Nullable String text) {
+    public static void renderItemDecorations(GuiGraphics guiGraphics, float scale, Font font, ItemStack stack, int x, int y, boolean halfPos) {
+        renderItemDecorations(guiGraphics, scale, font, stack, x, y, (String)null, halfPos);
+    }
+
+    public static void renderItemDecorations(GuiGraphics guiGraphics, float scale, Font font, ItemStack stack, int x, int y, @Nullable String text, boolean halfPos) {
         if (!stack.isEmpty()) {
             PoseStack pose = guiGraphics.pose();
             pose.pushPose();
-            float scale = slot.scale;
+            if (halfPos) pose.translate(-0.5f, -0.5f, 0f);
             if (stack.getCount() != 1 || text != null) {
                 String s = text == null ? String.valueOf(stack.getCount()) : text;
                 pose.translate(0.0F, 0.0F, 200.0F);

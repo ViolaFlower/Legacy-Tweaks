@@ -46,22 +46,28 @@ public class LegacyInventoryMenu extends InventoryMenu {
         this.slots.clear();
         int offset = 0;
         int offset2 = 0;
+        int armorOffset = 50;
+        int craftingOffset = 10000;
         if (!Tweaks.LEGACY_UI.legacyInventoryScreenTweak.noOffhand.isOn()) {
             offset = 5;
             offset2 = 1;
         }
-        this.addSlot(new LegacyResultSlot(playerInventory.player, this.craftSlots, this.resultSlots, 0, 156 + offset, 30-33 - offset2, Tweaks.LEGACY_UI.legacyInventoryScreenTweak.noOffhand.isOn() ? 25 : 19));
+        if (Tweaks.LEGACY_UI.legacyInventoryScreenTweak.classicCrafting.isOn()) {
+            armorOffset = 0;
+            craftingOffset = 0;
+        }
+        this.addSlot(new LegacyResultSlot(playerInventory.player, this.craftSlots, this.resultSlots, 0, 156 + offset + craftingOffset, 30 - 33 - offset2 + craftingOffset, Tweaks.LEGACY_UI.legacyInventoryScreenTweak.noOffhand.isOn() ? 25 : 19));
 
-        for(int i = 0; i < 2; ++i) {
-            for(int j = 0; j < 2; ++j) {
-                this.addSlot(new LegacySlot(this.craftSlots, j + i * 2, (100-9) + j * 21, (20-30 - offset) + i * 21, 19));
+        for (int i = 0; i < 2; ++i) {
+            for (int j = 0; j < 2; ++j) {
+                this.addSlot(new LegacySlot(this.craftSlots, j + i * 2, (100 - 9 + craftingOffset) + j * 21, (20 - 30 - offset + craftingOffset) + i * 21, 19));
             }
         }
 
         for(int i = 0; i < 4; ++i) {
             EquipmentSlot equipmentSlot = SLOT_IDS[i];
             ResourceLocation resourceLocation = (ResourceLocation)TEXTURE_EMPTY_SLOTS.get(equipmentSlot);
-            this.addSlot(new LegacyArmorSlot(playerInventory, owner, equipmentSlot, 39 - i, -6, -31 + i * 21, resourceLocation, 19));
+            this.addSlot(new LegacyArmorSlot(playerInventory, owner, equipmentSlot, 39 - i, -6 + armorOffset, -31 + i * 21, resourceLocation, 19));
         }
 
         for(int i = 0; i < 3; ++i) {
@@ -75,7 +81,7 @@ public class LegacyInventoryMenu extends InventoryMenu {
         }
 
         if (!Tweaks.LEGACY_UI.legacyInventoryScreenTweak.noOffhand.isOn()) {
-            this.addSlot(new LegacySlot(playerInventory, 40, 100-9, 32, 19) {
+            this.addSlot(new LegacySlot(playerInventory, 40, 100-9 + armorOffset, 32, 19) {
                 public void setByPlayer(ItemStack newStack, ItemStack oldStack) {
                     owner.onEquipItem(EquipmentSlot.OFFHAND, oldStack, newStack);
                     super.setByPlayer(newStack, oldStack);
@@ -89,7 +95,8 @@ public class LegacyInventoryMenu extends InventoryMenu {
     }
 
     public static boolean isHotbarSlot(int index) {
-        return index >= 36 && index < 45 || index == 45;
+        int slotOffset = Tweaks.LEGACY_UI.legacyInventoryScreenTweak.classicCrafting.isOn() ? 0 : 5;
+        return index >= 36 - slotOffset && index < 45 - slotOffset || index == 45 - slotOffset;
     }
 
     public void fillCraftSlotsStackedContents(StackedContents itemHelper) {
@@ -124,38 +131,41 @@ public class LegacyInventoryMenu extends InventoryMenu {
             ItemStack itemStack2 = slot.getItem();
             itemStack = itemStack2.copy();
             EquipmentSlot equipmentSlot = player.getEquipmentSlotForItem(itemStack);
-            if (index == 0) {
-                if (!this.moveItemStackTo(itemStack2, 9, 45, true)) {
+            int slotIndexOffset = 0;
+            boolean classicCrafing = Tweaks.LEGACY_UI.legacyInventoryScreenTweak.classicCrafting.isOn();
+            if (classicCrafing) slotIndexOffset = 0;
+            if (index == 0 && classicCrafing) {
+                if (!this.moveItemStackTo(itemStack2, 9 - slotIndexOffset, 45 - slotIndexOffset, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onQuickCraft(itemStack2, itemStack);
-            } else if (index >= 1 && index < 5) {
-                if (!this.moveItemStackTo(itemStack2, 9, 45, false)) {
+            } else if (index >= 1 && index < 5 && classicCrafing) {
+                if (!this.moveItemStackTo(itemStack2, 9 - slotIndexOffset, 45 - slotIndexOffset, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= 5 && index < 9) {
-                if (!this.moveItemStackTo(itemStack2, 9, 45, false)) {
+            } else if (index >= 5 - slotIndexOffset && index < 9 - slotIndexOffset) {
+                if (!this.moveItemStackTo(itemStack2, 9 - slotIndexOffset, 45 - slotIndexOffset, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (equipmentSlot.getType() == Type.HUMANOID_ARMOR && !((Slot)this.slots.get(8 - equipmentSlot.getIndex())).hasItem()) {
+            } else if (equipmentSlot.getType() == Type.HUMANOID_ARMOR && !((Slot)this.slots.get((8 - slotIndexOffset) - equipmentSlot.getIndex())).hasItem()) {
                 int i = 8 - equipmentSlot.getIndex();
-                if (!this.moveItemStackTo(itemStack2, i, i + 1, false)) {
+                if (!this.moveItemStackTo(itemStack2, i - slotIndexOffset, i + 1 - slotIndexOffset, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (equipmentSlot == EquipmentSlot.OFFHAND && !((Slot)this.slots.get(45)).hasItem()) {
-                if (!this.moveItemStackTo(itemStack2, 45, 46, false)) {
+            } else if (equipmentSlot == EquipmentSlot.OFFHAND && !((Slot)this.slots.get(45 - slotIndexOffset)).hasItem() && !Tweaks.LEGACY_UI.legacyInventoryScreenTweak.noOffhand.isOn()) {
+                if (!this.moveItemStackTo(itemStack2, 45 - slotIndexOffset, 46 - slotIndexOffset, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= 9 && index < 36) {
-                if (!this.moveItemStackTo(itemStack2, 36, 45, false)) {
+            } else if (index >= 9 - slotIndexOffset && index < 36 - slotIndexOffset) {
+                if (!this.moveItemStackTo(itemStack2, 36 - slotIndexOffset, 45 - slotIndexOffset, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= 36 && index < 45) {
-                if (!this.moveItemStackTo(itemStack2, 9, 36, false)) {
+            } else if (index >= 36 - slotIndexOffset && index < 45 - slotIndexOffset) {
+                if (!this.moveItemStackTo(itemStack2, 9 - slotIndexOffset, 36 - slotIndexOffset, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(itemStack2, 9, 45, false)) {
+            } else if (!this.moveItemStackTo(itemStack2, 9 - slotIndexOffset, 45 - slotIndexOffset, false)) {
                 return ItemStack.EMPTY;
             }
 

@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
+import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
 import java.util.function.Function;
 
@@ -101,5 +102,19 @@ public class LegacyScreen extends Screen {
 
     protected void setScreen(Function<Screen, Screen> screen) {
         Minecraft.getInstance().setScreen(screen.apply(this));
+    }
+
+    @Override
+    protected void renderMenuBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        renderMenuBackgroundTexture(guiGraphics, Sprites.MENU_BACKGROUND, x, y, 0.0F, 0.0F, width, height);
+    }
+
+    @Override
+    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        if (this.minecraft.level == null) {
+            this.renderPanorama(guiGraphics, partialTick);
+        } else {
+            this.renderMenuBackground(guiGraphics);
+        }
     }
 }
