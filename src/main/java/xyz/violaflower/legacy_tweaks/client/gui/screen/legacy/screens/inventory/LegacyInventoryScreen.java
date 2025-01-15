@@ -14,6 +14,7 @@ import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.InventoryMenu;
@@ -23,6 +24,9 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
+import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
+import xyz.violaflower.legacy_tweaks.util.common.sound.SoundUtil;
+import xyz.violaflower.legacy_tweaks.util.common.sound.Sounds;
 
 @Environment(EnvType.CLIENT)
 public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<InventoryMenu> implements RecipeUpdateListener {
@@ -99,7 +103,7 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 			this.addWidget(this.recipeBookComponent);
 		}
 	}
-
+	
 	@Override
 	protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
 		guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0x404040, false);

@@ -1,6 +1,8 @@
 package xyz.violaflower.legacy_tweaks.mixin.client.tweak.legacy_ui.ui_sounds;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ComponentPath;
+import net.minecraft.client.gui.screens.LevelLoadingScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.sounds.SoundSource;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,6 +22,7 @@ public class ScreenMixin {
     }
     @Inject(method = "onClose",at = @At("HEAD"))
     private void addOnCloseSound(CallbackInfo ci){
+        if (Minecraft.getInstance().screen instanceof LevelLoadingScreen) return;
         if (Tweaks.LEGACY_UI.generalScreenTweaks.useLegacyUISounds.isOn()) SoundUtil.playFullPitchSound(Sounds.BACK, SoundSource.MASTER);
     }
 }
