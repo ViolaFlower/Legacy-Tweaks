@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacySlot;
-import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.container.menu.LegacyAbstractContainerScreen;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.LegacyAbstractContainerScreen;
 import xyz.violaflower.legacy_tweaks.util.client.GraphicsUtil;
 
 @Mixin(AbstractContainerScreen.class)

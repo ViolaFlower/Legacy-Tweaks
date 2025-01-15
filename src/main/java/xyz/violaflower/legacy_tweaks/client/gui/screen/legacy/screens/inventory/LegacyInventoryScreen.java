@@ -1,4 +1,4 @@
-package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.container;
+package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
@@ -16,7 +16,8 @@ import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
-public class LegacyInventoryScreen extends EffectRenderingInventoryScreen<LegacyInventoryMenu> implements RecipeUpdateListener {
+/// @see net.minecraft.client.gui.screens.inventory.InventoryScreen
+public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<LegacyInventoryMenu> implements RecipeUpdateListener {
 
     private float xMouse;
     private float yMouse;

@@ -18,7 +18,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.container.menu.LegacyAbstractContainerScreen;
 
 
 /// @see net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen

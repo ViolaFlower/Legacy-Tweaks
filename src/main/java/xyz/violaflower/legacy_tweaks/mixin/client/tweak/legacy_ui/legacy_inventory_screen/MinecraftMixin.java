@@ -5,7 +5,7 @@ import net.minecraft.client.gui.screens.Screen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.container.LegacyInventoryScreen;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.LegacyInventoryScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
 @Mixin(Minecraft.class)

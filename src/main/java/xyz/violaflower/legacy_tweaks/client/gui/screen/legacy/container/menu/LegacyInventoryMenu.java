@@ -24,6 +24,7 @@ import xyz.violaflower.legacy_tweaks.mixin.client.accessor.CraftingMenuAccessor;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
+@Deprecated
 public class LegacyInventoryMenu extends InventoryMenu {
     private static final Map<EquipmentSlot, ResourceLocation> TEXTURE_EMPTY_SLOTS;
     private static final EquipmentSlot[] SLOT_IDS;
