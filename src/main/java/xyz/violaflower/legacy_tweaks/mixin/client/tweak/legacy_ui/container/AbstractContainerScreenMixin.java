@@ -183,7 +183,7 @@ public abstract class AbstractContainerScreenMixin {
 
     @WrapOperation(method = "isHovering(Lnet/minecraft/world/inventory/Slot;DD)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;isHovering(IIIIDD)Z"))
     private boolean isHovering(AbstractContainerScreen instance, int x, int y, int width, int height, double mouseX, double mouseY, Operation<Boolean> original, @Local(argsOnly = true) Slot slot) {
-        if (!shouldApply()) original.call(instance, x, y, width, height, mouseX, mouseY);
+        if (!shouldApply()) return original.call(instance, x, y, width, height, mouseX, mouseY);
         return original.call(instance, (int) (slot instanceof SlotExtension extension ? extension.lt$getVisualX() : slot.x), (int) (slot instanceof SlotExtension extension ? extension.lt$getVisualY() : slot.y), slot instanceof SlotExtension extension ? extension.lt$getSize() : width, slot instanceof SlotExtension extension ? extension.lt$getSize() : height, mouseX, mouseY);
     }
 
