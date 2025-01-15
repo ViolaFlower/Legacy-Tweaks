@@ -26,13 +26,6 @@ import xyz.violaflower.legacy_tweaks.util.client.GraphicsUtil;
 
 @Mixin(AbstractContainerScreen.class)
 public class AbstractContainerScreenMixin {
-
-    @Unique
-    private int currentMouseY;
-
-    @Unique
-    private int currentMouseX;
-
     @Shadow
     private ItemStack draggingItem;
 
@@ -52,12 +45,6 @@ public class AbstractContainerScreenMixin {
     }
 
     @Shadow @Nullable protected Slot hoveredSlot;
-
-    @Inject(method = "render", at = @At("HEAD"))
-    private void setCurrentMouseY(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
-        currentMouseY = mouseY;
-        currentMouseX = mouseX;
-    }
 
     @Inject(method = "renderSlot", at = @At("HEAD"))
     private void getSlot(GuiGraphics guiGraphics, Slot slot, CallbackInfo ci, @Share("currentSlot") LocalRef<Slot> currentSlot) {
@@ -110,7 +97,7 @@ public class AbstractContainerScreenMixin {
 //    }
 
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderFloatingItem(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V", ordinal = 0))
-    private void changeSlotSizeItem(AbstractContainerScreen instance, GuiGraphics guiGraphics, ItemStack itemStack, int x, int y, String text, Operation<Void> original) {
+    private void changeSlotSizeItem(AbstractContainerScreen instance, GuiGraphics guiGraphics, ItemStack itemStack, int x, int y, String text, Operation<Void> original, @Local(ordinal = 0, argsOnly = true) int mouseX, @Local(ordinal = 1, argsOnly = true) int mouseY) {
         if (/*currentSlot*/null/*TODO*/ instanceof LegacySlot) {
             int l = this.draggingItem.isEmpty() ? 20 : ((LegacySlot) null/*currentSlot*/).size;
             PoseStack poseStack = guiGraphics.pose();
@@ -120,7 +107,7 @@ public class AbstractContainerScreenMixin {
             guiGraphics.pose().translate(guiGraphics.guiWidth()/2f, guiGraphics.guiHeight()/2f,0.0F);
             poseStack.scale(1.5f, 1.5f, 1.5f);
             guiGraphics.pose().translate(-guiGraphics.guiWidth()/2f, -guiGraphics.guiHeight()/2f,0);
-            GraphicsUtil.renderFloatingItem(instance, 28, guiGraphics, itemStack, currentMouseX, currentMouseY, text);
+            GraphicsUtil.renderFloatingItem(instance, 28, guiGraphics, itemStack, mouseX, mouseY, text);
             poseStack.popPose();
         } else {
             original.call(instance, guiGraphics, itemStack, x, y, text);
