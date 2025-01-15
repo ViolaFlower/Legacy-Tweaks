@@ -1,36 +1,22 @@
 package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.container;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.ItemStack;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.container.menu.LegacyInventoryMenu;
-import xyz.violaflower.legacy_tweaks.mixin.client.accessor.AbstractContainerScreenAccessor;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.client.GraphicsUtil;
 import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
-import static net.minecraft.client.gui.screens.inventory.InventoryScreen.renderEntityInInventoryFollowsMouse;
-
-public class LegacyInventory extends EffectRenderingInventoryScreen<LegacyInventoryMenu> implements RecipeUpdateListener {
+public class LegacyInventoryScreen extends EffectRenderingInventoryScreen<LegacyInventoryMenu> implements RecipeUpdateListener {
 
     private float xMouse;
     private float yMouse;
@@ -38,7 +24,7 @@ public class LegacyInventory extends EffectRenderingInventoryScreen<LegacyInvent
     private boolean widthTooNarrow;
     private boolean buttonClicked;
 
-    public LegacyInventory(Player player) {
+    public LegacyInventoryScreen(Player player) {
         super(new LegacyInventoryMenu(player.getInventory(), !player.level().isClientSide, player), player.getInventory(), Component.translatable("container.crafting"));
         this.titleLabelX = 97;
     }
