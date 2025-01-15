@@ -60,6 +60,7 @@
   ],
   "mixins": [
     "client.accessor.CraftingMenuAccessor",
+    "client.tweak.legacy_ui.slot.SlotMixin",
     "common.tweak.gameplay.EntityMixin",
     "common.tweak.legacy_attack.ItemStackMixin",
     "common.tweak.legacy_attack.PlayerMixin",

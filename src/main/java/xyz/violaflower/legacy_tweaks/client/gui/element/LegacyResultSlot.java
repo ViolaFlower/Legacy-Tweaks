@@ -9,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.RecipeType;
 
+@Deprecated(forRemoval = true)
 public class LegacyResultSlot extends LegacySlot {
     private final CraftingContainer craftSlots;
     private final Player player;

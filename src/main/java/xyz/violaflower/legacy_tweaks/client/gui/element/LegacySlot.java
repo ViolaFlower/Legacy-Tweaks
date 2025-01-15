@@ -3,6 +3,7 @@ package xyz.violaflower.legacy_tweaks.client.gui.element;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 
+@Deprecated(forRemoval = true)
 public class LegacySlot extends Slot {
     public final int size;
     public final float x;

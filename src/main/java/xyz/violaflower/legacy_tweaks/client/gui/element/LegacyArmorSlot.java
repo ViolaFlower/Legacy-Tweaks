@@ -13,6 +13,7 @@ import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import org.jetbrains.annotations.Nullable;
 
+@Deprecated(forRemoval = true)
 public class LegacyArmorSlot extends LegacySlot {
     private final LivingEntity owner;
     private final EquipmentSlot slot;
