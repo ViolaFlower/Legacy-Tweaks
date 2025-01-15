@@ -4,10 +4,14 @@ import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 
 public class LegacySlot extends Slot {
-    public final int scale;
+    public final int size;
+    public final float x;
+    public final float y;
 
-    public LegacySlot(Container container, int slot, int x, int y, int scale) {
-        super(container, slot, x, y);
-        this.scale = scale;
+    public LegacySlot(Container container, int slot, float x, float y, int size) {
+        super(container, slot, (int) x, (int) y);
+        this.size = size;
+        this.x = x;
+        this.y = y;
     }
 }

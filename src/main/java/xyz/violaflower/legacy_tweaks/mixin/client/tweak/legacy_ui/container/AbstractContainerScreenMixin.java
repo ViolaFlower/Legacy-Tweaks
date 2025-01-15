@@ -67,24 +67,24 @@ public class AbstractContainerScreenMixin {
     @ModifyArgs(method = "renderSlot", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blit(IIIIILnet/minecraft/client/renderer/texture/TextureAtlasSprite;)V", ordinal = 0))
     private void changeSlotSizeRender(Args args, @Share("currentSlot") LocalRef<Slot> currentSlot) {
         if (currentSlot.get() instanceof LegacySlot legacySlot) {
-            args.set(3, legacySlot.scale);
-            args.set(4, legacySlot.scale);
+            args.set(3, legacySlot.size);
+            args.set(4, legacySlot.size);
         }
     }
 
     @ModifyArgs(method = "renderSlot", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;fill(IIIII)V", ordinal = 0))
     private void changeSlotSizeRender2(Args args, @Share("currentSlot") LocalRef<Slot> currentSlot) {
         if (currentSlot.get() instanceof LegacySlot legacySlot) {
-            args.set(2, args.get(2).hashCode() + legacySlot.scale);
-            args.set(3, args.get(3).hashCode() + legacySlot.scale);
+            args.set(2, args.get(2).hashCode() + legacySlot.size);
+            args.set(3, args.get(3).hashCode() + legacySlot.size);
         }
     }
 
     @ModifyArgs(method = "isHovering(Lnet/minecraft/world/inventory/Slot;DD)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;isHovering(IIIIDD)Z"))
     private void changeSlotSizeHover(Args args, @Local(argsOnly = true) Slot currentSlot) {
         if (currentSlot instanceof LegacySlot) {
-            args.set(2, ((LegacySlot) currentSlot).scale);
-            args.set(3, ((LegacySlot) currentSlot).scale);
+            args.set(2, ((LegacySlot) currentSlot).size);
+            args.set(3, ((LegacySlot) currentSlot).size);
         }
     }
 
@@ -98,7 +98,7 @@ public class AbstractContainerScreenMixin {
 
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderSlotHighlight(Lnet/minecraft/client/gui/GuiGraphics;III)V"))
     private void changeSlotSizeHightlight(GuiGraphics guiGraphics, int x, int y, int blitOffset, Operation<Void> original) {
-        if (this.hoveredSlot instanceof LegacySlot legacySlot) guiGraphics.fillGradient(RenderType.guiOverlay(), x, y, x + legacySlot.scale, y + legacySlot.scale, 0x80ffffff, 0x80ffffff, blitOffset);
+        if (this.hoveredSlot instanceof LegacySlot legacySlot) guiGraphics.fillGradient(RenderType.guiOverlay(), x, y, x + legacySlot.size, y + legacySlot.size, 0x80ffffff, 0x80ffffff, blitOffset);
         else original.call(guiGraphics, x, y, blitOffset);
     }
 
@@ -112,7 +112,7 @@ public class AbstractContainerScreenMixin {
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderFloatingItem(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V", ordinal = 0))
     private void changeSlotSizeItem(AbstractContainerScreen instance, GuiGraphics guiGraphics, ItemStack itemStack, int x, int y, String text, Operation<Void> original) {
         if (/*currentSlot*/null/*TODO*/ instanceof LegacySlot) {
-            int l = this.draggingItem.isEmpty() ? 20 : ((LegacySlot) null/*currentSlot*/).scale;
+            int l = this.draggingItem.isEmpty() ? 20 : ((LegacySlot) null/*currentSlot*/).size;
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
 //
@@ -148,7 +148,7 @@ public class AbstractContainerScreenMixin {
     @WrapOperation(method = "renderSlot", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V"))
     private void changeSlotItemDecorationsRender(GuiGraphics instance, Font l, ItemStack i, int j, int k, String i1, Operation<Void> original, @Local(argsOnly = true) Slot currentSlot) {
         if (currentSlot instanceof LegacySlot legacySlot) {
-            GraphicsUtil.renderItemDecorations(instance, legacySlot.scale, l, i, j + 2, k + 2, i1, true);
+            GraphicsUtil.renderItemDecorations(instance, legacySlot.size, l, i, j + 2, k + 2, i1, true);
         } else {
             original.call(instance, l, i, j, k, i1);
         }
