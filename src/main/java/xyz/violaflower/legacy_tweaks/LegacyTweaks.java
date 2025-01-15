@@ -21,6 +21,7 @@ import xyz.violaflower.legacy_tweaks.network.payload.CoolPacket2;
 import xyz.violaflower.legacy_tweaks.networking.LegacyTweaksNetworking;
 import xyz.violaflower.legacy_tweaks.tweaks.TweakManager;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
+import xyz.violaflower.legacy_tweaks.util.common.sound.Sounds;
 
 import java.util.function.Supplier;
 
@@ -46,6 +47,7 @@ public final class LegacyTweaks {
         tweakManager.register(Tweaks.GAMEPLAY);
         tweakManager.register(Tweaks.LEGACY_UI);
         tweakManager.register(Tweaks.EYE_CANDY);
+        Sounds.init();
         TweakManager.load();
 
         // this only works on Fabric!

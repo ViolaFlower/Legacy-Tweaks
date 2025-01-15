@@ -10,10 +10,13 @@ import net.minecraft.client.gui.screens.options.OptionsScreen;
 import net.minecraft.client.gui.screens.options.SkinCustomizationScreen;
 import net.minecraft.client.gui.screens.options.controls.ControlsScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
 import net.minecraft.client.gui.screens.Screen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
+import xyz.violaflower.legacy_tweaks.util.common.sound.SoundUtil;
+import xyz.violaflower.legacy_tweaks.util.common.sound.Sounds;
 
 import java.util.Objects;
 
@@ -64,6 +67,7 @@ public class LegacyHelpOptionsScreen extends LegacyScreen {
 
     @Override
     public void onClose() {
+        if (Tweaks.LEGACY_UI.generalScreenTweaks.useLegacyUISounds.isOn()) SoundUtil.playFullPitchSound(Sounds.BACK, SoundSource.MASTER);
         minecraft.setScreen(parent);
     }
 }

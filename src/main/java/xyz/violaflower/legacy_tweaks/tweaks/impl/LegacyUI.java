@@ -222,6 +222,7 @@ public class LegacyUI extends Tweak {
 		public final DoubleSliderOption fineTunedUIScale;
 		public final BooleanOption legacyCompactText;
 		public final BooleanOption oldButton;
+		public final BooleanOption useLegacyUISounds;
 
 		public GeneralScreenTweaks() {
             super("generalScreenTweaks", true);
@@ -237,6 +238,7 @@ public class LegacyUI extends Tweak {
 			fineTunedUIScale.setConsumer(d -> {if (isEnabled()) Minecraft.getInstance().resizeDisplay();});
 			legacyCompactText = addBooleanOption("legacyCompactText", true);
 			oldButton = addBooleanOption("oldButton", true);
+			useLegacyUISounds = addBooleanOption("useLegacyUISounds", true);
         }
 	}
 

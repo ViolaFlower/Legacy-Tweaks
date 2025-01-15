@@ -51,6 +51,8 @@
     "client.tweak.legacy_ui.legacy_pause_screen.MinecraftMixin",
     "client.tweak.legacy_ui.legacy_title_screen.MinecraftMixin",
     "client.tweak.legacy_ui.show_quit_button.ScreenMixin",
+    "client.tweak.legacy_ui.ui_sounds.AbstractWidgetMixin",
+    "client.tweak.legacy_ui.ui_sounds.ScreenMixin",
     "client.tweak.mipmapping.ItemRenderBlockTypesMixin",
     "client.tweak.mipmapping.MipmapGeneratorMixin",
     "client.tweak.mipmapping.RenderStateShardMixin",
