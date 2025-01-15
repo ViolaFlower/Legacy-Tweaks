@@ -3,15 +3,11 @@ package xyz.violaflower.legacy_tweaks.mixin.client.tweak.legacy_ui.container;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.Share;
-import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -22,11 +18,6 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArgs;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
-import xyz.violaflower.legacy_tweaks.client.gui.element.LegacySlot;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.LegacyAbstractContainerScreen;
 import xyz.violaflower.legacy_tweaks.util.client.GraphicsUtil;
@@ -183,6 +174,12 @@ public abstract class AbstractContainerScreenMixin {
 //            original.call(instance, l, i, j, k, i1);
 //        }
 //    }
+
+    @WrapOperation(method = "isHovering(Lnet/minecraft/world/inventory/Slot;DD)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;isHovering(IIIIDD)Z"))
+    private boolean isHovering(AbstractContainerScreen instance, int x, int y, int width, int height, double mouseX, double mouseY, Operation<Boolean> original, @Local(argsOnly = true) Slot slot) {
+
+        return original.call(instance, (int) (slot instanceof SlotExtension extension ? extension.lt$getVisualX() : slot.x), (int) (slot instanceof SlotExtension extension ? extension.lt$getVisualY() : slot.y), slot instanceof SlotExtension extension ? extension.lt$getSize() : width, slot instanceof SlotExtension extension ? extension.lt$getSize() : height, mouseX, mouseY);
+    }
 
     /**
      * @author Jab125

@@ -232,14 +232,18 @@ public class GraphicsUtil {
     }
 
     public static void renderItemDecorations(GuiGraphics guiGraphics, float scale, Font font, ItemStack stack, int x, int y, @Nullable String text, boolean halfPos) {
+        float normalized = scale;
         if (!stack.isEmpty()) {
             PoseStack pose = guiGraphics.pose();
             pose.pushPose();
             if (halfPos) pose.translate(-0.5f, -0.5f, 0f);
             if (stack.getCount() != 1 || text != null) {
                 String s = text == null ? String.valueOf(stack.getCount()) : text;
-                pose.translate(0.0F, 0.0F, 200.0F);
-                guiGraphics.drawString(font, s, x + 19 - 2 - font.width(s), y + 6 + 3, 16777215, true);
+                pose.translate(0, 0.0F, 200.0F);
+                pose.pushPose();
+                pose.translate(x + 16 * scale + 3 - 2 - font.width(s), (16 * scale + 3 - 1) - font.lineHeight, 0);
+                guiGraphics.drawString(font, s, 0, 0, 0xffffff, true);
+                pose.popPose();
             }
 
             if (stack.isBarVisible()) {
