@@ -1,0 +1,44 @@
+{
+  "legacy.ui.focus": {
+    "sounds": [
+      {
+        "name": "legacy_tweaks:focus"
+      }
+    ]
+  },
+  "legacy.ui.back": {
+    "sounds": [
+      {
+        "name": "legacy_tweaks:back"
+      }
+    ]
+  },
+  "legacy.ui.craft_fail": {
+    "sounds": [
+      {
+        "name": "legacy_tweaks:craft_fail"
+      }
+    ]
+  },
+  "legacy.ui.craft": {
+    "sounds": [
+      {
+        "name": "legacy_tweaks:craft"
+      }
+    ]
+  },
+  "legacy.ui.scroll": {
+    "sounds": [
+      {
+        "name": "legacy_tweaks:scroll"
+      }
+    ]
+  },
+  "legacy.ui.press": {
+    "sounds": [
+      {
+        "name": "legacy_tweaks:press"
+      }
+    ]
+  }
+}

@@ -8,11 +8,14 @@ import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.OptionsScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.config.LTScreen;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.options.LegacyGraphicsScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
+import xyz.violaflower.legacy_tweaks.util.common.sound.SoundUtil;
+import xyz.violaflower.legacy_tweaks.util.common.sound.Sounds;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -68,6 +71,7 @@ public class LegacyOptionsScreen extends LegacyScreen {
 
 	@Override
 	public void onClose() {
+		if (Tweaks.LEGACY_UI.generalScreenTweaks.useLegacyUISounds.isOn()) SoundUtil.playFullPitchSound(Sounds.BACK, SoundSource.MASTER);
 		minecraft.setScreen(parent);
 	}
 
