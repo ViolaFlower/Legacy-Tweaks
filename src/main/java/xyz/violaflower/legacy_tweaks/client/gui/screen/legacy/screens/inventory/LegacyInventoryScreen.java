@@ -88,12 +88,17 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 					);
 		} else {
 			super.init();
+			this.topPos-=20;
 			this.widthTooNarrow = this.width < 379;
 			this.recipeBookComponent.init(this.width, this.height, this.minecraft, this.widthTooNarrow, this.menu);
-			this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth);
+			int fjd = (width - (this.imageWidth-39)) / 2;
+			int fje = (width - (this.imageWidth)) / 2;
+			this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth-39);
+			if (this.leftPos == fjd) this.leftPos = fje;
 			this.addRenderableWidget(new ImageButton(this.leftPos + 104, this.height / 2 - 22, 20, 18, RecipeBookComponent.RECIPE_BUTTON_SPRITES, button -> {
 				this.recipeBookComponent.toggleVisibility();
-				this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth);
+				this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth-39);
+				if (this.leftPos == fjd) this.leftPos = fje;
 				button.setPosition(this.leftPos + 104, this.height / 2 - 22);
 				this.buttonClicked = true;
 			}));

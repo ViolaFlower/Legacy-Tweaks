@@ -25,4 +25,9 @@ public abstract class LegacyAbstractContainerScreen<T extends AbstractContainerM
 		mouseY -= (double)j;
 		return mouseX >= (double)(x - 1) && mouseX < (double)(x + width + 1) && mouseY >= (double)(y - 1) && mouseY < (double)(y + height + 1);
 	}
+
+	// 16px or whatever is 1.0
+	public float lt$scale() {
+		return 1.25f;
+	}
 }

@@ -129,16 +129,18 @@ public abstract class AbstractContainerScreenMixin {
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderFloatingItem(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V", ordinal = 0))
     private void changeSlotSizeItem(AbstractContainerScreen instance, GuiGraphics guiGraphics, ItemStack itemStack, int x, int y, String text, Operation<Void> original, @Local(ordinal = 0, argsOnly = true) int mouseX, @Local(ordinal = 1, argsOnly = true) int mouseY) {
         if (!shouldApply()) {original.call(instance, guiGraphics, itemStack, x, y, text); return;}
-        if (/*currentSlot*/null/*TODO*/ instanceof SlotExtension) {
-            int l = this.draggingItem.isEmpty() ? 20 : ((SlotExtension) null/*currentSlot*/).lt$getSize();
+        if (((Object) this) instanceof LegacyAbstractContainerScreen screen) {
+           // int l = this.draggingItem.isEmpty() ? 20 : ((SlotExtension) null/*currentSlot*/).lt$getSize();
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
 //
 //            poseStack.translate(1/1.25f, 1/1.25f, 1/1.25f);
-            guiGraphics.pose().translate(guiGraphics.guiWidth()/2f, guiGraphics.guiHeight()/2f,0.0F);
-            poseStack.scale(1.5f, 1.5f, 1.5f);
-            guiGraphics.pose().translate(-guiGraphics.guiWidth()/2f, -guiGraphics.guiHeight()/2f,0);
-            GraphicsUtil.renderFloatingItem(instance, 28, guiGraphics, itemStack, mouseX, mouseY, text);
+            //guiGraphics.pose().translate(guiGraphics.guiWidth()/2f, guiGraphics.guiHeight()/2f,0.0F);
+            poseStack.translate(x, y, 0);
+            poseStack.scale(screen.lt$scale(), screen.lt$scale(), screen.lt$scale());
+            original.call(instance, guiGraphics, itemStack, 0, 0, text);
+            //guiGraphics.pose().translate(-guiGraphics.guiWidth()/2f, -guiGraphics.guiHeight()/2f,0);
+            //GraphicsUtil.renderFloatingItem(instance, 28, guiGraphics, itemStack, mouseX, mouseY, text);
             poseStack.popPose();
         } else {
             original.call(instance, guiGraphics, itemStack, x, y, text);
