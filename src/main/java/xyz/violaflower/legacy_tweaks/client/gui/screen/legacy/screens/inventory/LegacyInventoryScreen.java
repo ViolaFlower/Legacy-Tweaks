@@ -21,6 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
+import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 import xyz.violaflower.legacy_tweaks.util.common.sound.SoundUtil;
@@ -88,14 +89,14 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 					);
 		} else {
 			super.init();
-			this.topPos-=20;
+			if (!ScreenUtil.isLargeGui()) this.topPos-=20;
 			this.widthTooNarrow = this.width < 379;
 			this.recipeBookComponent.init(this.width, this.height, this.minecraft, this.widthTooNarrow, this.menu);
 			int fjd = (width - (this.imageWidth-39)) / 2;
 			int fje = (width - (this.imageWidth)) / 2;
 			this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth-39);
 			if (this.leftPos == fjd) this.leftPos = fje;
-			this.addRenderableWidget(new ImageButton(this.leftPos + 104, this.height / 2 - 22, 20, 18, RecipeBookComponent.RECIPE_BUTTON_SPRITES, button -> {
+			this.addRenderableWidget(new ImageButton(this.leftPos + 10, this.topPos + 30, 20, 18, RecipeBookComponent.RECIPE_BUTTON_SPRITES, button -> {
 				this.recipeBookComponent.toggleVisibility();
 				this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth-39);
 				if (this.leftPos == fjd) this.leftPos = fje;
