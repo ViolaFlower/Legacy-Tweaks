@@ -99,6 +99,7 @@ public class AbstractContainerScreenMixin {
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderSlotHighlight(Lnet/minecraft/client/gui/GuiGraphics;III)V"))
     private void changeSlotSizeHightlight(GuiGraphics guiGraphics, int x, int y, int blitOffset, Operation<Void> original) {
         if (this.hoveredSlot instanceof LegacySlot legacySlot) guiGraphics.fillGradient(RenderType.guiOverlay(), x, y, x + legacySlot.scale, y + legacySlot.scale, 0x80ffffff, 0x80ffffff, blitOffset);
+        else original.call(guiGraphics, x, y, blitOffset);
     }
 
 //    @Inject(method = "render", at = @At("TAIL"))
