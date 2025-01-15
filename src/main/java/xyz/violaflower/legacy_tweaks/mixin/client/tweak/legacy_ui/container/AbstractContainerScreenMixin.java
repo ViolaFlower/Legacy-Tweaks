@@ -118,6 +118,8 @@ public class AbstractContainerScreenMixin {
             guiGraphics.pose().translate(-guiGraphics.guiWidth()/2f, -guiGraphics.guiHeight()/2f,0);
             GraphicsUtil.renderFloatingItem(instance, 28, guiGraphics, itemStack, currentMouseX, currentMouseY, text);
             poseStack.popPose();
+        } else {
+            original.call(instance, guiGraphics, itemStack, x, y, text);
         }
     }
 
