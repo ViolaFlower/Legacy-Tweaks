@@ -2,8 +2,6 @@ package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory
 
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
@@ -28,7 +26,6 @@ import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 import xyz.violaflower.legacy_tweaks.util.common.sound.SoundUtil;
 import xyz.violaflower.legacy_tweaks.util.common.sound.Sounds;
 
-@Environment(EnvType.CLIENT)
 public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<InventoryMenu> implements RecipeUpdateListener {
 	/**
 	 * The old x position of the mouse pointer
@@ -60,7 +57,7 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 					// yes, this is painful
 					if (InventoryMenu.INV_SLOT_START <= i) {
 						extension.lt$setVisualX(slot.x * 18.66667f / 16 + 3.66667f);
-						extension.lt$setVisualY(slot.y * 18.66667f / 16 + 3.66667f + 3.66667f + 3.66667f + 3.66667f + (InventoryMenu.isHotbarSlot(i) ? 5.33333f : 3.33333f));
+						extension.lt$setVisualY(slot.y * 18.66667f / 16 + 3.66667f + 3.66667f + 3.66667f + 3.66667f + (InventoryMenu.isHotbarSlot(i) ? 5f : 3.33333f));
 					}
 				}
 				extension.lt$setSize(19);
@@ -103,7 +100,7 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 			this.addWidget(this.recipeBookComponent);
 		}
 	}
-	
+
 	@Override
 	protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
 		guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0x404040, false);
