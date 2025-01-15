@@ -184,20 +184,23 @@ public class GraphicsUtil {
 
     static void renderItem(GuiGraphics guiGraphics, SlotExtension slot, @Nullable LivingEntity entity, @Nullable Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         if (!stack.isEmpty()) {
+            float scale = slot.lt$getSize();
+            float normalizedScale = scale / 16;
             BakedModel bakedmodel = minecraft.getItemRenderer().getModel(stack, level, entity, seed);
             PoseStack pose = guiGraphics.pose();
             pose.pushPose();
-            pose.translate((float)(x + 8), (float)(y + 8), (float)(150 + (bakedmodel.isGui3d() ? guiOffset : 0)));
-            pose.translate(-0.5f, -0.5f, 0f);
+            pose.translate((float)(x + 8 * normalizedScale), (float)(y + 8 * normalizedScale), (float)(150 + (bakedmodel.isGui3d() ? guiOffset : 0) * normalizedScale));
+            //pose.translate(-0.5f, -0.5f, 0f);
             try {
-                float scale = slot.lt$getSize();
+
+                System.out.println(scale);
                 pose.scale(scale, -scale, scale);
                 boolean flag = !bakedmodel.usesBlockLight();
                 if (flag) {
                     Lighting.setupForFlatItems();
                 }
 
-                minecraft.getItemRenderer().render(stack, ItemDisplayContext.GUI, false, pose, guiGraphics.bufferSource(), 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
+                minecraft.getItemRenderer().render(stack, ItemDisplayContext.GUI, false, pose, guiGraphics.bufferSource(), 0xf000f0, OverlayTexture.NO_OVERLAY, bakedmodel);
                 guiGraphics.flush();
                 if (flag) {
                     Lighting.setupFor3DItems();
