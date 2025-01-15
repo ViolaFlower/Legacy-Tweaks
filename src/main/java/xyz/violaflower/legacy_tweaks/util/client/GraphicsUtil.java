@@ -30,6 +30,7 @@ import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacySlot;
+import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
 import xyz.violaflower.legacy_tweaks.mixin.client.accessor.AbstractContainerScreenAccessor;
 import xyz.violaflower.legacy_tweaks.mixin.client.accessor.GuiGraphicsAccessor;
 
@@ -153,35 +154,35 @@ public class GraphicsUtil {
         Lighting.setupFor3DItems();
     }
 
-    public static void renderItem(GuiGraphics guiGraphics, LegacySlot slot, ItemStack stack, int x, int y) {
+    public static void renderItem(GuiGraphics guiGraphics, SlotExtension slot, ItemStack stack, int x, int y) {
         renderItem(guiGraphics, slot, minecraft.player, minecraft.level, stack, x, y, 0);
     }
 
-    public static void renderItem(GuiGraphics guiGraphics, LegacySlot slot, ItemStack stack, int x, int y, int seed) {
+    public static void renderItem(GuiGraphics guiGraphics, SlotExtension slot, ItemStack stack, int x, int y, int seed) {
         renderItem(guiGraphics, slot, minecraft.player, minecraft.level, stack, x, y, seed);
     }
 
-    public static void renderItem(GuiGraphics guiGraphics, LegacySlot slot, ItemStack stack, int x, int y, int seed, int guiOffset) {
+    public static void renderItem(GuiGraphics guiGraphics, SlotExtension slot, ItemStack stack, int x, int y, int seed, int guiOffset) {
         renderItem(guiGraphics, slot, minecraft.player, minecraft.level, stack, x, y, seed, guiOffset);
     }
 
-    public static void renderFakeItem(GuiGraphics guiGraphics, LegacySlot slot, ItemStack stack, int x, int y) {
+    public static void renderFakeItem(GuiGraphics guiGraphics, SlotExtension slot, ItemStack stack, int x, int y) {
         renderFakeItem(guiGraphics, slot, stack, x, y, 0);
     }
 
-    public static void renderFakeItem(GuiGraphics guiGraphics, LegacySlot slot,  ItemStack stack, int x, int y, int seed) {
+    public static void renderFakeItem(GuiGraphics guiGraphics, SlotExtension slot, ItemStack stack, int x, int y, int seed) {
         renderItem(guiGraphics, slot, (LivingEntity)null, minecraft.level, stack, x, y, seed);
     }
 
-    public static void renderItem(GuiGraphics guiGraphics, LegacySlot slot, LivingEntity entity, ItemStack stack, int x, int y, int seed) {
+    public static void renderItem(GuiGraphics guiGraphics, SlotExtension slot, LivingEntity entity, ItemStack stack, int x, int y, int seed) {
         renderItem(guiGraphics, slot, entity, entity.level(), stack, x, y, seed);
     }
 
-    public static void renderItem(GuiGraphics guiGraphics, LegacySlot slot, @Nullable LivingEntity entity, @Nullable Level level, ItemStack stack, int x, int y, int seed) {
+    public static void renderItem(GuiGraphics guiGraphics, SlotExtension slot, @Nullable LivingEntity entity, @Nullable Level level, ItemStack stack, int x, int y, int seed) {
         renderItem(guiGraphics, slot, entity, level, stack, x, y, seed, 0);
     }
 
-    static void renderItem(GuiGraphics guiGraphics, LegacySlot slot, @Nullable LivingEntity entity, @Nullable Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
+    static void renderItem(GuiGraphics guiGraphics, SlotExtension slot, @Nullable LivingEntity entity, @Nullable Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         if (!stack.isEmpty()) {
             BakedModel bakedmodel = minecraft.getItemRenderer().getModel(stack, level, entity, seed);
             PoseStack pose = guiGraphics.pose();
@@ -189,7 +190,7 @@ public class GraphicsUtil {
             pose.translate((float)(x + 8), (float)(y + 8), (float)(150 + (bakedmodel.isGui3d() ? guiOffset : 0)));
             pose.translate(-0.5f, -0.5f, 0f);
             try {
-                float scale = slot.size;
+                float scale = slot.lt$getSize();
                 pose.scale(scale, -scale, scale);
                 boolean flag = !bakedmodel.usesBlockLight();
                 if (flag) {
