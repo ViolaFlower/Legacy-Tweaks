@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.LegacyScreen;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.LegacyTitleScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
@@ -26,7 +27,7 @@ public class ScreenMixin {
 		}
 		boolean valueChanged = previousScreenHeightIsLargeGui != screenHeight > 720;
 		Object this_ = this;
-		if (this_ instanceof LegacyTitleScreen screen && valueChanged) {
+		if (this_ instanceof LegacyScreen screen && valueChanged) {
 			previousScreenHeightIsLargeGui = screenHeight > 720;
 			initialized = false;
 		}
