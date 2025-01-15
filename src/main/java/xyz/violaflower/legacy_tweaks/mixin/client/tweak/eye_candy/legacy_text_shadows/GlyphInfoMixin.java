@@ -15,7 +15,7 @@ import xyz.violaflower.legacy_tweaks.tweaks.impl.EyeCandy;
 public interface GlyphInfoMixin {
 	@Inject(method = "getShadowOffset", at = @At("HEAD"), cancellable = true)
 	private void getShadowOffset(CallbackInfoReturnable<Float> cir) {
-		if (!Tweaks.LEGACY_UI.generalScreenTweaks.legacyTextShadows.isOn()) return;
+		if (!EyeCandyHelper.isLegacyTextShadowsEnabled()) return;
 		Tweak.IntSliderOption legacyTextShadowOffset = Tweaks.LEGACY_UI.generalScreenTweaks.legacyTextShadowOffset;
 		cir.setReturnValue((float)(legacyTextShadowOffset.get() / Minecraft.getInstance().getWindow().getGuiScale()));
 	}
