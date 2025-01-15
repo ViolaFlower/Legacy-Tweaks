@@ -234,12 +234,12 @@ public abstract class AbstractContainerScreenMixin {
         guiGraphics.pose().pushPose();
         guiGraphics.pose().translate(0.0F, 0.0F, 100.0F);
         if (itemStack.isEmpty() && slot.isActive()) {
-            Pair<ResourceLocation, ResourceLocation> pair = slot.getNoItemIcon();
+            Pair<ResourceLocation, ResourceLocation> pair = slot instanceof SlotExtension extension && extension.lt$getNoItemIcon() != null ? extension.lt$getNoItemIcon() : slot.getNoItemIcon();
             if (pair != null) {
                 TextureAtlasSprite textureAtlasSprite = (TextureAtlasSprite) Minecraft.getInstance().getTextureAtlas(pair.getFirst()).apply(pair.getSecond());
                 guiGraphics.pose().pushPose();
                 guiGraphics.pose().translate(i, j, 0);
-                guiGraphics.blit(0, 0, 0, 16, 16, textureAtlasSprite);
+                guiGraphics.blit(0, 0, 0, slot instanceof SlotExtension extension ? extension.lt$getSize() : 16, slot instanceof SlotExtension extension ? extension.lt$getSize() : 16, textureAtlasSprite);
                 guiGraphics.pose().popPose();
                 bl2 = true;
             }

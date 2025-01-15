@@ -45,6 +45,7 @@ public class LegacyArmorSlot extends LegacySlot {
         return !itemStack.isEmpty() && !player.isCreative() && EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_ARMOR_CHANGE) ? false : super.mayPickup(player);
     }
 
+    @Override
     public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
         return this.emptyIcon != null ? Pair.of(InventoryMenu.BLOCK_ATLAS, this.emptyIcon) : super.getNoItemIcon();
     }

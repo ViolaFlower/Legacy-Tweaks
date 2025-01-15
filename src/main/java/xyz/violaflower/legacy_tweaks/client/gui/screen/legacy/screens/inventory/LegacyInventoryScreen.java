@@ -2,6 +2,7 @@ package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory
 
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
@@ -11,6 +12,8 @@ import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
@@ -27,8 +30,20 @@ import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 import xyz.violaflower.legacy_tweaks.util.common.sound.SoundUtil;
 import xyz.violaflower.legacy_tweaks.util.common.sound.Sounds;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Supplier;
+
 /// @see InventoryScreen
 public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<InventoryMenu> implements RecipeUpdateListener {
+	private static final Map<EquipmentSlot, ResourceLocation> TEXTURE_EMPTY_SLOTS = ((Supplier<LinkedHashMap<EquipmentSlot, ResourceLocation>>) () -> {
+		LinkedHashMap<EquipmentSlot, ResourceLocation> equipmentSlotResourceLocationLinkedHashMap = new LinkedHashMap<>();
+		equipmentSlotResourceLocationLinkedHashMap.put(EquipmentSlot.FEET, Sprites.EMPTY_ARMOR_SLOT_BOOTS);
+		equipmentSlotResourceLocationLinkedHashMap.put(EquipmentSlot.LEGS, Sprites.EMPTY_ARMOR_SLOT_LEGGINGS);
+		equipmentSlotResourceLocationLinkedHashMap.put(EquipmentSlot.CHEST, Sprites.EMPTY_ARMOR_SLOT_CHESTPLATE);
+		equipmentSlotResourceLocationLinkedHashMap.put(EquipmentSlot.HEAD, Sprites.EMPTY_ARMOR_SLOT_HELMET);
+		return equipmentSlotResourceLocationLinkedHashMap;
+	}).get();
 	/**
 	 * The old x position of the mouse pointer
 	 */
@@ -61,9 +76,11 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 						extension.lt$setVisualX(126/2f);
 						int fsu = i - InventoryMenu.ARMOR_SLOT_START;
 						extension.lt$setVisualY(14.5f + fsu * 21);
+						extension.lt$setNoItemIcon(Pair.of(InventoryMenu.BLOCK_ATLAS, TEXTURE_EMPTY_SLOTS.entrySet().stream().toList().get(TEXTURE_EMPTY_SLOTS.size()-fsu-1).getValue()));
 					} else if (i == InventoryMenu.SHIELD_SLOT) {
 						extension.lt$setVisualX(320/2);
 						extension.lt$setVisualY(155/2f);
+						extension.lt$setNoItemIcon(Pair.of(InventoryMenu.BLOCK_ATLAS, Sprites.EMPTY_ARMOR_SLOT_SHIELD));
 					} else if (InventoryMenu.INV_SLOT_START <= i) {
 						extension.lt$setVisualX(slot.x * 18.66667f / 16 + 3.66667f);
 						extension.lt$setVisualY(slot.y * 18.66667f / 16 + 3.66667f + 3.66667f + 3.66667f + 3.66667f + (InventoryMenu.isHotbarSlot(i) ? 5.16667f : 3.33333f));
@@ -146,7 +163,7 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 		guiGraphics.pose().scale(1, 217.5F / this.imageHeight, 1);
 		guiGraphics.blit(Sprites.INVENTORY(), i, j, this.imageWidth, this.imageHeight, 0, 0, 430, 435, 440, 440);
 		guiGraphics.pose().popPose();
-		InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics, i + 26, j + 8, i + 75, j + 78, 30, 0.0625F, this.xMouse, this.yMouse, this.minecraft.player);
+		InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics, i + 183 / 2, j + 31 / 2, i + 301 / 2, j + 191 / 2, 39, 0.0625F, this.xMouse, this.yMouse, this.minecraft.player);
 	}
 
 

@@ -1,5 +1,7 @@
 package xyz.violaflower.legacy_tweaks.mixin.client.tweak.legacy_ui.slot;
 
+import com.mojang.datafixers.util.Pair;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.Slot;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,33 +19,45 @@ public class SlotMixin implements SlotExtension {
 	private Float visualY;
 	@Unique
 	private int size = 16;
+	@Unique
+	private Pair<ResourceLocation, ResourceLocation> noIconItem;
 	@Override
-	public void lt$setVisualX(float x) {
+	public void lt$setVisualX(Float x) {
 		this.visualX = x;
 	}
 
 	@Override
-	public void lt$setVisualY(float y) {
+	public void lt$setVisualY(Float y) {
 		this.visualY = y;
 	}
 
 	@Override
-	public float lt$getVisualX() {
+	public Float lt$getVisualX() {
 		return this.visualX == null ? this.x : this.visualX;
 	}
 
 	@Override
-	public float lt$getVisualY() {
+	public Float lt$getVisualY() {
 		return this.visualY == null ? this.y : this.visualY;
 	}
 
 	@Override
-	public void lt$setSize(int size) {
+	public void lt$setSize(Integer size) {
 		this.size = size;
 	}
 
 	@Override
 	public int lt$getSize() {
 		return this.size;
+	}
+
+	@Override
+	public void lt$setNoItemIcon(Pair<ResourceLocation, ResourceLocation> pair) {
+		this.noIconItem = pair;
+	}
+
+	@Override
+	public Pair<ResourceLocation, ResourceLocation> lt$getNoItemIcon() {
+		return this.noIconItem;
 	}
 }
