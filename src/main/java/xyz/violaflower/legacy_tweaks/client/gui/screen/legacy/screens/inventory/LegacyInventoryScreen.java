@@ -61,6 +61,9 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 						extension.lt$setVisualX(126/2f);
 						int fsu = i - InventoryMenu.ARMOR_SLOT_START;
 						extension.lt$setVisualY(14.5f + fsu * 21);
+					} else if (i == InventoryMenu.SHIELD_SLOT) {
+						extension.lt$setVisualX(320/2);
+						extension.lt$setVisualY(155/2f);
 					} else if (InventoryMenu.INV_SLOT_START <= i) {
 						extension.lt$setVisualX(slot.x * 18.66667f / 16 + 3.66667f);
 						extension.lt$setVisualY(slot.y * 18.66667f / 16 + 3.66667f + 3.66667f + 3.66667f + 3.66667f + (InventoryMenu.isHotbarSlot(i) ? 5.16667f : 3.33333f));
