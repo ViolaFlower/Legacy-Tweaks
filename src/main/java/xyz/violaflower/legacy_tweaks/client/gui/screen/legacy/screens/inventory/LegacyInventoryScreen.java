@@ -27,6 +27,7 @@ import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 import xyz.violaflower.legacy_tweaks.util.common.sound.SoundUtil;
 import xyz.violaflower.legacy_tweaks.util.common.sound.Sounds;
 
+/// @see InventoryScreen
 public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<InventoryMenu> implements RecipeUpdateListener {
 	/**
 	 * The old x position of the mouse pointer
@@ -96,11 +97,11 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 			int fje = (width - (this.imageWidth)) / 2;
 			this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth-39);
 			if (this.leftPos == fjd) this.leftPos = fje;
-			this.addRenderableWidget(new ImageButton(this.leftPos + 10, this.topPos + 30, 20, 18, RecipeBookComponent.RECIPE_BUTTON_SPRITES, button -> {
+			this.addRenderableWidget(new ImageButton(this.leftPos + 15, this.topPos + 70, 20, 18, RecipeBookComponent.RECIPE_BUTTON_SPRITES, button -> {
 				this.recipeBookComponent.toggleVisibility();
 				this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth-39);
 				if (this.leftPos == fjd) this.leftPos = fje;
-				button.setPosition(this.leftPos + 104, this.height / 2 - 22);
+				button.setPosition(this.leftPos + 15, this.topPos + 70);
 				this.buttonClicked = true;
 			}));
 			this.addWidget(this.recipeBookComponent);

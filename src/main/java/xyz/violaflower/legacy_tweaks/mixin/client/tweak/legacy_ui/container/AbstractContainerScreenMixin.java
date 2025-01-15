@@ -18,6 +18,8 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.LegacyAbstractContainerScreen;
 import xyz.violaflower.legacy_tweaks.util.client.GraphicsUtil;
@@ -61,6 +63,8 @@ public abstract class AbstractContainerScreenMixin {
     @Shadow protected abstract void recalculateQuickCraftRemaining();
 
     @Shadow protected int imageWidth;
+
+    @Shadow protected abstract void renderSlot(GuiGraphics guiGraphics, Slot slot);
 
     @Unique
     private boolean shouldApply() {
@@ -179,16 +183,23 @@ public abstract class AbstractContainerScreenMixin {
 
     @WrapOperation(method = "isHovering(Lnet/minecraft/world/inventory/Slot;DD)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;isHovering(IIIIDD)Z"))
     private boolean isHovering(AbstractContainerScreen instance, int x, int y, int width, int height, double mouseX, double mouseY, Operation<Boolean> original, @Local(argsOnly = true) Slot slot) {
-
+        if (!shouldApply()) original.call(instance, x, y, width, height, mouseX, mouseY);
         return original.call(instance, (int) (slot instanceof SlotExtension extension ? extension.lt$getVisualX() : slot.x), (int) (slot instanceof SlotExtension extension ? extension.lt$getVisualY() : slot.y), slot instanceof SlotExtension extension ? extension.lt$getSize() : width, slot instanceof SlotExtension extension ? extension.lt$getSize() : height, mouseX, mouseY);
     }
 
+    @Inject(method = "renderSlot", at = @At("HEAD"), cancellable = true)
+    private void renderSlot(GuiGraphics guiGraphics, Slot slot, CallbackInfo ci) {
+        if (shouldApply()) {
+            renderSlot2(guiGraphics, slot);
+            ci.cancel();
+        }
+    }
     /**
      * @author Jab125
      * @reason TODO FIX THIS LATER
      */
-    @Overwrite
-    public void renderSlot(GuiGraphics guiGraphics, Slot slot) {
+    @Unique
+    public void renderSlot2(GuiGraphics guiGraphics, Slot slot) {
         float i = slot instanceof SlotExtension extension ? extension.lt$getVisualX() : slot.x;
         float j = slot instanceof SlotExtension extension ? extension.lt$getVisualY() : slot.y;
         ItemStack itemStack = slot.getItem();
