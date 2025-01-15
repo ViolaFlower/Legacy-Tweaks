@@ -7,6 +7,7 @@ import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.container.menu.LegacyInventoryMenu;
@@ -15,6 +16,8 @@ import xyz.violaflower.legacy_tweaks.util.client.GraphicsUtil;
 import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
+import xyz.violaflower.legacy_tweaks.util.common.sound.SoundUtil;
+import xyz.violaflower.legacy_tweaks.util.common.sound.Sounds;
 
 /// @see net.minecraft.client.gui.screens.inventory.InventoryScreen
 public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<LegacyInventoryMenu> implements RecipeUpdateListener {
@@ -39,6 +42,7 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
     }
 
     protected void init() {
+        if (Tweaks.LEGACY_UI.generalScreenTweaks.useLegacyUISounds.isOn()) SoundUtil.playFullPitchSound(Sounds.PRESS, SoundSource.MASTER);
         if (this.minecraft.gameMode.hasInfiniteItems()) {
             this.minecraft.setScreen(new CreativeModeInventoryScreen(this.minecraft.player, this.minecraft.player.connection.enabledFeatures(), (Boolean)this.minecraft.options.operatorItemsTab().get()));
         } else {

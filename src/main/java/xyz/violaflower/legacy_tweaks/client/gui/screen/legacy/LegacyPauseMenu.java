@@ -16,14 +16,17 @@ import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.enums.PlayGameScreen;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
+import xyz.violaflower.legacy_tweaks.util.common.sound.SoundUtil;
+import xyz.violaflower.legacy_tweaks.util.common.sound.Sounds;
 
 import java.util.Objects;
 
-public class LegacyPauseMenu extends LegacyScreen{
+public class LegacyPauseMenu extends LegacyScreen {
     private FrameLayout frameLayout;
     private LegacyLogoRenderer logoRenderer;
 
@@ -68,6 +71,8 @@ public class LegacyPauseMenu extends LegacyScreen{
         this.repositionElements();
     }
 
+
+
     private void onDisconnect() {
         boolean bl = this.minecraft.isLocalServer();
         ServerData serverData = this.minecraft.getCurrentServer();
@@ -102,5 +107,20 @@ public class LegacyPauseMenu extends LegacyScreen{
     public void render(GuiGraphics guiGraphics, int i, int j, float f) {
         super.render(guiGraphics, i, j, f);
         logoRenderer.renderLogo(guiGraphics, this.width, 1);
+    }
+
+    @Override
+    public void onClose() {
+        this.minecraft.setScreen(null);
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (keyCode == 256 && this.shouldCloseOnEsc()) {
+            if (Tweaks.LEGACY_UI.generalScreenTweaks.useLegacyUISounds.isOn()) SoundUtil.playFullPitchSound(Sounds.BACK, SoundSource.MASTER);
+            this.minecraft.setScreen(null);
+            return true;
+        }
+        return super.keyPressed(keyCode, scanCode, modifiers);
     }
 }
