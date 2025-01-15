@@ -57,7 +57,7 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 					// yes, this is painful
 					if (InventoryMenu.INV_SLOT_START <= i) {
 						extension.lt$setVisualX(slot.x * 18.66667f / 16 + 3.66667f);
-						extension.lt$setVisualY(slot.y * 18.66667f / 16 + 3.66667f + 3.66667f + 3.66667f + 3.66667f + (InventoryMenu.isHotbarSlot(i) ? 5f : 3.33333f));
+						extension.lt$setVisualY(slot.y * 18.66667f / 16 + 3.66667f + 3.66667f + 3.66667f + 3.66667f + (InventoryMenu.isHotbarSlot(i) ? 5.16667f : 3.33333f));
 					}
 				}
 				extension.lt$setSize(19);
