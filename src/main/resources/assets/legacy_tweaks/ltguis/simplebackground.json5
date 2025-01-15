@@ -6,13 +6,6 @@
         "action": "setScreen",
         "args": [":parent"]
       }
-    ],
-    "renderBackground": [
-      {
-        "type": "action",
-        "action": "renderPanorama",
-        "args": ["^0", 1]
-      }
     ]
   }
 }
