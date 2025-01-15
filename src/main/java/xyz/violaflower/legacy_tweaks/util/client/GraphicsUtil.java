@@ -31,6 +31,7 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacySlot;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
+import xyz.violaflower.legacy_tweaks.helper.tweak.world.EyeCandyHelper;
 import xyz.violaflower.legacy_tweaks.mixin.client.accessor.AbstractContainerScreenAccessor;
 import xyz.violaflower.legacy_tweaks.mixin.client.accessor.GuiGraphicsAccessor;
 
@@ -238,11 +239,16 @@ public class GraphicsUtil {
             pose.pushPose();
             if (halfPos) pose.translate(-0.5f, -0.5f, 0f);
             if (stack.getCount() != 1 || text != null) {
+                EyeCandyHelper.setLegacyTextShadows(false);
+                EyeCandyHelper.setCompactText(true);
                 String s = text == null ? String.valueOf(stack.getCount()) : text;
                 pose.translate(0, 0.0F, 200.0F);
                 pose.pushPose();
-                pose.translate(x + 16 * scale + 3 - 2 - font.width(s), (16 * scale + 3 - 1) - font.lineHeight, 0);
+                pose.translate(x + 16 * scale + 3 - 2 - font.width(s) * scale, (16 * scale + 3 - 1) - font.lineHeight * scale, 0);
+                pose.scale(scale, scale, 1);
                 guiGraphics.drawString(font, s, 0, 0, 0xffffff, true);
+                EyeCandyHelper.setCompactText(false);
+                EyeCandyHelper.setLegacyTextShadows(true);
                 pose.popPose();
             }
 
