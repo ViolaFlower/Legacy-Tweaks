@@ -9,6 +9,7 @@ import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
+import xyz.violaflower.legacy_tweaks.util.client.GraphicsUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
@@ -20,24 +21,23 @@ public class LegacyContainerScreen extends LegacyAbstractContainerScreen<ChestMe
         super(manipulateSlots(menu), playerInventory, title);
         this.containerRows = menu.getRowCount();
         this.imageWidth = 430 / 2;
-        this.imageHeight = (282 / 2) + this.containerRows * 42;
+        this.imageHeight = (282 / 2) + (this.containerRows * 42);
         int i = 222;
         int j = 114;
-        this.titleLabelY = this.imageHeight - 194;
+        this.titleLabelY = this.imageHeight;
     }
 
     private static ChestMenu manipulateSlots(ChestMenu chestMenu) {
         int i = 0;
         for (Slot slot : chestMenu.slots) {
             if (slot instanceof SlotExtension extension) {
+                int slotOffset = (21 * chestMenu.getRowCount()) /2;
                 if (i <= (9 * chestMenu.getRowCount()) - 1) {
                     extension.lt$setVisualX(slot.x * 18.66667f / 16 + 4.66667f);
-                    extension.lt$setVisualY(slot.y * 18.66667f / 16 + 6f);
+                    extension.lt$setVisualY(slot.y * 18.66667f / 16 + 5.6f + slotOffset);
                 } else if (i > (9 * chestMenu.getRowCount() - 1) && i <= (9 * chestMenu.getRowCount()) + 36) {
-//                    extension.lt$setVisualX(slot.x * 18.66667f / 16 + 4.66667f);
-//                    extension.lt$setVisualY(slot.y * 18.66667f / 16 + 6f);
                     extension.lt$setVisualX(slot.x * 18.66667f / 16 + 4.66667f);
-                    extension.lt$setVisualY(slot.y * 18.66667f / 16 + 3.66667f + (isHotbarSlot(chestMenu, i) ? 6.46667f : 4.54444f));
+                    extension.lt$setVisualY(slot.y * 18.66667f / 16 + 3.56667f + (isHotbarSlot(chestMenu, i) ? 6.46667f : 4.54444f) + slotOffset);
                 }
                 extension.lt$setSize(19);
             }
@@ -60,26 +60,28 @@ public class LegacyContainerScreen extends LegacyAbstractContainerScreen<ChestMe
 //        int i = this.leftPos;
 //        int j = this.topPos;
         int i = (this.width - this.imageWidth) / 2;
-        int j = (this.height - this.imageHeight) / 2;
+        int j = ((this.height - this.imageHeight) / 2) + (21 * this.containerRows)/2;
         int topD = (this.containerRows * 42 + 52);
         int top = topD/2;
-        float topF = ((this.containerRows * 42f + 52f)/2);
+        float topF = ((this.containerRows * 42f + 51f)/2);
         int bottom = 240/2;
         guiGraphics.pose().pushPose();
-        guiGraphics.pose().scale(1, topF / top, 1);
-        guiGraphics.blit(Sprites.CHEST_LARGE, i, j, this.imageWidth, top, 0, 0, 430, topD, 440, 550);
+//        guiGraphics.pose().scale(1, topF / top, 1);
+        GraphicsUtil.blit(guiGraphics, Sprites.CHEST_LARGE, i, j, this.imageWidth, topF, 0, 0, 430, topF*2, 440, 550);
         guiGraphics.pose().popPose();
 
         guiGraphics.pose().pushPose();
-        guiGraphics.pose().scale(1, (240f/2f) / bottom, 1);
-        guiGraphics.blit(Sprites.CHEST_LARGE, i, j + 1 + top, this.imageWidth, 240/2, 0, 303, 430, 240, 440, 550);
+//        guiGraphics.pose().scale(1, (240f/2f) / bottom, 1);
+        GraphicsUtil.blit(guiGraphics, Sprites.CHEST_LARGE, i, j + topF, this.imageWidth, bottom, 0, 303, 430, 240, 440, 550);
         guiGraphics.pose().popPose();
 
     }
 
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        guiGraphics.drawString(this.font, this.title, this.titleLabelX + 6, this.titleLabelY + 2, 4210752, false);
+        int inv = ((this.height - this.imageHeight) / 2) + (21 * this.containerRows)/4;
+        int container = ((this.height - this.imageHeight) / 2) - (21*this.containerRows);
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX + 6, container + 2, 4210752, false);
         guiGraphics.drawString(this.font, Lang.Container.INVENTORY.getString(), this.titleLabelX + 6, this.titleLabelY + 84, 0x404040, false);
     }
 
