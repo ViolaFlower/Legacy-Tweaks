@@ -1,6 +1,7 @@
 package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory;
 
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +14,7 @@ import xyz.violaflower.legacy_tweaks.util.client.GraphicsUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
-
+/// @see ContainerScreen
 public class LegacyContainerScreen extends LegacyAbstractContainerScreen<ChestMenu> implements MenuAccess<ChestMenu> {
     private final int containerRows;
 
@@ -22,8 +23,6 @@ public class LegacyContainerScreen extends LegacyAbstractContainerScreen<ChestMe
         this.containerRows = menu.getRowCount();
         this.imageWidth = 430 / 2;
         this.imageHeight = (282 / 2) + (this.containerRows * 42);
-        int i = 222;
-        int j = 114;
         this.titleLabelY = this.imageHeight;
     }
 
@@ -57,32 +56,21 @@ public class LegacyContainerScreen extends LegacyAbstractContainerScreen<ChestMe
     }
 
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
-//        int i = this.leftPos;
-//        int j = this.topPos;
-        int i = (this.width - this.imageWidth) / 2;
-        int j = ((this.height - this.imageHeight) / 2) + (21 * this.containerRows)/2;
-        int topD = (this.containerRows * 42 + 52);
-        int top = topD/2;
-        float topF = ((this.containerRows * 42f + 51f)/2);
+        int xPos = (this.width - this.imageWidth) / 2;
+        int yPos = ((this.height - this.imageHeight) / 2) + (21 * this.containerRows)/2;
+        float top = ((this.containerRows * 42f + 51f)/2);
         int bottom = 240/2;
-        guiGraphics.pose().pushPose();
-//        guiGraphics.pose().scale(1, topF / top, 1);
-        GraphicsUtil.blit(guiGraphics, Sprites.CHEST_LARGE, i, j, this.imageWidth, topF, 0, 0, 430, topF*2, 440, 550);
-        guiGraphics.pose().popPose();
-
-        guiGraphics.pose().pushPose();
-//        guiGraphics.pose().scale(1, (240f/2f) / bottom, 1);
-        GraphicsUtil.blit(guiGraphics, Sprites.CHEST_LARGE, i, j + topF, this.imageWidth, bottom, 0, 303, 430, 240, 440, 550);
-        guiGraphics.pose().popPose();
-
+        GraphicsUtil.blit(guiGraphics, Sprites.CHEST_LARGE, xPos, yPos, this.imageWidth, top, 0, 0, 430, top*2, 440, 550);
+        GraphicsUtil.blit(guiGraphics, Sprites.CHEST_LARGE, xPos, yPos + top, this.imageWidth, bottom, 0, 303, 430, 240, 440, 550);
     }
 
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        int inv = ((this.height - this.imageHeight) / 2) + (21 * this.containerRows)/4;
-        int container = ((this.height - this.imageHeight) / 2) - (21*this.containerRows);
-        guiGraphics.drawString(this.font, this.title, this.titleLabelX + 6, container + 2, 4210752, false);
-        guiGraphics.drawString(this.font, Lang.Container.INVENTORY.getString(), this.titleLabelX + 6, this.titleLabelY + 84, 0x404040, false);
+        int yPos = ((this.height - this.imageHeight) / 2) + (21 * this.containerRows);
+        int containerOffset = -105 + (10 * this.containerRows);
+        int inventoryOffset = containerOffset + (21 * this.containerRows) + 20 + (this.containerRows <= 3 ? -1 : 0);
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX + 6, yPos + containerOffset, 4210752, false);
+        guiGraphics.drawString(this.font, Lang.Container.INVENTORY.getString(), this.titleLabelX + 6, yPos + inventoryOffset, 0x404040, false);
     }
 
     @Override
