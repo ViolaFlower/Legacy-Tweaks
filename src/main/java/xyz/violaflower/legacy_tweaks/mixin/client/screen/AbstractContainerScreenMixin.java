@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import xyz.violaflower.legacy_tweaks.helper.tweak.hud.PaperDollHelper;
+import xyz.violaflower.legacy_tweaks.helper.tweak.legacy_ui.hud.PaperDollHelper;
 
 @Mixin(AbstractContainerScreen.class)
 public class AbstractContainerScreenMixin {

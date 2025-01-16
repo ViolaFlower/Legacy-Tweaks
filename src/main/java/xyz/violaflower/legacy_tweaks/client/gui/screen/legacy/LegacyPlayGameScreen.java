@@ -7,7 +7,7 @@ import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.storage.LevelStorageSource;
-import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
+import xyz.violaflower.legacy_tweaks.util.client.screen.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
 import java.util.concurrent.ExecutionException;

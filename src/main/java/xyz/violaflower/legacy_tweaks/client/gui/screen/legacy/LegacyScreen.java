@@ -2,17 +2,11 @@ package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy;
 
 import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ComponentPath;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
-import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
-import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
+import xyz.violaflower.legacy_tweaks.util.client.screen.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
-import xyz.violaflower.legacy_tweaks.util.common.sound.SoundUtil;
-import xyz.violaflower.legacy_tweaks.util.common.sound.Sounds;
 
 import java.util.function.Function;
 

@@ -17,7 +17,7 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
-import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
+import xyz.violaflower.legacy_tweaks.util.client.screen.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 import xyz.violaflower.legacy_tweaks.util.common.sound.SoundUtil;

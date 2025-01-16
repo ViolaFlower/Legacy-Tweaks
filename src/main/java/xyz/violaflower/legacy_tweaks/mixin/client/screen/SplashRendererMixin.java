@@ -13,9 +13,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import xyz.violaflower.legacy_tweaks.helper.tweak.world.EyeCandyHelper;
+import xyz.violaflower.legacy_tweaks.helper.tweak.legacy_ui.candy.text.TextHelper;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
-import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
+import xyz.violaflower.legacy_tweaks.util.client.screen.ScreenUtil;
 
 @Mixin(SplashRenderer.class)
 public abstract class SplashRendererMixin {
@@ -49,11 +49,11 @@ public abstract class SplashRendererMixin {
         float animScale = 1.8F - Mth.abs(Mth.sin((float) (Util.getMillis() % 1000L) / 1000F * ((float) Math.PI * 2F)) * 0.1F);
         animScale = (animScale * 100.0F / (float) (font.width(this.splash) + 32));
         guiGraphics.pose().scale(animScale * scale, animScale * scale, animScale * scale);
-        EyeCandyHelper.setCompactText(true);
-        EyeCandyHelper.setLegacyTextShadows(false);
+        TextHelper.setCompactText(true);
+        TextHelper.setLegacyTextShadows(false);
         guiGraphics.drawCenteredString(font, this.splash, 0, y, 0xffff00 | color);
-        EyeCandyHelper.setLegacyTextShadows(true);
-        EyeCandyHelper.setCompactText(false);
+        TextHelper.setLegacyTextShadows(true);
+        TextHelper.setCompactText(false);
         guiGraphics.pose().popPose();
         ci.cancel();
     }

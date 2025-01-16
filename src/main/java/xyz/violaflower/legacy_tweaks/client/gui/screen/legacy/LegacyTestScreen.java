@@ -6,12 +6,9 @@ import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyLogoRenderer;
-import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
+import xyz.violaflower.legacy_tweaks.util.client.screen.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
-
-import java.util.Objects;
 
 // playground for testing gui things
 public class LegacyTestScreen extends LegacyScreen {

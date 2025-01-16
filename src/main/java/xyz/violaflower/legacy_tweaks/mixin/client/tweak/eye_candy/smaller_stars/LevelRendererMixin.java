@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.LevelRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import xyz.violaflower.legacy_tweaks.helper.tweak.world.SkyHelper;
+import xyz.violaflower.legacy_tweaks.helper.tweak.eye_candy.sky.SkyHelper;
 
 @Mixin(LevelRenderer.class)
 public class LevelRendererMixin {

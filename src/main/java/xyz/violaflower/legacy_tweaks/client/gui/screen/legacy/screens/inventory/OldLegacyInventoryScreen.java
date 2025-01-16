@@ -10,8 +10,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.container.menu.LegacyInventoryMenu;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
-import xyz.violaflower.legacy_tweaks.util.client.GraphicsUtil;
-import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
+import xyz.violaflower.legacy_tweaks.util.client.screen.graphics.GraphicsUtil;
+import xyz.violaflower.legacy_tweaks.util.client.screen.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 

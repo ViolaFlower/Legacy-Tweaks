@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import xyz.violaflower.legacy_tweaks.helper.tweak.texture.ModelHelper;
+import xyz.violaflower.legacy_tweaks.helper.tweak.eye_candy.model.ModelHelper;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 

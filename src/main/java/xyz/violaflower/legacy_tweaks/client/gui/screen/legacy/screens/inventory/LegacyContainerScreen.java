@@ -4,13 +4,11 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ChestMenu;
-import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
-import xyz.violaflower.legacy_tweaks.util.client.GraphicsUtil;
+import xyz.violaflower.legacy_tweaks.util.client.screen.graphics.GraphicsUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
