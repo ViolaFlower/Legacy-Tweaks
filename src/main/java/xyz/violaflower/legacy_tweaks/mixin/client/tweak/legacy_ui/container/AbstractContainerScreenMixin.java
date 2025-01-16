@@ -111,17 +111,21 @@ public abstract class AbstractContainerScreenMixin {
 //            args.set(3, args.get(3).hashCode() + ((LegacySlot) abstractContainerScreenMixin.currentSlot).scale);
 //        }
 //    }
-
+// GuiGraphics guiGraphics, int x, int y, int blitOffset, Operation<Void> original
+    //? if (neoforge) {
+    /*@WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderSlotHighlight(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/inventory/Slot;IIF)V"))
+    *///?} else {
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderSlotHighlight(Lnet/minecraft/client/gui/GuiGraphics;III)V"))
-    private void changeSlotSizeHightlight(GuiGraphics guiGraphics, int x, int y, int blitOffset, Operation<Void> original) {
-        if (!shouldApply()) {original.call(guiGraphics, x, y, blitOffset); return;}
+    //?}
+    private void changeSlotSizeHightlight(/*? if (neoforge) {*//*AbstractContainerScreen instance, *//*?}*/GuiGraphics guiGraphics, /*? if (neoforge) {*//*Slot slot, *//*?}*/int x, int y, /*? if (neoforge) {*//*float*//*?} else {*/int/*?}*/ blitOffset, Operation<Void> original) {
+        if (!shouldApply()) {original.call(/*? if (neoforge) {*//*instance, *//*?}*/ guiGraphics, /*? if (neoforge) {*//*slot, *//*?}*/x, y, blitOffset); return;}
         if (this.hoveredSlot instanceof SlotExtension legacySlot) {
             guiGraphics.pose().pushPose();
             guiGraphics.pose().translate(legacySlot.lt$getVisualX(), legacySlot.lt$getVisualY(), 0);
             guiGraphics.pose().scale(legacySlot.lt$getSize(), legacySlot.lt$getSize(), 1);
-            guiGraphics.fillGradient(RenderType.guiOverlay(), 0, 0, 1, 1, 0x80ffffff, 0x80ffffff, blitOffset);
+            guiGraphics.fillGradient(RenderType.guiOverlay(), 0, 0, 1, 1, 0x80ffffff, 0x80ffffff, /*? if (neoforge) {*//*(int)*//*?}*/ blitOffset);
             guiGraphics.pose().popPose();
-        } else original.call(guiGraphics, x, y, blitOffset);
+        } else original.call(/*? if (neoforge) {*//*instance, *//*?}*/ guiGraphics, /*? if (neoforge) {*//*slot, *//*?}*/x, y, blitOffset);
     }
 
 //    @Inject(method = "render", at = @At("TAIL"))
