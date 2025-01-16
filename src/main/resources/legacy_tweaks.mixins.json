@@ -14,6 +14,7 @@
     "client.accessor.GuiAccessor",
     "client.accessor.GuiGraphicsAccessor",
     "client.accessor.PostChainAccessor",
+    "client.accessor.RecipeBookComponentAccessor",
     "client.accessor.ScissorStackAccessor",
     "client.accessor.TextureStateShardAccessor",
     "client.networking.NetworkRegistryMixin",

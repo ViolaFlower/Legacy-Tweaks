@@ -14,7 +14,6 @@ public interface Sprites {
     ResourceLocation PANORAMA_NIGHT = ModAsset.guiLocation("panorama/panorama_night.png");
 
     ResourceLocation HOTBAR_SELECTION = ModAsset.getResourceLocation("hud/hotbar_selection");
-//    ResourceLocation INVENTORY = ModAsset.guiLocation(Tweaks.LEGACY_UI.legacyInventoryScreenTweak.noOffhand.isOn() ? "container/classic_inventory.png" : "container/classic_inventory_tu53.png");
 
     ResourceLocation EMPTY_ARMOR_SLOT_HELMET = ResourceLocation.withDefaultNamespace("item/legacy_armor_slot_helmet");
     ResourceLocation EMPTY_ARMOR_SLOT_CHESTPLATE = ResourceLocation.withDefaultNamespace("item/legacy_armor_slot_chestplate");
@@ -31,6 +30,9 @@ public interface Sprites {
     ResourceLocation MINECRAFT_LOGO = ResourceLocation.withDefaultNamespace("textures/gui/title/minecraft.png");
     ResourceLocation EASTER_EGG_LOGO = ResourceLocation.withDefaultNamespace("textures/gui/title/minceraft.png");
     ResourceLocation MINECRAFT_EDITION = ResourceLocation.withDefaultNamespace("textures/gui/title/edition.png");
+
+    ResourceLocation CHEST_SMALL = ModAsset.guiLocation("container/small_chest.png");
+    ResourceLocation CHEST_LARGE = ModAsset.guiLocation("container/large_chest.png");
 
     static ResourceLocation INVENTORY() {
         LegacyUI.LegacyInventoryScreenTweak tweak = Tweaks.LEGACY_UI.legacyInventoryScreenTweak;

@@ -1,29 +1,22 @@
 package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory;
 
-import com.mojang.blaze3d.platform.Lighting;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
-import org.jetbrains.annotations.Nullable;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
@@ -68,25 +61,36 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 			if (slot instanceof SlotExtension extension) {
 				if (i == InventoryMenu.RESULT_SLOT) {
 					System.out.println("moving the result slot...");
-					extension.lt$setVisualX(0);
-					extension.lt$setVisualY(0);
+					float resultOffsetX = hideOffhand() ? 5.7f : 0f;
+					float resultOffsetY = hideOffhand() ? 1.25f : 0f;
+					float resultOffsetCrafting = isClassicCraftingOn() ? 0f : 10000f;
+					extension.lt$setVisualX(180.5f - resultOffsetX + resultOffsetCrafting);
+					extension.lt$setVisualY(41.5f + resultOffsetY);
+					extension.lt$setSize(hideOffhand() ? 25 : 19);
 				} else {
 					// yes, this is painful
+					float classicCraftingOffset = isClassicCraftingOn() ? 50 : 0;
 					if (i >= InventoryMenu.ARMOR_SLOT_START && i < InventoryMenu.ARMOR_SLOT_END) {
-						extension.lt$setVisualX(126/2f);
+						extension.lt$setVisualX((126/2f) - classicCraftingOffset);
 						int fsu = i - InventoryMenu.ARMOR_SLOT_START;
 						extension.lt$setVisualY(14.5f + fsu * 21);
 						extension.lt$setNoItemIcon(Pair.of(InventoryMenu.BLOCK_ATLAS, TEXTURE_EMPTY_SLOTS.entrySet().stream().toList().get(TEXTURE_EMPTY_SLOTS.size()-fsu-1).getValue()));
+					} else if (i >= InventoryMenu.CRAFT_SLOT_START && i < InventoryMenu.ARMOR_SLOT_END) {
+						float craftingSlotOffset = isClassicCraftingOn() ? 0f : 10000f;
+						float noOffhandOffset = hideOffhand() ? 4.5f : 0;
+						extension.lt$setVisualX(slot.x * 18.66667f / 16 - 4.3f + craftingSlotOffset);
+						extension.lt$setVisualY(slot.y * 18.66667f / 16 + 10.1f + craftingSlotOffset + noOffhandOffset);
 					} else if (i == InventoryMenu.SHIELD_SLOT) {
-						extension.lt$setVisualX(320/2);
+						float shieldOffset = hideOffhand() ? 10000f : 0f;
+						extension.lt$setVisualX((320/2f) - classicCraftingOffset + shieldOffset);
 						extension.lt$setVisualY(155/2f);
 						extension.lt$setNoItemIcon(Pair.of(InventoryMenu.BLOCK_ATLAS, Sprites.EMPTY_ARMOR_SLOT_SHIELD));
 					} else if (InventoryMenu.INV_SLOT_START <= i) {
 						extension.lt$setVisualX(slot.x * 18.66667f / 16 + 3.66667f);
-						extension.lt$setVisualY(slot.y * 18.66667f / 16 + 3.66667f + 3.66667f + 3.66667f + 3.66667f + (InventoryMenu.isHotbarSlot(i) ? 5.16667f : 3.33333f));
+						extension.lt$setVisualY(slot.y * 18.66667f / 16 + 3.66667f + 3.66667f + 3.66667f + 3.66667f + (InventoryMenu.isHotbarSlot(i) ? 5.16667f : 3.44444f));
 					}
+					extension.lt$setSize(19);
 				}
-				extension.lt$setSize(19);
 			}
 			i++;
 		}
@@ -107,6 +111,7 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 
 	@Override
 	protected void init() {
+		SoundUtil.playFullPitchSound(Sounds.PRESS, SoundSource.MASTER);
 		if (false && this.minecraft.gameMode.hasInfiniteItems()) {
 			this.minecraft
 					.setScreen(
@@ -119,22 +124,29 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 			this.recipeBookComponent.init(this.width, this.height, this.minecraft, this.widthTooNarrow, this.menu);
 			int fjd = (width - (this.imageWidth-39)) / 2;
 			int fje = (width - (this.imageWidth)) / 2;
+			int classicCraftingOffset = isClassicCraftingOn() ? 50 : 0;
+			int noOffhandOffset = isClassicCraftingOn() ? hideOffhand() ? 0 : -21 : 0;
+			int noOffhandAndClassicCraftingOffset = !isClassicCraftingOn() ? hideOffhand() ? 0 : 21 : 0;
 			this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth-39);
 			if (this.leftPos == fjd) this.leftPos = fje;
-			this.addRenderableWidget(new ImageButton(this.leftPos + 15, this.topPos + 70, 20, 18, RecipeBookComponent.RECIPE_BUTTON_SPRITES, button -> {
-				this.recipeBookComponent.toggleVisibility();
-				this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth-39);
-				if (this.leftPos == fjd) this.leftPos = fje;
-				button.setPosition(this.leftPos + 15, this.topPos + 70);
-				this.buttonClicked = true;
-			}));
-			this.addWidget(this.recipeBookComponent);
+			if (showRecipeBook()) {
+				this.addRenderableWidget(new ImageButton(this.leftPos + 160 - classicCraftingOffset - noOffhandOffset, this.topPos + 78 - noOffhandAndClassicCraftingOffset, 19, 18, RecipeBookComponent.RECIPE_BUTTON_SPRITES, button -> {
+					this.recipeBookComponent.toggleVisibility();
+					this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth - 39);
+					if (this.leftPos == fjd) this.leftPos = fje;
+					button.setPosition(this.leftPos + 160 - classicCraftingOffset - noOffhandOffset, this.topPos + 78 - noOffhandAndClassicCraftingOffset);
+					this.buttonClicked = true;
+				}));
+				this.addWidget(this.recipeBookComponent);
+			}
 		}
 	}
 
 	@Override
 	protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-		guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0x404040, false);
+		int craftingLabelOffset = hideOffhand() ? 4 : 0;
+		if (isClassicCraftingOn()) guiGraphics.drawString(this.font, this.title, this.titleLabelX + 13, this.titleLabelY + 11 + craftingLabelOffset, 0x404040, false);
+		guiGraphics.drawString(this.font, Lang.Container.INVENTORY.getString(), this.titleLabelX - 84, this.titleLabelY + 97, 0x404040, false);
 	}
 
 	@Override
@@ -155,15 +167,21 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 	}
 
 	@Override
+	public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+		this.renderBg(guiGraphics, partialTick, mouseX, mouseY);
+	}
+
+	@Override
 	protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
 		int i = this.leftPos;
 		int j = this.topPos;
+		int playerOffset = isClassicCraftingOn() ? 0 : 50;
 		// the scale is there so 217px is properly stretched out to 217.5px
 		guiGraphics.pose().pushPose();
 		guiGraphics.pose().scale(1, 217.5F / this.imageHeight, 1);
 		guiGraphics.blit(Sprites.INVENTORY(), i, j, this.imageWidth, this.imageHeight, 0, 0, 430, 435, 440, 440);
 		guiGraphics.pose().popPose();
-		InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics, i + 183 / 2, j + 31 / 2, i + 301 / 2, j + 191 / 2, 39, 0.0625F, this.xMouse, this.yMouse, this.minecraft.player);
+		InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics, i + 31 + playerOffset, j + 20, i + 110 + playerOffset, j + 90, 35, 0.0625F, this.xMouse, this.yMouse, this.minecraft.player);
 	}
 
 
@@ -205,9 +223,9 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 	@Override
 	protected boolean hasClickedOutside(double mouseX, double mouseY, int guiLeft, int guiTop, int mouseButton) {
 		boolean bl = mouseX < (double)guiLeft
-					 || mouseY < (double)guiTop
-					 || mouseX >= (double)(guiLeft + this.imageWidth)
-					 || mouseY >= (double)(guiTop + this.imageHeight);
+				|| mouseY < (double)guiTop
+				|| mouseX >= (double)(guiLeft + this.imageWidth)
+				|| mouseY >= (double)(guiTop + this.imageHeight);
 		return this.recipeBookComponent.hasClickedOutside(mouseX, mouseY, this.leftPos, this.topPos, this.imageWidth, this.imageHeight, mouseButton) && bl;
 	}
 
@@ -225,5 +243,17 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 	@Override
 	public RecipeBookComponent getRecipeBookComponent() {
 		return this.recipeBookComponent;
+	}
+
+	private static boolean isClassicCraftingOn() {
+		return Tweaks.LEGACY_UI.legacyInventoryScreenTweak.classicCrafting.isOn();
+	}
+
+	private static boolean showRecipeBook() {
+		return !Tweaks.LEGACY_UI.legacyInventoryScreenTweak.hideRecipeBook.isOn();
+	}
+
+	private static boolean hideOffhand() {
+		return Tweaks.LEGACY_UI.legacyInventoryScreenTweak.noOffhand.isOn();
 	}
 }
