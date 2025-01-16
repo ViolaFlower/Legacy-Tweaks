@@ -37,7 +37,7 @@ public class LegacyContainerScreen extends LegacyAbstractContainerScreen<ChestMe
                     extension.lt$setVisualY(slot.y * 18.66667f / 16 + 5.6f + slotOffset);
                 } else if (i > (9 * chestMenu.getRowCount() - 1) && i <= (9 * chestMenu.getRowCount()) + 36) {
                     extension.lt$setVisualX(slot.x * 18.66667f / 16 + 4.66667f);
-                    extension.lt$setVisualY(slot.y * 18.66667f / 16 + 3.56667f + (isHotbarSlot(chestMenu, i) ? 6.46667f : 4.54444f) + slotOffset);
+                    extension.lt$setVisualY(slot.y * 18.66667f / 16 + 3.56667f + (isHotbarSlot(chestMenu, i) ? 6.46667f : 4.54444f) + slotOffset - 0.33333f);
                 }
                 extension.lt$setSize(19);
             }
