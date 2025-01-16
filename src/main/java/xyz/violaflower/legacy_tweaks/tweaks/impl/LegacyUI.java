@@ -71,6 +71,7 @@ public class LegacyUI extends Tweak {
 			public final BooleanOption vignette;
 			public final BooleanOption forceDisableHudScale;
 			public final BooleanOption applyHudScaleCrosshair;
+			public final BooleanOption thirdPersonCrosshair;
 
 			public GeneralTweaks() {
 				super("generalTweaks", true);
@@ -87,6 +88,7 @@ public class LegacyUI extends Tweak {
 				vignette = addBooleanOption("vignette", false);
 				forceDisableHudScale = addBooleanOption("forceDisableHudScale", false);
 				applyHudScaleCrosshair = addBooleanOption("applyHudScaleCrosshair", true);
+				thirdPersonCrosshair = addBooleanOption("thirdPersonCrosshair", false);
 			}
 		}
 

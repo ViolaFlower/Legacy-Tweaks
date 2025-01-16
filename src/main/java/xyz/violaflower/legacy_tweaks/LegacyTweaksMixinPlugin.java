@@ -45,7 +45,7 @@ public class LegacyTweaksMixinPlugin implements IMixinConfigPlugin {
 				for (AbstractInsnNode instruction : method.instructions) {
 					if (instruction.getOpcode() == Opcodes.AASTORE) {
 						// add a call to aastoreMarker()
-						method.instructions.insert(instruction, new MethodInsnNode(Opcodes.INVOKESTATIC, "xyz/violaflower/legacy_tweaks/helper/tweak/texture/MipmapTypeHelper", "aastoreMarker", "()V"));
+						method.instructions.insert(instruction, new MethodInsnNode(Opcodes.INVOKESTATIC, "xyz/violaflower/legacy_tweaks/helper/tweak/eye_candy/mipmapping/MipmapTypeHelper", "aastoreMarker", "()V"));
 					}
 				}
 			}

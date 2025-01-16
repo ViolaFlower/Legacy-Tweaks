@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.CameraType;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -13,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.violaflower.legacy_tweaks.helper.tweak.legacy_ui.hud.HudHelper;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
 @Mixin(value = Gui.class, priority = -999999999)
 public class GuiMixin {
@@ -42,5 +44,11 @@ public class GuiMixin {
         } else {
             RenderSystem.defaultBlendFunc();
         }
+    }
+
+    @WrapOperation(method = "renderCrosshair", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/CameraType;isFirstPerson()Z"))
+    private boolean shouldRenderCrosshairInThirdPerson(CameraType instance, Operation<Boolean> original) {
+        if (Tweaks.LEGACY_UI.guiHudTweaks.generalTweaks.thirdPersonCrosshair.isOn()) return true;
+        return original.call(instance);
     }
 }

@@ -47,6 +47,7 @@ public final class LegacyTweaks {
         tweakManager.register(Tweaks.GAMEPLAY);
         tweakManager.register(Tweaks.LEGACY_UI);
         tweakManager.register(Tweaks.EYE_CANDY);
+        tweakManager.register(Tweaks.SWING);
         Sounds.init();
         TweakManager.load();
 
