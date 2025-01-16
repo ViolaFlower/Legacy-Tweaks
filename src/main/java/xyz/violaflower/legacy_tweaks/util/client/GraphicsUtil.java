@@ -34,6 +34,7 @@ import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
 import xyz.violaflower.legacy_tweaks.helper.tweak.world.EyeCandyHelper;
 import xyz.violaflower.legacy_tweaks.mixin.client.accessor.AbstractContainerScreenAccessor;
 import xyz.violaflower.legacy_tweaks.mixin.client.accessor.GuiGraphicsAccessor;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
 public class GraphicsUtil {
 
@@ -185,8 +186,8 @@ public class GraphicsUtil {
 
     static void renderItem(GuiGraphics guiGraphics, SlotExtension slot, @Nullable LivingEntity entity, @Nullable Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         if (!stack.isEmpty()) {
-            float scale = slot.lt$getSize();
-            float normalizedScale = scale / 16;
+            float scale = (slot.lt$getSize() * (Tweaks.LEGACY_UI.legacyContainerScreenTweak.smallerItemSizes.isOn() ? 0.85f : 1f));
+            float normalizedScale = slot.lt$getSize() / 16;
             BakedModel bakedmodel = minecraft.getItemRenderer().getModel(stack, level, entity, seed);
             PoseStack pose = guiGraphics.pose();
             pose.pushPose();

@@ -12,6 +12,7 @@ public class LegacyUI extends Tweak {
 	public final LegacyPauseScreenTweak legacyPauseScreenTweak;
 	public final LegacyHelpOptionsScreenTweak legacyHelpOptionsScreen;
 	public final LegacyInventoryScreenTweak legacyInventoryScreenTweak;
+	public final LegacyContainerScreenTweak legacyContainerScreenTweak;
 	public final GuiHudTweaks guiHudTweaks;
 	public final F3Info f3Info;
 	public final WindowTitle windowTitle;
@@ -29,6 +30,7 @@ public class LegacyUI extends Tweak {
 		addSubTweak(legacyPlayGameScreenTweak = new LegacyPlayGameScreenTweak());
 		addSubTweak(legacyHelpOptionsScreen = new LegacyHelpOptionsScreenTweak());
 		addSubTweak(legacyInventoryScreenTweak = new LegacyInventoryScreenTweak());
+		addSubTweak(legacyContainerScreenTweak = new LegacyContainerScreenTweak());
 		addSubTweak(f3Info = new F3Info());
 		addSubTweak(windowTitle = new WindowTitle());
 	}
@@ -318,6 +320,19 @@ public class LegacyUI extends Tweak {
 			noOffhand = addBooleanOption("noOffhand", false);
 			hideRecipeBook = addBooleanOption("hideRecipeBook", true);
 			classicCrafting = addBooleanOption("classicCrafting", false);
+		}
+	}
+
+	public static class LegacyContainerScreenTweak extends Tweak {
+		public final BooleanOption useLegacyGenericContainer;
+		public final BooleanOption useLegacyFurnaceContainer;
+		public final BooleanOption smallerItemSizes;
+		public LegacyContainerScreenTweak() {
+			super("legacyContainerScreen", true);
+			setTweakAuthor("Jab125", "Permdog99");
+			useLegacyGenericContainer = addBooleanOption("useLegacyGenericContainer", true);
+			useLegacyFurnaceContainer = addBooleanOption("useLegacyFurnaceContainer", true);
+			smallerItemSizes = addBooleanOption("smallerItemSizes", true);
 		}
 	}
 
