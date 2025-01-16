@@ -16,8 +16,11 @@ public interface SlotExtension {
 	Float lt$getVisualY();
 
 	/// @param size size in scaled pixels
-	void lt$setSize(Integer size);
-	/*let's assume it's an int*/int lt$getSize();
+	void lt$setSize(Float size);
+	default void lt$setSize(float size) {
+		this.lt$setSize((Float) size);
+	}
+	/*let's assume it's an int*/float lt$getSize();
 
 	void lt$setNoItemIcon(Pair<ResourceLocation, ResourceLocation> pair);
 

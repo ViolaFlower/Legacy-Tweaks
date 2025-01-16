@@ -118,7 +118,8 @@ public abstract class AbstractContainerScreenMixin {
         if (this.hoveredSlot instanceof SlotExtension legacySlot) {
             guiGraphics.pose().pushPose();
             guiGraphics.pose().translate(legacySlot.lt$getVisualX(), legacySlot.lt$getVisualY(), 0);
-            guiGraphics.fillGradient(RenderType.guiOverlay(), 0, 0, 0 + legacySlot.lt$getSize(), 0 + legacySlot.lt$getSize(), 0x80ffffff, 0x80ffffff, blitOffset);
+            guiGraphics.pose().scale(legacySlot.lt$getSize(), legacySlot.lt$getSize(), 1);
+            guiGraphics.fillGradient(RenderType.guiOverlay(), 0, 0, 1, 1, 0x80ffffff, 0x80ffffff, blitOffset);
             guiGraphics.pose().popPose();
         } else original.call(guiGraphics, x, y, blitOffset);
     }
@@ -184,7 +185,7 @@ public abstract class AbstractContainerScreenMixin {
     @WrapOperation(method = "isHovering(Lnet/minecraft/world/inventory/Slot;DD)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;isHovering(IIIIDD)Z"))
     private boolean isHovering(AbstractContainerScreen instance, int x, int y, int width, int height, double mouseX, double mouseY, Operation<Boolean> original, @Local(argsOnly = true) Slot slot) {
         if (!shouldApply()) return original.call(instance, x, y, width, height, mouseX, mouseY);
-        return original.call(instance, (int) (slot instanceof SlotExtension extension ? extension.lt$getVisualX() : slot.x), (int) (slot instanceof SlotExtension extension ? extension.lt$getVisualY() : slot.y), slot instanceof SlotExtension extension ? extension.lt$getSize() : width, slot instanceof SlotExtension extension ? extension.lt$getSize() : height, mouseX, mouseY);
+        return original.call(instance, (int) (slot instanceof SlotExtension extension ? extension.lt$getVisualX() : slot.x), (int) (slot instanceof SlotExtension extension ? extension.lt$getVisualY() : slot.y), slot instanceof SlotExtension extension ? (int) extension.lt$getSize() : width, slot instanceof SlotExtension extension ? (int) extension.lt$getSize() : height, mouseX, mouseY);
     }
 
     @Inject(method = "renderSlot", at = @At("HEAD"), cancellable = true)
@@ -239,7 +240,8 @@ public abstract class AbstractContainerScreenMixin {
                 TextureAtlasSprite textureAtlasSprite = (TextureAtlasSprite) Minecraft.getInstance().getTextureAtlas(pair.getFirst()).apply(pair.getSecond());
                 guiGraphics.pose().pushPose();
                 guiGraphics.pose().translate(i, j, 0);
-                guiGraphics.blit(0, 0, 0, slot instanceof SlotExtension extension ? extension.lt$getSize() : 16, slot instanceof SlotExtension extension ? extension.lt$getSize() : 16, textureAtlasSprite);
+                guiGraphics.pose().scale(slot instanceof SlotExtension extension ? extension.lt$getSize() : 16, slot instanceof SlotExtension extension ? extension.lt$getSize() : 16, 1);
+                guiGraphics.blit(0, 0, 0, 1,1, textureAtlasSprite);
                 guiGraphics.pose().popPose();
                 bl2 = true;
             }

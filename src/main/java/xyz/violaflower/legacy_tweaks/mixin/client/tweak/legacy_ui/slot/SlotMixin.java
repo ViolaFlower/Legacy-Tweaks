@@ -18,7 +18,7 @@ public class SlotMixin implements SlotExtension {
 	@Unique
 	private Float visualY;
 	@Unique
-	private int size = 16;
+	private float size = 16;
 	@Unique
 	private Pair<ResourceLocation, ResourceLocation> noIconItem;
 	@Override
@@ -41,13 +41,13 @@ public class SlotMixin implements SlotExtension {
 		return this.visualY == null ? this.y : this.visualY;
 	}
 
-	@Override
-	public void lt$setSize(Integer size) {
+	@Override // TODO account for null
+	public void lt$setSize(Float size) {
 		this.size = size;
 	}
 
 	@Override
-	public int lt$getSize() {
+	public float lt$getSize() {
 		return this.size;
 	}
 
