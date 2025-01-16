@@ -139,3 +139,4 @@ WIP
 ## Special Thanks
 - Pedro270707/AndroidDr for guidance and assistance in development
 - NicSonic for making the legacy-styled "Minecraft: Java Edition" logo
+- Agarilao for helping out with bug testing and general assistance in development
