@@ -47,6 +47,8 @@
     "client.tweak.legacy_ui.gui_hud_tweaks.other.GuiMixin",
     "client.tweak.legacy_ui.gui_hud_tweaks.scoreboard.GuiMixin",
     "client.tweak.legacy_ui.gui_hud_tweaks.vignette.GuiMixin",
+    "client.tweak.legacy_ui.legacy_container.ContainerScreenMixin",
+    "client.tweak.legacy_ui.legacy_container.MenuScreenMixin",
     "client.tweak.legacy_ui.legacy_inventory_screen.MinecraftMixin",
     "client.tweak.legacy_ui.legacy_panorama.PanoramaRendererMixin",
     "client.tweak.legacy_ui.legacy_pause_screen.MinecraftMixin",
