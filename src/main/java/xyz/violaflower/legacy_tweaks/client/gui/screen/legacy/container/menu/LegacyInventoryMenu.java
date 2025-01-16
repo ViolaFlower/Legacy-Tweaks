@@ -1,12 +1,9 @@
 package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.container.menu;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
 import java.util.Map;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlot.Type;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,13 +11,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyArmorSlot;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyResultSlot;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacySlot;
-import xyz.violaflower.legacy_tweaks.mixin.client.accessor.CraftingMenuAccessor;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 

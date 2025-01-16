@@ -11,11 +11,8 @@
     "client.accessor.CompositeRenderTypeAccessor",
     "client.accessor.CompositeStateAccessor",
     "client.accessor.FogDataAccessor",
-    "client.accessor.GuiAccessor",
     "client.accessor.GuiGraphicsAccessor",
     "client.accessor.PostChainAccessor",
-    "client.accessor.RecipeBookComponentAccessor",
-    "client.accessor.ScissorStackAccessor",
     "client.accessor.TextureStateShardAccessor",
     "client.networking.NetworkRegistryMixin",
     "client.screen.AbstractContainerScreenMixin",
@@ -47,7 +44,6 @@
     "client.tweak.legacy_ui.gui_hud_tweaks.other.GuiMixin",
     "client.tweak.legacy_ui.gui_hud_tweaks.scoreboard.GuiMixin",
     "client.tweak.legacy_ui.gui_hud_tweaks.vignette.GuiMixin",
-    "client.tweak.legacy_ui.legacy_container.ContainerScreenMixin",
     "client.tweak.legacy_ui.legacy_container.MenuScreenMixin",
     "client.tweak.legacy_ui.legacy_inventory_screen.MinecraftMixin",
     "client.tweak.legacy_ui.legacy_panorama.PanoramaRendererMixin",
@@ -66,7 +62,6 @@
     "common.tweak.map_changes.MapRendererMixin"
   ],
   "mixins": [
-    "client.accessor.CraftingMenuAccessor",
     "client.tweak.legacy_ui.slot.SlotMixin",
     "common.tweak.gameplay.EntityMixin",
     "common.tweak.legacy_attack.ItemStackMixin",

@@ -1,15 +1,6 @@
 package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory;
 
-import net.minecraft.client.RecipeBookCategories;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.components.StateSwitchingButton;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
-import net.minecraft.client.gui.screens.recipebook.RecipeBookTabButton;
-import net.minecraft.network.chat.Component;
-import xyz.violaflower.legacy_tweaks.mixin.client.accessor.RecipeBookComponentAccessor;
-
-import java.util.Objects;
 
 public class LegacyRecipeBookComponent extends RecipeBookComponent {
 
