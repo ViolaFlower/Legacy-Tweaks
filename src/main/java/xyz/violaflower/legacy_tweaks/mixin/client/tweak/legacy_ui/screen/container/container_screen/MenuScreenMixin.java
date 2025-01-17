@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.LegacyContainerScreen;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.LegacyFurnaceScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
 import java.util.Map;
@@ -54,7 +55,7 @@ public class MenuScreenMixin {
         register(MenuType.BREWING_STAND, BrewingStandScreen::new);
         register(MenuType.CRAFTING, CraftingScreen::new);
         register(MenuType.ENCHANTMENT, EnchantmentScreen::new);
-        register(MenuType.FURNACE, FurnaceScreen::new);
+        register(MenuType.FURNACE, LegacyFurnaceScreen::new);
         register(MenuType.GRINDSTONE, GrindstoneScreen::new);
         register(MenuType.HOPPER, HopperScreen::new);
         register(MenuType.LECTERN, LecternScreen::new);
