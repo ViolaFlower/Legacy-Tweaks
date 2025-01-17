@@ -43,5 +43,7 @@ public class LegacyTweaksClient {
 		LegacyTweaks.isIntegratedServer = () -> {
 			return Minecraft.getInstance().getSingleplayerServer() != null;
 		};
+
+		ClientKeyMapping.register();
 	}
 }

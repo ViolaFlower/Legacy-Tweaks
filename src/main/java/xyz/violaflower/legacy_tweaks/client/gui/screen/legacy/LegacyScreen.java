@@ -5,6 +5,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import xyz.violaflower.legacy_tweaks.client.ClientKeyMapping;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.config.LTScreen;
 import xyz.violaflower.legacy_tweaks.util.client.screen.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
@@ -116,5 +118,14 @@ public class LegacyScreen extends Screen {
         } else {
             this.renderMenuBackground(guiGraphics);
         }
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (ClientKeyMapping.OPEN_CONFIG.matches(keyCode, scanCode) && ClientKeyMapping.OPEN_CONFIG.isDown()) {
+            this.minecraft.setScreen(new LTScreen(this));
+            return true;
+        }
+        return super.keyPressed(keyCode, scanCode, modifiers);
     }
 }

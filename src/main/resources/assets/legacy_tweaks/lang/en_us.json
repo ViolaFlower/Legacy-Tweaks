@@ -4,6 +4,9 @@
   "common.legacy_tweaks.window.title": "Console: %s Edition - Java",
   "common.legacy_tweaks.window.titleTU": "Minecraft: Console Edition - %s",
 
+  "key.legacy_tweaks.keybindings.openConfig": "Open Config",
+  "key.legacy_tweaks.keybindings.mainCategory": "Legacy Tweaks",
+
   "gui.legacy_tweaks.configScreen.title": "LT Settings",
   "gui.legacy_tweaks.configScreen.enabled": "E",
   "gui.legacy_tweaks.configScreen.disabled": "D",

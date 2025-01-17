@@ -7,6 +7,17 @@ public interface Lang {
     Translate WINDOW_TITLE = new Translate("common.legacy_tweaks.window.title");
     Translate WINDOW_TITLE_TU = new Translate("common.legacy_tweaks.window.titleTU");
 
+    interface KeyBindings
+    {
+        Translate OPEN_CONFIG = from("openConfig");
+        Translate MAIN_CATEGORY = from("mainCategory");
+
+        private static Translate from(String name)
+        {
+            return new Translate("key.legacy_tweaks.keybindings." + name);
+        }
+    }
+
     interface ConfigScreen
     {
         Translate TITLE = from("title");
