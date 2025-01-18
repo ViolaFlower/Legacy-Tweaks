@@ -37,6 +37,13 @@ public interface Sprites {
     ResourceLocation SMALL_CRAFTING_1080 = ModAsset.guiLocation("container/crafting_interface_small_1080p.png");
     ResourceLocation LARGE_CRAFTING_1080 = ModAsset.guiLocation("container/crafting_interface_large_1080p.png");
 
+    ResourceLocation CRAFTING_TAB_CENTER = ModAsset.getResourceLocation("container/crafting_tab_center");
+    ResourceLocation CRAFTING_TAB_LEFT_SIDE = ModAsset.getResourceLocation("container/crafting_tab_left_side");
+    ResourceLocation CRAFTING_TAB_RIGHT_SIDE = ModAsset.getResourceLocation("container/crafting_tab_right_side");
+    ResourceLocation CRAFTING_TAB_SELECTED = ModAsset.getResourceLocation("container/crafting_tab_selected");
+    ResourceLocation CRAFTING_TAB_SELECTED_SIDE = ModAsset.getResourceLocation("container/crafting_tab_selected_side");
+
+
     static ResourceLocation INVENTORY() {
         LegacyUI.LegacyInventoryScreenTweak tweak = Tweaks.LEGACY_UI.legacyInventoryScreenTweak;
         if (tweak.classicCrafting.isOn()) {
