@@ -34,6 +34,9 @@ public interface Sprites {
     ResourceLocation CHEST_SMALL = ModAsset.guiLocation("container/small_chest.png");
     ResourceLocation CHEST_LARGE = ModAsset.guiLocation("container/large_chest.png");
 
+    ResourceLocation SMALL_CRAFTING_1080 = ModAsset.guiLocation("container/crafting_interface_small_1080p.png");
+    ResourceLocation LARGE_CRAFTING_1080 = ModAsset.guiLocation("container/crafting_interface_large_1080p.png");
+
     static ResourceLocation INVENTORY() {
         LegacyUI.LegacyInventoryScreenTweak tweak = Tweaks.LEGACY_UI.legacyInventoryScreenTweak;
         if (tweak.classicCrafting.isOn()) {
