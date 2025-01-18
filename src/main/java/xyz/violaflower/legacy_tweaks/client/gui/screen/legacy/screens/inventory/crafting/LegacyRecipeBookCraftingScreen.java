@@ -81,7 +81,9 @@ public class LegacyRecipeBookCraftingScreen extends LegacyAutoCraftingScreen<Inv
         this.recipeBookPage.init(this.minecraft, (int) this.leftPos, (int) this.topPos);
 //        this.recipeBookPage.addListener(this);
         this.selectedTab.setStateTriggered(true);
+        setVisible();
         this.updateCollections(false);
+        this.createTabs1();
         this.updateTabs();
     }
 
@@ -94,6 +96,10 @@ public class LegacyRecipeBookCraftingScreen extends LegacyAutoCraftingScreen<Inv
                 this.tabs.add(new LegacyTabButton(xPos, (int) this.topPos - 20, 101, 66, false, i == 0 ? 0 : i == categoryIndex.getLast().hashCode() ? 2 : 1, categoryIndex.indexOf(i), this.title, this.sprites, icon, b -> changeTab()));
             }
         }
+    }
+
+    private void createTabs1() {
+        this.tabs.add(new LegacyTabButton((int) this.leftPos, (int) this.topPos - 20, 101, 66, false, 1, 0, this.title, this.sprites, LegacyTabButton.createIconItem(ItemStack.EMPTY), b -> changeTab()));
     }
 
     private RecipeBookCategories getCategory() {
