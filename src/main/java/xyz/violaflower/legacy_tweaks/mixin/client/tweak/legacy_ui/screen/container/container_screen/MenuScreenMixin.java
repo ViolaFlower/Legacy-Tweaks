@@ -3,7 +3,10 @@ package xyz.violaflower.legacy_tweaks.mixin.client.tweak.legacy_ui.screen.contai
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.*;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.CraftingMenu;
 import net.minecraft.world.inventory.MenuType;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.LegacyContainerScreen;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.LegacyFurnaceScreen;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.crafting.LegacyQuickCraftingScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
 import java.util.Map;
@@ -53,7 +57,7 @@ public class MenuScreenMixin {
         register(MenuType.BEACON, BeaconScreen::new);
         register(MenuType.BLAST_FURNACE, BlastFurnaceScreen::new);
         register(MenuType.BREWING_STAND, BrewingStandScreen::new);
-        register(MenuType.CRAFTING, CraftingScreen::new);
+        register(MenuType.CRAFTING, (MenuScreens.ScreenConstructor) (menu, playerInventory, title) -> new LegacyQuickCraftingScreen(menu, playerInventory, title));
         register(MenuType.ENCHANTMENT, EnchantmentScreen::new);
         register(MenuType.FURNACE, LegacyFurnaceScreen::new);
         register(MenuType.GRINDSTONE, GrindstoneScreen::new);

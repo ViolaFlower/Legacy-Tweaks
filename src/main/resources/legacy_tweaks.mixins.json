@@ -64,6 +64,8 @@
     "common.tweak.gameplay.map.MapRendererMixin"
   ],
   "mixins": [
+    "client.tweak.legacy_ui.screen.container.inventory_screen.CraftingMenuMixin",
+    "client.tweak.legacy_ui.screen.container.inventory_screen.InventoryMenuMixin",
     "client.tweak.legacy_ui.slot.SlotMixin",
     "common.tweak.gameplay.chat.dimension_notification.EntityMixin",
     "common.tweak.gameplay.chat.no_advancement_message.PlayerAdvancementsMixin",

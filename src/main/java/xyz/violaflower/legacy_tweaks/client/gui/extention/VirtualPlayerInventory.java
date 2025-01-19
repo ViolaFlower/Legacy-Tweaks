@@ -2,7 +2,7 @@ package xyz.violaflower.legacy_tweaks.client.gui.extention;
 
 import net.minecraft.world.inventory.Slot;
 
-public interface VirtualInventory extends Iterable<Slot> {
+public interface VirtualPlayerInventory extends Iterable<Slot> {
 	// from 0 to 36
 	Slot getSlot(int slot);
 	// from 0 to 27

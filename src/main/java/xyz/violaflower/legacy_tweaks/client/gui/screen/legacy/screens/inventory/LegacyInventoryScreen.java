@@ -17,7 +17,7 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
-import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.crafting.LegacyRecipeBookCraftingScreen;
+//import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.crafting.LegacyRecipeBookCraftingScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.client.screen.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
@@ -138,7 +138,7 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 //					if (this.leftPos == fjd) this.leftPos = fje;
 //					button.setPosition(this.leftPos + 160 - classicCraftingOffset - noOffhandOffset, this.topPos + 78 - noOffhandAndClassicCraftingOffset);
 //					this.buttonClicked = true;
-					this.minecraft.setScreen(new LegacyRecipeBookCraftingScreen(this.minecraft.player, this));
+					//this.minecraft.setScreen(new LegacyRecipeBookCraftingScreen(this.minecraft.player, this));
 				}));
 				this.addWidget(this.recipeBookComponent);
 			}

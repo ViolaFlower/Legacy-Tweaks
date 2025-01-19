@@ -12,6 +12,7 @@ import xyz.violaflower.legacy_tweaks.util.client.screen.graphics.GraphicsUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
 
+/// Screen used in chest-like blocks like chests, shulker boxes, and barrels
 /// @see ContainerScreen
 public class LegacyContainerScreen extends LegacyAbstractContainerScreen<ChestMenu> implements MenuAccess<ChestMenu> {
     private final int containerRows;
