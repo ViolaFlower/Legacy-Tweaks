@@ -8,6 +8,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.CraftingMenuExtension;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
+import xyz.violaflower.legacy_tweaks.client.gui.extention.VirtualCraftingInventory;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.LegacyAbstractContainerScreen;
 import xyz.violaflower.legacy_tweaks.util.client.screen.graphics.GraphicsUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
@@ -44,6 +45,26 @@ public class LegacyQuickCraftingScreen<T extends AbstractContainerMenu & Craftin
 			}
 			menu.lt$getVirtualPlayerInventory().iterateSlots().forEach(f -> ((SlotExtension)f).lt$setSize(14 + 1 / 3f));
 		}//554 534
+		int craXo = 0;
+		int craYo = 0;
+		VirtualCraftingInventory slots = menu.lt$getVirtualCraftingInventory();
+		int width1 = slots.getWidth();
+		for (Slot slot : slots) {
+			//58,386
+			if (!(slot instanceof SlotExtension extension)) continue;
+			extension.lt$setVisualX(59/3f+craXo*70f/3);
+			extension.lt$setVisualY(387/3f+craYo*70f/3);
+			if (++craXo >= width1) {
+				craXo = 0;
+				craYo++;
+			}
+			extension.lt$setSize(21);
+		}
+		if (slots.getResultSlot() instanceof SlotExtension extension) {
+			extension.lt$setSize(97/3f);//381 437
+			extension.lt$setVisualX(380/3f);
+			extension.lt$setVisualY(436/3f);
+		}
 		return menu;
 	}
 

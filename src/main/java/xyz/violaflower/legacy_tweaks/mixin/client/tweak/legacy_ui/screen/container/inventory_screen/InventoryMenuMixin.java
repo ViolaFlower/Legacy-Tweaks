@@ -7,26 +7,35 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import org.jetbrains.annotations.NotNull;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.CraftingMenuExtension;
+import xyz.violaflower.legacy_tweaks.client.gui.extention.VirtualCraftingInventory;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.VirtualPlayerInventory;
 
 import java.util.Iterator;
 
 @Mixin(InventoryMenu.class)
 public abstract class InventoryMenuMixin extends RecipeBookMenu<CraftingInput, CraftingRecipe> implements CraftingMenuExtension {
+	@Shadow @Final public static int CRAFT_SLOT_START;
+
+	@Shadow @Final public static int RESULT_SLOT;
+
 	public InventoryMenuMixin(MenuType<?> menuType, int containerId) {
 		super(menuType, containerId);
+	}
+
+	@Unique
+	private void assertSlot(int slot, int min, int max) {
+		if (slot >= min && slot < max) return;
+		throw new IllegalArgumentException();
 	}
 
 	@Override
 	public VirtualPlayerInventory lt$getVirtualPlayerInventory() {
 		return new VirtualPlayerInventory() {
-			private void assertSlot(int slot, int min, int max) {
-				if (slot >= min && slot < max) return;
-				throw new IllegalArgumentException();
-			}
 			@Override
 			public Slot getSlot(int slot) {
 				assertSlot(slot, 0, 36);
@@ -107,6 +116,32 @@ public abstract class InventoryMenuMixin extends RecipeBookMenu<CraftingInput, C
 			@Override
 			public Slot next() {
 				return inventory.getSlot(i++);
+			}
+		};
+	}
+
+	@Override
+	public VirtualCraftingInventory lt$getVirtualCraftingInventory() {
+		return new VirtualCraftingInventory() {
+			@Override
+			public int getWidth() {
+				return InventoryMenuMixin.this.getGridWidth();
+			}
+
+			@Override
+			public int getHeight() {
+				return InventoryMenuMixin.this.getGridHeight();
+			}
+
+			@Override
+			public Slot getCraftingSlot(int num) {
+				assertSlot(num, 0, getSize());
+				return InventoryMenuMixin.this.getSlot(CRAFT_SLOT_START+num);
+			}
+
+			@Override
+			public Slot getResultSlot() {
+				return InventoryMenuMixin.this.getSlot(RESULT_SLOT);
 			}
 		};
 	}
