@@ -123,11 +123,14 @@ public abstract class LegacyAbstractFurnaceScreen<T extends AbstractFurnaceMenu>
 		if (this.menu.isLit()) {
 			int k = 14;
 			int magic = 10;
-			int l = Mth.ceil(this.menu.getLitProgress() * (14.0F*magic)-1) + 1;
+			int l = Mth.ceil(this.menu.getLitProgress() * (209.0F)) + 1;
 			guiGraphics.pose().pushPose();
-			guiGraphics.pose().scale(1, (float) 1 / 10, 1); // 231 144
-			guiGraphics.pose().scale(1.5f, 1.5f, 1.5f);
-			guiGraphics.blitSprite(this.litProgressSprite, 14, 14*magic, 0, 140 - l, leftPos + 77, topPos + 480 + 14 - l, 14, l);
+			//guiGraphics.pose().scale(1, (float) 1 / 10, 1); // 231 144
+			//guiGraphics.pose().scale(1.5f, 1.5f, 1.5f);
+			guiGraphics.pose().scale(1, (float) 1 / 10, 1);
+			guiGraphics.pose().translate(0-0.666667, 0, 0);
+			guiGraphics.blitSprite(this.litProgressSprite, 20, 210, 0, 210-l, leftPos+77, topPos*10+460+210-l, 20, l);
+			//guiGraphics.blitSprite(this.litProgressSprite, 14, 14*magic, 0, 140 - l, (int)(leftPos*1.5) + 16, ((int)(topPos*1.5)) + 480 + 14 - l, 14, l);
 			guiGraphics.pose().popPose();
 		}
 
