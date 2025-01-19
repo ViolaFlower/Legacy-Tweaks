@@ -19,20 +19,18 @@ import java.util.function.Function;
 /// @see StateSwitchingButton
 public class LegacyTabButton extends StateSwitchingButton {
     public final Function<LegacyTabButton, Renderable> icon;
-    private final Consumer<LegacyTabButton> onPress;
+    public final Consumer<LegacyTabButton> onPress;
     protected int selectedTabIndex;
     public LegacyWidgetSprites widgets;
     public final Component text;
-    public int tabIndex;
 
-    public LegacyTabButton(int x, int y, int width, int height, boolean isStateTriggered, int selectedTabIndex, int tabIndex, Component text, LegacyWidgetSprites sprites, Function<LegacyTabButton, Renderable> icon, Consumer<LegacyTabButton> onPress) {
+    public LegacyTabButton(int x, int y, int width, int height, boolean isStateTriggered, int selectedTabIndex, Component text, LegacyWidgetSprites sprites, Function<LegacyTabButton, Renderable> icon, Consumer<LegacyTabButton> onPress) {
         super(x, y, width, height, isStateTriggered);
         this.icon = icon;
         this.onPress = onPress;
         this.selectedTabIndex = selectedTabIndex;
         this.text = text;
         this.isStateTriggered = isStateTriggered;
-        this.tabIndex = tabIndex;
         this.initTextureValues(sprites);
     }
 
@@ -93,6 +91,11 @@ public class LegacyTabButton extends StateSwitchingButton {
 
     @Override
     public void onClick(double mouseX, double mouseY) {
+        isStateTriggered = !isStateTriggered;
+        onPress.accept(this);
+    }
+
+    public void onPress() {
         isStateTriggered = !isStateTriggered;
         onPress.accept(this);
     }

@@ -32,12 +32,14 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyTabButton;
+import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyTabListing;
 import xyz.violaflower.legacy_tweaks.client.gui.element.LegacyWidgetSprites;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.LegacyAutoCraftingScreen;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.LegacyInventoryScreen;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -49,7 +51,7 @@ public class LegacyRecipeBookCraftingScreen extends LegacyAutoCraftingScreen<Inv
     private static float staticLeftPos;
     private static float staticTopPos;
     public ClientRecipeBook book;
-    public final List<LegacyTabButton> tabs = new ArrayList<>();
+    public LegacyTabListing tabs = new LegacyTabListing();
     public LegacyTabButton selectedTab;
     protected RecipeBookMenu<?, ?> menu;
     private final RecipeBookPage recipeBookPage = new RecipeBookPage();
@@ -65,7 +67,6 @@ public class LegacyRecipeBookCraftingScreen extends LegacyAutoCraftingScreen<Inv
         this.parent = parent;
         staticLeftPos = this.leftPos - (useSmallCrafting() ? 36.5f : 0f);
         staticTopPos = this.topPos;
-
     }
 
     protected void init(Minecraft minecraft, RecipeBookMenu<?, ?> menu) {
@@ -76,34 +77,34 @@ public class LegacyRecipeBookCraftingScreen extends LegacyAutoCraftingScreen<Inv
     }
 
     public void initBook() {
-        this.tabs.clear();
+        this.tabs.tabs.clear();
         createTabs();
         this.recipeBookPage.init(this.minecraft, (int) this.leftPos, (int) this.topPos);
 //        this.recipeBookPage.addListener(this);
         this.selectedTab.setStateTriggered(true);
         setVisible();
         this.updateCollections(false);
-        this.createTabs1();
+        this.createTabs();
         this.updateTabs();
     }
 
     private void createTabs() {
-        for(RecipeBookCategories recipeBookCategories : RecipeBookCategories.getCategories(RecipeBookType.CRAFTING)) {
-            List<RecipeBookCategories> categoryIndex = RecipeBookCategories.getCategories(RecipeBookType.CRAFTING);
-            for (int i = 0; i == categoryIndex.size(); i++) {
-                Function<LegacyTabButton, Renderable> icon = LegacyTabButton.createIconItem(recipeBookCategories.getIconItems().get(i));
-                int xPos = (int) (this.leftPos - 20) + (i * 20);
-                this.tabs.add(new LegacyTabButton(xPos, (int) this.topPos - 20, 101, 66, false, i == 0 ? 0 : i == categoryIndex.getLast().hashCode() ? 2 : 1, categoryIndex.indexOf(i), this.title, this.sprites, icon, b -> changeTab()));
-            }
-        }
+        List<RecipeBookCategories> categoryIndex = RecipeBookCategories.getCategories(RecipeBookType.CRAFTING);
+        this.tabs.createMultipleTabs(7, (int) this.leftPos, (int) this.topPos, 20, 20, Component.empty(), sprites, createIcons(categoryIndex.size()), tabs -> updateTabs());
     }
 
-    private void createTabs1() {
-        this.tabs.add(new LegacyTabButton((int) this.leftPos, (int) this.topPos - 20, 101, 66, false, 1, 0, this.title, this.sprites, LegacyTabButton.createIconItem(ItemStack.EMPTY), b -> changeTab()));
+    private List<Function<LegacyTabButton, Renderable>> createIcons(int categoryIndex) {
+        List<Function<LegacyTabButton, Renderable>> icons = new ArrayList<>(List.of());
+        for(RecipeBookCategories recipeBookCategories : RecipeBookCategories.getCategories(RecipeBookType.CRAFTING)) {
+            for (int i = 0; i <= categoryIndex; i++) {
+                icons.add(LegacyTabButton.createIconItem(recipeBookCategories.getIconItems().get(i)));
+            }
+        }
+        return icons;
     }
 
     private RecipeBookCategories getCategory() {
-        return RecipeBookCategories.getCategories(RecipeBookType.CRAFTING).get(this.tabs.get(this.selectedTab.tabIndex).tabIndex);
+        return RecipeBookCategories.getCategories(RecipeBookType.CRAFTING).get(this.tabs.selectedIndex);
     }
 
     protected void setVisible() {
@@ -202,7 +203,7 @@ public class LegacyRecipeBookCraftingScreen extends LegacyAutoCraftingScreen<Inv
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         super.renderBg(guiGraphics, partialTick, mouseX, mouseY);
-        for(LegacyTabButton recipeBookTabButton : this.tabs) {
+        for(LegacyTabButton recipeBookTabButton : this.tabs.tabs) {
             recipeBookTabButton.render(guiGraphics, mouseX, mouseY, partialTick);
         }
     }
