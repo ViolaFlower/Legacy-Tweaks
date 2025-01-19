@@ -1,6 +1,7 @@
 package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory;
 
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
@@ -16,6 +17,7 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
 import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.crafting.LegacyRecipeBookCraftingScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.client.screen.ScreenUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
@@ -131,11 +133,12 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 			if (this.leftPos == fjd) this.leftPos = fje;
 			if (showRecipeBook()) {
 				this.addRenderableWidget(new ImageButton(this.leftPos + 160 - classicCraftingOffset - noOffhandOffset, this.topPos + 78 - noOffhandAndClassicCraftingOffset, 19, 18, RecipeBookComponent.RECIPE_BUTTON_SPRITES, button -> {
-					this.recipeBookComponent.toggleVisibility();
-					this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth - 39);
-					if (this.leftPos == fjd) this.leftPos = fje;
-					button.setPosition(this.leftPos + 160 - classicCraftingOffset - noOffhandOffset, this.topPos + 78 - noOffhandAndClassicCraftingOffset);
-					this.buttonClicked = true;
+//					this.recipeBookComponent.toggleVisibility();
+//					this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth - 39);
+//					if (this.leftPos == fjd) this.leftPos = fje;
+//					button.setPosition(this.leftPos + 160 - classicCraftingOffset - noOffhandOffset, this.topPos + 78 - noOffhandAndClassicCraftingOffset);
+//					this.buttonClicked = true;
+					this.minecraft.setScreen(new LegacyRecipeBookCraftingScreen(this.minecraft.player, this));
 				}));
 				this.addWidget(this.recipeBookComponent);
 			}
