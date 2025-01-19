@@ -25,7 +25,7 @@ public class LegacyQuickCraftingScreen<T extends AbstractContainerMenu & Craftin
 		{
 			int invXo = 0;
 			int invYo = 0;
-			for (Slot slot : menu.lt$getVirtualInventory().iterateInventorySlots()) {
+			for (Slot slot : menu.lt$getVirtualPlayerInventory().iterateInventorySlots()) {
 				if (!(slot instanceof SlotExtension extension)) continue;
 				extension.lt$setVisualX(553f / 3f + invXo * 16);
 				extension.lt$setVisualY(366f / 3f + invYo * 16);
@@ -35,14 +35,14 @@ public class LegacyQuickCraftingScreen<T extends AbstractContainerMenu & Craftin
 					invYo++;
 				}
 			}
-			for (Slot slot : menu.lt$getVirtualInventory().iterateHotbarSlots()) {
+			for (Slot slot : menu.lt$getVirtualPlayerInventory().iterateHotbarSlots()) {
 				if (!(slot instanceof SlotExtension extension)) continue;
 				extension.lt$setVisualX(553f / 3f + invXo * 16);
 				extension.lt$setVisualY(533f / 3f);
 				i++;
 				invXo++;
 			}
-			menu.lt$getVirtualInventory().iterateSlots().forEach(f -> ((SlotExtension)f).lt$setSize(14 + 1/3f));
+			menu.lt$getVirtualPlayerInventory().iterateSlots().forEach(f -> ((SlotExtension)f).lt$setSize(14 + 1 / 3f));
 		}//554 534
 		return menu;
 	}

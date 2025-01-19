@@ -18,7 +18,7 @@ public abstract class CraftingMenuMixin extends RecipeBookMenu<CraftingInput, Cr
 	}
 
 	@Override
-	public VirtualPlayerInventory lt$getVirtualInventory() {
+	public VirtualPlayerInventory lt$getVirtualPlayerInventory() {
 		return new VirtualPlayerInventory() {
 			private void assertSlot(int slot, int min, int max) {
 				if (slot >= min && slot < max) return;
@@ -61,7 +61,7 @@ public abstract class CraftingMenuMixin extends RecipeBookMenu<CraftingInput, Cr
 
 	@Unique
 	private Iterator<Slot> createInventoryIterator() {
-		VirtualPlayerInventory inventory = lt$getVirtualInventory();
+		VirtualPlayerInventory inventory = lt$getVirtualPlayerInventory();
 		return new Iterator<>() {
 			int i = 0;
 			@Override
@@ -77,7 +77,7 @@ public abstract class CraftingMenuMixin extends RecipeBookMenu<CraftingInput, Cr
 	}
 	@Unique
 	private Iterator<Slot> createHotbarIterator() {
-		VirtualPlayerInventory inventory = lt$getVirtualInventory();
+		VirtualPlayerInventory inventory = lt$getVirtualPlayerInventory();
 		return new Iterator<>() {
 			int i = 0;
 			@Override
@@ -93,7 +93,7 @@ public abstract class CraftingMenuMixin extends RecipeBookMenu<CraftingInput, Cr
 	}
 	@Unique
 	private Iterator<Slot> createIterator() {
-		VirtualPlayerInventory inventory = lt$getVirtualInventory();
+		VirtualPlayerInventory inventory = lt$getVirtualPlayerInventory();
 		return new Iterator<>() {
 			int i = 0;
 			@Override
