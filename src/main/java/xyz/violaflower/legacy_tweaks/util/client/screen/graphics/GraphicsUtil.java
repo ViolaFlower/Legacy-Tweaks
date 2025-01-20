@@ -184,9 +184,13 @@ public class GraphicsUtil {
     }
 
     static void renderItem(GuiGraphics guiGraphics, SlotExtension slot, @Nullable LivingEntity entity, @Nullable Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
+        renderItem(guiGraphics, slot.lt$getSize(), entity, level, stack, x, y, seed, guiOffset);
+    }
+
+    public static void renderItem(GuiGraphics guiGraphics, float scale_, @Nullable LivingEntity entity, @Nullable Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
         if (!stack.isEmpty()) {
-            float scale = (slot.lt$getSize() * (Tweaks.LEGACY_UI.legacyContainerScreenTweak.smallerItemSizes.isOn() ? 0.85f : 1f));
-            float normalizedScale = slot.lt$getSize() / 16;
+            float scale = (scale_ * (Tweaks.LEGACY_UI.legacyContainerScreenTweak.smallerItemSizes.isOn() ? 0.85f : 1f));
+            float normalizedScale = scale_ / 16;
             BakedModel bakedmodel = minecraft.getItemRenderer().getModel(stack, level, entity, seed);
             PoseStack pose = guiGraphics.pose();
             pose.pushPose();
@@ -217,7 +221,6 @@ public class GraphicsUtil {
 
             pose.popPose();
         }
-
     }
 
     public static void renderFloatingItem(AbstractContainerScreen screen, float scale, GuiGraphics guiGraphics, ItemStack stack, int x, int y, String text) {

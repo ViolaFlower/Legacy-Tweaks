@@ -50,6 +50,8 @@
     "client.tweak.legacy_ui.hud.scoreboard.GuiMixin",
     "client.tweak.legacy_ui.hud.vignette.GuiMixin",
     "client.tweak.legacy_ui.screen.container.AbstractContainerScreenMixin",
+    "client.tweak.legacy_ui.screen.container.RecipeBookComponentAccessor",
+    "client.tweak.legacy_ui.screen.container.RecipeBookPageAccessor",
     "client.tweak.legacy_ui.screen.container.container_screen.MenuScreenMixin",
     "client.tweak.legacy_ui.screen.container.inventory_screen.MinecraftMixin",
     "client.tweak.legacy_ui.screen.pause_screen.MinecraftMixin",

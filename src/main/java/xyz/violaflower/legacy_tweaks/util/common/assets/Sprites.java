@@ -37,6 +37,7 @@ public interface Sprites {
     ResourceLocation SMALL_CRAFTING_1080 = ModAsset.guiLocation("container/crafting_interface_small_1080p.png");
     ResourceLocation LARGE_CRAFTING_1080 = ModAsset.guiLocation("container/crafting_interface_large_1080p.png");
     ResourceLocation CRAFTING_BASIS = ModAsset.guiLocation("container/crafting3x3basis.png");
+    ResourceLocation CRAFTING_SELECTED = ModAsset.guiLocation("container/crafting_highlight_l_small.png");
 
     ResourceLocation CRAFTING_TAB_CENTER = ModAsset.getResourceLocation("container/crafting_tab_center");
     ResourceLocation CRAFTING_TAB_LEFT_SIDE = ModAsset.getResourceLocation("container/crafting_tab_left_side");
