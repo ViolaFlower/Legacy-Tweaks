@@ -184,12 +184,16 @@ public class GraphicsUtil {
     }
 
     static void renderItem(GuiGraphics guiGraphics, SlotExtension slot, @Nullable LivingEntity entity, @Nullable Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
-        renderItem(guiGraphics, slot.lt$getSize(), entity, level, stack, x, y, seed, guiOffset);
+        renderItem(guiGraphics, slot.lt$getSize(), entity, level, stack, x, y, seed, guiOffset, Tweaks.LEGACY_UI.legacyContainerScreenTweak.smallerItemSizes.isOn());
     }
 
-    public static void renderItem(GuiGraphics guiGraphics, float scale_, @Nullable LivingEntity entity, @Nullable Level level, ItemStack stack, int x, int y, int seed, int guiOffset) {
+    public static void renderHotbarItem(GuiGraphics guiGraphics, @Nullable LivingEntity entity, ItemStack stack, int x, int y, int seed) {
+        renderItem(guiGraphics, 16, entity, minecraft.level, stack, x, y, seed, 0, Tweaks.LEGACY_UI.guiHudTweaks.hotbarTweaks.smallerItemIcons.isOn());
+    }
+
+    public static void renderItem(GuiGraphics guiGraphics, float scale_, @Nullable LivingEntity entity, @Nullable Level level, ItemStack stack, int x, int y, int seed, int guiOffset, boolean useSmallScale) {
         if (!stack.isEmpty()) {
-            float scale = (scale_ * (Tweaks.LEGACY_UI.legacyContainerScreenTweak.smallerItemSizes.isOn() ? 0.85f : 1f));
+            float scale = (scale_ * (useSmallScale ? 0.85f : 1f));
             float normalizedScale = scale_ / 16;
             BakedModel bakedmodel = minecraft.getItemRenderer().getModel(stack, level, entity, seed);
             PoseStack pose = guiGraphics.pose();

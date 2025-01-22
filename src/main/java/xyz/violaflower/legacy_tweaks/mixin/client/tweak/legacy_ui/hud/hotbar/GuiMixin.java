@@ -2,11 +2,14 @@ package xyz.violaflower.legacy_tweaks.mixin.client.tweak.legacy_ui.hud.hotbar;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.Util;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,6 +23,7 @@ import xyz.violaflower.legacy_tweaks.helper.tweak.legacy_ui.candy.text.TextHelpe
 import xyz.violaflower.legacy_tweaks.helper.tweak.legacy_ui.hud.HudHelper;
 import xyz.violaflower.legacy_tweaks.helper.tweak.legacy_ui.hud.PaperDollHelper;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
+import xyz.violaflower.legacy_tweaks.util.client.screen.graphics.GraphicsUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
 @Mixin(value = Gui.class, priority = -999999999)
@@ -51,6 +55,11 @@ public class GuiMixin {
             return;
         }
         HudHelper.end(guiGraphics, HudHelper.guiHudTweaks.hotbarTweaks.legacyHotbar.isOn());
+    }
+
+    @WrapOperation(method = "renderSlot", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;III)V", ordinal = 0))
+    private void changeItemScale(GuiGraphics instance, LivingEntity entity, ItemStack stack, int x, int y, int seed, Operation<Void> original) {
+        GraphicsUtil.renderHotbarItem(instance, entity, stack, x, y, seed);
     }
 
 //    @Inject(method = "renderItemHotbar", at = @At("HEAD"), cancellable = true)

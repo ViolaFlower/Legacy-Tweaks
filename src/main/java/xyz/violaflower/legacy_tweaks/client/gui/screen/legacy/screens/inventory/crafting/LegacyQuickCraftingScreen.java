@@ -22,6 +22,7 @@ import xyz.violaflower.legacy_tweaks.client.gui.extention.VirtualCraftingInvento
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.LegacyAbstractContainerScreen;
 import xyz.violaflower.legacy_tweaks.mixin.client.tweak.legacy_ui.screen.container.RecipeBookComponentAccessor;
 import xyz.violaflower.legacy_tweaks.mixin.client.tweak.legacy_ui.screen.container.RecipeBookPageAccessor;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.client.screen.graphics.GraphicsUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
@@ -125,7 +126,7 @@ public class LegacyQuickCraftingScreen<T extends AbstractContainerMenu & Craftin
 					guiGraphics.blit(Sprites.CRAFTING_SELECTED, 0-6, 0-6, 0, 0, 36, 36, 36, 36);
 					guiGraphics.pose().popPose();
 				}
-				GraphicsUtil.renderItem(guiGraphics, 73/3f, null, minecraft.level, resultItem, 0, 0, 0, 0);
+				GraphicsUtil.renderItem(guiGraphics, 73/3f, null, minecraft.level, resultItem, 0, 0, 0, 0, Tweaks.LEGACY_UI.legacyContainerScreenTweak.smallerItemSizes.isOn());
 				//guiGraphics.pose().scale(73/16f/3f*0.85f, 73/16f/3f*0.85f, 73/16f/3f*0.85f);
 				//guiGraphics.renderItem(resultItem, 0, 0);
 				guiGraphics.pose().popPose();

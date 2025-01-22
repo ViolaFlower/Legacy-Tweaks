@@ -100,6 +100,7 @@ public class LegacyUI extends Tweak {
 			public final BooleanOption legacyExperienceText;
 			public final BooleanOption fastHealthBlink;
 			public final BooleanOption legacyItemOverlay;
+			public final BooleanOption smallerItemIcons;
 
 			public HotbarTweaks() {
 				super("hotbarTweaks", true);
@@ -112,6 +113,7 @@ public class LegacyUI extends Tweak {
 				useLegacyHotbarTexture = addBooleanOption("useLegacyHotbarTexture", true);
 				fastHealthBlink = addBooleanOption("fastHealthBlink", true);
 				legacyItemOverlay = addBooleanOption("legacyItemOverlay", true);
+				smallerItemIcons = addBooleanOption("smallerItemIcons", true);
 			}
 		}
 
