@@ -1,0 +1,55 @@
+{
+  "imports": [
+    {
+      "type": "importActionsFrom",
+      "file": "legacy_tweaks:ltguis/layoututils.json"
+    },
+    {
+      "type": "importActionsFrom",
+      "file": "legacy_tweaks:ltguis/simplebackground.json"
+    },
+    {
+      "type": "importActionsFrom",
+      "file": "legacy_tweaks:ltguis/simple-layout-screen.json"
+    }
+  ],
+  "actions": {
+    "addButtons": [
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.optionsScreen.gameOptions", "@openNotImplementedScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.optionsScreen.audio", "@openNotImplementedScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.optionsScreen.graphics", "@openGraphicsScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.optionsScreen.ui", "@openNotImplementedScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.configScreen.title", "@openTweaksScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayoutConditional",
+        "args": ["?_internal.customization.showJavaOptionsButton", "gui.legacy_tweaks.optionsScreen.javaSettings", "@openJavaOptionsScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.optionsScreen.reset", "@openNotImplementedScreen"]
+      }
+    ]
+  }
+}
