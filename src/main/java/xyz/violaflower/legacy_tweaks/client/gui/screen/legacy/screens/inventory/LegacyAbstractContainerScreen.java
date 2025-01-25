@@ -1,5 +1,6 @@
 package xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory;
 
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -29,5 +30,10 @@ public abstract class LegacyAbstractContainerScreen<T extends AbstractContainerM
 	// 16px or whatever is 1.0
 	public float lt$scale() {
 		return 1.25f;
+	}
+
+	@Override
+	public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+		this.renderBg(guiGraphics, partialTick, mouseX, mouseY);
 	}
 }

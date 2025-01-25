@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.LegacyContainerScreen;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.LegacyFurnaceScreen;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.LegacyShulkerBoxScreen;
 import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.screens.inventory.crafting.LegacyQuickCraftingScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 
@@ -43,6 +44,7 @@ public class MenuScreenMixin {
             register(MenuType.GENERIC_9x4, LegacyContainerScreen::new);
             register(MenuType.GENERIC_9x5, LegacyContainerScreen::new);
             register(MenuType.GENERIC_9x6, LegacyContainerScreen::new);
+            register(MenuType.SHULKER_BOX, LegacyShulkerBoxScreen::new);
         } else {
             register(MenuType.GENERIC_9x1, ContainerScreen::new);
             register(MenuType.GENERIC_9x2, ContainerScreen::new);
@@ -50,6 +52,7 @@ public class MenuScreenMixin {
             register(MenuType.GENERIC_9x4, ContainerScreen::new);
             register(MenuType.GENERIC_9x5, ContainerScreen::new);
             register(MenuType.GENERIC_9x6, ContainerScreen::new);
+            register(MenuType.SHULKER_BOX, ShulkerBoxScreen::new);
         }
         register(MenuType.GENERIC_3x3, DispenserScreen::new);
         register(MenuType.CRAFTER_3x3, CrafterScreen::new);
@@ -65,7 +68,6 @@ public class MenuScreenMixin {
         register(MenuType.LECTERN, LecternScreen::new);
         register(MenuType.LOOM, LoomScreen::new);
         register(MenuType.MERCHANT, MerchantScreen::new);
-        register(MenuType.SHULKER_BOX, ShulkerBoxScreen::new);
         register(MenuType.SMITHING, SmithingScreen::new);
         register(MenuType.SMOKER, SmokerScreen::new);
         register(MenuType.CARTOGRAPHY_TABLE, CartographyTableScreen::new);

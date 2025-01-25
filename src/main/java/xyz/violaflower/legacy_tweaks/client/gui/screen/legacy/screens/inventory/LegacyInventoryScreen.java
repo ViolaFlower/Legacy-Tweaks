@@ -170,11 +170,6 @@ public class LegacyInventoryScreen extends LegacyEffectRenderingInventoryScreen<
 	}
 
 	@Override
-	public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-		this.renderBg(guiGraphics, partialTick, mouseX, mouseY);
-	}
-
-	@Override
 	protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
 		int i = this.leftPos;
 		int j = this.topPos;

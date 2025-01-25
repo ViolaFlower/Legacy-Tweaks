@@ -71,9 +71,4 @@ public class LegacyContainerScreen extends LegacyAbstractContainerScreen<ChestMe
         guiGraphics.drawString(this.font, this.title, this.titleLabelX + 6, yPos + containerOffset, 4210752, false);
         guiGraphics.drawString(this.font, Lang.Container.INVENTORY.getString(), this.titleLabelX + 6, yPos + inventoryOffset, 0x404040, false);
     }
-
-    @Override
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        this.renderBg(guiGraphics, partialTick, mouseX, mouseY);
-    }
 }
