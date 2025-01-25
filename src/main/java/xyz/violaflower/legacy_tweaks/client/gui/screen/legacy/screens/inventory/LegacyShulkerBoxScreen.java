@@ -9,7 +9,9 @@ import xyz.violaflower.legacy_tweaks.client.gui.extention.SlotExtension;
 import xyz.violaflower.legacy_tweaks.util.client.screen.graphics.GraphicsUtil;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 import xyz.violaflower.legacy_tweaks.util.common.lang.Lang;
+import net.minecraft.client.gui.screens.inventory.ShulkerBoxScreen;
 
+/// @see ShulkerBoxScreen
 public class LegacyShulkerBoxScreen extends LegacyAbstractContainerScreen<ShulkerBoxMenu> {
     public LegacyShulkerBoxScreen(ShulkerBoxMenu menu, Inventory playerInventory, Component title) {
         super(manipulateSlots(menu), playerInventory, title);
