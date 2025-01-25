@@ -45,9 +45,8 @@ public abstract class ChatComponentMixin {
             ci.cancel();
             return;
         }
-        int hudScale = Tweaks.LEGACY_UI.guiHudTweaks.generalTweaks.hudScale.get();
         float posX = HudHelper.getChatScreenSpacing();
-        float posY = -95;
+        float posY = -72;
         guiGraphics.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         HudHelper.start(guiGraphics, HudHelper.guiHudTweaks.chatTweaks.legacyChat.isOn(), HudHelper.guiHudTweaks.chatTweaks.applyHudScaleChat.isOn(), HudHelper.guiHudTweaks.chatTweaks.applyScreenSpacingChat.isOn(), false, true, 1f, posX, posY, 2f, 1f);
     }
