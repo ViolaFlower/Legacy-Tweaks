@@ -20,7 +20,7 @@ Consider joining the [ViolaFlower Discord](https://discord.com/invite/dsBrDdJysn
 - And just hang out with the rest of our community!
 
 ## ❓ Why Choose Legacy Tweaks Over Legacy4J?
-Legacy4J was built as an all-in-one LCE recreation. While on paper, that sounds like a good idea, in reality, it causes problems. Legacy4J is bloated, not customizable, and can cause issues with mod compatibility.  
+Legacy4J was built as an all-in-one LCE recreation. While on paper, that sounds like a good idea, in reality, it causes problems. Legacy4J is bloated, and can cause issues with mod compatibility.  
 Legacy Tweaks fixes these problems by being built with customizability and mod compatibility in mind.
 
 Overall, Legacy Tweaks was designed to address the issues that plagued Legacy4J from the beginning.
@@ -79,7 +79,7 @@ Want to enjoy Legacy Tweaks with your friends? Use my code ``raamviot50`` for 25
 
 ### Controlify
 ![Controlify Banner](https://raw.githubusercontent.com/isXander/Controlify/1.19.x/dev/assets/controlify-banner.png)
-- Controlify is the best mod for controller support! With explicit Steam Deck support, gyro controls, and more, it is compatible with Legacy Tweaks. Connecting a controller is as simple as plugging it into your PC!
+- Controlify is the best mod for controller support! With explicit Steam Deck support, gyro controls, and more, it is compatible with Legacy Tweaks. Connecting a controller is as simple as plugging it into your PC! It even has a Legacy Console Edition style mode for more accuracy!
 
   ### [Download Here!](https://modrinth.com/mod/controlify)
 
@@ -120,8 +120,6 @@ WIP
 - LimeGradient
 
 ### Developers
-
-- Capeling
 - DexrnZacAttack
 - icanttellyou
 - Jab125
