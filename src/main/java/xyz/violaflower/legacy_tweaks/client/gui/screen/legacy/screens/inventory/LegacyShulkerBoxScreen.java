@@ -14,7 +14,7 @@ public class LegacyShulkerBoxScreen extends LegacyAbstractContainerScreen<Shulke
     public LegacyShulkerBoxScreen(ShulkerBoxMenu menu, Inventory playerInventory, Component title) {
         super(manipulateSlots(menu), playerInventory, title);
         this.imageWidth = 430 / 2;
-        this.imageHeight = (282 / 2) + (3 * 42);
+        this.imageHeight = 417 / 2;
     }
 
     private static ShulkerBoxMenu manipulateSlots(ShulkerBoxMenu shulkerBoxMenu) {
@@ -24,10 +24,10 @@ public class LegacyShulkerBoxScreen extends LegacyAbstractContainerScreen<Shulke
                 int slotOffset = (21 * 3) /2;
                 if (i <= (9 * 3) - 1) {
                     extension.lt$setVisualX(slot.x * 18.66667f / 16 + 4.66667f);
-                    extension.lt$setVisualY(slot.y * 18.66667f / 16 + 5.6f + slotOffset);
+                    extension.lt$setVisualY(slot.y * 18.66667f / 16 + 5.6f);
                 } else if (i > ((9 * 3) - 1) && i <= (9 * 3) + 36) {
                     extension.lt$setVisualX(slot.x * 18.66667f / 16 + 4.66667f);
-                    extension.lt$setVisualY(slot.y * 18.66667f / 16 + 4.56667f + (isHotbarSlot(i) ? 6.46667f : 4.54444f) + slotOffset - 0.33333f);
+                    extension.lt$setVisualY(slot.y * 18.66667f / 16 + 4.56667f + (isHotbarSlot(i) ? 6.46667f : 4.54444f) - 0.33333f);
                 }
                 extension.lt$setSize(19);
             }
@@ -48,15 +48,15 @@ public class LegacyShulkerBoxScreen extends LegacyAbstractContainerScreen<Shulke
 
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         int xPos = (this.width - this.imageWidth) / 2;
-        int yPos = ((this.height - this.imageHeight) / 2) + (21 * 3)/2;
-        GraphicsUtil.blit(guiGraphics, Sprites.CHEST_SMALL, xPos, yPos, this.imageWidth, 208.5f, 0, 0, 430, 417, 440, 440);
+        int yPos = (this.height - this.imageHeight) / 2;
+        GraphicsUtil.blit(guiGraphics, Sprites.CHEST_SMALL, xPos, yPos, this.imageWidth, 417f/2f, 0, 0, 430, 417, 440, 440);
     }
 
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        int yPos = ((this.height - this.imageHeight) / 2) + (21 * 3);
-        int containerOffset = -105 + (10 * 3);
-        int inventoryOffset = containerOffset + (21 * 3) + 19;
+        int yPos = ((this.height - this.imageHeight) / 2);
+        int containerOffset = -74;
+        int inventoryOffset = containerOffset + 82;
         guiGraphics.drawString(this.font, this.title, this.titleLabelX + 6, yPos + containerOffset, 4210752, false);
         guiGraphics.drawString(this.font, Lang.Container.INVENTORY.getString(), this.titleLabelX + 6, yPos + inventoryOffset, 0x404040, false);
     }
