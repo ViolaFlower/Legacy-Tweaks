@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import xyz.violaflower.legacy_tweaks.helper.tweak.legacy_ui.hud.HudHelper;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.client.screen.ScreenUtil;
 
 @Mixin(value = ChatComponent.class, priority = -999999999)
@@ -32,7 +33,7 @@ public abstract class ChatComponentMixin {
 
     @ModifyArg(method = "render",at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;fill(IIIII)V", ordinal = 0), index = 4)
     private int changeChatBackground(int i) {
-        if (HudHelper.guiHudTweaks.chatTweaks.grayChatBackground.isOn()) return 0x323232 + i;
+        if (HudHelper.guiHudTweaks.chatTweaks.grayChatBackground.isOn()) return 0x323232 + i; // TODO make color data-driven
         return i;
     }
 
@@ -44,8 +45,10 @@ public abstract class ChatComponentMixin {
             ci.cancel();
             return;
         }
+        int hudScale = Tweaks.LEGACY_UI.guiHudTweaks.generalTweaks.hudScale.get();
         float posX = HudHelper.getChatScreenSpacing();
         float posY = -95;
+        guiGraphics.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         HudHelper.start(guiGraphics, HudHelper.guiHudTweaks.chatTweaks.legacyChat.isOn(), HudHelper.guiHudTweaks.chatTweaks.applyHudScaleChat.isOn(), HudHelper.guiHudTweaks.chatTweaks.applyScreenSpacingChat.isOn(), false, true, 1f, posX, posY, 2f, 1f);
     }
 
