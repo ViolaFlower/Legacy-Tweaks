@@ -13,7 +13,6 @@
     "client.accessor.FogDataAccessor",
     "client.accessor.GuiGraphicsAccessor",
     "client.accessor.PostChainAccessor",
-    "client.accessor.ScreenAccessor",
     "client.accessor.TextureStateShardAccessor",
     "client.networking.NetworkRegistryMixin",
     "client.screen.AbstractContainerScreenMixin",
