@@ -12,6 +12,7 @@
     "client.accessor.CompositeStateAccessor",
     "client.accessor.FogDataAccessor",
     "client.accessor.GuiGraphicsAccessor",
+    "client.accessor.MipmapGeneratorAccessor",
     "client.accessor.PostChainAccessor",
     "client.accessor.TextureStateShardAccessor",
     "client.networking.NetworkRegistryMixin",

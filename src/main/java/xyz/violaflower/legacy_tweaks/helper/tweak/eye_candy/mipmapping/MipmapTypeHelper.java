@@ -9,7 +9,9 @@ import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.util.FastColor;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import xyz.violaflower.legacy_tweaks.mixin.client.accessor.MipmapGeneratorAccessor;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapTypes;
 
@@ -52,6 +54,9 @@ public class MipmapTypeHelper {
                     cir.cancel();
                 }
                 case MipmapTypes.JAVA -> {
+                    cir.setReturnValue(mipmapJava(originals, mipmapLevel));
+                    currentResourceLocation = null;
+                    cir.cancel();
                 }
             }
             // uncomment to export the generated mipmaps
@@ -153,7 +158,7 @@ public class MipmapTypeHelper {
                         for(int m = 0; m < k; ++m) {
                             int color = getColor(nativeImage, l * 2 + 1, m * 2 + 1);
                             int color2 = blend(getColor(nativeImage, l * 2, m * 2), getColor(nativeImage, l * 2 + 1, m * 2), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), bl);
-                            setColor(nativeImage2, l, m, i == 1 || i == 2 ? color : color2);
+                            setAlphaWithColor(nativeImage2, l, m, i == 1 || i == 2 ? color : color2, 255, i == 1);
                         }
                     }
                     nativeImages[i] = nativeImage2;
@@ -193,7 +198,7 @@ public class MipmapTypeHelper {
                         for(int m = 0; m < k; ++m) {
                             int color = getColor(nativeImage, l * 2 + 1, m * 2 + 1);
                             int color2 = blend(getColor(nativeImage, l * 2 + 0, m * 2 + 0), getColor(nativeImage, l * 2 + 1, m * 2 + 0), getColor(nativeImage, l * 2 + 0, m * 2 + 1), getColor(nativeImage, l * 2 + 1, m * 2 + 1), bl);
-                            setColor(nativeImage2, l, m, i == 1 ? color : color2);
+                            setAlphaWithColor(nativeImage2, l, m, i == 1 ? color : color2, 255, i == 1);
                         }
                     }
                     nativeImages[i] = nativeImage2;
@@ -235,7 +240,7 @@ public class MipmapTypeHelper {
 
                             int colorMipped3 = blend(getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), bl);
                             int colorMipped4 = blend(getColor(nativeImage, l * 2, m * 2), getColor(nativeImage, l * 2 + 1, m * 2), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), bl);
-                            setColor(nativeImage2, l, m, i == 1 ? colorMipped1 : (i == 2 ? colorMipped1 : (i == 3 ? colorMipped3 : colorMipped4)));
+                            setAlphaWithColor(nativeImage2, l, m, i == 1 ? colorMipped1 : (i == 2 ? colorMipped1 : (i == 3 ? colorMipped3 : colorMipped4)), 255, i == 1);
                         }
                     }
                     nativeImages[i] = nativeImage2;
@@ -276,7 +281,7 @@ public class MipmapTypeHelper {
 
                     for(int l = 0; l < j; ++l) {
                         for(int m = 0; m < k; ++m) {
-                            setColor(nativeImage2, l, m, blend(getColor(nativeImage, l * 2 + 0, m * 2 + 0), getColor(nativeImage, l * 2 + 1, m * 2 + 0), getColor(nativeImage, l * 2 + 0, m * 2 + 1), getColor(nativeImage, l * 2 + 1, m * 2 + 1), bl));
+                            setAlphaWithColor(nativeImage2, l, m, blend(getColor(nativeImage, l * 2 + 0, m * 2 + 0), getColor(nativeImage, l * 2 + 1, m * 2 + 0), getColor(nativeImage, l * 2 + 0, m * 2 + 1), getColor(nativeImage, l * 2 + 1, m * 2 + 1), bl), 255, i == 1);
                         }
                     }
 
@@ -318,59 +323,60 @@ public class MipmapTypeHelper {
      * @return Returns the new texture with blending
      */
     private static int blend(int one, int two, int three, int four, boolean checkAlpha) {
-        if (checkAlpha) {
-            float f = 0.0F;
-            float g = 0.0F;
-            float h = 0.0F;
-            float i = 0.0F;
-            if (one >> 24 != 0) {
-                f += getColorFraction(one >> 24);
-                g += getColorFraction(one >> 16);
-                h += getColorFraction(one >> 8);
-                i += getColorFraction(one >> 0);
-            }
-
-            if (two >> 24 != 0) {
-                f += getColorFraction(two >> 24);
-                g += getColorFraction(two >> 16);
-                h += getColorFraction(two >> 8);
-                i += getColorFraction(two >> 0);
-            }
-
-            if (three >> 24 != 0) {
-                f += getColorFraction(three >> 24);
-                g += getColorFraction(three >> 16);
-                h += getColorFraction(three >> 8);
-                i += getColorFraction(three >> 0);
-            }
-
-            if (four >> 24 != 0) {
-                f += getColorFraction(four >> 24);
-                g += getColorFraction(four >> 16);
-                h += getColorFraction(four >> 8);
-                i += getColorFraction(four >> 0);
-            }
-
-            f /= 4.0F;
-            g /= 4.0F;
-            h /= 4.0F;
-            i /= 4.0F;
-            int j = (int)(Math.pow((double)f, 0.45454545454545453) * 255.0);
-            int k = (int)(Math.pow((double)g, 0.45454545454545453) * 255.0);
-            int l = (int)(Math.pow((double)h, 0.45454545454545453) * 255.0);
-            int m = (int)(Math.pow((double)i, 0.45454545454545453) * 255.0);
-            if (j < 96) {
-                j = 0;
-            }
-
-            return j << 24 | k << 16 | l << 8 | m;
-        } else {
-            int n = getColorComponent(one, two, three, four, 24);
-            int o = getColorComponent(one, two, three, four, 16);
-            int p = getColorComponent(one, two, three, four, 8);
-            int q = getColorComponent(one, two, three, four, 0);
-            return n << 24 | o << 16 | p << 8 | q;
-        }
+        return MipmapGeneratorAccessor.legacyTweaks$getAlphaBlend(one, two, three, four, checkAlpha);
+//        if (checkAlpha) {
+//            float f = 0.0F;
+//            float g = 0.0F;
+//            float h = 0.0F;
+//            float i = 0.0F;
+//            if (one >> 24 != 0) {
+//                f += getColorFraction(one >> 24);
+//                g += getColorFraction(one >> 16);
+//                h += getColorFraction(one >> 8);
+//                i += getColorFraction(one >> 0);
+//            }
+//
+//            if (two >> 24 != 0) {
+//                f += getColorFraction(two >> 24);
+//                g += getColorFraction(two >> 16);
+//                h += getColorFraction(two >> 8);
+//                i += getColorFraction(two >> 0);
+//            }
+//
+//            if (three >> 24 != 0) {
+//                f += getColorFraction(three >> 24);
+//                g += getColorFraction(three >> 16);
+//                h += getColorFraction(three >> 8);
+//                i += getColorFraction(three >> 0);
+//            }
+//
+//            if (four >> 24 != 0) {
+//                f += getColorFraction(four >> 24);
+//                g += getColorFraction(four >> 16);
+//                h += getColorFraction(four >> 8);
+//                i += getColorFraction(four >> 0);
+//            }
+//
+//            f /= 4.0F;
+//            g /= 4.0F;
+//            h /= 4.0F;
+//            i /= 4.0F;
+//            int j = (int)(Math.pow((double)f, 0.45454545454545453) * 255.0);
+//            int k = (int)(Math.pow((double)g, 0.45454545454545453) * 255.0);
+//            int l = (int)(Math.pow((double)h, 0.45454545454545453) * 255.0);
+//            int m = (int)(Math.pow((double)i, 0.45454545454545453) * 255.0);
+//            if (j < 96) {
+//                j = 0;
+//            }
+//
+//            return j << 24 | k << 16 | l << 8 | m;
+//        } else {
+//            int n = getColorComponent(one, two, three, four, 24);
+//            int o = getColorComponent(one, two, three, four, 16);
+//            int p = getColorComponent(one, two, three, four, 8);
+//            int q = getColorComponent(one, two, three, four, 0);
+//            return n << 24 | o << 16 | p << 8 | q;
+//        }
     }
 
     /**
@@ -431,5 +437,13 @@ public class MipmapTypeHelper {
      */
     public static int getColor(NativeImage nativeImage, int a, int b) {
         return nativeImage.getPixelRGBA(a, b);
+    }
+
+    public static void setAlphaWithColor(NativeImage nativeImage, int x, int y, int colorRBG, int alpha, boolean alphaCondition) {
+        int alphaChanged = FastColor.ARGB32.alpha(colorRBG);
+        if (FastColor.ARGB32.alpha(colorRBG) > 0 && FastColor.ARGB32.alpha(colorRBG) < 255 && hasAlpha(nativeImage)) {
+            alphaChanged = alpha;
+        }
+        setColor(nativeImage, x, y, FastColor.ARGB32.color(alphaChanged, colorRBG));
     }
 }
