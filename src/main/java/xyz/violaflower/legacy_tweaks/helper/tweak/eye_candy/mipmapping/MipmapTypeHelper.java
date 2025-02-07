@@ -158,7 +158,7 @@ public class MipmapTypeHelper {
                         for(int m = 0; m < k; ++m) {
                             int color = getColor(nativeImage, l * 2 + 1, m * 2 + 1);
                             int color2 = blend(getColor(nativeImage, l * 2, m * 2), getColor(nativeImage, l * 2 + 1, m * 2), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), bl);
-                            setAlphaWithColor(nativeImage2, l, m, i == 1 || i == 2 ? color : color2, 255, i == 1);
+                            setColorWithAlpha(nativeImage2, l, m, i == 1 || i == 2 ? color : color2, 255, i >= 2);
                         }
                     }
                     nativeImages[i] = nativeImage2;
@@ -198,7 +198,7 @@ public class MipmapTypeHelper {
                         for(int m = 0; m < k; ++m) {
                             int color = getColor(nativeImage, l * 2 + 1, m * 2 + 1);
                             int color2 = blend(getColor(nativeImage, l * 2 + 0, m * 2 + 0), getColor(nativeImage, l * 2 + 1, m * 2 + 0), getColor(nativeImage, l * 2 + 0, m * 2 + 1), getColor(nativeImage, l * 2 + 1, m * 2 + 1), bl);
-                            setAlphaWithColor(nativeImage2, l, m, i == 1 ? color : color2, 255, i == 1);
+                            setColorWithAlpha(nativeImage2, l, m, i == 1 ? color : color2, 255, i >= 2);
                         }
                     }
                     nativeImages[i] = nativeImage2;
@@ -240,7 +240,7 @@ public class MipmapTypeHelper {
 
                             int colorMipped3 = blend(getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), bl);
                             int colorMipped4 = blend(getColor(nativeImage, l * 2, m * 2), getColor(nativeImage, l * 2 + 1, m * 2), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), bl);
-                            setAlphaWithColor(nativeImage2, l, m, i == 1 ? colorMipped1 : (i == 2 ? colorMipped1 : (i == 3 ? colorMipped3 : colorMipped4)), 255, i == 1);
+                            setColorWithAlpha(nativeImage2, l, m, i == 1 ? colorMipped1 : (i == 2 ? colorMipped1 : (i == 3 ? colorMipped3 : colorMipped4)), 255, i >= 2);
                         }
                     }
                     nativeImages[i] = nativeImage2;
@@ -281,7 +281,7 @@ public class MipmapTypeHelper {
 
                     for(int l = 0; l < j; ++l) {
                         for(int m = 0; m < k; ++m) {
-                            setAlphaWithColor(nativeImage2, l, m, blend(getColor(nativeImage, l * 2 + 0, m * 2 + 0), getColor(nativeImage, l * 2 + 1, m * 2 + 0), getColor(nativeImage, l * 2 + 0, m * 2 + 1), getColor(nativeImage, l * 2 + 1, m * 2 + 1), bl), 255, i == 1);
+                            setColorWithAlpha(nativeImage2, l, m, blend(getColor(nativeImage, l * 2 + 0, m * 2 + 0), getColor(nativeImage, l * 2 + 1, m * 2 + 0), getColor(nativeImage, l * 2 + 0, m * 2 + 1), getColor(nativeImage, l * 2 + 1, m * 2 + 1), bl), 255, i >= 2);
                         }
                     }
 
@@ -439,11 +439,11 @@ public class MipmapTypeHelper {
         return nativeImage.getPixelRGBA(a, b);
     }
 
-    public static void setAlphaWithColor(NativeImage nativeImage, int x, int y, int colorRBG, int alpha, boolean alphaCondition) {
+    public static void setColorWithAlpha(NativeImage nativeImage, int x, int y, int colorRBG, int alpha, boolean alphaCondition) {
         int alphaChanged = FastColor.ARGB32.alpha(colorRBG);
-        if (FastColor.ARGB32.alpha(colorRBG) > 0 && FastColor.ARGB32.alpha(colorRBG) < 255 && hasAlpha(nativeImage)) {
+        if (hasAlpha(nativeImage) && alphaCondition) {
             alphaChanged = alpha;
         }
-        setColor(nativeImage, x, y, FastColor.ARGB32.color(alphaChanged, colorRBG));
+        nativeImage.blendPixel(x, y, FastColor.ARGB32.color(alphaChanged, colorRBG));
     }
 }
