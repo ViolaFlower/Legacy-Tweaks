@@ -32,7 +32,7 @@ public class ScreenUtil {
         Window screenWindow = Minecraft.getInstance().getWindow();
         int lastGuiScale = screenWindow.calculateScale(0, Minecraft.getInstance().isEnforceUnicode());
         if (screenWindow.getScreenHeight() > 1080) {
-            lastGuiScale = lastGuiScale - 2;
+            lastGuiScale = lastGuiScale - 3;
 
         } else if (screenWindow.getScreenHeight() >= 720) {
             lastGuiScale = lastGuiScale - 1;
