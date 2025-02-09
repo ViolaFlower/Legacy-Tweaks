@@ -53,7 +53,9 @@ public class MipmapTypeHelper {
                     cir.cancel();
                 }
                 case MipmapTypes.JAVA -> {
+                    cir.setReturnValue(mipmapJava(originals, mipmapLevel));
                     currentResourceLocation = null;
+                    cir.cancel();
                 }
             }
             // uncomment to export the generated mipmaps
