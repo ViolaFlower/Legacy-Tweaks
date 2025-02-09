@@ -296,9 +296,10 @@ public class MipmapTypeHelper {
         NativeImage newImage = new NativeImage(original.getWidth() >> 1, original.getHeight() >> 1, false);
         int j = newImage.getWidth();
         int k = newImage.getHeight();
+        Optional<File> noAlphaFile = fromFileResource(ResourceLocation.fromNamespaceAndPath(currentResourceLocation.getNamespace(), "textures/ltmipmaps/" + currentResourceLocation.getPath() + "/no_alpha.txt"));
         for(int l = 0; l < j; ++l) {
             for (int m = 0; m < k; ++m) {
-                setColorWithAlpha(newImage, l, m, blend(getColor(original, l * 2, m * 2 + 1), getColor(original, l * 2, m * 2 + 1), getColor(original, l * 2, m * 2 + 1), getColor(original, l * 2, m * 2 + 1), bl), 255, mipmap >= 2);
+                setColorWithAlpha(newImage, l, m, blend(getColor(original, l * 2, m * 2 + 1), getColor(original, l * 2, m * 2 + 1), getColor(original, l * 2, m * 2 + 1), getColor(original, l * 2, m * 2 + 1), bl), 255, mipmap >= 2 && noAlphaFile.isEmpty());
             }
         }
         return newImage;
