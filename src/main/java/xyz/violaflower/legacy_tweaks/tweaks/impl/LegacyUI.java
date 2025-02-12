@@ -236,7 +236,7 @@ public class LegacyUI extends Tweak {
 
 			legacyPanorama = addBooleanOption("legacyPanorama", true);
 			useLegacyTitleLogo = addBooleanOption("useLegacyTitleLogo", true);
-			autoFindBestUIScale = addBooleanOption("autoFindBestUIScale", false);
+			autoFindBestUIScale = addBooleanOption("autoFindBestUIScale", true);
 			legacyTextShadows = addBooleanOption("legacyTextShadows", true);
 			legacyTextShadowOffset = addSliderOption("shadowOffset", 1, 0, 10);
 			forceDisableFineTunedUIScale = addBooleanOption("forceDisableFineTunedUIScale", true);
