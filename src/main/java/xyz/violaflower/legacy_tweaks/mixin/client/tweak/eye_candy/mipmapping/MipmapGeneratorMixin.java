@@ -33,13 +33,11 @@ public class MipmapGeneratorMixin {
     @Dynamic // this is some cursed stuff
     @Inject(method = "generateMipLevels", at = @At(value = "INVOKE", target = "Lxyz/violaflower/legacy_tweaks/helper/tweak/eye_candy/mipmapping/MipmapTypeHelper;aastoreMarker()V", ordinal = 1))
     private static void changeJavaMipmaps(NativeImage[] images, int mipmapLevels, CallbackInfoReturnable<NativeImage[]> cir, @Local(ordinal = 1) int level, @Local(ordinal = 1) NativeImage[] nativeImages) {
-        MipmapTypeHelper.maybeGetAccurateMipmapForImage(nativeImages[level - 1], level, g -> nativeImages[level] = g, MipmapTypeHelper.currentResourceLocation);
-        MipmapTypeHelper.maybeGetMipmapForLevel(level, g -> nativeImages[level] = g, MipmapTypeHelper.currentResourceLocation);
+        nativeImages[level] = MipmapTypeHelper.maybeGetMipmapForLevel(level, nativeImages[level - 1], nativeImages[level], MipmapTypeHelper.currentResourceLocation);
     }
     @Dynamic // this is some cursed stuff
     @Inject(method = "generateMipLevels", at = @At(value = "INVOKE", target = "Lxyz/violaflower/legacy_tweaks/helper/tweak/eye_candy/mipmapping/MipmapTypeHelper;aastoreMarker()V", ordinal = 2))
     private static void changeJavaMipmaps2(NativeImage[] images, int mipmapLevels, CallbackInfoReturnable<NativeImage[]> cir, @Local(ordinal = 1) int level, @Local(ordinal = 1) NativeImage[] nativeImages) {
-        MipmapTypeHelper.maybeGetAccurateMipmapForImage(nativeImages[level - 1], level, g -> nativeImages[level] = g, MipmapTypeHelper.currentResourceLocation);
-        MipmapTypeHelper.maybeGetMipmapForLevel(level, g -> nativeImages[level] = g, MipmapTypeHelper.currentResourceLocation);
+        nativeImages[level] = MipmapTypeHelper.maybeGetMipmapForLevel(level, nativeImages[level - 1], nativeImages[level], MipmapTypeHelper.currentResourceLocation);
     }
 }

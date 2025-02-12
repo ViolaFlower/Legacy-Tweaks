@@ -171,6 +171,7 @@ public interface Lang {
     {
         Translate JAVA = from("java");
         Translate DISABLED = from("disabled");
+        Translate LCE_ACCURATE = from("legacyAccurate");
 
         private static Translate from(String name)
         {

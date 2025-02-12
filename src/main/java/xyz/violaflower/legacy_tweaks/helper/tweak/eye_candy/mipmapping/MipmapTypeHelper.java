@@ -1,28 +1,24 @@
-// Legacy Mipmaps © 2025 by Permdog99 is licensed under CC BY-SA 4.0.
-// To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/4.0/
-// Modified by Permdog99 for use under Legacy Tweaks
-
 package xyz.violaflower.legacy_tweaks.helper.tweak.eye_candy.mipmapping;
 
 import com.mojang.blaze3d.platform.NativeImage;
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
-import net.minecraft.util.FastColor;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.violaflower.legacy_tweaks.mixin.client.accessor.MipmapGeneratorAccessor;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.tweaks.enums.MipmapTypes;
+import xyz.violaflower.legacy_tweaks.util.common.color.ColorRGBA;
 
 import java.io.*;
 import java.nio.file.Path;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 /**
  * Mipmap helper for creating mipmap types
  */
+
+
 public class MipmapTypeHelper {
     public static ResourceLocation currentResourceLocation;
 
@@ -52,6 +48,12 @@ public class MipmapTypeHelper {
                     currentResourceLocation = null;
                     cir.cancel();
                 }
+                case MipmapTypes.LCE_ACCURATE -> {
+                    cir.setReturnValue(mipmapAccurateFull(originals, mipmapLevel));
+                    currentResourceLocation = null;
+                    cir.cancel();
+                }
+
                 case MipmapTypes.JAVA -> {
                     cir.setReturnValue(mipmapJava(originals, mipmapLevel));
                     currentResourceLocation = null;
@@ -79,36 +81,41 @@ public class MipmapTypeHelper {
     // Dynamically added to MipmapGenerator via a mixin plugin
     public static void aastoreMarker() {}
 
-    /// Adds manual mipmaps in `textures/ltmipmaps`
-    public static void addManualMipmaps(int mipmapLevels, NativeImage[] mipmaps, ResourceLocation currentResourceLocation) {
-        if (!Tweaks.EYE_CANDY.mipmapping.manualMipmapping.isEnabled()) return;
-        if (currentResourceLocation == null) return;
-        for (int level = 0; level < mipmapLevels; level++) {
-            Optional<NativeImage> nativeImage = fromResource(ResourceLocation.fromNamespaceAndPath(currentResourceLocation.getNamespace(), "textures/ltmipmaps/" + currentResourceLocation.getPath() + "/" + level + ".png"));
-            if (nativeImage.isPresent()) {
-                mipmaps[level] = nativeImage.get();
-            }
+    /// Gets the mipped texture based on whether there is a manual mipped texture or if accuracy mode has been set. If neither, automatic method is used
+    public static NativeImage maybeGetMipmapForLevel(int mipmap, NativeImage previousOriginal, NativeImage original, ResourceLocation currentResourceLocation) {
+        if (!Tweaks.EYE_CANDY.mipmapping.manualMipmapping.isEnabled()) return original;
+        if (currentResourceLocation == null) return original;
+        Optional<NativeImage> manualImage = fromResource(ResourceLocation.fromNamespaceAndPath(currentResourceLocation.getNamespace(), "textures/mipmaps/" + currentResourceLocation.getPath() + "/" + mipmap + ".png"));
+        Optional<File> accurateFile = fromFileResource(ResourceLocation.fromNamespaceAndPath(currentResourceLocation.getNamespace(), "textures/mipmaps/" + currentResourceLocation.getPath() + "/accurate.txt"));
+
+        if (manualImage.isPresent()) {
+            return createManualMipmap(mipmap, original, manualImage.get(), currentResourceLocation);
+        } else if (accurateFile.isPresent() || Tweaks.EYE_CANDY.mipmapping.mipmapType.mipmapType.get() == MipmapTypes.LCE_ACCURATE) {
+            return mipmapAccurate(previousOriginal);
+        } else {
+            return original;
         }
     }
 
-    /// Adds manual mipmaps in `textures/ltmipmaps`
-    public static void maybeGetMipmapForLevel(int level, Consumer<NativeImage> consumer, ResourceLocation currentResourceLocation) {
-        if (!Tweaks.EYE_CANDY.mipmapping.manualMipmapping.isEnabled()) return;
-        if (currentResourceLocation == null) return;
-        Optional<NativeImage> nativeImage = fromResource(ResourceLocation.fromNamespaceAndPath(currentResourceLocation.getNamespace(), "textures/ltmipmaps/" + currentResourceLocation.getPath() + "/" + level + ".png"));
-		nativeImage.ifPresent(consumer::accept);
-    }
-
-    /// Checks for accurate.txt in 'textures/ltmipmaps'
-    public static void maybeGetAccurateMipmapForImage(NativeImage original, int mipmapLevel, Consumer<NativeImage> consumer, ResourceLocation currentResourceLocation) {
-        if (!Tweaks.EYE_CANDY.mipmapping.manualMipmapping.isEnabled()) return;
-        if (currentResourceLocation == null) return;
-        Optional<File> txt = fromFileResource(ResourceLocation.fromNamespaceAndPath(currentResourceLocation.getNamespace(), "textures/ltmipmaps/" + currentResourceLocation.getPath() + "/accurate.txt"));
-        if (txt.isPresent()) {
-            consumer.accept(mipmapAccurate(original, mipmapLevel));
+    /// Creates the manual mipped image for use within the game, and fails if the image size is not correct
+    public static NativeImage createManualMipmap(int mipmap, NativeImage original, NativeImage manualImage, ResourceLocation currentResourceLocation) {
+        int j = original.getWidth();
+        int k = original.getHeight();
+        int a = manualImage.getWidth();
+        int b = manualImage.getHeight();
+        if (j != a && k != b) {
+            System.err.println("Using automatic mipmapping for %s at level %s, width and height are incorrect: %sx%s instead of %sx%s".formatted(currentResourceLocation.getPath(), mipmap, a, b, j, k));
+            return original;
+        } else if (j != a) {
+            System.err.println("Using automatic mipmapping for %s at level %s, width is incorrect: %s instead of %s".formatted(currentResourceLocation.getPath(), mipmap, a, j));
+            return original;
+        } else if (k != b) {
+            System.err.println("Using automatic mipmapping for %s at level %s, height is incorrect: %s instead of %s".formatted(currentResourceLocation.getPath(), mipmap, b, k));
+            return original;
+        } else {
+            return manualImage;
         }
     }
-
 
     /// Gets an {@link Optional}`<`{@link NativeImage}`>` from a {@link ResourceLocation}
     private static Optional<NativeImage> fromResource(ResourceLocation resourceLocation) {
@@ -181,8 +188,6 @@ public class MipmapTypeHelper {
             for(int i = 1; i <= mipmap; ++i) {
                 if (i < originals.length) {
                     nativeImages[i] = originals[i];
-                    int finalI = i;
-                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
                 } else {
                     NativeImage nativeImage = nativeImages[i - 1];
                     NativeImage nativeImage2 = new NativeImage(nativeImage.getWidth() >> 1, nativeImage.getHeight() >> 1, false);
@@ -192,14 +197,11 @@ public class MipmapTypeHelper {
                     for(int l = 0; l < j; ++l) {
                         for(int m = 0; m < k; ++m) {
                             int color = getColor(nativeImage, l * 2 + 1, m * 2 + 1);
-                            int color2 = blend(getColor(nativeImage, l * 2, m * 2), getColor(nativeImage, l * 2 + 1, m * 2), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), bl);
+                            int color2 = vanillaBlend(getColor(nativeImage, l * 2, m * 2), getColor(nativeImage, l * 2 + 1, m * 2), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), bl);
                             setColor(nativeImage2, l, m, i == 1 || i == 2 ? color : color2);
                         }
                     }
-                    nativeImages[i] = nativeImage2;
-                    int finalI = i;
-                    maybeGetAccurateMipmapForImage(nativeImages[finalI - 1], finalI, g -> nativeImages[finalI] = g, currentResourceLocation);
-                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
+                    nativeImages[i] = maybeGetMipmapForLevel(i, nativeImage, nativeImage2, currentResourceLocation);
                 }
             }
             return nativeImages;
@@ -222,8 +224,6 @@ public class MipmapTypeHelper {
             for(int i = 1; i <= mipmap; ++i) {
                 if (i < originals.length) {
                     nativeImages[i] = originals[i];
-                    int finalI = i;
-                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
                 } else {
                     NativeImage nativeImage = nativeImages[i - 1];
                     NativeImage nativeImage2 = new NativeImage(nativeImage.getWidth() >> 1, nativeImage.getHeight() >> 1, false);
@@ -233,14 +233,11 @@ public class MipmapTypeHelper {
                     for(int l = 0; l < j; ++l) {
                         for(int m = 0; m < k; ++m) {
                             int color = getColor(nativeImage, l * 2 + 1, m * 2 + 1);
-                            int color2 = blend(getColor(nativeImage, l * 2 + 0, m * 2 + 0), getColor(nativeImage, l * 2 + 1, m * 2 + 0), getColor(nativeImage, l * 2 + 0, m * 2 + 1), getColor(nativeImage, l * 2 + 1, m * 2 + 1), bl);
+                            int color2 = vanillaBlend(getColor(nativeImage, l * 2 + 0, m * 2 + 0), getColor(nativeImage, l * 2 + 1, m * 2 + 0), getColor(nativeImage, l * 2 + 0, m * 2 + 1), getColor(nativeImage, l * 2 + 1, m * 2 + 1), bl);
                             setColor(nativeImage2, l, m, i == 1 ? color : color2);
                         }
                     }
-                    nativeImages[i] = nativeImage2;
-                    int finalI = i;
-                    maybeGetAccurateMipmapForImage(nativeImages[finalI - 1], finalI, g -> nativeImages[finalI] = g, currentResourceLocation);
-                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
+                    nativeImages[i] = maybeGetMipmapForLevel(i, nativeImage, nativeImage2, currentResourceLocation);
                 }
             }
             return nativeImages;
@@ -263,27 +260,21 @@ public class MipmapTypeHelper {
             for(int i = 1; i <= mipmap; ++i) {
                 if (i < originals.length) {
                     nativeImages[i] = originals[i];
-                    int finalI = i;
-                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
                 } else {
                     NativeImage nativeImage = nativeImages[i == 2 ? 0 : i - 1];
                     NativeImage nativeImage2 = new NativeImage(i == 2 ? (nativeImage.getWidth() >> 2) : (nativeImage.getWidth() >> 1), i == 2 ? (nativeImage.getHeight() >> 2) : (nativeImage.getHeight() >> 1), false);
-
                     int j = nativeImage2.getWidth();
                     int k = nativeImage2.getHeight();
                     for(int l = 0; l < j; ++l) {
                         for(int m = 0; m < k; ++m) {
                             int colorMipped1 = getColor(nativeImage, i == 2 ? (l * 4 + 2) : (l * 2 + 1), i == 2 ? (m * 4 + 2) : (m * 2 + 1));
 
-                            int colorMipped3 = blend(getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), bl);
-                            int colorMipped4 = blend(getColor(nativeImage, l * 2, m * 2), getColor(nativeImage, l * 2 + 1, m * 2), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), bl);
+                            int colorMipped3 = vanillaBlend(getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), bl);
+                            int colorMipped4 = vanillaBlend(getColor(nativeImage, l * 2, m * 2), getColor(nativeImage, l * 2 + 1, m * 2), getColor(nativeImage, l * 2, m * 2 + 1), getColor(nativeImage, l * 2, m * 2 + 1), bl);
                             setColor(nativeImage2, l, m, i == 1 ? colorMipped1 : (i == 2 ? colorMipped1 : (i == 3 ? colorMipped3 : colorMipped4)));
                         }
                     }
-                    nativeImages[i] = nativeImage2;
-                    int finalI = i;
-                    maybeGetAccurateMipmapForImage(nativeImages[finalI - 1], finalI, g -> nativeImages[finalI] = g, currentResourceLocation);
-                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
+                    nativeImages[i] = maybeGetMipmapForLevel(i, nativeImage, nativeImage2, currentResourceLocation);
                 }
             }
             return nativeImages;
@@ -291,18 +282,53 @@ public class MipmapTypeHelper {
     }
 
     /// Takes a {@link NativeImage} and mips it accurately to LCE
-    public static NativeImage mipmapAccurate(NativeImage original, int mipmap) {
-        boolean bl = hasAlpha(original);
+    public static NativeImage mipmapAccurate(NativeImage original) {
         NativeImage newImage = new NativeImage(original.getWidth() >> 1, original.getHeight() >> 1, false);
         int j = newImage.getWidth();
         int k = newImage.getHeight();
-        Optional<File> noOpaqueFile = fromFileResource(ResourceLocation.fromNamespaceAndPath(currentResourceLocation.getNamespace(), "textures/ltmipmaps/" + currentResourceLocation.getPath() + "/no_opaque.txt"));
         for(int l = 0; l < j; ++l) {
             for (int m = 0; m < k; ++m) {
-                setColorWithAlpha(newImage, l, m, blend(getColor(original, l * 2, m * 2 + 1), getColor(original, l * 2, m * 2 + 1), getColor(original, l * 2, m * 2 + 1), getColor(original, l * 2, m * 2 + 1), bl), 255, mipmap >= 2 && noOpaqueFile.isEmpty());
+                setColor(newImage, l, m, crispBlend(getColor(original, l * 2 + 1, m * 2), getColor(original, l * 2, m * 2 + 1)));
             }
         }
         return newImage;
+    }
+
+    /**
+     * Used to create Legacy style mipmaps
+     * @param originals The original textures before mipped
+     * @param mipmap The mipmap level to mip to
+     * @return Returns the created mipped textures
+     */
+    public static NativeImage[] mipmapAccurateFull(NativeImage[] originals, int mipmap) {
+        if (mipmap + 1 <= originals.length) {
+            return originals;
+        } else {
+            NativeImage[] nativeImages = new NativeImage[mipmap + 1];
+            nativeImages[0] = originals[0];
+            boolean bl = hasAlpha(nativeImages[0]);
+
+            for(int i = 1; i <= mipmap; ++i) {
+                if (i < originals.length) {
+                    nativeImages[i] = originals[i];
+                } else {
+                    NativeImage nativeImage = nativeImages[i - 1];
+                    NativeImage nativeImage2 = new NativeImage(nativeImage.getWidth() >> 1, nativeImage.getHeight() >> 1, false);
+                    int j = nativeImage2.getWidth();
+                    int k = nativeImage2.getHeight();
+
+                    for(int l = 0; l < j; ++l) {
+                        for(int m = 0; m < k; ++m) {
+                            setColor(nativeImage2, l, m, crispBlend(getColor(nativeImage, l * 2 + 1, m * 2), getColor(nativeImage, l * 2, m * 2 + 1)));
+                        }
+                    }
+
+                    nativeImages[i] = maybeGetMipmapForLevel(i, nativeImage, nativeImage2, currentResourceLocation);
+                }
+            }
+
+            return nativeImages;
+        }
     }
 
     /**
@@ -324,8 +350,6 @@ public class MipmapTypeHelper {
             for(int i = 1; i <= mipmap; ++i) {
                 if (i < originals.length) {
                     nativeImages[i] = originals[i];
-                    int finalI = i;
-                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
                 } else {
                     NativeImage nativeImage = nativeImages[i - 1];
                     NativeImage nativeImage2 = new NativeImage(nativeImage.getWidth() >> 1, nativeImage.getHeight() >> 1, false);
@@ -334,14 +358,11 @@ public class MipmapTypeHelper {
 
                     for(int l = 0; l < j; ++l) {
                         for(int m = 0; m < k; ++m) {
-                            setColor(nativeImage2, l, m, blend(getColor(nativeImage, l * 2 + 0, m * 2 + 0), getColor(nativeImage, l * 2 + 1, m * 2 + 0), getColor(nativeImage, l * 2 + 0, m * 2 + 1), getColor(nativeImage, l * 2 + 1, m * 2 + 1), bl));
+                            setColor(nativeImage2, l, m, vanillaBlend(getColor(nativeImage, l * 2 + 0, m * 2 + 0), getColor(nativeImage, l * 2 + 1, m * 2 + 0), getColor(nativeImage, l * 2 + 0, m * 2 + 1), getColor(nativeImage, l * 2 + 1, m * 2 + 1), bl));
                         }
                     }
 
-                    nativeImages[i] = nativeImage2;
-                    int finalI = i;
-                    maybeGetAccurateMipmapForImage(nativeImages[finalI - 1], finalI, g -> nativeImages[finalI] = g, currentResourceLocation);
-                    maybeGetMipmapForLevel(i, g -> nativeImages[finalI] = g, currentResourceLocation);
+                    nativeImages[i] = maybeGetMipmapForLevel(i, nativeImage, nativeImage2, currentResourceLocation);
                 }
             }
 
@@ -368,145 +389,65 @@ public class MipmapTypeHelper {
     }
 
     /**
-     * Blends multiple textures/colors together
-     * @param one First color variable
-     * @param two Second color variable
-     * @param three Third color variable
-     * @param four Fourth color variable
+     * Blends four packed colors together using the vanilla MC method
+     * @param one First packed color
+     * @param two Second packed color
+     * @param three Third packed color
+     * @param four Fourth packed color
      * @param checkAlpha Checks whether the texture has an alpha
-     * @return Returns the new texture with blending
+     * @return Returns the newly blended packed color
      */
-    private static int blend(int one, int two, int three, int four, boolean checkAlpha) { // TODO make a more LCE accurate blend feature with Sodium compatibility
+    private static int vanillaBlend(int one, int two, int three, int four, boolean checkAlpha) {
         return MipmapGeneratorAccessor.legacyTweaks$getAlphaBlend(one, two, three, four, checkAlpha);
-//        if (checkAlpha) {
-//            float f = 0.0F;
-//            float g = 0.0F;
-//            float h = 0.0F;
-//            float i = 0.0F;
-//            if (one >> 24 != 0) {
-//                f += getColorFraction(one >> 24);
-//                g += getColorFraction(one >> 16);
-//                h += getColorFraction(one >> 8);
-//                i += getColorFraction(one >> 0);
-//            }
-//
-//            if (two >> 24 != 0) {
-//                f += getColorFraction(two >> 24);
-//                g += getColorFraction(two >> 16);
-//                h += getColorFraction(two >> 8);
-//                i += getColorFraction(two >> 0);
-//            }
-//
-//            if (three >> 24 != 0) {
-//                f += getColorFraction(three >> 24);
-//                g += getColorFraction(three >> 16);
-//                h += getColorFraction(three >> 8);
-//                i += getColorFraction(three >> 0);
-//            }
-//
-//            if (four >> 24 != 0) {
-//                f += getColorFraction(four >> 24);
-//                g += getColorFraction(four >> 16);
-//                h += getColorFraction(four >> 8);
-//                i += getColorFraction(four >> 0);
-//            }
-//
-//            f /= 4.0F;
-//            g /= 4.0F;
-//            h /= 4.0F;
-//            i /= 4.0F;
-//            int j = (int)(Math.pow((double)f, 0.45454545454545453) * 255.0);
-//            int k = (int)(Math.pow((double)g, 0.45454545454545453) * 255.0);
-//            int l = (int)(Math.pow((double)h, 0.45454545454545453) * 255.0);
-//            int m = (int)(Math.pow((double)i, 0.45454545454545453) * 255.0);
-//            if (j < 96) {
-//                j = 0;
-//            }
-//
-//            return j << 24 | k << 16 | l << 8 | m;
-//        } else {
-//            int n = getColorComponent(one, two, three, four, 24);
-//            int o = getColorComponent(one, two, three, four, 16);
-//            int p = getColorComponent(one, two, three, four, 8);
-//            int q = getColorComponent(one, two, three, four, 0);
-//            return n << 24 | o << 16 | p << 8 | q;
-//        }
     }
 
     /**
-     * Gets the color component from color fractions
-     * @param one First color
-     * @param two Second color
-     * @param three Third color
-     * @param four Fourth color
-     * @param bits Fifth color
-     * @return Returns the color component
+     * Blends two packed colors together using a crisp system. Based on Legacy Console Edition's method for blending
+     * @param one First packed color
+     * @param two Second packed color
+     * @return Returns the newly blended packed color
      */
-    private static int getColorComponent(int one, int two, int three, int four, int bits) {
-        float f = getColorFraction(one >> bits);
-        float g = getColorFraction(two >> bits);
-        float h = getColorFraction(three >> bits);
-        float i = getColorFraction(four >> bits);
-        float j = (float)((double)((float)Math.pow((double)(f + g + h + i) * 0.25, 0.45454545454545453)));
-        return (int)((double)j * 255.0);
-    }
+    public static int crispBlend(int one, int two) {
+        ColorRGBA newColor = new ColorRGBA();
+        ColorRGBA colorOne = new ColorRGBA(one);
+        ColorRGBA colorTwo = new ColorRGBA(two);
 
-    /**
-     * Creates the color fractions
-     */
-    private static final float[] COLOR_FRACTIONS = Util.make(new float[256], (list) -> {
-        for(int i = 0; i < list.length; ++i) {
-            list[i] = (float)Math.pow((float)i / 255.0F, 2.2);
+        int packedColor;
+
+        if ((colorOne.getAlpha() + colorTwo.getAlpha()) < 255) {
+            packedColor = (colorOne.getRed() + colorTwo.getRed()) / 2 << 16 | (colorOne.getGreen() + colorTwo.getGreen()) / 2 << 8 | (colorOne.getBlue() + colorTwo.getBlue()) / 2;
+        } else if (colorTwo.getAlpha() < colorOne.getAlpha()) {
+            packedColor = (colorOne.getRed() * 255 + colorTwo.getRed()) / 256 << 16 | 0xff000000 | (colorOne.getGreen() * 255 + colorTwo.getGreen()) / 256 << 8 | (colorOne.getBlue() * 255 + colorTwo.getBlue()) / 256;
+        } else {
+            packedColor = (colorOne.getRed() + colorTwo.getRed() * 255) / 256 << 16 | 0xff000000 | (colorOne.getGreen() + colorTwo.getGreen() * 255) / 256 << 8 | (colorOne.getBlue() + colorTwo.getBlue() * 255) / 256;
         }
-    });
 
-    /**
-     * Gets the color fractions
-     * @param value Color value
-     * @return Returns COLOR_FRACTIONS
-     */
-    private static float getColorFraction(int value) {
-        return COLOR_FRACTIONS[value & 255];
+        newColor.setColor(packedColor);
+
+        return newColor.getPackedColor();
     }
 
     /* NativeImage Conversion Methods */
 
     /**
-     * Used to convert the "setColor" method from NativeImage to the correct MC version
+     * Used to convert the "setColor" method from {@link NativeImage} for convenience
      * @param nativeImage NativeImage to use
-     * @param a First color variable
-     * @param b Second color variable
-     * @param c Third color variable
+     * @param x X position for the specific color
+     * @param y Y position for the specific color
+     * @param color Packed color
      */
-    public static void setColor(NativeImage nativeImage, int a, int b, int c) {
-        nativeImage.setPixelRGBA(a, b, c);
+    public static void setColor(NativeImage nativeImage, int x, int y, int color) {
+        nativeImage.setPixelRGBA(x, y, color);
     }
 
     /**
-     * Used to convert the "getColor" method from NativeImage to the correct MC version
+     * Used to convert the "setColor" method from {@link NativeImage} for convenience
      * @param nativeImage NativeImage to use
-     * @param a First color variable
-     * @param b Second color variable
-     * @return Returns the color from the NativeImage
+     * @param x X position for the specific color
+     * @param y Y position for the specific color
+     * @return Returns the packed color
      */
-    public static int getColor(NativeImage nativeImage, int a, int b) {
-        return nativeImage.getPixelRGBA(a, b);
-    }
-
-    /**
-     * Used to set the NativeImage color with an optional alpha setting
-     * @param nativeImage NativeImage to use
-     * @param x the X pos for pixel
-     * @param y the Y pos for pixel
-     * @param colorRBG the color used
-     * @param alpha the alpha to use, can be 0-255
-     * @param alphaCondition whether to use alpha or not
-     */
-    public static void setColorWithAlpha(NativeImage nativeImage, int x, int y, int colorRBG, int alpha, boolean alphaCondition) {
-        int alphaChanged = FastColor.ARGB32.alpha(colorRBG);
-        if (alphaCondition) {
-            alphaChanged = alpha;
-        }
-        setColor(nativeImage, x, y, FastColor.ARGB32.color(alphaChanged, colorRBG));
+    public static int getColor(NativeImage nativeImage, int x, int y) {
+        return nativeImage.getPixelRGBA(x, y);
     }
 }

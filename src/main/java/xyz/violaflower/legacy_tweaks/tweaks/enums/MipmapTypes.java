@@ -8,6 +8,7 @@ public enum MipmapTypes implements EnumTweak {
     TU1(Lang.TitleUpdates.TU1),
     TU3(Lang.TitleUpdates.TU3),
     TU12(Lang.TitleUpdates.TU12),
+    LCE_ACCURATE(Lang.EnumTweak.LCE_ACCURATE),
     JAVA(Lang.EnumTweak.JAVA);
 
     private final Translate title;
