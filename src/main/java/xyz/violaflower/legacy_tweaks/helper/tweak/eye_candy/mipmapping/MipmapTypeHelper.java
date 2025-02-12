@@ -89,27 +89,27 @@ public class MipmapTypeHelper {
         Optional<File> accurateFile = fromFileResource(ResourceLocation.fromNamespaceAndPath(currentResourceLocation.getNamespace(), "textures/mipmaps/" + currentResourceLocation.getPath() + "/accurate.txt"));
 
         if (manualImage.isPresent()) {
-            return createManualMipmap(mipmap, original, manualImage.get(), currentResourceLocation);
-        } else if (accurateFile.isPresent() || Tweaks.EYE_CANDY.mipmapping.mipmapType.mipmapType.get() == MipmapTypes.LCE_ACCURATE) {
+            return getManualMipmap(mipmap, original, manualImage.get(), currentResourceLocation);
+        } else if (accurateFile.isPresent() & Tweaks.EYE_CANDY.mipmapping.mipmapType.mipmapType.get() != MipmapTypes.LCE_ACCURATE) {
             return mipmapAccurate(previousOriginal);
         } else {
             return original;
         }
     }
 
-    /// Creates the manual mipped image for use within the game, and fails if the image size is not correct
-    public static NativeImage createManualMipmap(int mipmap, NativeImage original, NativeImage manualImage, ResourceLocation currentResourceLocation) {
+    /// Gets the manual mipped image for use within the game, and fails if the image size is not correct
+    public static NativeImage getManualMipmap(int mipmap, NativeImage original, NativeImage manualImage, ResourceLocation currentResourceLocation) {
         int j = original.getWidth();
         int k = original.getHeight();
         int a = manualImage.getWidth();
         int b = manualImage.getHeight();
-        if (j != a && k != b) {
+        if (a != j && b != k) {
             System.err.println("Using automatic mipmapping for %s at level %s, width and height are incorrect: %sx%s instead of %sx%s".formatted(currentResourceLocation.getPath(), mipmap, a, b, j, k));
             return original;
-        } else if (j != a) {
+        } else if (a != j) {
             System.err.println("Using automatic mipmapping for %s at level %s, width is incorrect: %s instead of %s".formatted(currentResourceLocation.getPath(), mipmap, a, j));
             return original;
-        } else if (k != b) {
+        } else if (b != k) {
             System.err.println("Using automatic mipmapping for %s at level %s, height is incorrect: %s instead of %s".formatted(currentResourceLocation.getPath(), mipmap, b, k));
             return original;
         } else {
@@ -306,7 +306,6 @@ public class MipmapTypeHelper {
         } else {
             NativeImage[] nativeImages = new NativeImage[mipmap + 1];
             nativeImages[0] = originals[0];
-            boolean bl = hasAlpha(nativeImages[0]);
 
             for(int i = 1; i <= mipmap; ++i) {
                 if (i < originals.length) {
