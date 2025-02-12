@@ -17,8 +17,6 @@ import java.util.Optional;
 /**
  * Mipmap helper for creating mipmap types
  */
-
-
 public class MipmapTypeHelper {
     public static ResourceLocation currentResourceLocation;
 
