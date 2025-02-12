@@ -26,8 +26,8 @@ public abstract class CraftingMenuMixin extends RecipeBookMenu<CraftingInput, Cr
 
 	@Unique
 	private void assertSlot(int slot, int min, int max) {
-		if (slot >= min && slot < max) return;
-		throw new IllegalArgumentException();
+		if (slot >= min && slot < max) return; /// Disabled due to logger spitting it out non-stop
+//		throw new IllegalArgumentException();
 	}
 	@Override
 	public VirtualPlayerInventory lt$getVirtualPlayerInventory() {
