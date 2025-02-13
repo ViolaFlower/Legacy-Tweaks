@@ -7,8 +7,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import xyz.violaflower.legacy_tweaks.client.gui.screen.legacy.LegacyTitleScreen;
+import xyz.violaflower.legacy_tweaks.client.gui.screen.DataScreen;
 import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
+import xyz.violaflower.legacy_tweaks.util.client.ScreenUtil;
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
@@ -16,9 +17,9 @@ public class MinecraftMixin {
     @Inject(method = "setScreen", at = @At("RETURN"))
     private void setScreenMixin(Screen screen, CallbackInfo ci) {
         if (Tweaks.LEGACY_UI.legacyTitleScreen.legacyTitleScreen.isOn()) {
-            if (screen instanceof TitleScreen) Minecraft.getInstance().setScreen(new LegacyTitleScreen());
+            if (screen instanceof TitleScreen) Minecraft.getInstance().setScreen(DataScreen.makeDataDrivenScreen(null, ScreenUtil.TITLE_SCREEN));
         } else {
-            if (screen instanceof LegacyTitleScreen) Minecraft.getInstance().setScreen(new TitleScreen());
+            if (screen instanceof DataScreen screen1 && screen1.getId().equals(ScreenUtil.TITLE_SCREEN)) Minecraft.getInstance().setScreen(new TitleScreen());
         }
     }
 }
