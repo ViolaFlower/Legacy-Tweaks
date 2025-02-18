@@ -10,7 +10,7 @@ Legacy Tweaks is a mod that brings back many Legacy Console Edition features as 
 
 Inspired by Adrenix's [Nostalgic Tweaks](https://modrinth.com/mod/nostalgic-tweaks) and Wilyicaro's [Legacy4J](https://modrinth.com/mod/legacy4j), Legacy Tweaks brings many old Legacy Console Edition features to Java Edition.
 
-Legacy Tweaks contains over 40 tweaks as of version 0.1.0, including everything from GUIs, tooltips, gameplay features, to even recreations of old LCE version menus!
+Legacy Tweaks contains over 30 tweaks as of version 0.1.0, including everything from GUIs, tooltips and gameplay features.
 
 # 💬 Join the Community
 Consider joining the [ViolaFlower Discord](https://discord.com/invite/dsBrDdJysn) for sneak peeks and updates on development! By joining, you can:
@@ -18,12 +18,6 @@ Consider joining the [ViolaFlower Discord](https://discord.com/invite/dsBrDdJysn
 - Get the latest updates about development
 - Talk with and collaborate with our team
 - And just hang out with the rest of our community!
-
-## ❓ Why Choose Legacy Tweaks Over Legacy4J?
-Legacy4J was built as an all-in-one LCE recreation. While on paper, that sounds like a good idea, in reality, it causes problems. Legacy4J is bloated, and can cause issues with mod compatibility.  
-Legacy Tweaks fixes these problems by being built with customizability and mod compatibility in mind.
-
-Overall, Legacy Tweaks was designed to address the issues that plagued Legacy4J from the beginning.
 
 ## 📥 Installation Guide
 Legacy Tweaks is available for multiple mod loaders, but [Fabric Loader](https://fabricmc.net/use) is recommended. If you are using a third-party launcher (such as Prism Launcher), it should have built-in functionality to automatically install mod loaders. Once you have installed your mod loader of choice, simply place Legacy Tweaks into your mods folder like any other mod.
@@ -115,16 +109,14 @@ WIP
 
 ![Credits](https://cdn.modrinth.com/data/cached_images/802088672cb942fe41c48e43b121ec3d85bd54af_0.webp)
 
-### Owners
-- omoso/bowen
-- LimeGradient
+### Owner
+- omo50
 
 ### Developers
 - DexrnZacAttack
 - icanttellyou
 - Jab125
 - Kyrptonaught
-- LimeGradient
 - Permdog99
 
 ### Texture/Model Creation
@@ -137,4 +129,4 @@ WIP
 ## Special Thanks
 - Pedro270707/AndroidDr for guidance and assistance in development
 - NicSonic for making the legacy-styled "Minecraft: Java Edition" logo
-- Agarilao for helping out with bug testing and general assistance in development
+- Agarilmao for helping out with bug testing and general assistance in development
