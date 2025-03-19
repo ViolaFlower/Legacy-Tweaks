@@ -1,3 +1,6 @@
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonElement
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
@@ -109,6 +112,12 @@ processResources {
                 parse["client"].remove(mixin)
             }
             file.text = JsonOutput.prettyPrint(JsonOutput.toJson(parse))
+        }
+        fileTree(dir: outputs.files.asPath, include: "assets/legacy_tweaks/ltguis/*.json5").each { File file ->
+            def sibling = file.toPath().resolveSibling(file.name.substring(0, file.name.length() - 1))
+            System.out.println(sibling)
+            sibling.text = new GsonBuilder().setLenient().create().fromJson(file.text, JsonElement.class).toString()
+            println file.delete()
         }
     }
 }

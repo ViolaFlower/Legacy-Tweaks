@@ -1,0 +1,68 @@
+{
+  "imports": [
+    {
+      "type": "importActionsFrom",
+      "file": "legacy_tweaks:ltguis/layoututils.json"
+    },
+    {
+      "type": "importActionsFrom",
+      "file": "legacy_tweaks:ltguis/simplebackground.json"
+    },
+    {
+      "type": "importActionsFrom",
+      "file": "legacy_tweaks:ltguis/simple-layout-screen.json"
+    }
+  ],
+  "actions": {
+    "addButtons": [
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.helpOptionsScreen.changeSkin", "@openSkinCustomizationScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.helpOptionsScreen.howToPlay", "@openNotImplementedScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.helpOptionsScreen.controls", "@openControlsScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.helpOptionsScreen.settings", "@openSettingsScreen2"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": [ "gui.legacy_tweaks.helpOptionsScreen.credits", "@openCreditsScreen"]
+      }
+    ],
+    "openSettingsScreen": [
+      {
+        "type": "action",
+        "action": "openDataScreen",
+        "args": ["legacy_tweaks:ltguis/optionsscreen.json"]
+      }
+    ],
+    "openSettingsScreen2": [
+      {
+        "type": "ifTrue",
+        "value": "?_internal.customization.isLegacyOptionsOn",
+        "actions": [
+          "?openSettingsScreen"
+        ]
+      },
+      {
+        "type": "ifFalse",
+        "value": "?_internal.customization.isLegacyOptionsOn",
+        "actions": [
+          "?openJavaOptionsScreen"
+        ]
+      }
+    ]
+  }
+}

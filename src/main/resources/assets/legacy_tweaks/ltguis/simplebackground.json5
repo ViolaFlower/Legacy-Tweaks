@@ -1,0 +1,11 @@
+{
+  "actions": {
+    "onClose": [
+      {
+        "type": "action",
+        "action": "setScreen",
+        "args": [":parent"]
+      }
+    ]
+  }
+}

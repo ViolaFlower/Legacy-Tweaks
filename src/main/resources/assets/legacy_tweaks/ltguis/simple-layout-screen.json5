@@ -1,0 +1,106 @@
+{
+  "imports": [
+    {
+      "type": "importActionsFrom",
+      "file": "legacy_tweaks:ltguis/layoututils.json"
+    },
+    {
+      "type": "importActionsFrom",
+      "file": "legacy_tweaks:ltguis/simplebackground.json"
+    }
+  ],
+  "actions": {
+    "<init>": [
+      "?initLegacyLogoRenderer"
+    ],
+    "init": [
+      {
+        "type": "action",
+        "action": "super",
+        "args": [
+          "init"
+        ]
+      },
+      "?clearWidgets",
+      "?clearFocus",
+      "?beginInit",
+      {
+        "type": "putGlobal",
+        "name": "frameLayout",
+        "value": "?newFrameLayout"
+      },
+      {
+        "type": "putGlobal",
+        "name": "linearLayout",
+        "value": "?newVerticalLinearLayout"
+      },
+      {
+        "type": "action",
+        "action": "print",
+        "args": [":linearLayout"]
+      },
+      {
+        "type": "actionTo",
+        "instance": ":linearLayout",
+        "action": "LinearLayout.spacing",
+        "args": ["?getButtonSpacing"]
+      },
+      "?addButtons",
+      {
+        "type": "actionTo",
+        "instance": ":frameLayout",
+        "action": "FrameLayout.addChild",
+        "args": [":linearLayout"]
+      },
+      {
+        "type": "action",
+        "action": "addLayoutWidgets",
+        "args": [":frameLayout"]
+      },
+      "?repositionElements"
+    ],
+    "makeSplashRendererIfNull": [
+      {
+        "type": "ifNull",
+        "value": {
+          "type": "getGlobal",
+          "name": "splashRenderer"
+        },
+        "actions": [
+          {
+            "type": "putGlobal",
+            "name": "splashRenderer",
+            "value": "?newSplashRenderer"
+          }
+        ]
+      }
+    ],
+    "render": [
+      {
+        "type": "action",
+        "action": "super",
+        "args": ["render", "^0", "^1", "^2", "^3"]
+      },
+      {
+        "type": "actionTo",
+        "instance": ":logoRenderer",
+        "action": "LegacyLogoRenderer.renderLogo",
+        "args": ["^0", "?width", 1]
+      },
+      // this can be left here
+      {
+        "type": "ifNotNull",
+        "value": ":splashRenderer",
+        "actions": [
+          {
+            "type": "actionTo",
+            "instance": ":splashRenderer",
+            "action": "SplashRenderer.render",
+            "args": ["^0", "?width", "?font", 0xffffff00]
+          }
+        ]
+      }
+    ],
+    "beginInit": []
+  }
+}

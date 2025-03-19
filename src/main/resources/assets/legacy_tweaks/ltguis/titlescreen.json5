@@ -1,0 +1,82 @@
+{
+  "imports": [
+    {
+      "type": "importActionsFrom",
+      "file": "legacy_tweaks:ltguis/layoututils.json"
+    },
+    {
+      "type": "importActionsFrom",
+      "file": "legacy_tweaks:ltguis/simplebackground.json"
+    },
+    {
+      "type": "importActionsFrom",
+      "file": "legacy_tweaks:ltguis/simple-layout-screen.json"
+    }
+  ],
+  "actions": {
+    "addButtons": [
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.titleScreen.playGame", "@openSelectWorldScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayoutConditional",
+        "args": ["?_internal.customization.showMinigamesButton", "gui.legacy_tweaks.titleScreen.miniGames", "@openMultiplayerScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayoutConditional",
+        "args": ["?_internal.customization.showLeaderboardsButton", "gui.legacy_tweaks.titleScreen.leaderboards", "@openNotImplementedScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayoutConditional",
+        "args": ["?_internal.customization.hasModsScreen", "Mods", "@openModsScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayout",
+        "args": ["gui.legacy_tweaks.titleScreen.helpOptions", "@openHelpOptionsScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayoutConditional",
+        "args": ["?_internal.customization.showMinecraftStoreButton", "gui.legacy_tweaks.titleScreen.store", "@openTestScreen"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayoutConditional",
+        "args": ["?_internal.customization.showNewMinecraftButton", "gui.legacy_tweaks.titleScreen.java", "@switchToNewMinecraft"]
+      },
+      {
+        "type": "action",
+        "action": "addButtonToLayoutConditional",
+        "args": ["?_internal.customization.showQuitButton", "gui.legacy_tweaks.titleScreen.quit", "@quitGame"]
+      }
+    ],
+    "beginInit": [
+      "?makeSplashRendererIfNull"
+    ],
+    "openHelpOptionsScreen": [
+      {
+        "type": "action",
+        "action": "openDataScreen",
+        "args": ["legacy_tweaks:ltguis/help-and-options-screen.json"]
+      }
+    ],
+    "shouldCloseOnEsc": [
+      {
+        "type": "return",
+        "value": false
+      }
+    ],
+    "isPauseScreen": [
+      {
+        "type": "return",
+        "value": false
+      }
+    ]
+  }
+}
