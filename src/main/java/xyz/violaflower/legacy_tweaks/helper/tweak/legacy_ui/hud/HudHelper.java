@@ -89,7 +89,7 @@ public class HudHelper {
             int hudScale = guiHudTweaks.generalTweaks.hudScale.get();
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
-            ScreenUtil.drawOutlinedString(guiGraphics, font, Component.literal(exp), j, k, 8453920, 0, ScreenUtil.is720p() && hudScale == 3 || !ScreenUtil.is720p() && hudScale == 2 || hudScale == 1 ? 1 / 2f : 2 / 3f);
+            ScreenUtil.drawOutlinedString(guiGraphics, font, Component.literal(exp), j, k, 8453920, 0, !ScreenUtil.is1080pOrAbove() && hudScale == 3 || ScreenUtil.is1080pOrAbove() && hudScale == 2 || hudScale == 1 ? 1 / 2f : 2 / 3f);
             poseStack.popPose();
             minecraft.getProfiler().pop();
         }

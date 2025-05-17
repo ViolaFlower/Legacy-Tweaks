@@ -229,6 +229,7 @@ public class LegacyUI extends Tweak {
 		public final BooleanOption legacyCompactText;
 		public final BooleanOption oldButton;
 		public final BooleanOption useLegacyUISounds;
+		public final BooleanOption fixMacOSRetina;
 
 		public GeneralScreenTweaks() {
             super("generalScreenTweaks", true);
@@ -245,6 +246,7 @@ public class LegacyUI extends Tweak {
 			legacyCompactText = addBooleanOption("legacyCompactText", true);
 			oldButton = addBooleanOption("oldButton", true);
 			useLegacyUISounds = addBooleanOption("useLegacyUISounds", true);
+			fixMacOSRetina = addBooleanOption("fixMacOSRetina", false);
         }
 	}
 

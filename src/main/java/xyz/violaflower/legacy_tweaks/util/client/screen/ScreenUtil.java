@@ -12,6 +12,7 @@ import net.minecraft.util.FastColor;
 import net.minecraft.util.FormattedCharSequence;
 import org.jetbrains.annotations.Nullable;
 import xyz.violaflower.legacy_tweaks.mixin.client.accessor.GuiGraphicsAccessor;
+import xyz.violaflower.legacy_tweaks.tweaks.Tweaks;
 import xyz.violaflower.legacy_tweaks.util.common.assets.Sprites;
 
 import java.util.Objects;
@@ -20,8 +21,9 @@ public class ScreenUtil {
     public static MultiBufferSource.BufferSource guiBufferSourceOverride = null;
 
     public static boolean isLargeGui() {
-        Window screenWindow = Minecraft.getInstance().getWindow();
-        return screenWindow.getGuiScale() == screenWindow.calculateScale(0, Minecraft.getInstance().isEnforceUnicode()) || screenWindow.getGuiScale() == 0;
+        //Window screenWindow = Minecraft.getInstance().getWindow();
+        return !isHD();
+        //return screenWindow.getGuiScale() == screenWindow.calculateScale(0, Minecraft.getInstance().isEnforceUnicode()) || screenWindow.getGuiScale() == 0;
     }
 
     public static void renderPanorama(GuiGraphics guiGraphics, int width, int height, float fade, float partialTick) {
@@ -29,20 +31,46 @@ public class ScreenUtil {
     }
 
     public static double setBestGuiScale() {
-        Window screenWindow = Minecraft.getInstance().getWindow();
-        int lastGuiScale = screenWindow.calculateScale(0, Minecraft.getInstance().isEnforceUnicode());
-        if (screenWindow.getScreenHeight() > 1080) {
-            lastGuiScale = lastGuiScale - 3;
-
-        } else if (screenWindow.getScreenHeight() >= 720) {
-            lastGuiScale = lastGuiScale - 1;
+        int lastGuiScale = getScreenWindow().calculateScale(0, Minecraft.getInstance().isEnforceUnicode());
+        if (Minecraft.ON_OSX && Tweaks.LEGACY_UI.generalScreenTweaks.fixMacOSRetina.isOn()) {
+            if (getScreenWindow().isFullscreen()) {
+                lastGuiScale = lastGuiScale - 2;
+            } else if (isHD()) {
+                lastGuiScale = lastGuiScale - 2;
+            }
+        } else {
+            if (getScreenHeight() > 1080) {
+                lastGuiScale = lastGuiScale - 3;
+            } else if (getScreenHeight() >= 720) {
+                lastGuiScale = lastGuiScale - 1;
+            }
         }
+
         return Math.max(1, lastGuiScale);
     }
 
-    public static boolean is720p() {
-        Window screenWindow = Minecraft.getInstance().getWindow();
-        return screenWindow.getScreenHeight() >= 720 && screenWindow.getScreenHeight() < 1080;
+    public static Window getScreenWindow() {
+        return Minecraft.getInstance().getWindow();
+    }
+
+    public static int getScreenWidth() {
+        return getScreenWindow().getScreenWidth();
+    }
+
+    public static int getScreenHeight(){
+        return getScreenWindow().getScreenHeight();
+    }
+
+    public static boolean isHD() {
+        return getScreenHeight() >= 720;
+    }
+
+    public static boolean is1080pOrAbove() {
+        return getScreenHeight() <= 1080;
+    }
+
+    public static boolean isWidescreen() {
+        return getScreenWidth() / getScreenHeight() >= 1920/1080;
     }
 
     public static void drawOutlinedString(GuiGraphics graphics, Font font, Component component, int x, int y, int color, int outlineColor, float outline) {
