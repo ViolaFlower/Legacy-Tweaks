@@ -10,7 +10,7 @@ public class Gameplay extends Tweak {
 
     public Gameplay() {
         super("gameplay", true);
-        setTweakAuthor("Permdog99");
+        setTweakAuthor("AzaleaCatgirl99");
         setTweakVersion("1.0.0");
         setGroup();
         addSubTweak(waterMechanics = new WaterMechanics());
@@ -23,7 +23,7 @@ public class Gameplay extends Tweak {
         public final BooleanOption alwaysSwimInWater;
         public WaterMechanics() {
             super("waterMechanics", true);
-            setTweakAuthor("Permdog99");
+            setTweakAuthor("AzaleaCatgirl99");
             setTweakVersion("1.0.0");
             alwaysSwimInWater = addBooleanOption("alwaysSwimInWater", true);
         }

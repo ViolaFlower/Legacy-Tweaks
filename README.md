@@ -117,7 +117,7 @@ WIP
 - icanttellyou
 - Jab125
 - Kyrptonaught
-- Permdog99
+- AzaleaCatgirl99
 
 ### Texture/Model Creation
 - mzov_jen

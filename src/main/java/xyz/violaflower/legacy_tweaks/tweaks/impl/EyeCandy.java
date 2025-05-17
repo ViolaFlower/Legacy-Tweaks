@@ -57,7 +57,7 @@ public class EyeCandy extends Tweak {
 
 		public SunsetColors() {
 			super("sunsetColors", true);
-			setTweakAuthor("Permdog99");
+			setTweakAuthor("AzaleaCatgirl99");
 			sunsetColors = addSliderOption("Sunset Colors", enumProvider(SunsetRiseColors.JAVA, SunsetRiseColors::values, SunsetRiseColors::toString, SunsetRiseColors::getComponent));
 		}
 	}
@@ -69,7 +69,7 @@ public class EyeCandy extends Tweak {
 
 		public Models() {
 			super("models", true);
-			setTweakAuthor("Permdog99");
+			setTweakAuthor("AzaleaCatgirl99");
 
 			addSubTweak(glowEntities = new TweakBuilder("glowEntities").authors("Permdog99", "Legacy4J 1.7.5-beta").setDefaultEnabled(true).build());
 			addSubTweak(legacyWitchHat = new TweakBuilder("legacyWitchHat").authors("Permdog99", "Legacy4J 1.7.5-beta").setDefaultEnabled(true).onToggled(() ->{
@@ -87,7 +87,7 @@ public class EyeCandy extends Tweak {
 
 		public Mipmapping() {
 			super("mipmapping", true);
-			setTweakAuthor("Permdog99", "Jab125");
+			setTweakAuthor("AzaleaCatgirl99", "Jab125");
 
 			addSubTweak(mipmapType = new MipmapType());
 			addSubTweak(manualMipmapping = new TweakBuilder("manualMipmapping").authors("Jab125").setDefaultEnabled(true).onToggled(() -> {
@@ -116,7 +116,7 @@ public class EyeCandy extends Tweak {
 
 			public MipmapType() {
 				super("mipmapType", true);
-				setTweakAuthor("Permdog99");
+				setTweakAuthor("AzaleaCatgirl99");
 				mipmapType = addSliderOption("Mipmap Type", enumProvider(MipmapTypes.JAVA, MipmapTypes::values, MipmapTypes::toString, MipmapTypes::getComponent));
 				mipmapType.setConsumer(t -> {
 					Minecraft mc = Minecraft.getInstance();
@@ -138,7 +138,7 @@ public class EyeCandy extends Tweak {
 		public LegacyFog() {
 			super("legacyFog", true);
 			setGroup();
-			setTweakAuthor("Permdog99");
+			setTweakAuthor("AzaleaCatgirl99");
 
 			addSubTweak(overworldFog = new OverworldFog());
 			addSubTweak(netherFog = new NetherFog());
@@ -149,53 +149,53 @@ public class EyeCandy extends Tweak {
 
 		public static class OverworldFog extends Tweak {
 			public final DoubleSliderOption terrainFogStartOverworld;
-			public final DoubleSliderOption terrainFogStopOverworld;
+			public final IntSliderOption terrainFogStopOverworld;
 
 			public OverworldFog() {
 				super("overworldFog", true);
-				setTweakAuthor("Permdog99");
+				setTweakAuthor("AzaleaCatgirl99");
 
-				terrainFogStartOverworld = addSliderOption("terrainFogStart", 0.75d, 0d, 1d);
-				terrainFogStopOverworld = addSliderOption("terrainFogStop", 0.5d, 0d, 1d);
+				terrainFogStartOverworld = addSliderOption("terrainFogStart", 0.25d, 0d, 1d);
+				terrainFogStopOverworld = addSliderOption("terrainFogStop", 0, 0, 64);
 			}
 		}
 
 		public static class NetherFog extends Tweak {
 			public final DoubleSliderOption terrainFogStartNether;
-			public final DoubleSliderOption terrainFogStopNether;
+			public final IntSliderOption terrainFogStopNether;
 
 			public NetherFog() {
 				super("netherFog", true);
-				setTweakAuthor("Permdog99");
+				setTweakAuthor("AzaleaCatgirl99");
 
-				terrainFogStartNether = addSliderOption("terrainFogStart", 0.75d, 0d, 1d);
-				terrainFogStopNether = addSliderOption("terrainFogStop", 0.5d, 0d, 1d);
+				terrainFogStartNether = addSliderOption("terrainFogStart", 0.25d, 0d, 1d);
+				terrainFogStopNether = addSliderOption("terrainFogStop", 0, 0, 64);
 			}
 		}
 
 		public static class EndFog extends Tweak {
 			public final DoubleSliderOption terrainFogStartEnd;
-			public final DoubleSliderOption terrainFogStopEnd;
+			public final IntSliderOption terrainFogStopEnd;
 
 			public EndFog() {
 				super("endFog", true);
-				setTweakAuthor("Permdog99");
+				setTweakAuthor("AzaleaCatgirl99");
 
-				terrainFogStartEnd = addSliderOption("terrainFogStart", 0.75d, 0d, 1d);
-				terrainFogStopEnd = addSliderOption("terrainFogStop", 0.5d, 0d, 1d);
+				terrainFogStartEnd = addSliderOption("terrainFogStart", 0.25d, 0d, 1d);
+				terrainFogStopEnd = addSliderOption("terrainFogStop", 0, 0, 64);
 			}
 		}
 
 		public static class ModdedFog extends Tweak {
 			public final DoubleSliderOption terrainFogStartModded;
-			public final DoubleSliderOption terrainFogStopModded;
+			public final IntSliderOption terrainFogStopModded;
 
 			public ModdedFog() {
 				super("moddedDimensionsFog", true);
-				setTweakAuthor("Permdog99");
+				setTweakAuthor("AzaleaCatgirl99");
 
-				terrainFogStartModded = addSliderOption("terrainFogStart", 0.75d, 0d, 1d);
-				terrainFogStopModded = addSliderOption("terrainFogEnd", 0.5d, 0d, 1d);
+				terrainFogStartModded = addSliderOption("terrainFogStart", 0.25d, 0d, 1d);
+				terrainFogStopModded = addSliderOption("terrainFogStop", 0, 0, 64);
 			}
 		}
 	}

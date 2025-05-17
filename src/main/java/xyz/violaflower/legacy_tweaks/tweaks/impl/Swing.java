@@ -7,7 +7,7 @@ public class Swing extends Tweak {
 
     public Swing() {
         super("swing", true);
-        setTweakAuthor("Permdog99");
+        setTweakAuthor("AzaleaCatgirl99");
         setGroup();
 
         addSubTweak(camera = new Camera());
@@ -18,7 +18,7 @@ public class Swing extends Tweak {
         public final BooleanOption invertedThirdPerson;
         public Camera() {
             super("camera", true);
-            setTweakAuthor("Permdog99");
+            setTweakAuthor("AzaleaCatgirl99");
 
             attachThirdPersonToHead = addBooleanOption("attachThirdPersonToHead", true);
             invertedThirdPerson = addBooleanOption("invertedThirdPerson", false);

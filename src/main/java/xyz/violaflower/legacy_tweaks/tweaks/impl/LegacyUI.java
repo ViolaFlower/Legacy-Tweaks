@@ -19,7 +19,7 @@ public class LegacyUI extends Tweak {
 
 	public LegacyUI() {
 		super("legacyUI", true);
-		setTweakAuthor("Jab125", "Permdog99");
+		setTweakAuthor("Jab125", "AzaleaCatgirl99");
 		setGroup();
 
 		addSubTweak(guiHudTweaks = new GuiHudTweaks());
@@ -47,7 +47,7 @@ public class LegacyUI extends Tweak {
 
 		public GuiHudTweaks() {
 			super("guiHudTweaks", true);
-			setTweakAuthor("Permdog99");
+			setTweakAuthor("AzaleaCatgirl99");
 
 			addSubTweak(generalTweaks = new GeneralTweaks());
 			addSubTweak(hotbarTweaks = new HotbarTweaks());
@@ -75,7 +75,7 @@ public class LegacyUI extends Tweak {
 
 			public GeneralTweaks() {
 				super("generalTweaks", true);
-				setTweakAuthor("Permdog99");
+				setTweakAuthor("AzaleaCatgirl99");
 
 				screenSpacing = addSliderOption("screenSpacing", 100, 0, 100);
 				hudScale = addSliderOption("hudScale", 2, 1, 3);
@@ -104,7 +104,7 @@ public class LegacyUI extends Tweak {
 
 			public HotbarTweaks() {
 				super("hotbarTweaks", true);
-				setTweakAuthor("Permdog99");
+				setTweakAuthor("AzaleaCatgirl99");
 
 				legacyHotbar = addBooleanOption("legacyHotbar", true);
 				legacyExperienceText = addBooleanOption("legacyExperienceText", true);
@@ -127,7 +127,7 @@ public class LegacyUI extends Tweak {
 
 			public ChatTweaks() {
 				super("chatTweaks", true);
-				setTweakAuthor("Permdog99", "DexrnZacAttack", "Jab125");
+				setTweakAuthor("AzaleaCatgirl99", "DexrnZacAttack", "Jab125");
 
 				legacyChat = addBooleanOption("legacyChat", true);
 				grayChatBackground = addBooleanOption("grayChatBackground", true);
@@ -145,7 +145,7 @@ public class LegacyUI extends Tweak {
 
 			public BossBarTweaks() {
 				super("bossBarTweaks", true);
-				setTweakAuthor("Permdog99");
+				setTweakAuthor("AzaleaCatgirl99");
 
 				legacyBossBar = addBooleanOption("legacyBossBar", true);
 				applyScreenSpacingBossHealth = addBooleanOption("applyScreenSpacingBossHealth", true);
@@ -160,7 +160,7 @@ public class LegacyUI extends Tweak {
 
 			public EffectsTweaks() {
 				super("effectsTweaks", true);
-				setTweakAuthor("Permdog99");
+				setTweakAuthor("AzaleaCatgirl99");
 
 				legacyEffects = addBooleanOption("legacyEffects", true);
 				applyScreenSpacingEffects = addBooleanOption("applyScreenSpacingEffects", true);
@@ -176,7 +176,7 @@ public class LegacyUI extends Tweak {
 
 			public ModdedTweaks() {
 				super("moddedTweaks", true);
-				setTweakAuthor("Permdog99");
+				setTweakAuthor("AzaleaCatgirl99");
 
 				otherScreenSpacingX = addSliderOption("otherScreenSpacingX", 100, 0, 100);
 				otherScreenSpacingY = addSliderOption("otherScreenSpacingY", 100, 0, 100);
@@ -192,7 +192,7 @@ public class LegacyUI extends Tweak {
 
 			public ScoreboardTweaks() {
 				super("scoreboardTweaks", true);
-				setTweakAuthor("Permdog99");
+				setTweakAuthor("AzaleaCatgirl99");
 
 				legacyScoreboard = addBooleanOption("legacyScoreboard", true);
 				applyScreenSpacingScoreboard = addBooleanOption("applyScreenSpacingScoreboard", true);
@@ -208,7 +208,7 @@ public class LegacyUI extends Tweak {
 
 			public PaperDollTweaks() {
 				super("paperDollTweaks", true);
-				setTweakAuthor("Permdog99");
+				setTweakAuthor("AzaleaCatgirl99");
 
 				showPaperDoll = addBooleanOption("showPaperDoll", true);
 				smoothPaperDoll = addBooleanOption("smoothPaperDoll", false);
@@ -232,7 +232,7 @@ public class LegacyUI extends Tweak {
 
 		public GeneralScreenTweaks() {
             super("generalScreenTweaks", true);
-			setTweakAuthor("Jab125", "Permdog99");
+			setTweakAuthor("Jab125", "AzaleaCatgirl99");
 
 			legacyPanorama = addBooleanOption("legacyPanorama", true);
 			useLegacyTitleLogo = addBooleanOption("useLegacyTitleLogo", true);
@@ -258,7 +258,7 @@ public class LegacyUI extends Tweak {
 
 		public LegacyTitleScreenTweak() {
             super("legacyTitleScreen", true);
-			setTweakAuthor("Jab125", "Permdog99");
+			setTweakAuthor("Jab125", "AzaleaCatgirl99");
 
 			legacyTitleScreen = addBooleanOption("legacyTitleScreen", true);
 			showNewMinecraftButton = addBooleanOption("showNewMinecraftButton", false);
@@ -273,7 +273,7 @@ public class LegacyUI extends Tweak {
 		public final BooleanOption useLegacyPauseMenu;
 		public LegacyPauseScreenTweak() {
 			super("legacyPauseScreen", true);
-			setTweakAuthor("Permdog99");
+			setTweakAuthor("AzaleaCatgirl99");
 
 			useLegacyPauseMenu = addBooleanOption("useLegacyPauseMenu", true);
 		}
@@ -284,7 +284,7 @@ public class LegacyUI extends Tweak {
 
 		public LegacyOptionsTweak() {
 			super("legacyOptionsScreen", true);
-			setTweakAuthor("Jab125", "Permdog99");
+			setTweakAuthor("Jab125", "AzaleaCatgirl99");
 
 			showJavaOptionsButton = addBooleanOption("showJavaOptionsButton", false);
 		}
@@ -295,7 +295,7 @@ public class LegacyUI extends Tweak {
 
 		public LegacyPlayGameScreenTweak() {
 			super("legacyPlayGameScreen", true);
-			setTweakAuthor("dexrn", "Permdog99");
+			setTweakAuthor("dexrn", "AzaleaCatgirl99");
 
 			playGameScreenType = addSliderOption("playGameScreenType", enumProvider(PlayGameScreen.DISABLED, PlayGameScreen::values, PlayGameScreen::toString, PlayGameScreen::getComponent));
 		}
@@ -306,7 +306,7 @@ public class LegacyUI extends Tweak {
 
 		public LegacyHelpOptionsScreenTweak() {
 			super("legacyHelpOptionsScreen", true);
-			setTweakAuthor("Permdog99");
+			setTweakAuthor("AzaleaCatgirl99");
 
 			useLegacyHelpOptionsScreen = addBooleanOption("useLegacyHelpOptions", true);
 		}
@@ -319,7 +319,7 @@ public class LegacyUI extends Tweak {
 		public final BooleanOption classicCrafting;
 		public LegacyInventoryScreenTweak() {
 			super("legacyInventoryScreen", true);
-			setTweakAuthor("Permdog99");
+			setTweakAuthor("AzaleaCatgirl99");
 			useLegacyInventory = addBooleanOption("useLegacyInventory", true);
 			noOffhand = addBooleanOption("noOffhand", false);
 			hideRecipeBook = addBooleanOption("hideRecipeBook", true);
@@ -333,7 +333,7 @@ public class LegacyUI extends Tweak {
 		public final BooleanOption smallerItemSizes;
 		public LegacyContainerScreenTweak() {
 			super("legacyContainerScreen", true);
-			setTweakAuthor("Jab125", "Permdog99");
+			setTweakAuthor("Jab125", "AzaleaCatgirl99");
 			useLegacyGenericContainer = addBooleanOption("useLegacyGenericContainer", true);
 			useLegacyFurnaceContainer = addBooleanOption("useLegacyFurnaceContainer", true);
 			smallerItemSizes = addBooleanOption("smallerItemSizes", true);
